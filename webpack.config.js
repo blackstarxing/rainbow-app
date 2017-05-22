@@ -16,9 +16,9 @@ module.exports = {
     filename: '[name].js',
     publicPath: publicPath
   },
-  plugins: [
-    new ExtractTextPlugin("[name].css")
-  ],
+  // plugins: [
+  //   new ExtractTextPlugin("[name].css")
+  // ],
   module: {
     loaders: [
       {
@@ -69,7 +69,7 @@ if (process.env.NODE_ENV === 'production') {
             }),
             new webpack.optimize.OccurrenceOrderPlugin(),
             new webpack.HotModuleReplacementPlugin(),
-            new webpack.NoErrorsPlugin()
+            new webpack.NoEmitOnErrorsPlugin()
         ],
         module.exports.devtool = '#eval-source-map'
 }

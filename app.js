@@ -56,4 +56,25 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+if (isDev) {
+    app.use(webpackDevMiddleware(compiler, {
+        publicPath: webpackDevConfig.output.publicPath,
+        noInfo: true,
+        stats: {
+            colors: true
+        }
+    }));
+    app.use(webpackHotMiddleware(compiler));
+    app.use(express.static(path.join(__dirname, 'public')));
+    
+    routerConfig(app, {
+        dirPath: __dirname + '/routes/'
+    });
+} else {
+    app.use(express.static(path.join(__dirname, 'public')));
+    routerConfig(app, {
+        dirPath: __dirname + '/routes/'
+    });
+}
+
 module.exports = app;
