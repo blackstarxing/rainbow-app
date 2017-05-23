@@ -5,7 +5,7 @@ var path = require('path');
 var publicPath = 'http://localhost:3000/dist';
 //路径是相对于package.json所在路径
 var entry_map = {
-  'index': ['./client/css/index.css', hotMiddlewareScript],
+  'index': ['./client/css/index.css','./client/js/index.js', hotMiddlewareScript],
 }
 module.exports = {
   entry: entry_map,

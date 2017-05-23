@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
-var routerConfig = require('./middleware/router');
+var routerConfig = require('./server/middleware/router');
 var webpack = require('webpack'),
     webpackDevMiddleware = require('webpack-dev-middleware'),
     webpackHotMiddleware = require('webpack-hot-middleware'),
@@ -13,12 +13,12 @@ var webpack = require('webpack'),
 var compiler = webpack(webpackDevConfig);
 var NODE_ENV = process.env.NODE_ENV || 'production';
 var isDev = NODE_ENV === 'development';
-var index = require('./routes/index');
-var users = require('./routes/users');
+var index = require('./server/routes/index');
+var users = require('./server/routes/users');
 
 var app = express();
 
-nunjucks.configure('views', {
+nunjucks.configure('server/views', {
     autoescape: true,
     express: app
 });
@@ -47,12 +47,12 @@ if (isDev) {
     app.use(express.static(path.join(__dirname, 'public')));
     
     routerConfig(app, {
-        dirPath: __dirname + '/routes/'
+        dirPath: __dirname + '/server/routes/'
     });
 } else {
     app.use(express.static(path.join(__dirname, 'public')));
     routerConfig(app, {
-        dirPath: __dirname + '/routes/'
+        dirPath: __dirname + '/server/routes/'
     });
 }
 
