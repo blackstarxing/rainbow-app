@@ -20,7 +20,7 @@ module.exports = {
   //   new ExtractTextPlugin("[name].css")
   // ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js[x]?$/,
         exclude: /(node_modules)|(global\/lib\/)/,
