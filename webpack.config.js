@@ -6,16 +6,25 @@ var publicPath = 'http://localhost:3000/dist';
 //路径是相对于package.json所在路径
 var entry_map = {
   'index': ['./client/css/index.css','./client/js/index.js', hotMiddlewareScript],
+  'home': ['./client/css/home.css','./client/js/home.js', hotMiddlewareScript],
 }
 module.exports = {
   entry: entry_map,
-  devtool: 'source-map',
+  // devtool: 'source-map',
   output: {
     path: path.resolve(process.cwd(),'./public/dist/'),
     //[name]-[hash].js可以指定hash值。
     filename: '[name].js',
     publicPath: publicPath
   },
+  devServer: {
+        //contentBase: DEV_PATH,
+        historyApiFallback: true,
+        // hot: true,
+        open: true,
+        inline: true,
+        port: 3000
+    },
   // plugins: [
   //   new ExtractTextPlugin("[name].css")
   // ],
@@ -28,7 +37,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
+        loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader', publicPath: "/dist"})
       },
       {
         test: /\.scss$/,

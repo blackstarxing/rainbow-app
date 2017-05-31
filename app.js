@@ -16,7 +16,15 @@ var isDev = NODE_ENV === 'development';
 var index = require('./server/routes/index');
 var users = require('./server/routes/users');
 
+var proxy = require('express-http-proxy');
+
 var app = express();
+
+app.use('/api', proxy('http://172.16.10.3:8080', {
+  forwardPath: function(req, res) {
+    return require('url').parse(req.url).path;
+  }
+}));
 
 nunjucks.configure('server/views', {
     autoescape: true,

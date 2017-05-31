@@ -1,3 +1,169 @@
+html{
+	height: 100%;
+}
 body{
-	color:#f36;
+	min-height: 100%;
+}
+#room{
+	height:100%;
+}
+.m-video{
+	position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    overflow: hidden;
+}
+#mainvideo{
+	height: 100%;
+    width: 100%;
+    /*top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);*/
+}
+.m-header{
+	position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
+}
+.top-container{
+	position: absolute;
+    top: 0.266667rem;
+    left: 0.266667rem;
+    right: 0.266667rem;
+    display: flex;
+}
+.avatar-contatiner{
+	position: relative;
+	height: 0.96rem;
+	width: 4.0rem;
+	border-radius: 0.48rem;
+	background: rgba(0,0,0,0.5);
+}
+.avatar-contatiner i{
+	position: absolute;
+    display: inline-block;
+    width: 0.853333rem;
+    height: 0.853333rem;
+    top: 0.053333rem;
+    left: 0.053333rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    background-size: cover;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.avatar-contatiner .content{
+	width: 1.546667rem;
+	height: 100%;
+    position: absolute;
+    left: 1.013333rem;
+    padding:0.106667rem 0;
+    box-sizing: border-box;
+}
+.avatar-contatiner .name{
+	width: 100%;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 26px;
+    color: #fff;
+}
+.avatar-contatiner .avatar-id{
+	color:#c8c8c8;
+}
+.avatar-contatiner .follow{
+	position: absolute;
+	top: 0.16rem;
+	right: 0.16rem;
+	width: 1.12rem;
+	height: 0.64rem;
+	line-height: 0.64rem;
+	text-align: center;
+	background: #fff;
+	border-radius: 0.32rem;
+}
+.members-container{
+	height: 0.853333rem;
+	-webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    margin-left: 10px;
+    margin-top: 0.053333rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-x: auto;
+}
+.members-container .icon-avatar{
+	display: inline-block;
+    width: 0.853333rem;
+    height: 0.853333rem;
+    margin-left: 0.053333rem;
+    border-radius: 50%;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+.m-header .charm{
+	position: absolute;
+    top: 1.626667rem;
+    left: 0.266667rem;
+    overflow: hidden;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    border-radius: 0.32rem;
+    padding: 0 0.4rem 0 0.8rem;
+    color: #fff;
+    font-size: 22px;
+    /*background-color: rgba(0,0,0,.5);*/
+    background: url('/share/images/rank@2x.png') 0.16rem center no-repeat,url('/share/images/right_rank@3x.png') right 0.16rem center no-repeat rgba(0,0,0,0.5);
+    background-size: 0.533333rem,0.133333rem;
+}
+.main-section{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+.main-section .m-game{
+	width: 100%;
+	height: 5.44rem;
+	background: #000;
+}
+.m-chat{
+	padding:0 0.266667rem;
+	position: relative;
+}
+.chat-area .message{
+	display: inline-block;
+	max-width: 74%;
+	background: rgba(0,0,0,0.2);
+	height: 0.586667rem;
+	line-height: 0.586667rem;
+	padding:0 0.24rem;
+	margin-bottom: 0.133333rem;
+	width: auto;
+	border-radius: 0.293333rem;
+}
+.m-chat .award{
+	position: absolute;
+	right: 0.266667rem;
+	bottom: 0;
+	text-align: center;
+}
+.m-chat .award div{
+	width: 1.28rem;
+	height: 0.48rem;
+	line-height: 0.48rem;
+	border-radius: 0.053333rem;
+	background: rgba(0,0,0,0.5);
+	color:#fff;
 }
