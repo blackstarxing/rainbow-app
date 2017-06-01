@@ -15,7 +15,9 @@
     "express-http-proxy": "^1.0.3",
     "morgan": "~1.8.1",
     "nunjucks": "^3.0.0",
-    "serve-favicon": "~2.4.2"
+    "request": "^2.81.0",
+    "serve-favicon": "~2.4.2",
+    "thenjs": "^2.0.5"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

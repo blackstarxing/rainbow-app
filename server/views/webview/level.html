@@ -6,19 +6,19 @@
 	<div class="g-bd">
 		<div class="g-hd">
  			<div class="m-icon">
- 				<img src="http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg" alt="">
+ 				<img src="{{index.myLv.icon}}" alt="">
  				<div class="m-level">
- 					<div class="level"><i class="crown"></i>Lv24</div>
+ 					<div class="level"><i class="crown"></i>Lv{{index.myLv.lv}}</div>
  				</div>
  			</div>
  			<div class="m-pro f-cb">
- 				<span class="f-fl">Lv.24</span>
+ 				<span class="f-fl">Lv.{{index.myLv.lv}}</span>
  				<div class="progress f-fl">
-			      	<span class="orange" id="bar" style="width:50%;"><span></span></span>
+			      	<span class="orange" id="bar" style="width:{{index.myLv.now_expe/index.myLv.next_lv_expe*100}}%;"><span></span></span>
 			    </div>
-			    <span class="f-fl">Lv.25</span>
+			    <span class="f-fl">Lv.{{index.myLv.next_lv}}</span>
  			</div>
- 			<p class="tip">距离LV.4 还差792</p>
+ 			<p class="tip">距离LV.{{index.myLv.next_lv}} 还差{{index.myLv.next_lv_expe-index.myLv.now_expe}}</p>
  		</div>
  		<div class="g-md">
  			<h3>如何升级</h3>
@@ -27,40 +27,25 @@
  		<div class="g-bt">
  			<h3>等级特权</h3>
  			<div class="m-badge f-cb">
+                {% for list in index.privilegeList %}
  				<div class="badge">
- 					<div class="badge-icon"></div>
- 					<div class="badge-pri">等级图标</div>
- 					<div class="badge-lv">Lv.1 开启</div>
+ 					<div class="badge-icon"><img src="{{list.icon}}" alt=""></div>
+                    {% if list.is_open==1 %}
+                    <div class="badge-pri">{{list.name}}</div>
+ 					<div class="badge-lv">Lv.{{list.lv_id}} 开启</div>
+                    {% else %}
+                    <div class="badge-pri gray">{{list.name}}</div>
+                    <div class="badge-lv gray">Lv.{{list.lv_id}} 开启</div>
+                    {% endif %}
  				</div>
- 				<div class="badge">
- 					<div class="badge-icon gray-icon"></div>
- 					<div class="badge-pri gray">进场特效</div>
- 					<div class="badge-lv gray">Lv.20 开启</div>
- 				</div>
+                {% endfor %}
+                <div class="badge">
+                    <div class="badge-icon gray-icon"></div>
+                    <div class="badge-pri gray">更多特权</div>
+                    <div class="badge-lv more-badge">敬请期待</div>
+                </div>
  			</div>
  		</div>
 	</div>
  	
-{% endblock %}
-
-{% block js %}
-<!-- <script type="text/javascript" src="/dist/index.js"></script> -->
-<script>
-	$.ajax({
-        url: '/api/rainbow/myLv',
-        data: {
-        	token:'21fd95a5190a437d9f6ee4da9e2aa230',
-	        userId:2,
-	  	},  
-        type: 'get',
-        // async: false,
-        dataType: 'json',
-        success: function(data) {
-            
-        },
-        error: function() {
-            console.log('失败');
-        }
-    });
-</script>
 {% endblock %}

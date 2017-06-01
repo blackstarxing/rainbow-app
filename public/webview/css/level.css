@@ -127,7 +127,7 @@
 /*等级特权*/
 .badge{
 	float: left;
-	margin:0.48rem 0.866667rem 0;
+	margin:0.48rem 0.8rem 0;
 	font-size: 24px;
 }
 [data-dpr="3"] .badge {
@@ -137,8 +137,11 @@
 	height: 1.666667rem;
 	width: 1.146667rem;
 	margin:0 auto 0.213333rem;
-	background: url('/webview/images/sprite.png') -3.44rem -0px no-repeat;
-	background-size: 6.733333rem 3.786667rem;
+	/*background: url('/webview/images/sprite.png') -3.44rem -0px no-repeat;
+	background-size: 6.733333rem 3.786667rem;*/
+}
+.badge-icon img{
+	width: 100%;
 }
 .badge-pri{
 	text-align: center;
@@ -159,10 +162,19 @@
     font-size: 36px;
 }
 .gray-icon{
+	height: 1.666667rem;
 	background: url('/webview/images/sprite.png') -4.586667rem -0px no-repeat;
 	background-size: 6.733333rem 3.786667rem;
 }
 .gray{
 	color:#999;
 	border-color:#999;
+}
+.more-badge{
+	color:#999;
+	font-size: 26px;
+	border-color:transparent;
+}
+[data-dpr="3"] .more-badge {
+    font-size: 40px;
 }
