@@ -17,7 +17,7 @@ var rainbow = new Vue({
   			function dealPoker(){
   				if(pokerNum<15){
   					if(pokerNum<5){
-						$('.deal-section li').eq(pokerNum).addClass('rotate');
+						$('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[0]+width/2+0.35*width*(pokerNum%5)},500);
 						pokerNum++;
 	  					if(pokerNum==5){
 	  						setTimeout(function(){ 					
@@ -29,7 +29,7 @@ var rainbow = new Vue({
 		  					},50);
 	  					}
 	  				}else if(pokerNum<10){
-	  					$('.deal-section li').eq(pokerNum).addClass('rotate');
+	  					$('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[1]+width/2+0.35*width*(pokerNum%5)},500);
 						pokerNum++;
 	  					if(pokerNum==10){
 	  						setTimeout(function(){ 					
@@ -41,7 +41,7 @@ var rainbow = new Vue({
 		  					},50);
 	  					}
 	  				}else{
-	  					$('.deal-section li').eq(pokerNum).addClass('rotate');
+	  					$('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[2]+width/2+0.35*width*(pokerNum%5)},500);
 						pokerNum++;
 	  					setTimeout(function(){ 					
 	  						dealPoker();
