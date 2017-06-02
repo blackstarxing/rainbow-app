@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="../dist/index.css">
 {% endblock %}
 {% block content %}
-<div id="room">
+<div id="room" v-cloak>
     <div class="g-ct">
         <div class="m-video">
             <video id="mainvideo" preload="auto" autoplay="false" is="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" src="http://6721.liveplay.myqcloud.com/live/6721_8b0e1119b959709205a1aeae9cf103b2.m3u8"></video>
@@ -11,7 +11,7 @@
         <div class="m-header">
             <div class="top-container">
                 <div class="avatar-contatiner">
-                    <i class="avatar icon-avatar" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');"></i>
+                    <i class="avatar icon-avatar" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');" @click="showCard"></i>
                     <div class="content">
                         <div class="name">可爱的琳baby＊新主播＊等你来爱我</div>
                         <div class="author-id">ID 123456</div>
@@ -29,6 +29,10 @@
                 <div class="chat-area">
                     <div><span class="message">fasfdagagdsfgdsafadsfd</span></div>
                     <div><span class="message">dsfgdsafadsfd</span></div>
+                    <div><span class="message">dsfgdsafadsfd</span></div>
+                    <div><span class="message">dsfgdsafadsfd</span></div>
+                    <div><span class="message">dsfgdsafadsfd</span></div>
+                    <div><span class="message">dsfgdsafa4564</span></div>
                 </div>
                 <div class="award">
                     <div>可领取</div>
@@ -37,17 +41,87 @@
             </div>
             <div class="m-operate"></div>
             <div class="m-game">
-                
+                <!-- 牌区 -->
+                <div class="m-card">
+                    <div class="poker-box">
+                        <div class="poker-area">
+                            <ul class="f-cb">
+                                
+                            </ul>
+                        </div>
+                        <div class="poker-area">
+                            <ul class="f-cb">
+                                
+                            </ul>
+                        </div>
+                        <div class="poker-area">
+                            <ul class="f-cb">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="stake-box">
+                        <div class="stake-area">
+                        
+                        </div>
+                        <div class="stake-area">
+                            
+                        </div>
+                        <div class="stake-area">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="m-bet">
+                    
+                </div>
             </div>
         </div>
         
+    </div>
+    <div class="deal-section">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="pop-mask" v-show="cardDisplay">
+        <div class="anchor-panel">
+            <span class="report">举报</span>
+            <span class="close" @click="closeCard">╳</span>
+            <div class="avatar icon-avatar" style="background-image: url(&quot;//p.qlogo.cn/hy_personal/4376ae1e0cf0ccce49552e53ce1a45b3581e23f5bf1ad771b98b939c0e863809b6b1a9516c6abcf8ccfc29b031184cab/80?tp=webp&quot;);"></div>
+            <h3 class="name"><span class="name-text">乌龙茶</span><span class="sex male"></span><span class="levelMedal" style="background-image: url('/share/images/third_level.png');">28</span>
+            </h3>
+            <p class="anchor-id">Id: 123456</p>
+            <p class="signature">此人还没有留下任何痕迹...</p>
+            <ul class="numbers">
+                <li><span class="number">3</span><label>关注</label></li>
+                <li><span class="number">7</span><label>粉丝</label></li>
+                <li><span class="number">0</span><label>魅力</label></li>
+            </ul>
+            <p class="listen-text"><span>+ 关注</span></p>
+        </div>
     </div>
 </div>
  	
 {% endblock %}
 
 {% block js %}
-<!-- <script type="text/javascript" src="/dist/index.js"></script> -->
+<script type="text/javascript" src="/js/vue.js"></script>
+<script type="text/javascript" src="/dist/index.js"></script>
 <script>
 	
 </script>

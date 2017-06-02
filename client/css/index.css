@@ -7,6 +7,9 @@ body{
 #room{
 	height:100%;
 }
+[v-cloak] {
+	display: none;
+} 
 .m-video{
 	position: absolute;
     left: 0;
@@ -136,11 +139,17 @@ body{
 .main-section .m-game{
 	width: 100%;
 	height: 5.44rem;
-	background: #000;
+	background: #fff;
 }
 .m-chat{
 	padding:0 0.266667rem;
 	position: relative;
+}
+.chat-area{
+	height: auto;
+	max-height: 3.6rem;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 .chat-area .message{
 	display: inline-block;
@@ -152,6 +161,7 @@ body{
 	margin-bottom: 0.133333rem;
 	width: auto;
 	border-radius: 0.293333rem;
+	text-shadow: 0 .5px 1px rgba(0,0,0,.5);
 }
 .m-chat .award{
 	position: absolute;
@@ -166,4 +176,344 @@ body{
 	border-radius: 0.053333rem;
 	background: rgba(0,0,0,0.5);
 	color:#fff;
+}
+.m-game{
+	box-sizing: border-box;
+}
+.m-card{
+	height: 4.266667rem;
+	padding-top: 0.266667rem;
+	box-sizing: border-box;
+	background: url('/share/images/game_top.png') repeat-x,url('/share/images/game_bg.png');
+	background-size: 100% 0.133333rem,100% 100%;
+}
+.poker-box,.stake-box{
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+.poker-box{
+	margin-bottom: 0.16rem;
+}
+.poker-area,.stake-area{
+	flex: 1;
+	overflow: hidden;
+}
+.poker-area ul{
+	width: 2.54rem;
+	height: 1.466667rem;
+	margin:0 auto;
+}
+.poker-area li{
+	width: 1.066667rem;
+	height: 1.466667rem;
+	background: url('/share/images/poker_back.png') no-repeat;
+	background-size: 100% 100%;
+	float: left;
+	margin-left: -0.7rem;
+}
+.poker-area li:first-child{
+	margin-left: 0;
+}
+.stake-area{
+	height: 2.186667rem;
+	margin:0 0.16rem;
+	background: url('/share/images/stake_bg.png') no-repeat;
+	background-size: 100% 100%;
+}
+.deal-section{
+	
+}
+.deal-section ul{
+	height: 100%;
+}
+.deal-section li{
+	position: absolute;
+	width: 1.066667rem;
+	height: 1.466667rem;
+	left: 50%;
+	top: 50%;
+	transform: rotate(0deg);
+	-webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+	background: url('/share/images/poker_back.png') no-repeat;
+	background-size: 100% 100%;
+}
+/*卡牌旋转动画*/
+.deal-section .rotate{
+    /*transform-origin:0 0%;*/
+    /*-webkit-transform: translate(-100%,-100%);
+    transform: translate(-100%,-100%);*/
+	animation:myfirst .5s linear 1;
+	-webkit-animation:myfirst .5s linear 1;
+    -moz-animation:myfirst .5s linear 1; /* Firefox */
+    -o-animation:myfirst .5s linear 1; /* Opera */
+	/*transform: rotate(45deg);*/
+}
+/*@-webkit-keyframes rotatePoker{
+
+　　0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+
+　　50%{-webkit-transform:rotate(180deg);transform:rotate(180deg);}
+
+　　100%{-webkit-transform:rotate(360deg);transform:rotate(360deg);}
+
+}*/
+@keyframes myfirst
+{
+0%   {transform:rotate(0deg);}
+25%  {transform:rotate(90deg);}
+50%  {transform:rotate(180deg);}
+75%  {transform:rotate(270deg);}
+100% {transform:rotate(360deg);}
+}
+@-webkit-keyframes rotatePoker{
+
+　　0%{opacity: 1;}
+
+　　50%{opacity: 0.5}
+
+　　100%{opacity: 0;}
+
+}
+
+@keyframes rotatePoker{
+
+　　0%{transform:rotate(0deg);}
+
+　　50%{transform:rotate(180deg);}
+
+　　100%{transform:rotate(360deg);}
+
+}
+.m-bet{
+	height: 1.173333rem;
+	background: rgba(0,0,0,0.64);
+}
+
+/*用户卡片弹窗*/
+.pop-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    background-color: rgba(0,0,0,.5)
+}
+
+.anchor-panel {
+    background-color: #fff;
+    position: absolute;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    width: 8.533333rem;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    padding: 0 22px;
+    border-radius: 0.133333rem;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.anchor-panel .report {
+    position: absolute;
+    color: #999;
+    left: 30px;
+    top: 12px;
+    font-size: 26px;
+}
+
+.anchor-panel .close {
+    position: absolute;
+    color: #999;
+    right: 30px;
+    top: 12px;
+    font-size: 26px;
+}
+
+.anchor-panel .report:before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 3px;
+    width: 13px;
+    height: 13px;
+    -webkit-background-repeat: no-repeat;
+}
+
+.anchor-panel .report.reported {
+    left: 15px
+}
+
+.anchor-panel .report.reported:before {
+    display: none
+}
+
+.anchor-panel .avatar {
+    width: 2.133333rem;
+    height: 2.133333rem;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: -0.88rem;
+    left: 50%;
+    margin-left: -1.066667rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    background-size: cover
+}
+
+.anchor-panel .name {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin-top: 1.52rem;
+    font-size: 32px;
+    line-height: 36px;
+    height: 36px
+}
+
+.anchor-panel .name span {
+    display: inline-block;
+    vertical-align: middle
+}
+
+.anchor-panel .name span.name-text {
+    max-width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 0.133333rem;
+}
+
+.anchor-panel .name .sex {
+    position: relative;
+    width: 0;
+    height: 0.346667rem;
+    margin:0 0.133333rem;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0
+}
+
+.anchor-panel .name .male,.anchor-panel .name .female {
+    margin-right: 18px
+}
+
+.anchor-panel .name .male:after,.anchor-panel .name .female:after {
+    content: '';
+    position: absolute;
+    right: -15px;
+    top: 0;
+    width: 0.346667rem;
+    height: 0.346667rem;
+}
+
+.anchor-panel .name span.male:after {
+    content: ' ';
+    background-repeat: no-repeat;
+}
+
+.anchor-panel .name span.female:after {
+    content: '  ';
+    background-repeat: no-repeat;
+}
+.anchor-panel .name span.male:after {
+    background-size: 0.346667rem;
+    background-image: url('/share/images/male.png');
+}
+.anchor-panel .name span.female:after {
+    background-size: 14px 30.333333333333336px;
+    background-image: url('/share/images/female.png');
+}
+
+.anchor-panel .name .levelMedal {
+    display: inline-block;
+    vertical-align: middle;
+    color:#fff;
+    font-size: 24px;
+    width: 0.853333rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    -webkit-background-size: 0.853333rem 0.4rem;
+    background-size: 0.853333rem 0.4rem;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+   	text-indent: 0.333333rem;
+   	margin-left: 0.133333rem;
+}
+
+.anchor-panel .anchor-id{
+	font-size: 26px;
+	color: #999;
+	margin-top: 0.16rem;
+}
+
+.anchor-panel .signature {
+    font-size: 28px;
+    line-height: 28px;
+    height: 28px;
+    margin-top: 0.426667rem;
+    color: #999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.anchor-panel .numbers {
+    margin: 0.64rem 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    padding-bottom: 22px
+}
+
+.anchor-panel .numbers li {
+    list-style: none;
+    min-width: 40px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1
+}
+
+.anchor-panel .numbers li span.number {
+    font-size: 32px;
+    color: #333;
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.anchor-panel .numbers li label {
+	display: inline-block;
+    font-size: 26px;
+    color: #999;
+    margin-top: 0.213333rem;
+}
+
+.anchor-panel .listen-text span{
+	display: block;
+	margin:0 auto 0.72rem;
+	width: 1.6rem;
+	height: 0.746667rem;
+	line-height: 0.746667rem;
+	background: #f36;
+	color:#fff;
+	border-radius: 0.373333rem;
 }
