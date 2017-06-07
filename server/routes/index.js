@@ -7,7 +7,7 @@ var path = 'http://172.16.10.3:8080';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: '彩虹' });
 });
 
 router.get('/share/index', function(req, res, next) {
@@ -40,10 +40,6 @@ router.get('/webview/level', function(req, res, next) {
         console.log(error);
         res.render('error', { title: "错误"});
     });
-});
-
-router.get('/home', function(req, res, next) {
-  res.render('home', { title: 'blackstar' });
 });
 
 module.exports = router;
