@@ -27,6 +27,11 @@ body{
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);*/
 }
+img{
+    border:0; 
+    max-width:100%;
+    vertical-align:bottom;
+}
 .m-header{
 	position: absolute;
     top: 0;

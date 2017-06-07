@@ -42,4 +42,8 @@ router.get('/webview/level', function(req, res, next) {
     });
 });
 
+router.get('/activity/notice', function(req, res, next) {
+  res.render('activity/notice', { title: '文明公约' });
+});
+
 module.exports = router;
