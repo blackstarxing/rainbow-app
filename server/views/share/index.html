@@ -26,7 +26,7 @@
         </div>
         <div class="main-section">
             <div class="m-chat">
-                <div class="chat-area">
+                <div class="chat-area" id="chat">
                     <div><span class="message">fasfdagagdsfgdsafadsfd</span></div>
                     <div><span class="message">dsfgdsafadsfd</span></div>
                     <div><span class="message">dsfgdsafadsfd</span></div>
@@ -43,34 +43,100 @@
             <div class="m-game">
                 <!-- 牌区 -->
                 <div class="m-card">
-                    <div class="poker-box">
-                        <div class="poker-area">
-                            <ul class="f-cb">
-                                
-                            </ul>
+                    <div class="game-box">
+                        <div class="stake-box">
+                            <div class="poker-area">
+                                <div class="result-box" v-show="game.poker_group[0]">
+                                    <ul class="f-cb">
+                                        <li class="poker1">J</li>
+                                        <li class="poker2">2</li>
+                                        <li class="poker3">6</li>
+                                        <li class="poker2">Q</li>
+                                        <li class="poker4">A</li>
+                                    </ul>
+                                    <div class="result"><img src="/share/images/goldcow.png" alt=""></div>
+                                </div>                                
+                            </div>
+                            <div class="stake-area f-cb">
+                                <div class="stake-name">
+                                    <div>奇奇</div>
+                                    <img src="/share/images/cow_1.png" alt="">
+                                    <div class="power">x2.2倍</div>
+                                </div>
+                                <div class="stake-num">
+                                    <div class="stake-all">
+                                        1.2万
+                                    </div>
+                                    <div class="stake-my">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-mask" v-show="game.mask[0]"></div>
                         </div>
-                        <div class="poker-area">
-                            <ul class="f-cb">
-                                
-                            </ul>
+                        <div class="stake-box">
+                            <div class="poker-area">
+                                <div class="result-box" v-show="game.poker_group[1]">
+                                    <ul class="f-cb">
+                                        <li class="poker1">J</li>
+                                        <li class="poker2">2</li>
+                                        <li class="poker3">6</li>
+                                        <li class="poker2">Q</li>
+                                        <li class="poker4">A</li>
+                                    </ul>
+                                    <div class="result"><img src="/share/images/goldcow.png" alt=""></div>
+                                </div>  
+                            </div>
+                            <div class="stake-area f-cb">
+                                <div class="stake-name">
+                                    <div>趣趣</div>
+                                    <img src="/share/images/cow_2.png" alt="">
+                                    <div class="power">x2.2倍</div>
+                                </div>
+                                <div class="stake-num">
+                                    <div class="stake-all">
+                                        1.2万
+                                    </div>
+                                    <div class="stake-my">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-mask" v-show="game.mask[1]"></div>
                         </div>
-                        <div class="poker-area">
-                            <ul class="f-cb">
-                                
-                            </ul>
+                        <div class="stake-box">
+                            <div class="poker-area">
+                                <div class="result-box" v-show="game.poker_group[2]">
+                                    <ul class="f-cb">
+                                        <li class="poker1">J</li>
+                                        <li class="poker2">2</li>
+                                        <li class="poker3">6</li>
+                                        <li class="poker2">Q</li>
+                                        <li class="poker4">A</li>
+                                    </ul>
+                                    <div class="result"><img src="/share/images/goldcow.png" alt=""></div>
+                                </div>  
+                            </div>
+                            <div class="stake-area f-cb">
+                                <div class="stake-name">
+                                    <div>乐乐</div>
+                                    <img src="/share/images/cow_3.png" alt="">
+                                    <div class="power">x2.2倍</div>
+                                </div>
+                                <div class="stake-num">
+                                    <div class="stake-all">
+                                        1.2万
+                                    </div>
+                                    <div class="stake-my">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-mask" v-show="game.mask[2]"></div>
                         </div>
                     </div>
-                    <div class="stake-box">
-                        <div class="stake-area">
-                        
-                        </div>
-                        <div class="stake-area">
-                            
-                        </div>
-                        <div class="stake-area">
-                            
-                        </div>
-                    </div>
+                    <div class="game-tip" v-bind:class="[game.tipClass]" v-show="game.showTip">${game.tip}</div>
+                    <div class="clock" v-show="game.showClock">${game.time}</div>
                 </div>
                 <div class="m-bet">
                     
@@ -81,21 +147,7 @@
     </div>
     <div class="deal-section">
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            
         </ul>
     </div>
     <div class="pop-mask" v-show="cardDisplay">
@@ -115,13 +167,23 @@
             <p class="listen-text"><span>+ 关注</span></p>
         </div>
     </div>
+    <div class="end-mask"></div>
 </div>
  	
 {% endblock %}
 
 {% block js %}
 <script type="text/javascript" src="/js/vue.js"></script>
+<script type="text/javascript" src="http://realtime.plhwin.com/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/js/dcodeIO/Long.min.js"></script>     
+<script type="text/javascript" src="/js/dcodeIO/ByteBufferAB.min.js"></script>  
+<script type="text/javascript" src="/js/dcodeIO/ProtoBuf.min.js"></script>  
+<script type="text/javascript" src="/js/sha1.js"></script>
+<script type="text/javascript" src="/js/Web_SDK_Base_v2.8.0.js"></script>
+<script type="text/javascript" src="/js/Web_SDK_Chatroom_v2.8.0.js"></script>
 <script type="text/javascript" src="/dist/index.js"></script>
+<script type="text/javascript" src="/dist/chatroom.js"></script>
+<script type="text/javascript" src="/dist/game.js"></script>
 <script>
 	
 </script>
