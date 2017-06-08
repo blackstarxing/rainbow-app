@@ -31,7 +31,10 @@
             <div class="m-withdrawCash">
                 <span>提现金额</span>
                 <div class="u-amount f-cb">
-                    <i class="cashIcon"></i><input type="number" value="500">
+                    <i class="cashIcon"></i>
+                    <div class="amountVal">
+                        <input type="number" value="500">
+                    </div>
                 </div> 
                 <div class="withdraw-clue f-cb">
                     <div>请输入大于100的金额</div>
@@ -39,6 +42,7 @@
                 </div>
             </div>
         </div>
+        <button class="u-dl-btn u-withdrawBtn">兑换收益</button>
     </div>
 {% endblock %}
 {% block js %}

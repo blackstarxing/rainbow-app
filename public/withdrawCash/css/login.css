@@ -1,12 +1,6 @@
 .g-login{
 	
 }
-[data-dpr="1"] .g-login{
-    font-size: 15px;
-}
-[data-dpr="3"] .g-login{
-    font-size: 45px;
-}
 .m-headIcon{
 	/*display: flex;
 	align-items: center;
