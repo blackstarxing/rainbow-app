@@ -1,16 +1,50 @@
 {% extends 'layout.html' %}
 {% block css %}
-<!-- <link rel="stylesheet" href="/webview/css/income.css"> -->
+<link rel="stylesheet" href="/withdrawCash/css/income.css">
 {% endblock %}
 {% block content %}
-	<div id="g-login" class="g-bd">
-       
+	<div class="g-income">
+        <div class="m-headIcon">
+            <div class="u-headText">可兑换收益(元)</div>
+            <div class="u-headCash">1888232.48</div>
+        </div>  
+        <ul class="m-glamour f-cb">
+            <li class="u-glamour">
+                <span>我的魅力</span>
+                <div class="u-myGlamour">14545</div>
+            </li>
+            <li class="u-line">
+                <div></div>
+            </li>
+            <li class="u-glamour">
+                <span>可提现魅力</span>
+                <div class="u-withdrawGlamour">14545</div>
+            </li>
+        </ul> 
+        <div class="g-withdraw">
+            <div class="m-account">
+                <span>提现账户&nbsp;:</span>
+                <span class="weixinIcon"></span>
+                <span>微信</span>
+                <span class="accountName">(老叮当)</span>   
+            </div>
+            <div class="m-withdrawCash">
+                <span>提现金额</span>
+                <div class="u-amount f-cb">
+                    <i class="cashIcon"></i><input type="number" value="500">
+                </div> 
+                <div class="withdraw-clue f-cb">
+                    <div>请输入大于100的金额</div>
+                    <div style="display: none;">输入金额超过钱包余额</div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 {% block js %}
 <script type="text/javascript" src="/js/vue.js"></script>
 <script type="text/javascript" src="/dist/index.js"></script>
 <script>
-    window.document.title = "收入"
+    // window.document.title = "我的收益"
 </script>
 {% endblock %}
