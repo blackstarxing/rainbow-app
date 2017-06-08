@@ -1,0 +1,19 @@
+.g-login{
+	
+}
+[data-dpr="1"] .g-login{
+    font-size: 15px;
+}
+[data-dpr="3"] .g-login{
+    font-size: 45px;
+}
+.m-headIcon{
+	/*display: flex;
+	align-items: center;
+	justify-content: center;*/
+
+	margin: 1.125rem auto 0;
+    min-height:4rem;
+	background: url('/withdrawCash/images/LOGO@3x.png') center top no-repeat;
+	background-size:auto 4rem;
+}

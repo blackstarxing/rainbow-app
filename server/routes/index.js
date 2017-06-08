@@ -7,7 +7,7 @@ var path = 'http://172.16.10.3:8080';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: '彩虹' });
+  res.render('index', { title: 'Express' });
 });
 
 router.get('/share/index', function(req, res, next) {
@@ -42,8 +42,19 @@ router.get('/webview/level', function(req, res, next) {
     });
 });
 
-router.get('/activity/notice', function(req, res, next) {
-  res.render('activity/notice', { title: '文明公约' });
+//提现-登录
+router.get('/withdrawCash/login', function(req, res, next) {
+   res.render('withdrawCash/login', { title: '请登录' });
+});
+
+//提现-我的收益
+router.get('/withdrawCash/income', function(req, res, next) {
+   res.render('withdrawCash/income', { title: '我的收益' });
+});
+
+
+router.get('/home', function(req, res, next) {
+  res.render('home', { title: 'blackstar' });
 });
 
 module.exports = router;
