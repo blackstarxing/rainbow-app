@@ -16,7 +16,8 @@ body{
     top: 0;
     bottom: 0;
     right: 0;
-    background-color: #fff;
+    background: url(//p.qlogo.cn/hy_personal_room/6774614/67746141492792014/640?tp=webp) center center no-repeat;
+    background-size: cover;
     overflow: hidden;
 }
 #mainvideo{
@@ -26,11 +27,6 @@ body{
     left: 50%;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);*/
-}
-img{
-    border:0; 
-    max-width:100%;
-    vertical-align:bottom;
 }
 .m-header{
 	position: absolute;
@@ -53,7 +49,7 @@ img{
 	border-radius: 0.48rem;
 	background: rgba(0,0,0,0.5);
 }
-.avatar-contatiner i{
+.icon-avatar{
 	position: absolute;
     display: inline-block;
     width: 0.853333rem;
@@ -80,11 +76,13 @@ img{
 	white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 26px;
+    font-size: 0.346667rem;
     color: #fff;
+    margin-bottom: 0.053333rem;
 }
-.avatar-contatiner .avatar-id{
+.avatar-contatiner .author-id{
 	color:#c8c8c8;
+    font-size: 0.293333rem;
 }
 .avatar-contatiner .follow{
 	position: absolute;
@@ -97,13 +95,16 @@ img{
 	background: #fff;
 	border-radius: 0.32rem;
 }
+.u-follow-btn{
+    color:#ff285e;
+}
 .members-container{
-	height: 0.853333rem;
+	/*height: 0.853333rem;*/
 	-webkit-box-flex: 1;
     -webkit-flex: 1;
     flex: 1;
     margin-left: 10px;
-    margin-top: 0.053333rem;
+    /*margin-top: 0.053333rem;*/
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -131,9 +132,9 @@ img{
     border-radius: 0.32rem;
     padding: 0 0.4rem 0 0.8rem;
     color: #fff;
-    font-size: 22px;
+    font-size: 0.293333rem;
     /*background-color: rgba(0,0,0,.5);*/
-    background: url('/share/images/rank@2x.png') 0.16rem center no-repeat,url('/share/images/right_rank@3x.png') right 0.16rem center no-repeat rgba(0,0,0,0.5);
+    background: url('/share/images/rank.png') 0.16rem center no-repeat,url('/share/images/right_rank.png') right 0.16rem center no-repeat rgba(0,0,0,0.5);
     background-size: 0.533333rem,0.133333rem;
 }
 .main-section{
@@ -167,15 +168,17 @@ img{
 	width: auto;
 	border-radius: 0.293333rem;
 	text-shadow: 0 .5px 1px rgba(0,0,0,.5);
+    color:#fff;
 }
 .m-chat .award{
+    width: 1.28rem;
 	position: absolute;
 	right: 0.266667rem;
 	bottom: 0;
 	text-align: center;
 }
 .m-chat .award div{
-	width: 1.28rem;
+	width: 100%;
 	height: 0.48rem;
 	line-height: 0.48rem;
 	border-radius: 0.053333rem;
@@ -225,7 +228,7 @@ img{
 	margin-left: -0.7rem;
     color:#000;
     text-indent: 0.066667rem;
-    font-size: 20px;
+    font-size: 0.266667rem;
     font-weight: bolder;
     border:1px solid rgba(0,0,0,0.2);
     border-radius: 0.053333rem;
@@ -246,9 +249,6 @@ img{
 .poker-area .result img{
     width: 100%;
     vertical-align: bottom;
-}
-[data-dpr="3"] .poker-area li {
-    font-size: 36px;
 }
 .poker-area li.poker1{
     background: url('/share/images/poker_1.png') no-repeat;
@@ -300,9 +300,8 @@ img{
 	height: 1.466667rem;
 	left: 50%;
 	top: 50%;
-	transform: rotate(0deg);
-	-webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
 	background: url('/share/images/poker_back.png') no-repeat;
 	background-size: 100% 100%;
 }
@@ -317,6 +316,13 @@ img{
     -o-animation:rotatePoker .25s linear 1; /* Opera */
 	/*transform: rotate(45deg);*/
 }
+@keyframes rotatePoker{
+    0%   {transform:translate(-50%,-50%) rotate(0deg);}
+    25%  {transform:translate(-50%,-50%) rotate(90deg);}
+    50%  {transform:translate(-50%,-50%) rotate(180deg);}
+    75%  {transform:translate(-50%,-50%) rotate(270deg);}
+    100% {transform:translate(-50%,-50%) rotate(360deg);}
+}
 @-webkit-keyframes rotatePoker{
 
 　　 0%   {-webkit-transform:translate(-50%,-50%) rotate(0deg);}
@@ -326,17 +332,10 @@ img{
     100% {-webkit-transform:translate(-50%,-50%) rotate(360deg);}
 
 }
-@keyframes rotatePoker{
-    0%   {transform:translate(-50%,-50%) rotate(0deg);}
-    25%  {transform:translate(-50%,-50%) rotate(90deg);}
-    50%  {transform:translate(-50%,-50%) rotate(180deg);}
-    75%  {transform:translate(-50%,-50%) rotate(270deg);}
-    100% {transform:translate(-50%,-50%) rotate(360deg);}
-}
 
 .stake-name{
     text-align: center;
-    font-size: 22px;
+    font-size: 0.293333rem;
     width: 1rem;
     margin:0.1rem;
     color:#fff;
@@ -346,13 +345,13 @@ img{
     width: 100%;
 }
 .stake-name .power{
-    font-size: 20px;
+    font-size: 0.266667rem;
     color:#fff82b;
 }
 .stake-num{
     float: left;
     margin-left: 0.133333rem;
-    font-size: 22px;
+    font-size: 0.293333rem;
     color:#fff;
     text-indent: 0.613333rem;
 }
@@ -368,6 +367,7 @@ img{
     background-image: url('/share/images/coin.png');
     background-repeat: no-repeat;
     background-position: 0.16rem center;
+    background-size: 0.4rem;
 }
 /*游戏状态提示*/
 .game-tip{
@@ -389,7 +389,7 @@ img{
     line-height: 1.026667rem; 
     text-align: center;
     color:#fff;
-    font-size: 36px;
+    font-size: 0.48rem;
     left: 50%;
     top:0.4rem;
     -webkit-transform: translate(-50%,0);
@@ -404,7 +404,7 @@ img{
 }
 
 /*用户卡片弹窗*/
-.pop-mask {
+.m-pop-mask {
     position: absolute;
     top: 0;
     left: 0;
@@ -435,7 +435,7 @@ img{
     color: #999;
     left: 30px;
     top: 12px;
-    font-size: 26px;
+    font-size: 0.346667rem;
 }
 
 .anchor-panel .close {
@@ -443,7 +443,7 @@ img{
     color: #999;
     right: 30px;
     top: 12px;
-    font-size: 26px;
+    font-size: 0.346667rem;
 }
 
 .anchor-panel .report:before {
@@ -490,7 +490,7 @@ img{
     -webkit-justify-content: center;
     justify-content: center;
     margin-top: 1.52rem;
-    font-size: 32px;
+    font-size: 0.426667rem;
     line-height: 36px;
     height: 36px
 }
@@ -552,7 +552,7 @@ img{
     display: inline-block;
     vertical-align: middle;
     color:#fff;
-    font-size: 24px;
+    font-size: 0.32rem;
     width: 0.853333rem;
     height: 0.4rem;
     line-height: 0.4rem;
@@ -565,13 +565,13 @@ img{
 }
 
 .anchor-panel .anchor-id{
-	font-size: 26px;
+	font-size: 0.346667rem;
 	color: #999;
 	margin-top: 0.16rem;
 }
 
 .anchor-panel .signature {
-    font-size: 28px;
+    font-size: 0.373333rem;
     line-height: 28px;
     height: 28px;
     margin-top: 0.426667rem;
@@ -601,7 +601,7 @@ img{
 }
 
 .anchor-panel .numbers li span.number {
-    font-size: 32px;
+    font-size: 0.426667rem;
     color: #333;
     display: block;
     text-align: center;
@@ -611,7 +611,7 @@ img{
 
 .anchor-panel .numbers li label {
 	display: inline-block;
-    font-size: 26px;
+    font-size: 0.346667rem;
     color: #999;
     margin-top: 0.213333rem;
 }
@@ -625,6 +625,108 @@ img{
 	background: #f36;
 	color:#fff;
 	border-radius: 0.373333rem;
+}
+
+/*直播结束*/
+.m-end-mask{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 99999;
+    background: #fff;
+    text-align: center;
+    color:#fff;
+}
+.m-end-mask .end-bg{
+    width: 100%;
+    height: 100%;
+    background: url(//p.qlogo.cn/hy_personal_room/6774614/67746141492792014/640?tp=webp) center center no-repeat #fff;
+    background-size: cover;
+    -webkit-filter: blur(15px);
+    -webkit-filter: alpha( Opacity=100);
+       -moz-filter: blur(15px);
+        -ms-filter: blur(15px);    
+            filter: blur(15px);
+}
+.m-end-mask .end-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0;
+    z-index: 9;
+    background: rgba(0,0,0,0.5);
+}
+.m-end-mask .end-head{
+    margin-top:2.853333rem;
+    font-size: 0.533333rem;
+}
+.m-end-mask .end-head h3{
+    font-weight: normal;
+}
+.m-end-mask .end-head h3 span{
+    display: inline-block;
+    width: 1.066667rem;
+    height: 0.053333rem;
+    background: #fff;
+    vertical-align: middle;
+}
+.m-end-mask .end-head .icon-avatar{
+    position: static;
+    margin-top: 0.586667rem;
+    width: 2.133333rem;
+    height: 2.133333rem;
+    border:0.053333rem solid #fff;
+    box-sizing: border-box;
+}
+.end-recommend{
+    padding:0 1.28rem;
+    margin-top: 1.226667rem;
+}
+.end-recommend h3{
+    font-size: 0.4rem;
+    margin-bottom: 0.533333rem;
+}
+.end-recommend .recommend-box{
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-around;
+}
+.end-recommend .recommend{
+    /*flex:1;*/
+    width: 3.413333rem;
+    height: 3.413333rem;
+    border:4px solid rgba(0,0,0,0.4);
+}
+.end-recommend .recommend>a{
+    display: block;
+    height: 100%;
+    background-size: cover;
+}
+.end-recommend .recommend span{
+    display: inline-block;
+    width: 1.333333rem;
+    height: 0.373333rem;
+    line-height: 0.373333rem;
+    border:0.053333rem solid rgba(255,255,255,0.4);
+    border-radius: 0.24rem;
+    font-size: 0.24rem;
+    float: right;
+    background: rgba(0,0,0,0.4)
+}
+.end-recommend .recommend i{
+    color:#b8ff1f;
+    font-size: 0.506667rem;
+    vertical-align: middle;
+}
+.m-end-mask .u-dl-btn{
+    margin:0.853333rem auto 0;
 }
 
 /*animate css*/

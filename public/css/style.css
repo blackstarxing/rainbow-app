@@ -18,7 +18,8 @@ h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
 del,ins,u,s,a,a:hover{text-decoration:none;}
 body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\5b8b\4f53;color:#333;outline:0;}
 body{background:#fff;}
-a,a:hover{color:#333;}
+a,a:hover{color:#fff;}
+img{border:0;max-width: 100%;vertical-align: bottom;}
 
 /*function*/
 .f-cb:after,.f-cbli li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
@@ -28,3 +29,23 @@ a,a:hover{color:#333;}
 .f-db{display:block;}
 .f-fl{float:left;}
 .f-fr{float:right;}
+
+/*公共样式*/
+
+/*居中层*/
+.g-mobile-wrap{
+	max-width: 800px;
+	margin:0 auto;
+}
+
+.u-dl-btn{
+	display: block;
+	width: 7.733333rem;
+	height: 1.066667rem;
+	line-height: 1.066667rem;
+	background: #f36;
+	color:#fff;
+	font-size: 0.4rem;
+	text-align: center;
+	border-radius: 0.533333rem;
+}
