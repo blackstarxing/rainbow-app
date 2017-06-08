@@ -7,77 +7,77 @@ var top = $('.poker-area').eq(0).offset().top;
 var delay = 50;
 var vm = window.rainbow;
 
-// if ("WebSocket" in window)
-// {
-//     console.log("您的浏览器支持 WebSocket!");
+if ("WebSocket" in window)
+{
+    console.log("您的浏览器支持 WebSocket!");
 
-//     // 打开一个 web socket
-//     var ws = new WebSocket("ws://echo.websocket.org/echo");
+    // 打开一个 web socket
+    var ws = new WebSocket("ws://172.16.10.3:9801");
 
-//     function checkSocket() {
-//         if(ws != null) {
-//             var stateStr;
-//             switch(ws.readyState) {
-//                 case 0:
-//                     {
-//                         stateStr = "CONNECTING";
-//                         break;
-//                     }
-//                 case 1:
-//                     {
-//                         stateStr = "OPEN";
-//                         break;
-//                     }
-//                 case 2:
-//                     {
-//                         stateStr = "CLOSING";
-//                         break;
-//                     }
-//                 case 3:
-//                     {
+    function checkSocket() {
+        if(ws != null) {
+            var stateStr;
+            switch(ws.readyState) {
+                case 0:
+                    {
+                        stateStr = "CONNECTING";
+                        break;
+                    }
+                case 1:
+                    {
+                        stateStr = "OPEN";
+                        break;
+                    }
+                case 2:
+                    {
+                        stateStr = "CLOSING";
+                        break;
+                    }
+                case 3:
+                    {
 
-//                         stateStr = "CLOSED";
-//                         break;
-//                     }
-//                 default:
-//                     {
-//                         stateStr = "UNKNOW";
-//                         break;
-//                     }
-//             }
-//             console.log("WebSocket state = " + ws.readyState + " ( " + stateStr + " )");
-//         } else {
-//             console.log("WebSocket is null");
-//         }
-//     }
-//     setInterval(checkSocket,500)
-//     ws.onopen = function(event)
-//     {
-//         console.log(event);
-//       // Web Socket 已连接上，使用 send() 方法发送数据
-//       ws.send("发送数据");
-//       console.log("数据发送中...");
-//     };
+                        stateStr = "CLOSED";
+                        break;
+                    }
+                default:
+                    {
+                        stateStr = "UNKNOW";
+                        break;
+                    }
+            }
+            console.log("WebSocket state = " + ws.readyState + " ( " + stateStr + " )");
+        } else {
+            console.log("WebSocket is null");
+        }
+    }
+    setInterval(checkSocket,500)
+    ws.onopen = function(event)
+    {
+        console.log(event);
+      // Web Socket 已连接上，使用 send() 方法发送数据
+      ws.send("发送数据");
+      console.log("数据发送中...");
+    };
     
-//     ws.onmessage = function (evt) 
-//     { 
-//       var received_msg = evt.data;
-//       console.log("数据已接收...");
-//     };
+    ws.onmessage = function (evt) 
+    { 
+      var received_msg = evt.data;
+      console.log("数据已接收...");
+    };
     
-//     ws.onclose = function()
-//     { 
-//       // 关闭 websocket
-//       console.log("连接已关闭..."); 
-//     };
-// }
+    ws.onclose = function()
+    { 
+      // 关闭 websocket
+      console.log("连接已关闭..."); 
+    };
+}
 
-// else
-// {
-//    // 浏览器不支持 WebSocket
-//    console.log("您的浏览器不支持 WebSocket!");
-// }
-// ws.binaryType = "arraybuffer";  
+else
+{
+   // 浏览器不支持 WebSocket
+   console.log("您的浏览器不支持 WebSocket!");
+}
+ws.binaryType = "arraybuffer";  
 
 
 // if (typeof dcodeIO === 'undefined' || !dcodeIO.ProtoBuf) {
@@ -129,6 +129,9 @@ function dealPoker(){
 	var width = $('.deal-section li').eq(0).width();
 	var height = $('.deal-section li').eq(0).height();
 	if(pokerNum<15){
+        var initleft = $('.deal-section li').eq(pokerNum).offset().left;
+        var inittop = $('.deal-section li').eq(pokerNum).offset().top;
+        $('.deal-section li').eq(pokerNum).css({left:initleft+0.5*width,top:inittop+0.5*height});
 		if(pokerNum<5){
 		    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[0]+0.86*width+0.35*width*(pokerNum%5)},250);
 		}else if(pokerNum<10){
@@ -208,4 +211,4 @@ function createPoker(){
 	}
 	dealPoker();
 }
-createPoker();
+// createPoker();

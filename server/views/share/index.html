@@ -6,7 +6,7 @@
 <div id="room" v-cloak>
     <div class="g-ct">
         <div class="m-video">
-            <video id="mainvideo" preload="auto" autoplay="false" is="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" src="http://6721.liveplay.myqcloud.com/live/6721_8b0e1119b959709205a1aeae9cf103b2.m3u8"></video>
+            <video id="mainvideo" preload="auto" autoplay="false" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" src="http://6721.liveplay.myqcloud.com/live/6721_8b0e1119b959709205a1aeae9cf103b2.m3u8"></video>
         </div>
         <div class="m-header">
             <div class="top-container">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="award">
                     <div>可领取</div>
-                    <img src="/share/images/gold@2x.png" alt="">
+                    <img src="/share/images/gold.png" alt="">
                 </div>
             </div>
             <div class="m-operate"></div>
@@ -145,12 +145,24 @@
         </div>
         
     </div>
+    <!-- 礼物连击 -->
+    <div class="m-gift-combo">
+        <div class="gift-wrap f-cb">
+            <div class="gift-content f-fl"></div>
+            <div class="gift-num"></div>
+        </div>
+        <div class="gift-wrap">
+            <div class="gift-content"></div>
+            <div class="gift-num"></div>
+        </div>
+    </div>
+    <!-- 发牌 -->
     <div class="deal-section">
         <ul>
             
         </ul>
     </div>
-    <div class="pop-mask" v-show="cardDisplay">
+    <div class="m-pop-mask" v-show="cardDisplay">
         <div class="anchor-panel">
             <span class="report">举报</span>
             <span class="close" @click="closeCard">╳</span>
@@ -167,7 +179,31 @@
             <p class="listen-text"><span>+ 关注</span></p>
         </div>
     </div>
-    <div class="end-mask"></div>
+    <div class="m-end-mask" v-if="is_live_end">
+        <div class="end-bg"></div>
+        <div class="end-container">
+            <div class="end-head">
+                <h3><span></span>&nbsp;&nbsp;&nbsp;直播结束&nbsp;&nbsp;&nbsp;<span></span></h3>
+                <i class="avatar icon-avatar" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');"></i>
+            </div>
+            <div class="end-recommend">
+                <h3>精彩推荐</h3>
+                <div class="recommend-box">
+                    <div class="recommend">
+                        <a href="" style="background-image: url('//p.qlogo.cn/hy_personal/4376ae1e0cf0cccedf6a98055419b4438847511323dc7ea3c0fa7f621a7487230663cb77d04f449f658894768049357c/360?tp=webp');">      
+                            <span><i>·</i>直播中</span>                  
+                        </a>
+                    </div>
+                    <div class="recommend">
+                        <a href="" style="background-image: url('//p.qlogo.cn/hy_personal/4376ae1e0cf0cccedf6a98055419b4438847511323dc7ea3c0fa7f621a7487230663cb77d04f449f658894768049357c/360?tp=webp');">      
+                            <span><i>·</i>直播中</span>                  
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <a href="" class="u-dl-btn">下载彩虹直播</a>
+        </div>       
+    </div>
 </div>
  	
 {% endblock %}

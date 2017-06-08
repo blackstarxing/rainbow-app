@@ -10,6 +10,8 @@ rainbow = new Vue({
   		roomid:'8898958',
   		// 用户卡片显示
     	cardDisplay:false,
+    	// 直播结束
+    	is_live_end:false,
     	game:{
     		showTip:false,
     		showClock:false,
@@ -23,6 +25,7 @@ rainbow = new Vue({
   	mounted:function(){
   		this.$nextTick(function () {
   			var _this = this;
+  			// 获取直播间数据
   			$.ajax({
                 method: "GET",
                 url: "/api/rainbow/liveDetail",
