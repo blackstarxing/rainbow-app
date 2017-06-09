@@ -7,9 +7,7 @@ var top = $('.poker-area').eq(0).offset().top;
 var delay = 50;
 var vm = window.rainbow;
 
-if ("WebSocket" in window)
-{
-    console.log("您的浏览器支持 WebSocket!");
+if ("WebSocket" in window){
 
     // 打开一个 web socket
     var ws = new WebSocket("ws://172.16.10.3:9801");
@@ -50,17 +48,15 @@ if ("WebSocket" in window)
             console.log("WebSocket is null");
         }
     }
-    setInterval(checkSocket,500)
-    ws.onopen = function(event)
-    {
+    // setInterval(checkSocket,500)
+    ws.onopen = function(event){
         console.log(event);
-      // Web Socket 已连接上，使用 send() 方法发送数据
-      ws.send("发送数据");
-      console.log("数据发送中...");
+        // Web Socket 已连接上，使用 send() 方法发送数据
+        ws.send("发送数据");
+        console.log("数据发送中...");
     };
     
-    ws.onmessage = function (evt) 
-    { 
+    ws.onmessage = function (evt) { 
       var received_msg = evt.data;
       console.log("数据已接收...");
     };
@@ -70,10 +66,7 @@ if ("WebSocket" in window)
       // 关闭 websocket
       console.log("连接已关闭..."); 
     };
-}
-
-else
-{
+}else{
    // 浏览器不支持 WebSocket
    console.log("您的浏览器不支持 WebSocket!");
 }

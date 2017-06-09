@@ -17,9 +17,9 @@ router.get('/share/index', function(req, res, next) {
 router.get('/webview/level', function(req, res, next) {
 	var userId = req.query.userId?req.query.userId:'';
 	var token = req.query.token?req.query.token:'';
-	Thenjs.parallel([function(cookient) {
+	Thenjs.parallel([function(cont) {
         request({
-            uri: path+'/rainbow/myLv?userId='+2+'&token=15f8fef211c945c592e10b7b89a278d9',
+            uri: path+'/rainbow/myLv?userId='+userId+'&token='+token,
             headers: {
                 'User-Agent': 'request',
                 'cookie': req.headers.cookie,
