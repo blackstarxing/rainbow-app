@@ -198,28 +198,28 @@
 .m-gift-combo .wrap-top{
     margin-bottom: 0.32rem;
 }
-.m-gift-combo .gift-info{
-    width: 1.733333rem;
+.gift-content .gift-info{
+    width: 2.0rem;
     margin-left: 0.213333rem;
 }
-.m-gift-combo .icon-avatar{
+.gift-content .icon-avatar{
     position: static;
 }
-.m-gift-combo h3,.m-gift-combo p{
+.gift-content h3,.gift-content p{
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.m-gift-combo h3{
+.gift-content h3{
     font-size: 0.373333rem;
     color:#fff;
 }
-.m-gift-combo p{
+.gift-content p{
     font-size: 0.32rem;
     color:#ff3;
 }
-.m-gift-combo img{
+.gift-content img{
     width: 1.333333rem;
     position: absolute;
     right: 0.133333rem;
@@ -237,7 +237,7 @@
 }
 
 /*全局通知*/
-.globel-note{
+.globel-note,.vip-enter{
     position: absolute;
     top:1.546667rem;
     right: 0;
@@ -248,11 +248,33 @@
     border-top-left-radius: 0.346667rem;
     border-bottom-left-radius: 0.346667rem;
     background:-webkit-linear-gradient(left,rgba(169,58,255,0.8),rgba(169,58,255,0));
-    font-style: 3.706667rem;
+    font-size:0.373333rem;
     color:#fff;
+    z-index: 999;
 }
-.globel-note span{
+.globel-note span,.vip-enter span{
     color:#ff3;
+}
+
+/*大礼物*/
+.huge-gift{
+    position: absolute;
+    top: 2.773333rem;
+    right: 0;
+    width: 4.666667rem;
+    height: 1.066667rem;
+    padding:0.106667rem;
+    border-top-left-radius: 0.533333rem;
+    border-bottom-left-radius: 0.533333rem;
+    background:-webkit-linear-gradient(left,rgba(169,58,255,0.8),rgba(169,58,255,0));
+    box-sizing: border-box;
+}
+
+/*高级用户进入*/
+.vip-enter{
+    top:6.933333rem;
+    border-radius: 0.346667rem;
+    background:-webkit-linear-gradient(left,#7b06ff,#a53ddb);
 }
 
 /*游戏区*/

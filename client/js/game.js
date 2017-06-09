@@ -12,6 +12,26 @@ if ("WebSocket" in window){
     // 打开一个 web socket
     var ws = new WebSocket("ws://172.16.10.3:9801");
 
+    var heartCheck = {
+        timeout: 60000,//60ms
+        timeoutObj: null,
+        serverTimeoutObj: null,
+        reset: function(){
+            clearTimeout(this.timeoutObj);
+            clearTimeout(this.serverTimeoutObj);
+    　　　　 this.start();
+        },
+        start: function(){
+            var self = this;
+            this.timeoutObj = setTimeout(function(){
+                ws.send("HeartBeat");
+                self.serverTimeoutObj = setTimeout(function(){
+                    ws.close();//如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+                }, self.timeout)
+            }, this.timeout)
+        },
+    }
+
     function checkSocket() {
         if(ws != null) {
             var stateStr;
@@ -50,21 +70,25 @@ if ("WebSocket" in window){
     }
     // setInterval(checkSocket,500)
     ws.onopen = function(event){
+        heartCheck.start();
         console.log(event);
         // Web Socket 已连接上，使用 send() 方法发送数据
+        if (typeof dcodeIO === 'undefined' || !dcodeIO.ProtoBuf) {
+            throw(new Error("ProtoBuf.js is not present. Please see www/index.html for manual setup instructions."));
+        }
         ws.send("发送数据");
         console.log("数据发送中...");
     };
     
     ws.onmessage = function (evt) { 
-      var received_msg = evt.data;
-      console.log("数据已接收...");
+        heartCheck.reset();
+        var received_msg = evt.data;
+        console.log("数据已接收...");
     };
     
-    ws.onclose = function()
-    { 
-      // 关闭 websocket
-      console.log("连接已关闭..."); 
+    ws.onclose = function(){ 
+        // 关闭 websocket
+        console.log("连接已关闭..."); 
     };
 }else{
    // 浏览器不支持 WebSocket
@@ -73,9 +97,7 @@ if ("WebSocket" in window){
 ws.binaryType = "arraybuffer";  
 
 
-// if (typeof dcodeIO === 'undefined' || !dcodeIO.ProtoBuf) {
-//     throw(new Error("ProtoBuf.js is not present. Please see www/index.html for manual setup instructions."));
-// }
+
 // // 创建ProtoBuf
 // var ProtoBuf = dcodeIO.ProtoBuf;
 // var proto = ProtoBuf.loadProtoFile("/share/data/RainbowMessage.proto");  
@@ -93,29 +115,6 @@ ws.binaryType = "arraybuffer";
 // // childrenModule_2.setNumber(2);
 // // childrenModule_2.setName("Nginx5.0 中级案例");
  
-// // 父模块
-// var ParentModule = proto.build("CGOpen");
- 
-// // 像父模块设置值
-// var parentModule = new ParentModule();
-// parentModule.setUserId(1);
-// parentModule.setToken("Nginx5.0");
-// // parentModule.setChildrenModule(new Array(childrenModule_1,childrenModule_2));
- 
-// // 打印父模块此时数据【火狐浏览器Ｆ12进行观察】
-// console.log("ProtoBuf对象数据：");
-// console.log(parentModule);
- 
-// // 模拟发送
-// // 1.对象转字节：parentModule.toArrayBuffer() 
-// // 2.字节转对象：ParentModule.decode()
-// var msgDec = ParentModule.decode(parentModule.toArrayBuffer());
-// // 接收到的数据：
-// console.info("接收到的数据：");
-// console.info(parentModule.toArrayBuffer());
-// // 打印转换后的信息
-// console.info("经过ParentModule.decode转换后的数据：");
-// console.info(msgDec);
 
 // 发牌
 function dealPoker(){
