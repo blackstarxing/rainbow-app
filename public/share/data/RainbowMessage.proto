@@ -9,7 +9,8 @@ message CGBet
 	optional int32  value               = 3;   //下注值
 	optional int32  gameId              = 4;   //游戏id
 	optional int32  chessboardId        = 5;   //局id
-	optional string token               = 6;   //token
+	optional int32  liveId              = 6;   //直播间ID
+	optional string token               = 7;   //token
 }
 
 //----------------------下注返回（Gameserver<-->client）协议号 10002----------------------
@@ -85,7 +86,59 @@ message CGSendGift
 message GCSendGiftRet
 {
 	optional int32 	code				= 1;   //返回码   0成功  1 失败 2 金币不足
+	optional int32  gitfId              = 2;   //礼物ID
+	optional int32  num                 = 3;   //礼物数量
 }
+
+//----------------------直播间游戏状态（client<-->Gameserver）协议号 10009----------------------
+message CGGameState
+{
+	optional int32 	liveId				= 1;   //直播间ID
+	optional int32 	chessboardId		= 2;   //局ID
+}
+
+//----------------------直播间游戏状态返回（Gameserver<-->client）协议号 10010----------------------
+message GCGameStateRet
+{
+	optional int32 state				= 1;   //状态值 -1错误  1 游戏初始阶段  2 发牌阶段  3 下注阶段  4 结果计算阶段（开牌倒计时） 5 开牌阶段
+	optional int32 countDown            = 2;   //倒计时
+	optional int32  liveId	            = 3;   //直播间ID
+	optional int32  chessboardId        = 4;   //局ID  状态值为1时返回
+}
+
+//----------------------用户离开直播间（client<-->Gameserver）协议号 10011----------------------
+message CGOutLiveRoom
+{
+	optional int32  liveId	            = 1;   //直播间ID
+}
+
+//----------------------用户离开直播间返回（Gameserver<-->client）协议号 10012---------------------
+message GCOutLiveRoomRet
+{
+	optional int32  code	            = 1;   //0 成功
+}
+
+//----------------------直播间实时投注信息（client<-->Gameserver）协议号 10013----------------------
+message CGCathNowInfo
+{
+	optional int32  liveId	            = 1;   //直播间ID
+	optional int32  userId	            = 2;   //用户ID
+}
+
+//----------------------直播间实时投注信息返回（Gameserver<-->client）协议号 10014---------------------
+message GCCathNowInfoRet
+{
+	optional int32  index1Total	            = 1;   //第一投注位投注总值
+	optional int32  index1user	            = 2;   //第一投注位用户投注值
+	
+	optional int32  index2Total	            = 3;   //第二投注位投注总值
+	optional int32  index2user	            = 4;   //第二投注位用户投注值
+
+	optional int32  index3Total	            = 5;   //第三投注位投注总值
+	optional int32  index3user	            = 6;   //第三投注位用户投注值	
+
+}
+
 
 
 
