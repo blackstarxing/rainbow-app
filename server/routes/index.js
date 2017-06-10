@@ -42,6 +42,32 @@ router.get('/webview/level', function(req, res, next) {
     });
 });
 
+router.get('/webview/agreement', function(req, res, next) {
+    Thenjs.parallel([function(cont) {
+        request({
+            uri: 'http://172.16.10.3:8080/rainbow/compact',
+            headers: {
+                'User-Agent': 'request',
+                'cookie': req.headers.cookie,
+              }
+        }, function(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                cont(null, body);
+            } else {
+                cont(new Error('error!'));
+            }
+        })
+    }]).then(function(cont, result) {
+        res.render('webview/agreement', {
+            title: JSON.parse(result[0]).object.title,
+            agree: JSON.parse(result[0]).object,
+
+        });
+    }).fail(function(cont, error) {
+        console.log(error);
+        res.render('error', { title: "错误"});
+    });
+});
 //提现-登录
 router.get('/withdrawCash/login', function(req, res, next) {
    res.render('withdrawCash/login', { title: '请登录' });

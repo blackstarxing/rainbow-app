@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="g-mian"></div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+	$('.g-mian').html('{{agree.content | safe }}');
+</script>
+{% endblock %}
