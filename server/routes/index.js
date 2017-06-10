@@ -52,6 +52,10 @@ router.get('/withdrawCash/income', function(req, res, next) {
    res.render('withdrawCash/income', { title: '我的收益' });
 });
 
+//提现-短信验证码登录
+router.get('/withdrawCash/messageLog', function(req, res, next) {
+   res.render('withdrawCash/messageLog', { title: '短信登录' });
+});
 
 router.get('/home', function(req, res, next) {
   res.render('home', { title: 'blackstar' });

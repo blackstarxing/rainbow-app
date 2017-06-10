@@ -22,6 +22,27 @@ a,a:hover{color:#fff;}
 img{border:0;max-width: 100%;vertical-align: bottom;}
 button{border:none;}
 html,body{width: 100%;height: 100%;}
+/*input*/
+input{
+	height: 1.066667rem;
+	line-height: 1.066667rem;
+	border:none;
+	color:#333;
+}
+/*placeholder*/
+input::-webkit-input-placeholder{font-size:0.4rem;color:#999;}    /* 使用webkit内核的浏览器 */
+input:-moz-placeholder{font-size:0.4rem;color:#999;}              /* Firefox版本4-18 */
+input::-moz-placeholder{font-size:0.4rem;color:#999;}             /* Firefox版本19+ */
+input:-ms-input-placeholder{font-size:0.4rem;color:#999;}         /* IE浏览器 */
+/*border*/
+.bdc-top{border-top:1px solid #e6e6e6;}
+.bdc-btm{border-bottom:1px solid #e6e6e6;}
+.bdc-lt{border-left:1px solid #e6e6e6;}
+.bdc-rt{border-right:1px solid #e6e6e6;}
+
+.bdc-gy3{border:1px solid #333;}
+.bdc-gy6{border:1px solid #666;}
+.bdc-gye6{border:1px solid #e6e6e6;}
 /*function*/
 .f-cb:after,.f-cbli li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
 .f-cb,.f-cbli li{zoom:1;}
@@ -30,6 +51,35 @@ html,body{width: 100%;height: 100%;}
 .f-db{display:block;}
 .f-fl{float:left;}
 .f-fr{float:right;}
+
+/*color*/
+.fc-wt{color:#fff;}
+.fc-b3{color:#333;}
+.fc-b6{color:#666;}
+.fc-e6{color:#e6e6e6;}
+.fc-b9{color:#999;}
+/*红色*/
+.fc-f36{color:#f36;}
+/*橘色*/
+.fc-clue{color:#ff7c2d;}
+
+/*font*/
+.fs-28{font-size: 0.373333rem;}
+.fs-30{font-size: 0.4rem;}
+.fs-32{font-size: 0.426667rem;}
+.fs-36{font-size: 0.48rem;}
+
+/*背景颜色*/
+/*绿色*/
+.bgc-wx{background: #17db9d;}
+/*浅蓝色*/
+.bgc-qq{background: #12bff7;}
+/*白色*/
+.bgc-wt{background: #fff};
+/*红色(按钮)*/
+.bgc-f36{background-color: #ff3366}
+/*灰色*/
+.bgc-grey{background: #f5f5f5;}
 
 /*公共样式*/
 
@@ -51,3 +101,18 @@ html,body{width: 100%;height: 100%;}
 	text-align: center;
 	border-radius: 0.533333rem;
 }
+.u-btn-disclick{
+	opacity:0.6;  /*支持 Chrome, Opera, Safari 等浏览器*/
+	filter:alpha(opacity=60);  /*支持 IE 浏览器*/
+	/*-moz-opacity:0.60;*/ /*支持 FireFox 浏览器*/
+	/*-khtml-opacity: 0.6;*/ /*webkit内核浏览器*/
+}
+
+/* 两列右侧自适应布局 */
+.g-sd1{position:relative;float:left;width:1.6rem;margin-right:-1.6rem;}
+.g-mn1{float:right;width:100%;}
+.g-mn1c{margin-left:1.733333rem;}
+
+
+
+

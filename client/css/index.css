@@ -18,7 +18,7 @@ body{
     right: 0;
     background: url(//p.qlogo.cn/hy_personal_room/6774614/67746141492792014/640?tp=webp) center center no-repeat;
     background-size: cover;
-    overflow: hidden;
+    overflow: hidden; 
 }
 #mainvideo{
 	height: 100%;
