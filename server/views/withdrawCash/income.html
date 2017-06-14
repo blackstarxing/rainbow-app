@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <button class="u-dl-btn u-withdrawBtn">兑换收益</button>
+        <button class="u-dl-btn u-withdrawBtn u-btn-disclick">兑换收益</button>
     </div>
 {% endblock %}
 {% block js %}
@@ -50,5 +50,9 @@
 <script type="text/javascript" src="/dist/index.js"></script>
 <script>
     // window.document.title = "我的收益"
+    /*去掉iphone手机滑动默认行为*/
+    $('body').on('touchmove', function (event) {
+        event.preventDefault();
+    });
 </script>
 {% endblock %}

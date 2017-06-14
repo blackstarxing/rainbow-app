@@ -10,6 +10,10 @@ rainbow = new Vue({
   		roomid:'8898958',
   		// 用户卡片显示
     	cardDisplay:false,
+        // 玩法介绍
+        introDisplay:false,
+        // 下载广告
+        adDisplay:true,
     	// 直播结束
     	is_live_end:false,
     	game:{
@@ -61,6 +65,18 @@ rainbow = new Vue({
     	// 关闭弹框
     	closeCard:function(){
     		this.cardDisplay = false;      		
-    	}
+    	},
+        // 显示玩法介绍
+        showIntro:function(){
+            this.introDisplay = true;
+        },
+        // 关闭玩法介绍
+        closeIntro:function(){
+            this.introDisplay = false;
+        },
+        // 关闭下载
+        closeAd:function(){
+            this.adDisplay = false;
+        }
   	}
 })

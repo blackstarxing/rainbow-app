@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% block css %}
+<link rel="stylesheet" href="/withdrawCash/css/messageLog.css">
+{% endblock %}
+{% block content %}
+	<div class="g-messageLog">
+        <h1 class="fc-b3 fs-36">短信验证码登录</h1>  
+        <div class="m-phone-number g-bd1 bdc-btm f-cb ">
+            <div class="u-phone-number g-sd1">
+                <span class="fs-32 fc-b3">手机号</span>
+            </div>
+            <div class="g-mn1">
+                <div class="g-mn1c">
+                    <input class="phone-number-ipt fs-30" type="number" value="" placeholder="请输入手机号码">
+                </div>
+            </div>
+        </div>
+         <div class="m-phone-code g-bd1 bdc-btm f-cb ">
+            <div class="u-phone-code g-sd1">
+                <span  class="fs-32 fc-b3">验证码</span>
+            </div>
+            <div class="g-mn1">
+                <div class="g-mn1c">
+                     <input class="code-number-ipt fs-30 f-fl" type="number" value="" placeholder="请输入短信验证码">
+                     <span  class="fs-30 fc-f36 f-fr noset">获取验证码</span>
+                     <span  class="fs-30 fc-b6 f-fr set" >60s重新获取</span>
+                </div>
+            </div>
+        </div>
+        <div class="code-error-clue fc-clue fs-28">手机验证码错误</div>
+        <button class="u-dl-btn messagesLog-btn u-btn-disclick">登录</button>
+
+        <!--图形验证码-->
+        <div class="g-checkCodeMask">
+            <div class="g-checkCode bgc-wt">
+                <div class="m-Content fs-32 fc-b3">请输入图中的内容</div>
+                <div class="m-code-ipt">
+                    <input type="text" class="u-code-ipt bgc-grey fs-30" >
+                    <img class="u-codeImg" src="" alt="没有图片">
+                </div>
+                <div class="codeError fs-30 fc-clue">校验码有误</div>
+                <div class="m-codeBtn fs-30 f-cb">
+                    <button class="codeCancel fs-30 bgc-wt bdc-gye6 f-fl">取消</button>
+                    <button class="codeConfirm fs-30  fc-wt  f-fr">确定</button>
+                </div>
+             </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="/js/vue.js"></script>
+<script type="text/javascript" src="/dist/index.js"></script>
+<script>
+        $('.set').hide();
+        $('.noset').show();
+</script>
+{% endblock %}

@@ -3,13 +3,25 @@
 <link rel="stylesheet" href="/withdrawCash/css/login.css">
 {% endblock %}
 {% block content %}
-	<div  class="g-login">
-        <div class="m-headIcon">
-        	
+	<div  class="g-log">
+        <div class="m-headIcon"></div>
+        <div class="m-logtext">
+        	<div class="u-textLine"></div>
+        	<span>请选择以下登录方式</span>
+        	<div class="u-textLine"></div>
         </div>
-        <div class="test">
-        	
-        </div>
+        <button class="u-dl-btn u-weixin-btn bgc-wx">
+        	<div class="u-weixin-icon"></div>
+       		<span>微信登录</span>
+        </button>
+        <button class="u-dl-btn u-QQ-btn bgc-qq">
+        	<div class="u-QQ-icon"></div>
+        	<span>QQ登录&nbsp;&nbsp;</span>
+        </button>
+        <button class="u-dl-btn u-phone-btn bgc-wt">
+        	<div  class="u-phone-icon"></div>
+        	<span>手机登录</span>
+        </button>
     </div>
 {% endblock %}
 {% block js %}
