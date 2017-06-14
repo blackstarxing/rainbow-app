@@ -78,7 +78,12 @@ router.get('/withdrawCash/income', function(req, res, next) {
    res.render('withdrawCash/income', { title: '我的收益' });
 });
 
-
+router.get('/activity/handline', function(req, res, next) {
+   res.render('activity/handline', { title: '我要上头条' });
+});
+router.get('/activity/recharge', function(req, res, next) {
+   res.render('activity/recharge', { title: '充值说明' });
+});
 router.get('/home', function(req, res, next) {
   res.render('home', { title: 'blackstar' });
 });
