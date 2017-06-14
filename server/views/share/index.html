@@ -6,7 +6,7 @@
 <div id="room" v-cloak>
     <div class="g-ct">
         <div class="m-video">
-            <video id="mainvideo" preload="auto" autoplay="false" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" src="http://6721.liveplay.myqcloud.com/live/6721_8b0e1119b959709205a1aeae9cf103b2.m3u8"></video>
+            <video id="mainvideo" preload="auto" autoplay="false" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" src="{{link}}"></video>
         </div>
         <div class="m-header">
             <div class="top-container">
@@ -26,6 +26,10 @@
         </div>
         <div class="main-section">
             <div class="m-chat">
+                <!-- 高级用户 -->
+                <div class="vip-enter">
+                    24级 <span>啦啦啦</span> 进入直播间
+                </div>
                 <div class="chat-area" id="chat">
                     <div><span class="message">fasfdagagdsfgdsafadsfd</span></div>
                     <div><span class="message">dsfgdsafadsfd</span></div>
@@ -37,9 +41,14 @@
                 <div class="award">
                     <div>可领取</div>
                     <img src="/share/images/gold.png" alt="">
+                    x200
                 </div>
             </div>
-            <div class="m-operate"></div>
+            <div class="m-operate f-cb">
+                <i class="op-chat f-fl"></i>
+                <i class="op-gift f-fr"></i>
+                <i class="op-intro f-fr" @click="showIntro"></i>
+            </div>
             <div class="m-game">
                 <!-- 牌区 -->
                 <div class="m-card">
@@ -138,12 +147,19 @@
                     <div class="game-tip" v-bind:class="[game.tipClass]" v-show="game.showTip">${game.tip}</div>
                     <div class="clock" v-show="game.showClock">${game.time}</div>
                 </div>
-                <div class="m-bet">
-                    
-                </div>
+                <!-- <div class="m-bet"></div> -->
             </div>
         </div>
-        
+        <!-- 下载 -->
+        <div class="m-footer" v-show="adDisplay">
+            <img src="/images/icon.png" class="f-fl">
+            <div class="f-fl">
+                <h3>彩虹直播</h3>
+                <p>可以玩的直播间</p>
+            </div>
+            <i @click="closeAd"></i>
+            <a href="https://yuertvfile.wangyuhudong.com" class="download-btn f-fr">进入直播间</a>
+        </div>
     </div>
     <!-- 礼物连击 -->
     <div class="m-gift-combo">
@@ -182,12 +198,9 @@
                 <h3>提莫队长</h3>
                 <p>送出了红司机</p>
             </div>
+            <img src="/share/images/gift_star.png" alt="" class="bling">
             <img src="/share/images/siji.png" class="f-fl" alt="">
         </div>
-    </div>
-    <!-- 高级用户 -->
-    <div class="vip-enter">
-        24级 <span>啦啦啦</span> 进入直播间
     </div>
     <!-- 发牌 -->
     <div class="deal-section">
@@ -195,7 +208,8 @@
             
         </ul>
     </div>
-    <div class="m-pop-mask" v-show="cardDisplay">
+    <!-- 用户卡片 -->
+    <div class="m-pop-mask m-mask" v-show="cardDisplay">
         <div class="anchor-panel">
             <span class="report">举报</span>
             <span class="close" @click="closeCard">╳</span>
@@ -212,7 +226,16 @@
             <p class="listen-text"><span>+ 关注</span></p>
         </div>
     </div>
-    <div class="m-end-mask" v-if="is_live_end">
+    <!-- 玩法介绍 -->
+    <div class="m-intro-mask m-mask" v-show="introDisplay">
+        <div class="game-intro">
+            <h3>游戏介绍</h3>
+            <div class="intro-content"></div>
+            <div class="u-close" @click="closeIntro"></div>
+        </div>
+    </div>
+    <!-- 直播结束 -->
+    <div class="m-end-mask m-mask" v-if="is_live_end">
         <div class="end-bg"></div>
         <div class="end-container">
             <div class="end-head">
@@ -243,9 +266,10 @@
 
 {% block js %}
 <script type="text/javascript" src="/js/vue.js"></script>
+<script type="text/javascript" src="/js/dcodeIO/ByteArray.js"></script>  
 <script type="text/javascript" src="/js/dcodeIO/Long.min.js"></script>     
-<script type="text/javascript" src="/js/dcodeIO/ByteBufferAB.min.js"></script>  
-<script type="text/javascript" src="/js/dcodeIO/ProtoBuf.min.js"></script>  
+<script type="text/javascript" src="/js/dcodeIO/bytebuffer.min.js"></script>  
+<script type="text/javascript" src="/js/dcodeIO/protobuf.min.js"></script>  
 <script type="text/javascript" src="/js/sha1.js"></script>
 <script type="text/javascript" src="/js/Web_SDK_Base_v2.8.0.js"></script>
 <script type="text/javascript" src="/js/Web_SDK_Chatroom_v2.8.0.js"></script>

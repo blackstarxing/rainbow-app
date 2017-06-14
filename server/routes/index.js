@@ -4,14 +4,39 @@ var Thenjs = require('thenjs');
 var request = require('request');
 
 var path = 'http://172.16.10.3:8080';
+// var path = 'http://118.190.21.195:28888';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Express' });
 });
 
 router.get('/share/index', function(req, res, next) {
-  res.render('share/index', { title: '直播间' });
+    var liveId = req.query.liveId?req.query.liveId:'';
+    Thenjs.parallel([function(cont) {
+        request({
+            uri: path+'/rainbow/liveDetail?liveId='+liveId,
+            headers: {
+                'User-Agent': 'request',
+                'cookie': req.headers.cookie,
+              }
+        }, function(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                cont(null, body);
+            } else {
+                cont(new Error('error!'));
+            }
+        })
+    }]).then(function(cont, result) {
+        res.render('share/index', {
+            title: "直播间",
+            index: JSON.parse(result[0]).object,
+            link:JSON.parse(result[0]).object.info.rtmp.replace(/rtmp:/, "http:").replace(/rtmp/, "hls")+'.m3u8',
+        });
+    }).fail(function(cont, error) {
+        console.log(error);
+        res.render('error', { title: "错误"});
+    });
 });
 
 router.get('/webview/level', function(req, res, next) {
@@ -45,7 +70,7 @@ router.get('/webview/level', function(req, res, next) {
 router.get('/webview/agreement', function(req, res, next) {
     Thenjs.parallel([function(cont) {
         request({
-            uri: 'http://172.16.10.3:8080/rainbow/compact',
+            uri: path+'/rainbow/compact',
             headers: {
                 'User-Agent': 'request',
                 'cookie': req.headers.cookie,
@@ -81,10 +106,6 @@ router.get('/withdrawCash/income', function(req, res, next) {
 //提现-短信验证码登录
 router.get('/withdrawCash/messageLog', function(req, res, next) {
    res.render('withdrawCash/messageLog', { title: '短信登录' });
-});
-
-router.get('/home', function(req, res, next) {
-  res.render('home', { title: 'blackstar' });
 });
 
 module.exports = router;
