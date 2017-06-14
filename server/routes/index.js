@@ -77,7 +77,6 @@ router.get('/withdrawCash/login', function(req, res, next) {
 router.get('/withdrawCash/income', function(req, res, next) {
    res.render('withdrawCash/income', { title: '我的收益' });
 });
-
 router.get('/activity/handline', function(req, res, next) {
    res.render('activity/handline', { title: '我要上头条' });
 });
