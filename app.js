@@ -20,10 +20,18 @@ var proxy = require('express-http-proxy');
 
 var app = express();
 
-var proxyaddress = 'http://172.16.10.3:8080';
-// var proxyaddress = 'http://118.190.21.195:28888/';
+// var proxyaddress = 'http://172.16.10.3:8080';
+// var webproxyaddress = 'http://172.16.10.134:8080';
+var proxyaddress = 'http://118.190.21.195:28888';
+var webproxyaddress = 'http://118.190.21.195:39999';
 
 app.use('/api', proxy(proxyaddress, {
+  forwardPath: function(req, res) {
+    return require('url').parse(req.url).path;
+  }
+}));
+
+app.use('/webapi', proxy(webproxyaddress, {
   forwardPath: function(req, res) {
     return require('url').parse(req.url).path;
   }

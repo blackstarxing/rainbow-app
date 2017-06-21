@@ -3,8 +3,8 @@ var router = express.Router();
 var Thenjs = require('thenjs');
 var request = require('request');
 
-var path = 'http://172.16.10.3:8080';
-// var path = 'http://118.190.21.195:28888';
+// var path = 'http://172.16.10.3:8080';
+var path = 'http://118.190.21.195:28888';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

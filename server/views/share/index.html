@@ -6,23 +6,28 @@
 <div id="room" v-cloak>
     <div class="g-ct">
         <div class="m-video">
-            <video id="mainvideo" preload="auto" autoplay="false" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" src="{{link}}"></video>
+            <video id="mainvideo" preload="auto" autoplay="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" style="object-fit:fill">
+                <source type="application/x-mpegURL" src="{{link}}"/>
+            </video>
+            <div class="play-btn icon-play"></div>
         </div>
         <div class="m-header">
             <div class="top-container">
                 <div class="avatar-contatiner">
-                    <i class="avatar icon-avatar" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');" @click="showCard"></i>
+                    <i class="avatar icon-avatar icon-toplist" v-bind:style="{backgroundImage: 'url(' + info.user_icon + ')'}" v-bind:data-id="info.userId" @click="showCard"></i>
                     <div class="content">
-                        <div class="name">可爱的琳baby＊新主播＊等你来爱我</div>
-                        <div class="author-id">ID 123456</div>
+                        <div class="name">${info.nickname}</div>
+                        <div class="author-id">ID ${info.userId}</div>
                     </div>
                     <div class="follow">
                         <a href="" class="u-follow-btn">关注</a>
                     </div>
                 </div>
-                <div class="members-container"><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i></div>
+                <div class="members-container">
+                    <i class="item icon-avatar icon-toplist" v-bind:style="{backgroundImage: 'url(' + list.icon + ')'}" v-bind:data-id="list.userId" v-for="list in audienceList"></i>
+                </div>
             </div>
-            <div class="charm">魅力榜<i class="num">317063</i></div>
+            <div class="charm">魅力榜<i class="num">${info.charmTotalValue}</i></div>
         </div>
         <div class="main-section">
             <div class="m-chat">
@@ -30,14 +35,7 @@
                 <div class="vip-enter">
                     24级 <span>啦啦啦</span> 进入直播间
                 </div>
-                <div class="chat-area" id="chat">
-                    <div><span class="message">fasfdagagdsfgdsafadsfd</span></div>
-                    <div><span class="message">dsfgdsafadsfd</span></div>
-                    <div><span class="message">dsfgdsafadsfd</span></div>
-                    <div><span class="message">dsfgdsafadsfd</span></div>
-                    <div><span class="message">dsfgdsafadsfd</span></div>
-                    <div><span class="message">dsfgdsafa4564</span></div>
-                </div>
+                <div class="chat-area" id="chat"></div>
                 <div class="award">
                     <div>可领取</div>
                     <img src="/share/images/gold.png" alt="">
@@ -57,14 +55,17 @@
                             <div class="poker-area">
                                 <div class="result-box" v-show="game.poker_group[0]">
                                     <ul class="f-cb">
-                                        <li class="poker1">J</li>
-                                        <li class="poker2">2</li>
-                                        <li class="poker3">6</li>
-                                        <li class="poker2">Q</li>
-                                        <li class="poker4">A</li>
+                                        <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet1">${card.cardNoShow}</li>
                                     </ul>
-                                    <div class="result"><img src="/share/images/goldcow.png" alt=""></div>
-                                </div>                                
+                                    <div class="result"><img v-bind:src="'/share/images/cow'+game.result1+'.png'" alt=""></div>
+                                </div>  
+                                <ul class="halfway-poker" v-show="half_group[0]">
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>                              
                             </div>
                             <div class="stake-area f-cb">
                                 <div class="stake-name">
@@ -74,7 +75,7 @@
                                 </div>
                                 <div class="stake-num">
                                     <div class="stake-all">
-                                        1.2万
+                                        ${watchNum(game.catNum1)}
                                     </div>
                                     <div class="stake-my">
                                         
@@ -87,14 +88,17 @@
                             <div class="poker-area">
                                 <div class="result-box" v-show="game.poker_group[1]">
                                     <ul class="f-cb">
-                                        <li class="poker1">J</li>
-                                        <li class="poker2">2</li>
-                                        <li class="poker3">6</li>
-                                        <li class="poker2">Q</li>
-                                        <li class="poker4">A</li>
+                                        <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet2">${card.cardNoShow}</li>
                                     </ul>
-                                    <div class="result"><img src="/share/images/goldcow.png" alt=""></div>
+                                    <div class="result"><img v-bind:src="'/share/images/cow'+game.result2+'.png'" alt=""></div>
                                 </div>  
+                                <ul class="halfway-poker" v-show="half_group[1]">
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
                             </div>
                             <div class="stake-area f-cb">
                                 <div class="stake-name">
@@ -104,7 +108,7 @@
                                 </div>
                                 <div class="stake-num">
                                     <div class="stake-all">
-                                        1.2万
+                                        ${watchNum(game.catNum2)}
                                     </div>
                                     <div class="stake-my">
                                         
@@ -117,14 +121,17 @@
                             <div class="poker-area">
                                 <div class="result-box" v-show="game.poker_group[2]">
                                     <ul class="f-cb">
-                                        <li class="poker1">J</li>
-                                        <li class="poker2">2</li>
-                                        <li class="poker3">6</li>
-                                        <li class="poker2">Q</li>
-                                        <li class="poker4">A</li>
-                                    </ul>
-                                    <div class="result"><img src="/share/images/goldcow.png" alt=""></div>
+                                        <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet3">${card.cardNoShow}</li>
+                                    </ul>                                   
+                                    <div class="result"><img v-bind:src="'/share/images/cow'+game.result3+'.png'" alt=""></div>
                                 </div>  
+                                <ul class="halfway-poker" v-show="half_group[2]">
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
                             </div>
                             <div class="stake-area f-cb">
                                 <div class="stake-name">
@@ -134,7 +141,7 @@
                                 </div>
                                 <div class="stake-num">
                                     <div class="stake-all">
-                                        1.2万
+                                        ${watchNum(game.catNum3)}
                                     </div>
                                     <div class="stake-my">
                                         
@@ -172,9 +179,9 @@
                 </div>
                 <img src="/share/images/siji.png" class="f-fl" alt="">
             </div>
-            <div class="gift-num f-fl">X2</div>
+            <div class="gift-num f-fl">X${gift_num_top}</div>
         </div>
-        <div class="gift-wrap f-cb">
+        <div class="gift-wrap wrap-bottom f-cb">
             <div class="gift-content f-fl">
                 <i class="avatar icon-avatar f-fl" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');"></i>
                 <div class="gift-info f-fl">
@@ -183,7 +190,7 @@
                 </div>
                 <img src="/share/images/siji.png" class="f-fl" alt="">
             </div>
-            <div class="gift-num f-fl">X2</div>
+            <div class="gift-num f-fl">X${gift_num_bottom}</div>
         </div>
     </div>
     <!-- 全局通知 -->
@@ -213,15 +220,23 @@
         <div class="anchor-panel">
             <span class="report">举报</span>
             <span class="close" @click="closeCard">╳</span>
-            <div class="avatar icon-avatar" style="background-image: url(&quot;//p.qlogo.cn/hy_personal/4376ae1e0cf0ccce49552e53ce1a45b3581e23f5bf1ad771b98b939c0e863809b6b1a9516c6abcf8ccfc29b031184cab/80?tp=webp&quot;);"></div>
-            <h3 class="name"><span class="name-text">乌龙茶</span><span class="sex male"></span><span class="levelMedal" style="background-image: url('/share/images/third_level.png');">28</span>
+            <div class="avatar icon-avatar" v-bind:style="{backgroundImage: 'url(' + cardInfo.icon + ')'}" ></div>
+            <h3 class="name">
+                <span class="name-text">${cardInfo.nickname}</span>
+                <span class="sex male" v-if="cardInfo.sex==1"></span>
+                <span class="sex female" v-else></span>
+                <span class="levelMedal" style="background-image: url('/share/images/fouth_level.png');" v-if="cardInfo.lv>22">${cardInfo.lv}</span>
+                <span class="levelMedal" style="background-image: url('/share/images/third_level.png');" v-else-if="cardInfo.lv>12">${cardInfo.lv}</span>
+                <span class="levelMedal" style="background-image: url('/share/images/second_level.png');" v-else-if="cardInfo.lv>1">${cardInfo.lv}</span>
+                <span class="levelMedal" style="background-image: url('/share/images/first_level.png');" v-else>${cardInfo.lv}</span>
             </h3>
-            <p class="anchor-id">Id: 123456</p>
-            <p class="signature">此人还没有留下任何痕迹...</p>
+            <p class="anchor-id">Id: ${cardInfo.id}</p>
+            <p class="signature" v-if="cardInfo.personalsignature">${cardInfo.personalsignature}</p>
+            <p class="signature" v-else>此人还没有留下任何痕迹...</p>
             <ul class="numbers">
-                <li><span class="number">3</span><label>关注</label></li>
-                <li><span class="number">7</span><label>粉丝</label></li>
-                <li><span class="number">0</span><label>魅力</label></li>
+                <li><span class="number">${cardInfo.subscribeNum}</span><label>关注</label></li>
+                <li><span class="number">${cardInfo.fans}</span><label>粉丝</label></li>
+                <li><span class="number">${cardInfo.charmTotalValue}</span><label>魅力</label></li>
             </ul>
             <p class="listen-text"><span>+ 关注</span></p>
         </div>
@@ -230,7 +245,7 @@
     <div class="m-intro-mask m-mask" v-show="introDisplay">
         <div class="game-intro">
             <h3>游戏介绍</h3>
-            <div class="intro-content"></div>
+            <div class="intro-content" v-html="introContent"></div>
             <div class="u-close" @click="closeIntro"></div>
         </div>
     </div>
