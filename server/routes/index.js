@@ -107,6 +107,7 @@ router.get('/withdrawCash/income', function(req, res, next) {
 router.get('/withdrawCash/messageLog', function(req, res, next) {
    res.render('withdrawCash/messageLog', { title: '短信登录' });
 });
+
 router.get('/activity/handline', function(req, res, next) {
    res.render('activity/handline', { title: '我要上头条' });
 });
