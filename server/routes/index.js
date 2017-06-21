@@ -111,6 +111,7 @@ router.get('/withdrawCash/messageLog', function(req, res, next) {
 router.get('/activity/handline', function(req, res, next) {
    res.render('activity/handline', { title: '我要上头条' });
 });
+
 router.get('/activity/recharge', function(req, res, next) {
    res.render('activity/recharge', { title: '充值说明' });
 });
