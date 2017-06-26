@@ -6,10 +6,12 @@
 <div id="room" v-cloak>
     <div class="g-ct">
         <div class="m-video">
-            <video id="mainvideo" preload="auto" autoplay="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" style="object-fit:fill">
-                <source type="application/x-mpegURL" src="{{link}}"/>
-            </video>
-            <div class="play-btn icon-play"></div>
+            <div v-if="state==1">
+                <video id="mainvideo" preload="auto" autoplay="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" style="object-fit:fill">
+                    <source type="application/x-mpegURL" src="{{link}}"/>
+                </video>
+                <div class="play-btn icon-play"></div>
+            </div>           
         </div>
         <div class="m-header">
             <div class="top-container">
@@ -20,14 +22,14 @@
                         <div class="author-id">ID ${info.userId}</div>
                     </div>
                     <div class="follow">
-                        <a href="" class="u-follow-btn">关注</a>
+                        <a href="javascript:void(0)" class="u-follow-btn" @click="download">关注</a>
                     </div>
                 </div>
                 <div class="members-container">
                     <i class="item icon-avatar icon-toplist" v-bind:style="{backgroundImage: 'url(' + list.icon + ')'}" v-bind:data-id="list.userId" v-for="list in audienceList"></i>
                 </div>
             </div>
-            <div class="charm">魅力榜<i class="num">${info.charmTotalValue}</i></div>
+            <div class="charm" @click="download">魅力榜 <i class="num">${watchNum(info.charmTotalValue)}</i></div>
         </div>
         <div class="main-section">
             <div class="m-chat">
@@ -36,15 +38,15 @@
                     24级 <span>啦啦啦</span> 进入直播间
                 </div>
                 <div class="chat-area" id="chat"></div>
-                <div class="award">
+                <div class="award" @click="download">
                     <div>可领取</div>
                     <img src="/share/images/gold.png" alt="">
-                    x200
+                    x30
                 </div>
             </div>
             <div class="m-operate f-cb">
-                <i class="op-chat f-fl"></i>
-                <i class="op-gift f-fr"></i>
+                <i class="op-chat f-fl" @click="download"></i>
+                <i class="op-gift f-fr" @click="download"></i>
                 <i class="op-intro f-fr" @click="showIntro"></i>
             </div>
             <div class="m-game">
@@ -71,14 +73,14 @@
                                 <div class="stake-name">
                                     <div>奇奇</div>
                                     <img src="/share/images/cow_1.png" alt="">
-                                    <div class="power">x2.2倍</div>
+                                    <div class="power">x${game.rate_first}倍</div>
                                 </div>
                                 <div class="stake-num">
                                     <div class="stake-all">
                                         ${watchNum(game.catNum1)}
                                     </div>
                                     <div class="stake-my">
-                                        
+                                        0
                                     </div>
                                 </div>
                             </div>
@@ -104,14 +106,14 @@
                                 <div class="stake-name">
                                     <div>趣趣</div>
                                     <img src="/share/images/cow_2.png" alt="">
-                                    <div class="power">x2.2倍</div>
+                                    <div class="power">x${game.rate_second}倍</div>
                                 </div>
                                 <div class="stake-num">
                                     <div class="stake-all">
                                         ${watchNum(game.catNum2)}
                                     </div>
                                     <div class="stake-my">
-                                        
+                                        0
                                     </div>
                                 </div>
                             </div>
@@ -137,14 +139,14 @@
                                 <div class="stake-name">
                                     <div>乐乐</div>
                                     <img src="/share/images/cow_3.png" alt="">
-                                    <div class="power">x2.2倍</div>
+                                    <div class="power">x${game.rate_third}倍</div>
                                 </div>
                                 <div class="stake-num">
                                     <div class="stake-all">
                                         ${watchNum(game.catNum3)}
                                     </div>
                                     <div class="stake-my">
-                                        
+                                        0
                                     </div>
                                 </div>
                             </div>
@@ -165,8 +167,34 @@
                 <p>可以玩的直播间</p>
             </div>
             <i @click="closeAd"></i>
-            <a href="https://yuertvfile.wangyuhudong.com" class="download-btn f-fr">进入直播间</a>
+            <a href="javascript:void(0)" class="download-btn f-fr" @click="download">进入直播间</a>
         </div>
+    </div>
+    <!-- 直播结束 -->
+    <div class="m-end-mask m-mask" v-if="state==0">
+        <div class="end-bg" v-bind:style="{backgroundImage: 'url(' + info.live_icon + ')'}"></div>
+        <div class="end-container">
+            <div class="end-head">
+                <h3><span></span>&nbsp;&nbsp;&nbsp;直播结束&nbsp;&nbsp;&nbsp;<span></span></h3>
+                <i class="avatar icon-avatar" v-bind:style="{backgroundImage: 'url(' + info.user_icon + ')'}"></i>
+            </div>
+            <div class="end-recommend">
+                <h3>精彩推荐</h3>
+                <div class="recommend-box">
+                    <div class="recommend" v-for="index in otherLive">
+                        <a v-bind:href="'/share/index?liveId='+index.id" v-bind:style="{backgroundImage: 'url(' + index.icon + ')'}">      
+                            <span><i>·</i>直播中</span>                  
+                        </a>
+                    </div>
+                    <!-- <div class="recommend">
+                        <a href="" style="background-image: url('//p.qlogo.cn/hy_personal/4376ae1e0cf0cccedf6a98055419b4438847511323dc7ea3c0fa7f621a7487230663cb77d04f449f658894768049357c/360?tp=webp');">      
+                            <span><i>·</i>直播中</span>                  
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+            <a href="javascript:void(0)" class="u-dl-btn" @click="download">下载彩虹直播</a>
+        </div>       
     </div>
     <!-- 礼物连击 -->
     <div class="m-gift-combo">
@@ -218,7 +246,7 @@
     <!-- 用户卡片 -->
     <div class="m-pop-mask m-mask" v-show="cardDisplay">
         <div class="anchor-panel">
-            <span class="report">举报</span>
+            <span class="report" @click="download">举报</span>
             <span class="close" @click="closeCard">╳</span>
             <div class="avatar icon-avatar" v-bind:style="{backgroundImage: 'url(' + cardInfo.icon + ')'}" ></div>
             <h3 class="name">
@@ -238,42 +266,27 @@
                 <li><span class="number">${cardInfo.fans}</span><label>粉丝</label></li>
                 <li><span class="number">${cardInfo.charmTotalValue}</span><label>魅力</label></li>
             </ul>
-            <p class="listen-text"><span>+ 关注</span></p>
+            <p class="listen-text"><span @click="download">+ 关注</span></p>
         </div>
     </div>
     <!-- 玩法介绍 -->
     <div class="m-intro-mask m-mask" v-show="introDisplay">
         <div class="game-intro">
             <h3>游戏介绍</h3>
-            <div class="intro-content" v-html="introContent"></div>
+            <div class="intro-content">
+                <h3>游戏介绍</h3>
+                <p>欢乐斗牛是一款休闲益智的卡牌游戏。游戏开始的时候奇奇，趣趣，欢欢会拿到五张星球卡牌。您可以给你喜欢的小牛仔赠送彩虹糖。游戏结束后，胜利的小牛仔会给你相应的回报，输的小牛仔只能默默带走你的礼物。</p>
+                <h3>玩法介绍</h3>
+                <p>1、五张卡牌任意3张相加是10的倍数，剩余两张相加取个位数是几就是牛几。</p>
+                <p>银牛：五张卡牌中有一张牌是10，其余都比10大。</p>
+                <p>金牛：五张牌都是10以上的。</p>
+                <p>炸弹：5张牌中有4张牌是一样的。</p>
+                <p>十小：5张牌都小于5，且5张牌相加不大于10</p>
+                <p>2、欢乐斗牛的卡牌大小顺序依次为：十小>炸弹>金牛>银牛>牛牛.....>牛一>没牛</p>
+                <p>3、若卡牌组合相同时，比较最大卡牌数字大小；最大卡牌数字相同时，比较最大卡牌的标示大小，黑桃>红桃>梅花>方块</p>
+            </div>
             <div class="u-close" @click="closeIntro"></div>
         </div>
-    </div>
-    <!-- 直播结束 -->
-    <div class="m-end-mask m-mask" v-if="is_live_end">
-        <div class="end-bg"></div>
-        <div class="end-container">
-            <div class="end-head">
-                <h3><span></span>&nbsp;&nbsp;&nbsp;直播结束&nbsp;&nbsp;&nbsp;<span></span></h3>
-                <i class="avatar icon-avatar" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');"></i>
-            </div>
-            <div class="end-recommend">
-                <h3>精彩推荐</h3>
-                <div class="recommend-box">
-                    <div class="recommend">
-                        <a href="" style="background-image: url('//p.qlogo.cn/hy_personal/4376ae1e0cf0cccedf6a98055419b4438847511323dc7ea3c0fa7f621a7487230663cb77d04f449f658894768049357c/360?tp=webp');">      
-                            <span><i>·</i>直播中</span>                  
-                        </a>
-                    </div>
-                    <div class="recommend">
-                        <a href="" style="background-image: url('//p.qlogo.cn/hy_personal/4376ae1e0cf0cccedf6a98055419b4438847511323dc7ea3c0fa7f621a7487230663cb77d04f449f658894768049357c/360?tp=webp');">      
-                            <span><i>·</i>直播中</span>                  
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <a href="" class="u-dl-btn">下载彩虹直播</a>
-        </div>       
     </div>
 </div>
  	

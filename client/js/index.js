@@ -4,10 +4,14 @@ rainbow = new Vue({
   	data: {
         // 直播间数据
         info:'',
+        // 直播结束推荐直播
+        otherLive:'',
+        // 直播间状态
+        state:1,
   		// 直播间id
   		live_id:'',
-  		accid:'test_1000109',
-  		roomid:'9428957',
+  		accid:'',
+  		roomid:'',
         live_account:'',
         live_token:'',
         // 用户列表
@@ -20,8 +24,6 @@ rainbow = new Vue({
         introContent:'',
         // 下载广告
         adDisplay:true,
-    	// 直播结束
-    	is_live_end:false,
         half_enter: true,
         half_group:[false,false,false],
     	game:{
@@ -36,6 +38,10 @@ rainbow = new Vue({
             catNum1:0,
             catNum2:0,
             catNum3:0,
+            // 倍率
+            rate_first:0,
+            rate_second:0,
+            rate_third:0,
             // 牌组
             cardsSet1:[],
             cardsSet2:[],
@@ -53,6 +59,19 @@ rainbow = new Vue({
         gift_num_bottom:1,
         // 礼物队列
         gift_line:[],
+        // 礼物信息
+        gift_info1:{
+            sender_icon:'',
+            sender_name:'',
+            gift_name:'',
+            gift_icon:''
+        },
+        gift_info2:{
+            sender_icon:'',
+            sender_name:'',
+            gift_name:'',
+            gift_icon:''
+        }
   	},
     updated:function(){
         // $('.icon-toplist').click(function(){
@@ -78,26 +97,24 @@ rainbow = new Vue({
   	mounted:function(){
   		// this.$nextTick(function () {
   			var _this = this;
-            
+            _this.live_id = parseInt(_this.getQueryString('liveId'));
   			// 获取直播间数据
   			$.ajax({
                 method: "GET",
                 url: "/api/rainbow/liveDetail",
                 dataType: 'json',
                 data: {
-                	liveId:_this.getQueryString('liveId'),
+                	liveId:_this.live_id,
    					// userId:2
                 },
                 success: function(data) {
-                    // _this.roomid = data.object.info.chat_room_id;
-                    _this.roomid = 9466782;
+                    _this.roomid = data.object.info.chat_room_id;
                     _this.accid = 'test_'+data.object.info.userId;
                     _this.info = data.object.info;
-                    // _this.audienceList = data.object.audienceList;
-                    // console.log($('.icon-toplist').length)
-                    Vue.nextTick(function () {
-                        _this.getUserInfo();
-                    })
+                    _this.state = _this.info.state;
+                    _this.otherLive = data.object.otherLive;
+                    // 获取游戏数据
+                    _this.getGameInfo()
                 },
                 error: function(a, b, c) {
                     console.log("接口出问题啦");
@@ -129,6 +146,39 @@ rainbow = new Vue({
                 return unescape(r[2]);
             }
             return null;
+        },
+        getGameInfo:function(){
+            var _this = this;
+            // $.ajax({
+            //     method: "GET",
+            //     url: "/api/rainbow/game/introduce",
+            //     dataType: 'json',
+            //     data: {
+            //         gameId:_this.info.gameId,
+            //     },
+            //     success: function(data) {
+            //         _this.introContent = data.object;
+            //     },
+            //     error: function(a, b, c) {
+            //         console.log("接口出问题啦");
+            //     }
+            // });
+            $.ajax({
+                method: "GET",
+                url: "/api/rainbow/gameInfo",
+                dataType: 'json',
+                data: {
+                    gameId:_this.info.gameId,
+                },
+                success: function(data) {
+                    _this.game.rate_first = data.object.rate_first;
+                    _this.game.rate_second = data.object.rate_second;
+                    _this.game.rate_third = data.object.rate_third;
+                },
+                error: function(a, b, c) {
+                    console.log("接口出问题啦");
+                }
+            });
         },
         // 数量计算
         watchNum: function (num) {
@@ -176,6 +226,9 @@ rainbow = new Vue({
         // 关闭下载
         closeAd:function(){
             this.adDisplay = false;
-        }
+        },
+        download:function(){
+            window.location.href = "http://www.baidu.com";
+        },
   	}
 })

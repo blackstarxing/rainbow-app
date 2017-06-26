@@ -14,7 +14,9 @@ var vm = window.rainbow;
 
 var ws;//websocket实例
 var lockReconnect = false;//避免重复连接
-var wsUrl = 'ws:172.16.10.3:9801';
+// var wsUrl = 'ws:172.16.10.3:9801';
+// var wsUrl = 'ws:118.190.21.195:9801';
+var wsUrl = 'ws:www.caihonglive.tv:10000';
 
 var ProtoBuf = dcodeIO.ProtoBuf;  
 var proto = ProtoBuf.loadProtoFile("/share/data/RainbowMessage.proto");  
@@ -117,7 +119,7 @@ createWebSocket(wsUrl);
 // 游戏状态
 function getState(){
     var obj = {  
-        liveId:1,   //直播间ID
+        liveId:vm.live_id,   //直播间ID
     };
     sendMes(obj,'CGGameState',10009);
 }
@@ -125,7 +127,7 @@ function getState(){
 // 实时投注
 function getCathectic(){
     var obj = {  
-        liveId:1,   //直播间ID
+        liveId:vm.live_id,   //直播间ID
     };
     sendMes(obj,'CGCathNowInfo',10013);
 }
@@ -230,9 +232,27 @@ function encodeMes(event){
                 var wsMessage = proto.build(protoName);  
                 var ws = wsMessage.decode(msgBuffer.data.buffer);
                 console.log(ws);  
-                vm.game.catNum1 = ws.index1Total;
-                vm.game.catNum2 = ws.index2Total;
-                vm.game.catNum3 = ws.index3Total;
+                vm.game.catNum1 = ws.index1Total==null?0:ws.index1Total;
+                vm.game.catNum2 = ws.index2Total==null?0:ws.index2Total;
+                vm.game.catNum3 = ws.index3Total==null?0:ws.index3Total;
+                break;
+            }
+        case 10016:
+            {
+                protoName = "GCCloseLiveRet";
+                var wsMessage = proto.build(protoName);  
+                var ws = wsMessage.decode(msgBuffer.data.buffer);
+                console.log(ws);  
+                vm.state = 2;
+                break;
+            }
+        case 10017:
+            {
+                protoName = "GCCloseGameRet";
+                var wsMessage = proto.build(protoName);  
+                var ws = wsMessage.decode(msgBuffer.data.buffer);
+                console.log(ws); 
+                vm.state = 0; 
                 break;
             }
         default:
@@ -366,31 +386,33 @@ function createPoker(){
 }
 
 // createPoker();
-// $(".m-video").on("touchstart", function(e) {
-//     e.preventDefault();
-//     startX = e.originalEvent.changedTouches[0].pageX,
-//     startY = e.originalEvent.changedTouches[0].pageY;
-// });
-// $(".m-video").on("touchmove", function(e) {
-//     e.preventDefault();
-//     moveEndX = e.originalEvent.changedTouches[0].pageX,
-//     moveEndY = e.originalEvent.changedTouches[0].pageY,
-//     X = moveEndX - startX,
-//     Y = moveEndY - startY;
+$(".m-video").on("touchstart", function(e) {
+    e.preventDefault();
+    startX = e.originalEvent.changedTouches[0].pageX,
+    startY = e.originalEvent.changedTouches[0].pageY;
+});
+$(".m-video").on("touchmove", function(e) {
+    e.preventDefault();
+    moveEndX = e.originalEvent.changedTouches[0].pageX,
+    moveEndY = e.originalEvent.changedTouches[0].pageY,
+    X = moveEndX - startX,
+    Y = moveEndY - startY;
 
-//     if ( Math.abs(X) > Math.abs(Y) && X > 0 ) {
-//         // alert("left 2 right");
-//     }
-//     else if ( Math.abs(X) > Math.abs(Y) && X < 0 ) {
-//         // alert("right 2 left");
-//     }
-//     else if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
-//         // alert("top 2 bottom");
-//         $('.m-game').hide() && $('.deal-section').hide();
-//     }
-//     else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) {
-//         // alert("bottom 2 top");
-//         $('.m-game').show() && $('.deal-section').show();
-//     }
+    if ( Math.abs(X) > Math.abs(Y) && X > 0 ) {
+        // alert("left 2 right");
+    }
+    else if ( Math.abs(X) > Math.abs(Y) && X < 0 ) {
+        // alert("right 2 left");
+    }
+    else if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
+        // alert("top 2 bottom");
+        $('.m-game').css({opacity:0}) && $('.deal-section').css({opacity:0});
+        $('.m-chat,.m-operate').css({top:'5rem'});
+    }
+    else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) {
+        // alert("bottom 2 top");
+        $('.m-game').css({opacity:1}) && $('.deal-section').css({opacity:1});
+        $('.m-chat,.m-operate').css({top:0});
+    }
     
-// });
+});

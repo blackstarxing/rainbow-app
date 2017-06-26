@@ -12,11 +12,16 @@ var gname1 = '';
 
 var gname2 = '';
 
+// 视频播放
 var myVideo = document.getElementById('mainvideo');
-            $('.play-btn').on('click',function(){
-                myVideo.play();
-                $(this).hide();
-            })
+$('.play-btn').on('click',function(){
+    myVideo.play();
+    $(this).hide();
+})
+
+myVideo.onended = function() {
+    alert("直播结束");
+};
 
 // 获取游客云信账号
 $.ajax({
@@ -83,7 +88,7 @@ $.ajax({
 // 	        break;
 //     }
 // }
-
+// 礼物连击动画
 function giftCombo(name){
 	if(gname1==name){
 		var now_time_top = new Date().getTime();
@@ -132,55 +137,54 @@ function giftCombo(name){
 	}
 }
 
-$('.op-chat').click(function(){
-	if($(".globel-note").is(":animated")){
+// $('.op-chat').click(function(){
+// 	if($(".globel-note").is(":animated")){
 
-	}else{
-		$('.globel-note').css({'width':$('.globel-note').width()+2,'right':'-100%'});
-		$('.globel-note').animate({'right':'100%'},5000);
-	}
+// 	}else{
+// 		$('.globel-note').css({'width':$('.globel-note').width()+2,'right':'-100%'});
+// 		$('.globel-note').animate({'right':'100%'},5000);
+// 	}
 	
-});
+// });
 
-$('.op-gift').click(function(){
-	if($(".huge-gift").is(":animated")){
+// $('.op-gift').click(function(){
+// 	if($(".huge-gift").is(":animated")){
 
-	}else{
-		$('.huge-gift').css({'width':$('.huge-gift').width()+2,'right':'-100%'});
-		$('.huge-gift').animate({'right':'100%'},5000);
-	}
-});
+// 	}else{
+// 		$('.huge-gift').css({'width':$('.huge-gift').width()+2,'right':'-100%'});
+// 		$('.huge-gift').animate({'right':'100%'},5000);
+// 	}
+// });
 
-$('.award').click(function(){
-	if($(".vip-enter").is(":animated")){
+// $('.award').click(function(){
+// 	if($(".vip-enter").is(":animated")){
 
-	}else{
-		$('.vip-enter').css({'width':$('.vip-enter').width()+2,'right':'-100%'});
-		$('.vip-enter').animate({'right':'100%'},5000);
-	}
-});
+// 	}else{
+// 		$('.vip-enter').css({'width':$('.vip-enter').width()+2,'right':'-100%'});
+// 		$('.vip-enter').animate({'right':'100%'},5000);
+// 	}
+// });
 
-function getUserInfo(){
-	$('.icon-toplist').click(function(){
-        var that = this;
-        $.ajax({
-            method: "GET",
-            url: "/api/rainbow/userInfo",
-            dataType: 'json',
-            data: {
-                otherId:$(that).attr('data-id'),
-                // userId:2
-            },
-            success: function(data) {
-                vm.cardInfo = data.object;
-            },
-            error: function(a, b, c) {
-                console.log("接口出问题啦");
-            }
-        });
-        vm.cardDisplay = true;
-    })
-}
+// 获取用户卡片信息
+$('#room').on('click','.icon-toplist',function(){
+    var that = this;
+    $.ajax({
+        method: "GET",
+        url: "/api/rainbow/userInfo",
+        dataType: 'json',
+        data: {
+            otherId:$(that).attr('data-id'),
+            // userId:2
+        },
+        success: function(data) {
+            vm.cardInfo = data.object;
+        },
+        error: function(a, b, c) {
+            console.log("接口出问题啦");
+        }
+    });
+    vm.cardDisplay = true;
+})
 
 // 进入直播间
 function enterLiveroom(){
@@ -242,26 +246,30 @@ function enterLiveroom(){
 		
 	}
 
-
-	function onChatroomConnect(chatroom) {
-	    console.log('进入聊天室', chatroom);
-	 	rainbowchatroom.getChatroomMembers({
+	// 更新观众列表
+	function getMembers(){
+		rainbowchatroom.getChatroomMembers({
 		    guest: true,
 		    limit: 100,
 		    done: getChatroomMembersDone
 		});
 		function getChatroomMembersDone(error, obj) {
+			vm.audienceList = [];
 		    console.log('获取聊天室成员' + (!error?'成功':'失败'), error, obj.members);
 		    console.log(vm.audienceList);
+		    obj.members = obj.members.slice(1);
 		    obj.members.forEach(function(e,index){
 		    	var userId = e.account.slice(5);
                 vm.audienceList.push({'icon':e.avatar,'userId':userId}); 
             }) 
-            Vue.nextTick(function () {
-                getUserInfo();
-            })
 		}
-	    $('#chat').append("<div><span class='message fc-cf'>系统消息：倡导绿色直播文明和谐直播，共建美好社区，对直播内容24小时巡查。</span></div>"); 
+	}
+
+
+	function onChatroomConnect(chatroom) {
+	    console.log('进入聊天室', chatroom);
+	    getMembers();
+	    $('#chat').append("<div><span class='message fc-cf'>温馨提示：彩虹的直播互动仅供娱乐，请大家文明观看直播，理性参与游戏，适度娱乐，如有发现相关违规行为，请联系官方客服举报。查证属实的，彩虹将给予奖励。</span></div>"); 
 	}
 	function onChatroomWillReconnect(obj) {
 	    // 此时说明 `SDK` 已经断开连接, 请开发者在界面上提示用户连接已断开, 而且正在重新建立连接
@@ -282,7 +290,7 @@ function enterLiveroom(){
 	            break;
 	        }
 	    }
-	    $('#chat').append("<div><span class='bubble'>连接断开</span></div>"); 
+	    $('#chat').append("<div><span class='message'>连接断开</span></div>"); 
 	}
 	function onChatroomError(error, obj) {
 	    console.log('发生错误', error, obj);
@@ -291,41 +299,68 @@ function enterLiveroom(){
 	    console.log('收到聊天室消息', msgs);
 	    for(var i=0;i<msgs.length;i++){
 	    	if(msgs[i].content){
+	    		// 解析等级
+		    	var custom=msgs[i].custom?JSON.parse(msgs[i].fromCustom):'';
+	    		var level = 'first';
+	    		if(custom){
+	    			if(custom.level>22){
+		    			level='fourth';
+		    		}else if(custom.level>12){
+						level='third';
+		    		}else if(custom.level>1){
+		    			level='second';
+		    		}
+	    		}
 	    		// 礼物
 	    		var content=JSON.parse(msgs[i].content);
-	    		// console.log(content);
+	    		var giftType=content.data.giftType;
+	    		var giftImg=content.data.giftShowImage.indexOf('http')>-1?content.data.giftShowImage:'http://img.wangyuhudong.com/'+content.data.giftShowImage;
+	    		
 	    		if(content.data.giftNum>1){
-	    			$('#chat').append("<div class='gift'><span class='message'><span class='s-bl'>"+content.data.senderName+"</span>赠送给主播<span class='s-f36'>"+content.data.giftName+"</span><img src='http://img.wangyuhudong.com/"+content.data.giftShowImage+"' class='gift-icon' alt=''><span class='combo'>x"+content.data.giftNum+"</span></span><div>");
+	    			$('#chat').append("<div class='gift'><span class='message'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span><span class='fc-nick'>"+content.data.senderName+"</span><span class='fc-gift'>送出了一个"+content.data.giftName+"<img src='"+giftImg+"' class='gift-icon' alt=''>x"+content.data.giftNum+"</span></span><div>");
 	    		}else{
-	    			$('#chat').append("<div class='gift'><span class='message'><span class='s-bl'>"+content.data.senderName+"</span>赠送给主播<span class='s-f36'>"+content.data.giftName+"</span><img src='http://img.wangyuhudong.com/"+content.data.giftShowImage+"' class='gift-icon' alt=''></span><div>");
+	    			$('#chat').append("<div class='gift'><span class='message'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span><span class='fc-nick'>"+content.data.senderName+"</span><span class='fc-gift'>送出了一个"+content.data.giftName+"<img src='"+giftImg+"' class='gift-icon' alt=''></span></span><div>");
+	    		}
+
+	    		if(giftType==2){
+	    			
+	    		}else if(giftType==3){
+
 	    		}
 	    	}else if(msgs[i].text && msgs[i].fromNick && msgs[i].fromClientType != 'Server'){
 	    		// 发言
-	    		var host = msgs[i].fromNick=="1" ? '<label for="">主播</label>&nbsp;' : '';
-	    		var custom=JSON.parse(msgs[i].custom);
+	    		// 解析等级
+		    	var custom=msgs[i].custom?JSON.parse(msgs[i].custom):'';
 	    		var level = 'first';
-	    		if(custom.level>22){
-	    			level='fourth';
-	    		}else if(custom.level>12){
-					level='third';
-	    		}else if(custom.level>12){
-	    			level='second';
+	    		if(custom){
+	    			if(custom.level>22){
+		    			level='fourth';
+		    		}else if(custom.level>12){
+						level='third';
+		    		}else if(custom.level>1){
+		    			level='second';
+		    		}
 	    		}
+	    		var host = msgs[i].fromNick=="1" ? '<label for="">主播</label>&nbsp;' : '';
+	    		
 				$('#chat').append("<div><span class='message'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span>"+host+"<span class='fc-nick'>"+msgs[i].fromNick+":</span>"+msgs[i].text+"</span><div>");   		
 	    	}else if(msgs[i].text && !msgs[i].fromNick && msgs[i].custom){
-	            var custom=JSON.parse(msgs[i].custom);
 	            $('#chat').append("<div><span class='bubble'><span class='fromNick'>"+custom.nickname+":&nbsp;&nbsp;</span>"+msgs[i].text+"</span></div>");        
 	        }else if(msgs[i].flow=="in" && !msgs[i].text && msgs[i].attach.fromNick && msgs[i].attach.type=="memberEnter"){
 	        	// 进入直播间
-	        	var custom=JSON.parse(msgs[i].attach.custom);
-	    		var level = 'first';
-	    		if(custom.level>22){
-	    			level='fourth';
-	    		}else if(custom.level>12){
-					level='third';
-	    		}else if(custom.level>12){
-	    			level='second';
-	    		}
+	        	// 解析等级
+	        	getMembers();
+		    	var custom=msgs[i].attach.custom?JSON.parse(msgs[i].attach.custom):'';
+				var level = 'first';
+				if(custom){
+					if(custom.level>22){
+		    			level='fourth';
+		    		}else if(custom.level>12){
+						level='third';
+		    		}else if(custom.level>1){
+		    			level='second';
+		    		}
+				}
 	    		$('#chat').append("<div><span class='message fc-enter'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span><span class='fc-nick'>"+msgs[i].attach.fromNick+"</span>进入直播间</span></div>");
 	    	}else if(msgs[i].flow=="in" && msgs[i].text && msgs[i].custom =="" ){
 	    		var a = msgs[i].text.slice(0,2);

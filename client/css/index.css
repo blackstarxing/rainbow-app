@@ -32,7 +32,7 @@
     width: 2.133333rem;
     height: 2.133333rem;
     margin-left: -1.066667rem;
-    margin-top: -1.6rem;
+    margin-top: -3.6rem;
 }
 .icon-play{
     background-size: contain;
@@ -184,7 +184,7 @@
 	margin-bottom: 0.133333rem;
 	width: auto;
 	border-radius: 0.293333rem;
-	text-shadow: 0 .5px 1px rgba(0,0,0,.5);
+	text-shadow: 0 1px 2px rgba(0,0,0,.5);
 }
 .m-chat .award{
     width: 1.28rem;
@@ -211,6 +211,7 @@
 }
 /*高级用户进入*/
 .m-chat .vip-enter{
+    position: absolute;
     top:-1.066667rem;
     border-radius: 0.346667rem;
     background:-webkit-linear-gradient(left,#7b06ff,#a53ddb);
@@ -218,6 +219,7 @@
 
 /*操作*/
 .m-operate{
+    position: relative;
     padding: 0.133333rem 0.266667rem;
 }
 .m-operate i{
@@ -519,8 +521,6 @@
     line-height: 0.906667rem;
     background: rgba(0,0,0,0.2);
     border-radius: 0.08rem;
-}
-.stake-all{
     margin: 0.106667rem 0 0.133333rem 0;
     background-image: url('/share/images/coin.png');
     background-repeat: no-repeat;
@@ -627,13 +627,21 @@
     color: #f36;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 0.4rem;
+    /*margin-bottom: 0.4rem;*/
 }
 .m-intro-mask .game-intro .intro-content{
-    height: 100%;
-    padding-bottom:1.066667rem;
+    height: 90%;
+    /*padding-bottom:1.066667rem;*/
     overflow-y: auto;
     box-sizing: border-box;
+    color:#666;
+    line-height: 0.533333rem;
+}
+.m-intro-mask .game-intro .intro-content h3{
+    font-size: 0.373333rem;
+    color: #333;
+    text-align: left;
+    margin:0.4rem 0;
 }
 .m-intro-mask .game-intro .u-close{
     display: block;
@@ -788,11 +796,11 @@
     vertical-align: middle;
     color:#fff;
     font-size: 0.32rem;
-    width: 0.853333rem;
-    height: 0.4rem;
+    width: 0.906667rem;
+    height: 0.453333rem;
     line-height: 0.4rem;
-    -webkit-background-size: 0.853333rem 0.4rem;
-    background-size: 0.853333rem 0.4rem;
+    -webkit-background-size: cover;
+    background-size: cover;
     -webkit-flex-shrink: 0;
     flex-shrink: 0;
    	text-indent: 0.333333rem;
@@ -800,11 +808,11 @@
 }
 /*聊天等级*/
 .message .levelMedal {
-    width: 0.96rem;
-    height: 0.373333rem;
-    line-height: 0.373333rem;
+    width: 0.906667rem;
+    height: 0.453333rem;
+    line-height: 0.453333rem;
     margin-left: 0;
-    background-size: cover;
+    background-size: contain;
     text-align: center;
 }
 

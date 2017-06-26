@@ -3,8 +3,45 @@ var router = express.Router();
 var Thenjs = require('thenjs');
 var request = require('request');
 
-// var path = 'http://172.16.10.3:8080';
-var path = 'http://118.190.21.195:28888';
+// 微信分享ticket   
+var ticket = '';
+var ticketline = '';
+
+// var path = 'http://172.16.10.134:80';
+// var path = 'http://118.190.21.195:28888';
+var path = 'http://www.caihonglive.tv:28888';
+
+function getTicket(){
+    Thenjs.parallel([function(cont) {
+        request('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx1bd2b48c81600e98&secret=635994b64fafacc7e375d6554121fe2d', function(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                cont(null, body);
+            } else {
+                cont(new Error('error!'));
+            }
+        })
+    }]).then(function(cont, result) {
+        Thenjs.parallel([function(cont) {
+            console.log(JSON.parse(result[0]).access_token);
+            request('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='+JSON.parse(result[0]).access_token+'&type=jsapi', function(error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    cont(null, body);
+                } else {
+                    cont(new Error('error!'));
+                }
+            })
+        }]).then(function(cont, result) {
+            ticket = JSON.parse(result[0]).ticket;
+            ticketline = new Date().getTime();
+        }).fail(function(cont, error) {
+            console.log(error);
+            res.render('error', { title: "错误"});
+        });
+    }).fail(function(cont, error) {
+        console.log(error);
+        res.render('error', { title: "错误"});
+    });
+}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,6 +50,10 @@ router.get('/', function(req, res, next) {
 
 router.get('/share/index', function(req, res, next) {
     var liveId = req.query.liveId?req.query.liveId:'';
+    var nowtime = new Date().getTime();
+    if(!ticket || (nowtime-ticketline)>7000000){
+        getTicket();
+    }
     Thenjs.parallel([function(cont) {
         request({
             uri: path+'/rainbow/liveDetail?liveId='+liveId,
@@ -28,10 +69,12 @@ router.get('/share/index', function(req, res, next) {
             }
         })
     }]).then(function(cont, result) {
+        console.log('ticket',ticket)
         res.render('share/index', {
             title: "直播间",
             index: JSON.parse(result[0]).object,
             link:JSON.parse(result[0]).object.info.rtmp.replace(/rtmp:/, "http:").replace(/rtmp/, "hls")+'.m3u8',
+            ticket:ticket
         });
     }).fail(function(cont, error) {
         console.log(error);
@@ -114,6 +157,10 @@ router.get('/activity/handline', function(req, res, next) {
 
 router.get('/activity/recharge', function(req, res, next) {
    res.render('activity/recharge', { title: '充值说明' });
+});
+
+router.get('/activity/notice', function(req, res, next) {
+   res.render('activity/notice', { title: '文明公约' });
 });
 
 module.exports = router;

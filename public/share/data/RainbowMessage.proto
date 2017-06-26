@@ -94,6 +94,7 @@ message GCSendGiftRet
 message CGGameState
 {
 	optional int32 	liveId				= 1;   //直播间ID
+	optional int32  userId	            = 2;   //用户ID
 }
 
 //----------------------直播间游戏状态返回（Gameserver<-->client）协议号 10010----------------------
@@ -136,6 +137,25 @@ message GCCathNowInfoRet
 	optional int32  index3Total	            = 5;   //第三投注位投注总值
 	optional int32  index3user	            = 6;   //第三投注位用户投注值	
 
+}
+
+//----------------------直播关闭（client<-->Gameserver）协议号 10015----------------------
+message CGCloseLive
+{
+	 optional int32  liveId	            = 1;   //直播间ID
+}
+
+//----------------------直播关闭返回（Gameserver<-->client）协议号 10016---------------------
+message GCCloseLiveRet
+{
+	optional int32  liveId           	= 1;   //直播间ID
+	optional int32  code	            = 2;   //0 成功 1 失败
+}
+
+//----------------------游戏关闭通知返回（Gameserver<-->client）协议号 10017---------------------
+message GCCloseGameRet
+{
+	optional int32  liveId	            = 1;   //直播间ID
 }
 
 
