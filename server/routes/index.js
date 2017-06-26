@@ -3,8 +3,8 @@ var router = express.Router();
 var Thenjs = require('thenjs');
 var request = require('request');
 
-var path = 'http://172.16.10.3:8080';
-// var path = 'http://118.190.21.195:28888';
+// var path = 'http://172.16.10.3:8080';
+var path = 'http://118.190.21.195:28888';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -102,15 +102,18 @@ router.get('/withdrawCash/login', function(req, res, next) {
 router.get('/withdrawCash/income', function(req, res, next) {
    res.render('withdrawCash/income', { title: '我的收益' });
 });
-router.get('/activity/handline', function(req, res, next) {
-   res.render('activity/handline', { title: '我要上头条' });
-});
-router.get('/activity/recharge', function(req, res, next) {
-   res.render('activity/recharge', { title: '充值说明' });
-});
+
 //提现-短信验证码登录
 router.get('/withdrawCash/messageLog', function(req, res, next) {
    res.render('withdrawCash/messageLog', { title: '短信登录' });
+});
+
+router.get('/activity/handline', function(req, res, next) {
+   res.render('activity/handline', { title: '我要上头条' });
+});
+
+router.get('/activity/recharge', function(req, res, next) {
+   res.render('activity/recharge', { title: '充值说明' });
 });
 
 module.exports = router;

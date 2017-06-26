@@ -1,8 +1,27 @@
 var vm = window.rainbow;
 
+var last_time_top = null;
+
+var giftTopTime = null;
+
+var last_time_bottom = null;
+
+var giftBottomTime = null
+
+var gname1 = '';
+
+var gname2 = '';
+
+var myVideo = document.getElementById('mainvideo');
+            $('.play-btn').on('click',function(){
+                myVideo.play();
+                $(this).hide();
+            })
+
+// 获取游客云信账号
 $.ajax({
     method: "GET",
-    url: "http://172.16.10.3:8777/mobile/visitor",
+    url: "/webapi/rainbow/mobile/visitor",
     dataType: 'json',
     success: function(data) {
         vm.live_account = data.object.accid;
@@ -14,8 +33,157 @@ $.ajax({
     }
 });
 
+// 礼物连击
+// function giftCombo(type){
+// 	switch (type) {
+// 	    case 1:
+// 	    	var now_time_top = new Date().getTime();
+// 	    	if(last_time_top==null){
+// 	    		gname1 = '123';
+// 	    		vm.gift_top = true;
+// 	    		$('.wrap-top').removeClass('slideOutLeft').addClass('animated slideInLeft');
+// 	    		last_time_top = now_time_top;
+// 	    	}else if((now_time_top-last_time_top)<3000){
+// 	    		clearTimeout(giftTopTime);
+// 	    		last_time_top = now_time_top;
+// 	    		vm.gift_num_top++;
+// 	    	}else{
+// 	    		gname1 = '';
+// 	    		vm.gift_num_top = 1;
+// 	    		$('.wrap-top').removeClass('slideOutLeft').addClass('animated slideInLeft');
+// 	    		last_time_top = now_time_top;
+// 	    		clearTimeout(giftTopTime);
+// 	    	}
+// 			giftTopTime=setTimeout(function(){
+// 				vm.gift_top = false;
+// 				$('.wrap-top').removeClass('slideInLeft').addClass('animated slideOutLeft');
+// 			},3000);
+// 	        break;
+// 	    case 2:
+// 	    	var now_time_bottom = new Date().getTime();
+// 	    	if(last_time_bottom==null){
+// 	    		vm.gift_bottom = true;
+// 	    		$('.wrap-bottom').removeClass('slideOutLeft').addClass('animated slideInLeft');
+// 	    		last_time_bottom = now_time_bottom;
+// 	    	}else if((now_time_bottom-last_time_bottom)<3000){
+// 	    		clearTimeout(giftBottomTime);
+// 	    		last_time_bottom = now_time_bottom;
+// 	    		vm.gift_num_bottom++;
+// 	    	}else{
+// 	    		vm.gift_num_bottom = 1;
+// 	    		$('.wrap-bottom').removeClass('slideOutLeft').addClass('animated slideInLeft');
+// 	    		last_time_bottom = now_time_bottom;
+// 	    		clearTimeout(giftBottomTime);
+// 	    	}
+// 	    	giftBottomTime=setTimeout(function(){
+// 				$('.wrap-bottom').removeClass('slideInLeft').addClass('animated slideOutLeft');
+// 			},3000);
+// 	        break;
+// 	    default:
+// 	        break;
+//     }
+// }
+
+function giftCombo(name){
+	if(gname1==name){
+		var now_time_top = new Date().getTime();
+		clearTimeout(giftTopTime);
+		last_time_top = now_time_top;
+		vm.gift_num_top++;
+		$('.wrap-top .gift-num').removeClass('animated bounceIn').addClass('animated bounceIn');
+		giftTopTime=setTimeout(function(){
+			gname1 = '';
+			vm.gift_num_top = 1;
+			$('.wrap-top').removeClass('slideInLeft').addClass('animated slideOutLeft');
+		},3000);
+	}else if(gname2==name){
+		var now_time_bottom = new Date().getTime();
+		clearTimeout(giftBottomTime);
+		last_time_bottom = now_time_bottom;
+		vm.gift_num_bottom++;
+		$('.wrap-bottom .gift-num').removeClass('bounceIn').addClass('animated bounceIn');
+		giftBottomTime=setTimeout(function(){
+			gname2 = '';
+			vm.gift_num_bottom = 1;
+			$('.wrap-bottom').removeClass('slideInLeft').addClass('animated slideOutLeft');
+		},3000);
+	}else if(gname1==''){
+		var now_time_top = new Date().getTime();
+		gname1 = name;
+		$('.wrap-top').removeClass('slideOutLeft').addClass('animated slideInLeft');
+		last_time_top = now_time_top;
+		giftTopTime=setTimeout(function(){
+			gname1 = '';
+			vm.gift_num_top = 1;
+			$('.wrap-top').removeClass('slideInLeft').addClass('animated slideOutLeft');
+		},3000);
+	}else if(gname2==''){
+		var now_time_bottom = new Date().getTime();
+		gname2 = name;
+		$('.wrap-bottom').removeClass('slideOutLeft').addClass('animated slideInLeft');
+	    last_time_bottom = now_time_bottom;
+	    giftBottomTime=setTimeout(function(){
+			gname2 = '';
+			vm.gift_num_bottom = 1;
+			$('.wrap-bottom').removeClass('slideInLeft').addClass('animated slideOutLeft');
+		},3000);
+	}else{
+
+	}
+}
+
+$('.op-chat').click(function(){
+	if($(".globel-note").is(":animated")){
+
+	}else{
+		$('.globel-note').css({'width':$('.globel-note').width()+2,'right':'-100%'});
+		$('.globel-note').animate({'right':'100%'},5000);
+	}
+	
+});
+
+$('.op-gift').click(function(){
+	if($(".huge-gift").is(":animated")){
+
+	}else{
+		$('.huge-gift').css({'width':$('.huge-gift').width()+2,'right':'-100%'});
+		$('.huge-gift').animate({'right':'100%'},5000);
+	}
+});
+
+$('.award').click(function(){
+	if($(".vip-enter").is(":animated")){
+
+	}else{
+		$('.vip-enter').css({'width':$('.vip-enter').width()+2,'right':'-100%'});
+		$('.vip-enter').animate({'right':'100%'},5000);
+	}
+});
+
+function getUserInfo(){
+	$('.icon-toplist').click(function(){
+        var that = this;
+        $.ajax({
+            method: "GET",
+            url: "/api/rainbow/userInfo",
+            dataType: 'json',
+            data: {
+                otherId:$(that).attr('data-id'),
+                // userId:2
+            },
+            success: function(data) {
+                vm.cardInfo = data.object;
+            },
+            error: function(a, b, c) {
+                console.log("接口出问题啦");
+            }
+        });
+        vm.cardDisplay = true;
+    })
+}
+
+// 进入直播间
 function enterLiveroom(){
-	console.log(5657)
 	var address=[];
 	var lct = document.getElementById('chat');
 	// 当前时间
@@ -26,15 +194,16 @@ function enterLiveroom(){
 		h = myDate.getHours(),      //获取当前小时数(0-23)
 		mi = myDate.getMinutes(),    //获取当前分钟数(0-59)
 		s = myDate.getSeconds();   //获取当前秒数(0-59)
-	var CurTime = Date.UTC(y,m,d,h,mi,s);
-	var roomid = parseInt(4174310);
+	// var CurTime = Date.UTC(y,m,d,h,mi,s);Math.round(new Date().getTime()/1000)
+	var CurTime = Math.round(new Date().getTime()/1000);
 	var shaObj = new jsSHA("SHA-1", "TEXT");
 	// AppSecret
-	shaObj.update('1981023862be'+1+CurTime);
+	shaObj.update('0e41a6ff0d90'+1+CurTime);
 	var hash = shaObj.getHash("HEX");
 
+
 	// 获取聊天室信息重要参数
-	var appKey = '5585496885932f31d478ed0222072bcf';
+	var appKey = '76f43ad5b2a8603c628889449e72e3e7';
 
 	$.ajax({
 	    url: "https://api.netease.im/nimserver/chatroom/requestAddr.action",
@@ -57,7 +226,7 @@ function enterLiveroom(){
 	    }   
 	})
 	function getChat(){
-		var chatroom = Chatroom.getInstance({
+		rainbowchatroom = Chatroom.getInstance({
 		    appKey: appKey,
 		    account: vm.live_account,
 		    token: vm.live_token,
@@ -70,12 +239,29 @@ function enterLiveroom(){
 		    // 消息
 		    onmsgs: onChatroomMsgs
 		});
+		
 	}
 
 
 	function onChatroomConnect(chatroom) {
 	    console.log('进入聊天室', chatroom);
-	    // $('#chat').append("<div><span class='bubble s-bl'><img src='../../static/images/welcome.png' alt=''>欢迎来到<span class='nick'>"+vm.details.nickname+"</span>的直播间，喜欢主播别忘点关注哦！</span></div>"); 
+	 	rainbowchatroom.getChatroomMembers({
+		    guest: true,
+		    limit: 100,
+		    done: getChatroomMembersDone
+		});
+		function getChatroomMembersDone(error, obj) {
+		    console.log('获取聊天室成员' + (!error?'成功':'失败'), error, obj.members);
+		    console.log(vm.audienceList);
+		    obj.members.forEach(function(e,index){
+		    	var userId = e.account.slice(5);
+                vm.audienceList.push({'icon':e.avatar,'userId':userId}); 
+            }) 
+            Vue.nextTick(function () {
+                getUserInfo();
+            })
+		}
+	    $('#chat').append("<div><span class='message fc-cf'>系统消息：倡导绿色直播文明和谐直播，共建美好社区，对直播内容24小时巡查。</span></div>"); 
 	}
 	function onChatroomWillReconnect(obj) {
 	    // 此时说明 `SDK` 已经断开连接, 请开发者在界面上提示用户连接已断开, 而且正在重新建立连接
@@ -103,24 +289,44 @@ function enterLiveroom(){
 	}
 	function onChatroomMsgs(msgs) {
 	    console.log('收到聊天室消息', msgs);
-	    // $('.chat').html(msgs)
 	    for(var i=0;i<msgs.length;i++){
 	    	if(msgs[i].content){
+	    		// 礼物
 	    		var content=JSON.parse(msgs[i].content);
 	    		// console.log(content);
 	    		if(content.data.giftNum>1){
-	    			$('#chat').append("<div class='gift'><span class='bubble'><span class='s-bl'>"+content.data.senderName+"</span>赠送给主播<span class='s-f36'>"+content.data.giftName+"</span><img src='"+content.data.giftShowImage+"' class='gift-icon' alt=''><span class='combo'>x"+content.data.giftNum+"</span></span><div>");
+	    			$('#chat').append("<div class='gift'><span class='message'><span class='s-bl'>"+content.data.senderName+"</span>赠送给主播<span class='s-f36'>"+content.data.giftName+"</span><img src='http://img.wangyuhudong.com/"+content.data.giftShowImage+"' class='gift-icon' alt=''><span class='combo'>x"+content.data.giftNum+"</span></span><div>");
 	    		}else{
-	    			$('#chat').append("<div class='gift'><span class='bubble'><span class='s-bl'>"+content.data.senderName+"</span>赠送给主播<span class='s-f36'>"+content.data.giftName+"</span><img src='"+content.data.giftShowImage+"' class='gift-icon' alt=''></span><div>");
+	    			$('#chat').append("<div class='gift'><span class='message'><span class='s-bl'>"+content.data.senderName+"</span>赠送给主播<span class='s-f36'>"+content.data.giftName+"</span><img src='http://img.wangyuhudong.com/"+content.data.giftShowImage+"' class='gift-icon' alt=''></span><div>");
 	    		}
 	    	}else if(msgs[i].text && msgs[i].fromNick && msgs[i].fromClientType != 'Server'){
+	    		// 发言
 	    		var host = msgs[i].fromNick=="1" ? '<label for="">主播</label>&nbsp;' : '';
-				$('#chat').append("<div><span class='bubble'>"+host+"<span class='fromNick'>"+msgs[i].fromNick+":&nbsp;&nbsp;</span>"+msgs[i].text+"</span><div>");   		
+	    		var custom=JSON.parse(msgs[i].custom);
+	    		var level = 'first';
+	    		if(custom.level>22){
+	    			level='fourth';
+	    		}else if(custom.level>12){
+					level='third';
+	    		}else if(custom.level>12){
+	    			level='second';
+	    		}
+				$('#chat').append("<div><span class='message'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span>"+host+"<span class='fc-nick'>"+msgs[i].fromNick+":</span>"+msgs[i].text+"</span><div>");   		
 	    	}else if(msgs[i].text && !msgs[i].fromNick && msgs[i].custom){
 	            var custom=JSON.parse(msgs[i].custom);
 	            $('#chat').append("<div><span class='bubble'><span class='fromNick'>"+custom.nickname+":&nbsp;&nbsp;</span>"+msgs[i].text+"</span></div>");        
 	        }else if(msgs[i].flow=="in" && !msgs[i].text && msgs[i].attach.fromNick && msgs[i].attach.type=="memberEnter"){
-	    		$('#chat').append("<div><span class='bubble'>欢迎用户"+msgs[i].attach.fromNick+"进入直播间</span></div>");
+	        	// 进入直播间
+	        	var custom=JSON.parse(msgs[i].attach.custom);
+	    		var level = 'first';
+	    		if(custom.level>22){
+	    			level='fourth';
+	    		}else if(custom.level>12){
+					level='third';
+	    		}else if(custom.level>12){
+	    			level='second';
+	    		}
+	    		$('#chat').append("<div><span class='message fc-enter'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span><span class='fc-nick'>"+msgs[i].attach.fromNick+"</span>进入直播间</span></div>");
 	    	}else if(msgs[i].flow=="in" && msgs[i].text && msgs[i].custom =="" ){
 	    		var a = msgs[i].text.slice(0,2);
 	    		var b = msgs[i].text.slice(2).slice(0,-5);

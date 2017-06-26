@@ -1,5 +1,8 @@
 #room{
+    position: relative;
 	height:100%;
+    width: 100%;
+    overflow: hidden;
 }
 [v-cloak] {
 	display: none;
@@ -10,7 +13,7 @@
     top: 0;
     bottom: 0;
     right: 0;
-    background: url(//p.qlogo.cn/hy_personal_room/6774614/67746141492792014/640?tp=webp) center center no-repeat;
+    background: url('/share/images/outline.png') center center no-repeat;
     background-size: cover;
     overflow: hidden; 
 }
@@ -21,6 +24,19 @@
     left: 50%;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);*/
+}
+.play-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2.133333rem;
+    height: 2.133333rem;
+    margin-left: -1.066667rem;
+    margin-top: -1.6rem;
+}
+.icon-play{
+    background-size: contain;
+    background-image: url('/share/images/play.png');
 }
 .m-header{
 	position: absolute;
@@ -58,7 +74,7 @@
     overflow: hidden;
 }
 .avatar-contatiner .content{
-	width: 1.546667rem;
+	width: 1.6rem;
 	height: 100%;
     position: absolute;
     left: 1.013333rem;
@@ -75,6 +91,10 @@
     margin-bottom: 0.053333rem;
 }
 .avatar-contatiner .author-id{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 	color:#c8c8c8;
     font-size: 0.293333rem;
 }
@@ -110,11 +130,13 @@
     height: 0.853333rem;
     margin-left: 0.053333rem;
     border-radius: 50%;
+    border:2px solid #fff;
     position: relative;
     background-repeat: no-repeat;
     background-position: center center;
     -webkit-background-size: cover;
     background-size: cover;
+    box-sizing: border-box;
 }
 .m-header .charm{
 	position: absolute;
@@ -150,19 +172,19 @@
 	max-height: 2.88rem;
 	overflow-y: auto;
 	overflow-x: hidden;
+    color:#fff;
 }
 .chat-area .message{
 	display: inline-block;
 	max-width: 74%;
 	background: rgba(0,0,0,0.2);
-	height: 0.586667rem;
+	/*height: 0.586667rem;*/
 	line-height: 0.586667rem;
 	padding:0 0.24rem;
 	margin-bottom: 0.133333rem;
 	width: auto;
 	border-radius: 0.293333rem;
 	text-shadow: 0 .5px 1px rgba(0,0,0,.5);
-    color:#fff;
 }
 .m-chat .award{
     width: 1.28rem;
@@ -184,6 +206,9 @@
     width: 100%;
 }
 
+.chat-area .message img{
+    height: 0.56rem;
+}
 /*高级用户进入*/
 .m-chat .vip-enter{
     top:-1.066667rem;
@@ -217,6 +242,9 @@
 .m-gift-combo{
     position: absolute;
     top: 4.266667rem;
+}
+.gift-wrap{
+    transform: translate3d(-100%, 0, 0);
 }
 .m-gift-combo .gift-content{
     position: relative;
@@ -271,12 +299,12 @@
 
 /*全局通知*/
 .globel-note,.vip-enter{
-    position: absolute;
+    position: fixed;
     top:1.546667rem;
-    right: 0;
+    right: -100%;
     height: 0.693333rem;
     line-height: 0.693333rem;
-    width: auto;
+    /*width: auto;*/
     padding:0 0.346667rem;
     border-top-left-radius: 0.346667rem;
     border-bottom-left-radius: 0.346667rem;
@@ -284,6 +312,7 @@
     font-size:0.373333rem;
     color:#fff;
     z-index: 999;
+    /*overflow:hidden;*/
 }
 .globel-note span,.vip-enter span{
     color:#ff3;
@@ -293,7 +322,7 @@
 .huge-gift{
     position: absolute;
     top: 2.773333rem;
-    right: 0;
+    right: -100%;
     width: 4.666667rem;
     height: 1.066667rem;
     padding:0.106667rem;
@@ -396,6 +425,10 @@
 }
 .poker-area li:first-child{
 	margin-left: 0;
+}
+.halfway-poker li{
+    background: url('/share/images/poker_back.png') no-repeat;
+    background-size: 100% 100%;
 }
 .stake-area{
 	height: 2.186667rem;
@@ -521,7 +554,7 @@
     transform: translate(-50%,0);
     background: url('/share/images/clock.png') center center no-repeat;
     background-size: contain;
-    z-index: 99;
+    z-index: 999;
 }
 .m-bet{
 	height: 1.173333rem;
@@ -537,7 +570,7 @@
     padding:0.266667rem;
     background: rgba(0,0,0,0.64);
     box-sizing: border-box;
-    font-size: 24px;
+    font-size: 0.32rem;
     color:rgba(255,255,255,0.6);
     z-index: 999;
 }
@@ -594,10 +627,13 @@
     color: #f36;
     font-weight: bold;
     text-align: center;
+    margin-bottom: 0.4rem;
 }
 .m-intro-mask .game-intro .intro-content{
     height: 100%;
+    padding-bottom:1.066667rem;
     overflow-y: auto;
+    box-sizing: border-box;
 }
 .m-intro-mask .game-intro .u-close{
     display: block;
@@ -742,11 +778,12 @@
     background-image: url('/share/images/male.png');
 }
 .anchor-panel .name span.female:after {
-    background-size: 14px 30.333333333333336px;
+    background-size: 0.346667rem;
     background-image: url('/share/images/female.png');
 }
 
-.anchor-panel .name .levelMedal {
+.anchor-panel .name .levelMedal,
+.message .levelMedal {
     display: inline-block;
     vertical-align: middle;
     color:#fff;
@@ -760,6 +797,15 @@
     flex-shrink: 0;
    	text-indent: 0.333333rem;
    	margin-left: 0.133333rem;
+}
+/*聊天等级*/
+.message .levelMedal {
+    width: 0.96rem;
+    height: 0.373333rem;
+    line-height: 0.373333rem;
+    margin-left: 0;
+    background-size: cover;
+    text-align: center;
 }
 
 .anchor-panel .anchor-id{
@@ -923,24 +969,30 @@
 
 /*animate css*/
 .animated {
-  animation-duration: 1s;
-  animation-fill-mode: both;
+    animation-duration: 1s;
+    animation-fill-mode: both;
 }
 
 .animated.infinite {
-  animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
 }
 
 .animated.hinge {
-  animation-duration: 2s;
+    animation-duration: 2s;
 }
 
 .animated.flipOutX,
 .animated.flipOutY,
 .animated.bounceIn,
 .animated.bounceOut {
-  animation-duration: .75s;
+    animation-duration: .75s;
 }
+
+.animated.slideInLeft,
+.animated.slideOutLeft{
+    animation-duration: .5s;
+}
+
 @keyframes bounceIn {
   from, 20%, 40%, 60%, 80%, to {
     animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
@@ -996,4 +1048,34 @@
 
 .bounceOut {
   animation-name: bounceOut;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInLeft {
+  animation-name: slideInLeft;
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.slideOutLeft {
+  animation-name: slideOutLeft;
 }

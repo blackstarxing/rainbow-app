@@ -21,7 +21,7 @@ body{background:#fff;}
 a,a:hover{color:#fff;}
 img{border:0;max-width: 100%;vertical-align: bottom;}
 button{border:none;}
-html,body{width: 100%;height: 100%;margin:0 auto;}
+html,body{width: 100%;height: 100%;margin:0 auto;font-family: 'Microsoft YaHei','微软雅黑', Helvetica,Arial,sans-serif;}
 /*input*/
 input{
 	height: 1.066667rem;
@@ -60,10 +60,16 @@ input:-ms-input-placeholder{font-size:0.4rem;color:#999;}         /* IE浏览器
 .fc-b6{color:#666;}
 .fc-e6{color:#e6e6e6;}
 .fc-b9{color:#999;}
+/*橙色*/
+.fc-cf{color:#ffbd5f;}
 /*红色*/
 .fc-f36{color:#f36;}
 /*橘色*/
 .fc-clue{color:#ff7c2d;}
+/*进入直播间*/
+.fc-enter{color: #cdcbb9;}
+/*用户昵称*/
+.fc-nick{color: #5fffe3;margin:0 0.133333rem;}
 
 /*font*/
 .fs-28{font-size: 0.373333rem;}

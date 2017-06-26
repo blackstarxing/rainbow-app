@@ -14,7 +14,10 @@ var vm = window.rainbow;
 
 var ws;//websocket实例
 var lockReconnect = false;//避免重复连接
-var wsUrl = 'ws:172.16.10.3:9802';
+var wsUrl = 'ws:172.16.10.3:9801';
+
+var ProtoBuf = dcodeIO.ProtoBuf;  
+var proto = ProtoBuf.loadProtoFile("/share/data/RainbowMessage.proto");  
 
 function createWebSocket(url) {
     try {
@@ -37,7 +40,9 @@ function initEventHandle() {
     ws.onopen = function () {
         console.log('已连接');
         // 获取游戏状态
-        // getState();
+        getState();
+        // 获取实时投注
+        getCathectic();
         
         //心跳检测重置
         // heartCheck.start();
@@ -51,10 +56,10 @@ function initEventHandle() {
             buffer.writeInt(parseInt(1));
             buffer.position = 0;
             ws.send(buffer.data);
-        },30000)
+        },50000)
     };
     ws.onmessage = function (event) {
-        // encodeMes(event);
+        encodeMes(event);
         //如果获取到消息，心跳检测重置
         //拿到任何消息都说明当前连接是正常的
         // heartCheck.reset().start();
@@ -117,10 +122,16 @@ function getState(){
     sendMes(obj,'CGGameState',10009);
 }
 
+// 实时投注
+function getCathectic(){
+    var obj = {  
+        liveId:1,   //直播间ID
+    };
+    sendMes(obj,'CGCathNowInfo',10013);
+}
+
 // 发送websocket
 function sendMes(obj,protoName,startIndex){
-    var ProtoBuf = dcodeIO.ProtoBuf;  
-    var proto = ProtoBuf.loadProtoFile("/share/data/RainbowMessage.proto");  
     var RequestMessage   = proto.build(protoName);  
     
     var request = new RequestMessage(obj);  
@@ -142,52 +153,86 @@ function sendMes(obj,protoName,startIndex){
 
 // 解析websocket
 function encodeMes(event){
-    console.log(event);
+    // console.log(event.data.byteLength);
     var tempBuffer = new ByteArray();  
-    tempBuffer._writeUint8Array(new Uint8Array(event.data));  
-    tempBuffer.position = 0;  
-    var msgBuffer = new ByteArray(); 
-    tempBuffer.readBytes(msgBuffer, 4);   
-    var content = tempBuffer.readInt(msgBuffer); 
-    content =  tempBuffer.readInt(msgBuffer);
-    console.log(content);
-    var ProtoBuf = dcodeIO.ProtoBuf;  
+    tempBuffer._writeUint8Array(new Uint8Array(event.data)); 
+    //跳到协议号位置 
+    tempBuffer.position = 4;  
+    var msgBuffer = new ByteArray();  
+    // 协议号
+    var packetId=tempBuffer.readInt(); 
+    console.log('协议号:'+packetId);
+    // 跳到数据体位置
+    tempBuffer.position = 24;  
+    var cont = tempBuffer.readBytes(msgBuffer,tempBuffer.position,event.data.byteLength);
+    var ProtoBuf = dcodeIO.ProtoBuf; 
+    //协议名 
     var protoName= '';
-    switch(content) {
+    switch(packetId) {
         case 10002:
             {
                 protoName = "GCBetRet";
+                var wsMessage = proto.build(protoName);  
+                var ws = wsMessage.decode(msgBuffer.data.buffer);  
                 break;
             }
         case 10004:
             {
                 protoName = "GCOpenRet";
+                var wsMessage = proto.build(protoName);  
+                var ws = wsMessage.decode(msgBuffer.data.buffer);  
                 break;
             }
         case 10006:
             {
                 protoName = "GCResultRet";
+                var wsMessage = proto.build(protoName);  
+                var ws = wsMessage.decode(msgBuffer.data.buffer); 
+                console.log(ws);
+                vm.game.cardsSet1 = ws.cardsSet1.Cards;
+                vm.game.cardsSet2 = ws.cardsSet2.Cards;
+                vm.game.cardsSet3 = ws.cardsSet3.Cards;
+                vm.game.result1 = ws.cardsSet1.nameNo==null?0:ws.cardsSet1.nameNo;
+                vm.game.result2 = ws.cardsSet2.nameNo==null?0:ws.cardsSet2.nameNo;
+                vm.game.result3 = ws.cardsSet3.nameNo==null?0:ws.cardsSet3.nameNo;
+                vm.game.winIndex = ws.winIndex-1;
+                showResult(0);
+
+                // console.log(vm.game.cardsSet1);
+
                 break;
             }
         case 10008:
             {
-
                 protoName = "GCSendGiftRet";
+                var wsMessage = proto.build(protoName);  
+                var ws = wsMessage.decode(msgBuffer.data.buffer);  
                 break;
             }
         case 10010:
             {
                 protoName = "GCGameStateRet";
+                var wsMessage = proto.build(protoName);  
+                var ws = wsMessage.decode(msgBuffer.data.buffer);  
+                gameState(ws);
                 break;
             }
         case 10012:
             {
                 protoName = "GCOutLiveRoomRet";
+                var wsMessage = proto.build(protoName);  
+                var ws = wsMessage.decode(msgBuffer.data.buffer);  
                 break;
             }
         case 10014:
             {
                 protoName = "GCCathNowInfoRet";
+                var wsMessage = proto.build(protoName);  
+                var ws = wsMessage.decode(msgBuffer.data.buffer);
+                console.log(ws);  
+                vm.game.catNum1 = ws.index1Total;
+                vm.game.catNum2 = ws.index2Total;
+                vm.game.catNum3 = ws.index3Total;
                 break;
             }
         default:
@@ -196,44 +241,49 @@ function encodeMes(event){
                 break;
             }
     }
-    console.log(protoName);
-    var CommandMessage = ProtoBuf  
-            .loadProtoFile("/share/data/RainbowMessage.proto").build(protoName);  
-    var command = CommandMessage.decode(event.data);  
-    console.log(command); 
 }
 
-$('.op-chat').click(function(){
-    var ProtoBuf = dcodeIO.ProtoBuf;  
-    var proto = ProtoBuf.loadProtoFile("/share/data/RainbowMessage.proto");  
-    var RequestMessage   = proto.build("CGBet");  
-    var obj = {  
-        userId:1,   //用户id
-        index :2,   //下注位
-        value :3,   //下注值
-        gameId:4,   //游戏id
-        chessboardId:5,   //局id
-        liveId:6,   //直播间ID
-        token :'8987756454454',  
-    };
-    var request = new RequestMessage(obj);  
-    var msgArray = request.toArrayBuffer();  
-  
-    var content = new ByteArray(msgArray);  
-    var buffer = new ByteArray();  
-    var buffer = new ByteArray();  
-    var timestamp = Date.parse(new Date());
-    buffer.writeInt(parseInt(msgArray.byteLength));
-    buffer.writeInt(parseInt(10001)); 
-    buffer.writeDouble(timestamp); 
-    buffer.writeInt(parseInt(1));
-    buffer.writeInt(parseInt(1));
-    // buffer.position = 0; 
-    console.log(content);
-    buffer.writeBytes(content);  
-    console.log(buffer.data);
-    ws.send(buffer.data);  
-})
+// 牌局状态
+function gameState(data){
+    console.log(data);
+    if(data.state == 1 || data.state == 5){
+        vm.half_enter = false;
+        // 重置牌局
+        $('.deal-section ul').html('');
+        pokerNum = 0;
+        vm.game.poker_group = [false,false,false];
+        vm.game.mask = [false,false,false];
+        vm.game.tip = '请等待游戏开始';
+        vm.game.showTip = true;
+    }else if(data.state==2){
+        vm.half_enter = false;
+        vm.game.showTip = false;
+        createPoker();
+    }else if(data.state==3){
+        if(vm.half_enter == true){
+            vm.half_group = [true,true,true];
+        }
+        vm.game.tip = '开始支持';
+        vm.game.showTip = true;
+        vm.game.tipClass = 'animated bounceIn';
+        setTimeout(function(){
+            vm.game.tipClass = 'animated bounceOut';
+            setTimeout(countDown,750);
+        },1000)
+        // $('.game-tip').addClass('animated bounceIn');
+    }else if(data.state==4){
+        if(vm.half_enter == true){
+            vm.half_group = [true,true,true];
+        }
+        vm.game.tip = '揭晓结果';
+        vm.game.showTip = true;
+        vm.game.tipClass = 'animated bounceIn';
+        setTimeout(function(){  
+            vm.game.showTip = false;
+            // showResult(0);
+        },1000);
+    }
+}
 
 // 发牌
 function dealPoker(){
@@ -263,16 +313,7 @@ function dealPoker(){
 			},delay);
 		}
 	
-	}else{
-        vm.game.tip = '开始支持';
-        vm.game.showTip = true;
-        vm.game.tipClass = 'animated bounceIn';
-        setTimeout(function(){
-            vm.game.tipClass = 'animated bounceOut';
-            setTimeout(countDown,750);
-        },1000)
-        // $('.game-tip').addClass('animated bounceIn');
-    }
+	}
 }
 
 // 下注倒计时
@@ -285,29 +326,30 @@ function countDown(){
         },1000);
     }else{
         vm.game.showClock = false;
-        vm.game.tip = '揭晓结果';
-        vm.game.showTip = true;
-        vm.game.tipClass = 'animated bounceIn';
-        setTimeout(function(){  
-            vm.game.showTip = false;
-            showResult(0);
-        },1000);
     }
 }
 
 // 显示结果
 function showResult(index){
+    vm.half_enter = false;
     var arr_index = parseInt(index);
     if(arr_index<3){
         // vm.game.poker_group[arr_index] = true;
         Vue.set(vm.game.poker_group, arr_index, true);
+        Vue.set(vm.half_group, arr_index, false);
         // console.log(vm.game.poker_group[arr_index]);
         setTimeout(function(){  
             arr_index++;
             showResult(arr_index);
         },1000); 
         if(arr_index==2){
-            vm.game.mask = [true,false,true];
+            // vm.game.mask = [true,false,true];
+            vm.game.mask.forEach(function(e,index){  
+                if(index != vm.game.winIndex){
+                    Vue.set(vm.game.mask, index, true);
+                }
+                // alert(index);  
+            })              
         }
     } else{
         // vm.game.poker_group = [false,false,false];
@@ -318,8 +360,37 @@ function showResult(index){
 function createPoker(){
 	for(i=0;i<5;i++){
 		var li = $('<li></li>');
-		$('.deal-section').append(li);
+		$('.deal-section ul').append(li);
 	}
 	dealPoker();
 }
-createPoker();
+
+// createPoker();
+// $(".m-video").on("touchstart", function(e) {
+//     e.preventDefault();
+//     startX = e.originalEvent.changedTouches[0].pageX,
+//     startY = e.originalEvent.changedTouches[0].pageY;
+// });
+// $(".m-video").on("touchmove", function(e) {
+//     e.preventDefault();
+//     moveEndX = e.originalEvent.changedTouches[0].pageX,
+//     moveEndY = e.originalEvent.changedTouches[0].pageY,
+//     X = moveEndX - startX,
+//     Y = moveEndY - startY;
+
+//     if ( Math.abs(X) > Math.abs(Y) && X > 0 ) {
+//         // alert("left 2 right");
+//     }
+//     else if ( Math.abs(X) > Math.abs(Y) && X < 0 ) {
+//         // alert("right 2 left");
+//     }
+//     else if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
+//         // alert("top 2 bottom");
+//         $('.m-game').hide() && $('.deal-section').hide();
+//     }
+//     else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) {
+//         // alert("bottom 2 top");
+//         $('.m-game').show() && $('.deal-section').show();
+//     }
+    
+// });
