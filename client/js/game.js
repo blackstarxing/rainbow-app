@@ -15,8 +15,8 @@ var vm = window.rainbow;
 var ws;//websocket实例
 var lockReconnect = false;//避免重复连接
 // var wsUrl = 'ws:172.16.10.3:9801';
-// var wsUrl = 'ws:118.190.21.195:9801';
-var wsUrl = 'ws:www.caihonglive.tv:10000';
+var wsUrl = 'ws:118.190.21.195:9801';
+// var wsUrl = 'ws:www.caihonglive.tv:9801';
 
 var ProtoBuf = dcodeIO.ProtoBuf;  
 var proto = ProtoBuf.loadProtoFile("/share/data/RainbowMessage.proto");  
@@ -198,6 +198,7 @@ function encodeMes(event){
                 vm.game.result2 = ws.cardsSet2.nameNo==null?0:ws.cardsSet2.nameNo;
                 vm.game.result3 = ws.cardsSet3.nameNo==null?0:ws.cardsSet3.nameNo;
                 vm.game.winIndex = ws.winIndex-1;
+                vm.game.showTip = false;
                 showResult(0);
 
                 // console.log(vm.game.cardsSet1);
@@ -267,6 +268,9 @@ function encodeMes(event){
 function gameState(data){
     console.log(data);
     if(data.state == 1 || data.state == 5){
+        vm.game.catNum1 = 0;
+        vm.game.catNum2 = 0;
+        vm.game.catNum3 = 0;
         vm.half_enter = false;
         // 重置牌局
         $('.deal-section ul').html('');
@@ -283,25 +287,26 @@ function gameState(data){
         if(vm.half_enter == true){
             vm.half_group = [true,true,true];
         }
-        vm.game.tip = '开始支持';
-        vm.game.showTip = true;
-        vm.game.tipClass = 'animated bounceIn';
-        setTimeout(function(){
-            vm.game.tipClass = 'animated bounceOut';
-            setTimeout(countDown,750);
-        },1000)
+        vm.game.showTip = false;
+        vm.game.time = data.countDown;
+        countDown();
+        // setTimeout(function(){
+        //     vm.game.tipClass = 'animated bounceOut';
+        //     setTimeout(countDown,750);
+        // },1000)
         // $('.game-tip').addClass('animated bounceIn');
     }else if(data.state==4){
         if(vm.half_enter == true){
             vm.half_group = [true,true,true];
         }
+        vm.game.time = 0;
+        vm.game.showClock = false;
         vm.game.tip = '揭晓结果';
         vm.game.showTip = true;
         vm.game.tipClass = 'animated bounceIn';
-        setTimeout(function(){  
-            vm.game.showTip = false;
-            // showResult(0);
-        },1000);
+        // setTimeout(function(){  
+        //     vm.game.showTip = false;
+        // },1000);
     }
 }
 
@@ -314,11 +319,11 @@ function dealPoker(){
         var inittop = $('.deal-section li').eq(pokerNum).offset().top;
         $('.deal-section li').eq(pokerNum).css({left:initleft+0.5*width,top:inittop+0.5*height});
 		if(pokerNum<5){
-		    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[0]+0.86*width+0.35*width*(pokerNum%5)},250);
+		    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[0]+0.86*width+0.35*width*(pokerNum%5)},500);
 		}else if(pokerNum<10){
-			$('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[1]+0.86*width+0.35*width*(pokerNum%5)},250);
+			$('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[1]+0.86*width+0.35*width*(pokerNum%5)},500);
 		}else{
-			$('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[2]+0.86*width+0.35*width*(pokerNum%5)},250);
+			$('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[2]+0.86*width+0.35*width*(pokerNum%5)},500);
 		}
 		pokerNum++;
 		if(pokerNum==5 || pokerNum==10){ 						
@@ -331,9 +336,12 @@ function dealPoker(){
 			setTimeout(function(){ 					
 				dealPoker();
 			},delay);
-		}
-	
-	}
+		}	
+	}else{
+        vm.game.tip = '开始支持';
+        vm.game.showTip = true;
+        vm.game.tipClass = 'animated bounceIn';
+    }
 }
 
 // 下注倒计时

@@ -33,10 +33,12 @@
         </div>
         <div class="main-section">
             <div class="m-chat">
-                <!-- 高级用户 -->
-                <div class="vip-enter">
-                    24级 <span>啦啦啦</span> 进入直播间
+                 <!-- 飘屏礼物 -->
+                <div class="cool-gift">
+                    <div></div>
                 </div>
+                <!-- 高级用户 -->
+                <div class="vip-enter">${vip.range}级 <span>${vip.name}</span> 进入直播间</div>
                 <div class="chat-area" id="chat"></div>
                 <div class="award" @click="download">
                     <div>可领取</div>
@@ -200,41 +202,41 @@
     <div class="m-gift-combo">
         <div class="gift-wrap wrap-top f-cb">
             <div class="gift-content f-fl">
-                <i class="avatar icon-avatar f-fl" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');"></i>
+                <i class="avatar icon-avatar f-fl" v-bind:style="{backgroundImage: 'url(' + gift_info1.sender_icon + ')'}"></i>
                 <div class="gift-info f-fl">
-                    <h3>提莫队长</h3>
-                    <p>送出了红司机</p>
+                    <h3>${gift_info1.sender_name}</h3>
+                    <p>送出了${gift_info1.gift_name}</p>
                 </div>
-                <img src="/share/images/siji.png" class="f-fl" alt="">
+                <img v-bind:src="gift_info1.gift_icon"class="f-fl" alt="">
             </div>
             <div class="gift-num f-fl">X${gift_num_top}</div>
         </div>
         <div class="gift-wrap wrap-bottom f-cb">
             <div class="gift-content f-fl">
-                <i class="avatar icon-avatar f-fl" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');"></i>
+                <i class="avatar icon-avatar f-fl" v-bind:style="{backgroundImage: 'url(' + gift_info2.sender_icon + ')'}"></i>
                 <div class="gift-info f-fl">
-                    <h3>提莫队长</h3>
-                    <p>送出了红司机</p>
+                    <h3>${gift_info2.sender_name}</h3>
+                    <p>送出了${gift_info2.gift_name}</p>
                 </div>
-                <img src="/share/images/siji.png" class="f-fl" alt="">
+                <img v-bind:src="gift_info2.gift_icon" class="f-fl" alt="">
             </div>
             <div class="gift-num f-fl">X${gift_num_bottom}</div>
         </div>
     </div>
     <!-- 全局通知 -->
     <div class="globel-note">
-        提莫队长 <span>赢取了50000彩虹糖</span> 点击围观
+        ${trumpet.name} <span>${trumpet.content}</span> 点击围观
     </div>
     <!-- 大礼物 -->
     <div class="huge-gift">
         <div class="gift-content f-cb">
-            <i class="avatar icon-avatar f-fl" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');"></i>
+            <i class="avatar icon-avatar f-fl" v-bind:style="{backgroundImage: 'url(' + hugeGift.sender_icon + ')'}"></i>
             <div class="gift-info f-fl">
-                <h3>提莫队长</h3>
-                <p>送出了红司机</p>
+                <h3>${hugeGift.sender_name}</h3>
+                <p>送出了${hugeGift.gift_name}</p>
             </div>
             <img src="/share/images/gift_star.png" alt="" class="bling">
-            <img src="/share/images/siji.png" class="f-fl" alt="">
+            <img v-bind:src="hugeGift.gift_icon" class="f-fl" alt="">
         </div>
     </div>
     <!-- 发牌 -->

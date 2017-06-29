@@ -8,8 +8,8 @@ var ticket = '';
 var ticketline = '';
 
 // var path = 'http://172.16.10.134:80';
-// var path = 'http://118.190.21.195:28888';
-var path = 'http://www.caihonglive.tv:28888';
+var path = 'http://118.190.21.195:28888';
+// var path = 'http://www.caihonglive.tv:28888';
 
 function getTicket(){
     Thenjs.parallel([function(cont) {
@@ -22,7 +22,6 @@ function getTicket(){
         })
     }]).then(function(cont, result) {
         Thenjs.parallel([function(cont) {
-            console.log(JSON.parse(result[0]).access_token);
             request('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='+JSON.parse(result[0]).access_token+'&type=jsapi', function(error, response, body) {
                 if (!error && response.statusCode == 200) {
                     cont(null, body);
@@ -50,7 +49,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/share/index', function(req, res, next) {
     var liveId = req.query.liveId?req.query.liveId:'';
+    var type = req.query.type?req.query.type:'';
     var nowtime = new Date().getTime();
+    var page = '';
     if(!ticket || (nowtime-ticketline)>7000000){
         getTicket();
     }
@@ -69,13 +70,18 @@ router.get('/share/index', function(req, res, next) {
             }
         })
     }]).then(function(cont, result) {
-        console.log('ticket',ticket)
-        res.render('share/index', {
-            title: "直播间",
+        // console.log('ticket',ticket);
+        // 欢乐牛牛
+        // if(type==1){
+            page = 'share/index';
+        // }
+        res.render(page, {
+            title: "我正在彩虹直播与美女「"+JSON.parse(result[0]).object.info.nickname+"」一起玩游戏",
             index: JSON.parse(result[0]).object,
             link:JSON.parse(result[0]).object.info.rtmp.replace(/rtmp:/, "http:").replace(/rtmp/, "hls")+'.m3u8',
             ticket:ticket
         });
+        
     }).fail(function(cont, error) {
         console.log(error);
         res.render('error', { title: "错误"});

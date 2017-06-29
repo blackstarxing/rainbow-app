@@ -14,14 +14,14 @@
     {% block content %}{% endblock %}
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script src="/js/wxjsapi.js"></script>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script>
         enableWxShare({
             appId: 'wx1bd2b48c81600e98',
             ticket: '{{ticket}}',
-            title: '王者荣耀上铂金=199点券，“排好队，一个一个来!”',        
+            title: '{{title}}',        
             imgUrl: 'http://img.wangyuhudong.com/uploads/imgs/live/2017/yuerlogo.png',
-            desc: 'S6赛季来和娱儿直播决战王者峡谷，千元大奖等你领！'
+            desc: '玩游戏，撩美女，彩虹直播满足你'
         })
     </script>
     {% block js %}{% endblock %}

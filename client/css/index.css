@@ -209,13 +209,6 @@
 .chat-area .message img{
     height: 0.56rem;
 }
-/*高级用户进入*/
-.m-chat .vip-enter{
-    position: absolute;
-    top:-1.066667rem;
-    border-radius: 0.346667rem;
-    background:-webkit-linear-gradient(left,#7b06ff,#a53ddb);
-}
 
 /*操作*/
 .m-operate{
@@ -301,12 +294,13 @@
 
 /*全局通知*/
 .globel-note,.vip-enter{
-    position: fixed;
+    position: relative;
+    display: inline-block;
     top:1.546667rem;
-    right: -100%;
+    left: 110%;
+    /*width: auto;*/
     height: 0.693333rem;
     line-height: 0.693333rem;
-    /*width: auto;*/
     padding:0 0.346667rem;
     border-top-left-radius: 0.346667rem;
     border-bottom-left-radius: 0.346667rem;
@@ -320,11 +314,18 @@
     color:#ff3;
 }
 
+/*高级用户进入*/
+.m-chat .vip-enter{
+    top:-1.066667rem;
+    border-radius: 0.346667rem;
+    background:-webkit-linear-gradient(left,#7b06ff,#a53ddb);
+}
+
 /*大礼物*/
 .huge-gift{
     position: absolute;
     top: 2.773333rem;
-    right: -100%;
+    left: 100%;
     width: 4.666667rem;
     height: 1.066667rem;
     padding:0.106667rem;
@@ -337,6 +338,85 @@
     position: absolute;
     left: 0.76rem;
     width: 0.76rem;
+}
+
+/*飘屏礼物*/
+.cool-gift{
+    position: absolute;
+    left: 15%;
+    z-index: 9999;
+}
+.goddess{
+    width: 6.933333rem;
+    height: 5.333333rem;
+    background: url("/share/images/goddess.png") 0 0 no-repeat;
+    background-size: 100%;
+    animation: goddess 2s steps(25) forwards;
+    -webkit-animation: goddess 2s steps(25) forwards;
+}
+.car{
+    width: 6.933333rem;
+    height: 3.36rem;
+    background: url("/share/images/car.png") 0 0 no-repeat;
+    background-size: 100%;
+    animation: car 2.5s steps(30) forwards;
+    -webkit-animation: car 2.5s steps(30) forwards;
+}
+.merry{
+    width: 5.333333rem;
+    height: 5.333333rem;
+    background: url("/share/images/merry.png") 0 0 no-repeat;
+    background-size: 100%;
+    animation: merry 2s steps(27) forwards;
+    -webkit-animation: merry 2s steps(27) forwards;
+}
+@keyframes goddess {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -133.333333rem;
+    }
+}
+@-webkit-keyframes goddess {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -133.333333rem;
+    }
+}
+@keyframes car {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -100.8rem;
+    }
+}
+@-webkit-keyframes car {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -100.8rem;
+    }
+}
+@keyframes merry {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -144.0rem;
+    }
+}
+@-webkit-keyframes merry {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -144.0rem;
+    }
 }
 
 /*游戏区*/
@@ -470,10 +550,10 @@
     /*transform-origin:0 0%;*/
     /*-webkit-transform: translate(-100%,-100%);
     transform: translate(-100%,-100%);*/
-	animation:rotatePoker .25s linear 1;
-	-webkit-animation:rotatePoker .25s linear 1;
-    -moz-animation:rotatePoker .25s linear 1; /* Firefox */
-    -o-animation:rotatePoker .25s linear 1; /* Opera */
+	animation:rotatePoker .5s linear 1;
+	-webkit-animation:rotatePoker .5s linear 1;
+    -moz-animation:rotatePoker .5s linear 1; /* Firefox */
+    -o-animation:rotatePoker .5s linear 1; /* Opera */
 	/*transform: rotate(45deg);*/
 }
 @keyframes rotatePoker{
@@ -526,6 +606,7 @@
     background-repeat: no-repeat;
     background-position: 0.16rem center;
     background-size: 0.4rem;
+    text-align: center;
 }
 /*游戏状态提示*/
 .game-tip{

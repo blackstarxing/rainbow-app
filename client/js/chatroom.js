@@ -38,132 +38,96 @@ $.ajax({
     }
 });
 
-// 礼物连击
-// function giftCombo(type){
-// 	switch (type) {
-// 	    case 1:
-// 	    	var now_time_top = new Date().getTime();
-// 	    	if(last_time_top==null){
-// 	    		gname1 = '123';
-// 	    		vm.gift_top = true;
-// 	    		$('.wrap-top').removeClass('slideOutLeft').addClass('animated slideInLeft');
-// 	    		last_time_top = now_time_top;
-// 	    	}else if((now_time_top-last_time_top)<3000){
-// 	    		clearTimeout(giftTopTime);
-// 	    		last_time_top = now_time_top;
-// 	    		vm.gift_num_top++;
-// 	    	}else{
-// 	    		gname1 = '';
-// 	    		vm.gift_num_top = 1;
-// 	    		$('.wrap-top').removeClass('slideOutLeft').addClass('animated slideInLeft');
-// 	    		last_time_top = now_time_top;
-// 	    		clearTimeout(giftTopTime);
-// 	    	}
-// 			giftTopTime=setTimeout(function(){
-// 				vm.gift_top = false;
-// 				$('.wrap-top').removeClass('slideInLeft').addClass('animated slideOutLeft');
-// 			},3000);
-// 	        break;
-// 	    case 2:
-// 	    	var now_time_bottom = new Date().getTime();
-// 	    	if(last_time_bottom==null){
-// 	    		vm.gift_bottom = true;
-// 	    		$('.wrap-bottom').removeClass('slideOutLeft').addClass('animated slideInLeft');
-// 	    		last_time_bottom = now_time_bottom;
-// 	    	}else if((now_time_bottom-last_time_bottom)<3000){
-// 	    		clearTimeout(giftBottomTime);
-// 	    		last_time_bottom = now_time_bottom;
-// 	    		vm.gift_num_bottom++;
-// 	    	}else{
-// 	    		vm.gift_num_bottom = 1;
-// 	    		$('.wrap-bottom').removeClass('slideOutLeft').addClass('animated slideInLeft');
-// 	    		last_time_bottom = now_time_bottom;
-// 	    		clearTimeout(giftBottomTime);
-// 	    	}
-// 	    	giftBottomTime=setTimeout(function(){
-// 				$('.wrap-bottom').removeClass('slideInLeft').addClass('animated slideOutLeft');
-// 			},3000);
-// 	        break;
-// 	    default:
-// 	        break;
-//     }
-// }
+// 比较对象是否相等
+function isObjectValueEqual(a, b) {
+    if(typeof a == 'number' && typeof b == 'number'){
+        return a == b
+    }
+ 
+ 
+    var aProps = Object.getOwnPropertyNames(a);
+    var bProps = Object.getOwnPropertyNames(b);
+ 
+    if (aProps.length != bProps.length) {
+        return false;
+    }
+ 
+    for (var i = 0; i < aProps.length; i++) {
+        var propName = aProps[i];
+        if(Object.prototype.toString(a[propName]) == '[Object Object]'||Object.prototype.toString(b[propName]) == '[Object Object]'){
+            isObjectValueEqual(a[propName],b[propName])
+        }
+        if (a[propName] !== b[propName]) {
+            return false;
+        }
+    }
+    return true;
+}
+
 // 礼物连击动画
-function giftCombo(name){
-	if(gname1==name){
+function giftCombo(obj,num){
+	gname1 = {
+		sender_icon:vm.gift_info1.sender_icon,
+        sender_name:vm.gift_info1.sender_name,
+        gift_name:vm.gift_info1.gift_name,
+        gift_icon:vm.gift_info1.gift_icon
+	};
+	gname2 = {
+		sender_icon:vm.gift_info2.sender_icon,
+        sender_name:vm.gift_info2.sender_name,
+        gift_name:vm.gift_info2.gift_name,
+        gift_icon:vm.gift_info2.gift_icon
+	}
+	// console.log(1,obj);
+	// console.log(2,gname1);
+	if(isObjectValueEqual(gname1, obj)){
 		var now_time_top = new Date().getTime();
 		clearTimeout(giftTopTime);
 		last_time_top = now_time_top;
-		vm.gift_num_top++;
+		vm.gift_num_top = num;
 		$('.wrap-top .gift-num').removeClass('animated bounceIn').addClass('animated bounceIn');
 		giftTopTime=setTimeout(function(){
-			gname1 = '';
+			vm.gift_info1 = '';
 			vm.gift_num_top = 1;
 			$('.wrap-top').removeClass('slideInLeft').addClass('animated slideOutLeft');
-		},3000);
-	}else if(gname2==name){
+		},5000);
+	}else if(isObjectValueEqual(gname2, obj)){
 		var now_time_bottom = new Date().getTime();
 		clearTimeout(giftBottomTime);
 		last_time_bottom = now_time_bottom;
-		vm.gift_num_bottom++;
+		vm.gift_num_bottom = num;
 		$('.wrap-bottom .gift-num').removeClass('bounceIn').addClass('animated bounceIn');
 		giftBottomTime=setTimeout(function(){
-			gname2 = '';
+			vm.gift_info2 = '';
 			vm.gift_num_bottom = 1;
 			$('.wrap-bottom').removeClass('slideInLeft').addClass('animated slideOutLeft');
-		},3000);
-	}else if(gname1==''){
+		},5000);
+	}else if(vm.gift_info1==''){
 		var now_time_top = new Date().getTime();
-		gname1 = name;
+		vm.gift_info1 = obj;
+		vm.gift_num_top = num;
 		$('.wrap-top').removeClass('slideOutLeft').addClass('animated slideInLeft');
 		last_time_top = now_time_top;
 		giftTopTime=setTimeout(function(){
-			gname1 = '';
+			vm.gift_info1 = '';
 			vm.gift_num_top = 1;
 			$('.wrap-top').removeClass('slideInLeft').addClass('animated slideOutLeft');
-		},3000);
-	}else if(gname2==''){
+		},5000);
+	}else if(vm.gift_info2==''){
 		var now_time_bottom = new Date().getTime();
-		gname2 = name;
+		vm.gift_info2 = obj;
+		vm.gift_num_bottom = num;
 		$('.wrap-bottom').removeClass('slideOutLeft').addClass('animated slideInLeft');
 	    last_time_bottom = now_time_bottom;
 	    giftBottomTime=setTimeout(function(){
-			gname2 = '';
+			vm.gift_info2 = '';
 			vm.gift_num_bottom = 1;
 			$('.wrap-bottom').removeClass('slideInLeft').addClass('animated slideOutLeft');
-		},3000);
+		},5000);
 	}else{
 
 	}
 }
-
-// $('.op-chat').click(function(){
-// 	if($(".globel-note").is(":animated")){
-
-// 	}else{
-// 		$('.globel-note').css({'width':$('.globel-note').width()+2,'right':'-100%'});
-// 		$('.globel-note').animate({'right':'100%'},5000);
-// 	}
-	
-// });
-
-// $('.op-gift').click(function(){
-// 	if($(".huge-gift").is(":animated")){
-
-// 	}else{
-// 		$('.huge-gift').css({'width':$('.huge-gift').width()+2,'right':'-100%'});
-// 		$('.huge-gift').animate({'right':'100%'},5000);
-// 	}
-// });
-
-// $('.award').click(function(){
-// 	if($(".vip-enter").is(":animated")){
-
-// 	}else{
-// 		$('.vip-enter').css({'width':$('.vip-enter').width()+2,'right':'-100%'});
-// 		$('.vip-enter').animate({'right':'100%'},5000);
-// 	}
-// });
 
 // 获取用户卡片信息
 $('#room').on('click','.icon-toplist',function(){
@@ -257,10 +221,14 @@ function enterLiveroom(){
 			vm.audienceList = [];
 		    console.log('获取聊天室成员' + (!error?'成功':'失败'), error, obj.members);
 		    console.log(vm.audienceList);
-		    obj.members = obj.members.slice(1);
+		    // obj.members = obj.members.slice(1);
 		    obj.members.forEach(function(e,index){
+		    	// 预发布
 		    	var userId = e.account.slice(5);
-                vm.audienceList.push({'icon':e.avatar,'userId':userId}); 
+		    	// var userId = e.account;
+		    	if(e.avatar){
+		    		vm.audienceList.push({'icon':e.avatar,'userId':userId}); 
+		    	}                
             }) 
 		}
 	}
@@ -300,11 +268,11 @@ function enterLiveroom(){
 	    for(var i=0;i<msgs.length;i++){
 	    	if(msgs[i].content){
 	    		// 解析等级
-		    	var custom=msgs[i].custom?JSON.parse(msgs[i].fromCustom):'';
+		    	var custom=msgs[i].custom?JSON.parse(msgs[i].custom):'';
 	    		var level = 'first';
 	    		if(custom){
 	    			if(custom.level>22){
-		    			level='fourth';
+		    			level='fouth';
 		    		}else if(custom.level>12){
 						level='third';
 		    		}else if(custom.level>1){
@@ -317,16 +285,68 @@ function enterLiveroom(){
 	    		var giftImg=content.data.giftShowImage.indexOf('http')>-1?content.data.giftShowImage:'http://img.wangyuhudong.com/'+content.data.giftShowImage;
 	    		
 	    		if(content.data.giftNum>1){
-	    			$('#chat').append("<div class='gift'><span class='message'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span><span class='fc-nick'>"+content.data.senderName+"</span><span class='fc-gift'>送出了一个"+content.data.giftName+"<img src='"+giftImg+"' class='gift-icon' alt=''>x"+content.data.giftNum+"</span></span><div>");
+	    			// $('#chat').append("<div class='gift'><span class='message'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span><span class='fc-nick'>"+content.data.senderName+"</span><span class='fc-gift'>送出了一个"+content.data.giftName+"<img src='"+giftImg+"' class='gift-icon' alt=''>x"+content.data.giftNum+"</span></span><div>");
+	    			$('#chat').append("<div class='gift'><span class='message'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span><span class='fc-nick'>"+content.data.senderName+"</span><span class='fc-gift'>送出了一个"+content.data.giftName+"<img src='"+giftImg+"' class='gift-icon' alt=''></span></span><div>");
 	    		}else{
 	    			$('#chat').append("<div class='gift'><span class='message'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span><span class='fc-nick'>"+content.data.senderName+"</span><span class='fc-gift'>送出了一个"+content.data.giftName+"<img src='"+giftImg+"' class='gift-icon' alt=''></span></span><div>");
 	    		}
 
-	    		if(giftType==2){
-	    			
-	    		}else if(giftType==3){
+	    		if(giftType==1){
+	    			// 飘屏礼物
+	    			if($(".huge-gift").is(":animated")){
 
+					}else{
+						vm.hugeGift = {
+			    			sender_icon:content.data.headIcon,
+			    			sender_name:content.data.senderName,
+			    			gift_name:content.data.giftName,
+			    			gift_icon:giftImg
+			    		}
+						$('.huge-gift').css({'width':$('.huge-gift').width()+2,'left':'100%'});
+						$('.huge-gift').animate({'left':'-100%'},5000);
+					}
+	    		}else if(giftType==2){
+	    			// 连击礼物
+	    			var giftContent = {
+		    			sender_icon:content.data.headIcon,
+		    			sender_name:content.data.senderName,
+		    			gift_name:content.data.giftName,
+		    			gift_icon:giftImg
+		    		}
+		    		var num = content.data.giftNum;
+	    			giftCombo(giftContent,num);
+	    		}else if(giftType==3){
+	    			$('.cool-gift div').removeClass();
+	    			if(content.data.giftName=='女神'){
+	    				$('.cool-gift div').addClass('goddess');
+	    				setTimeout(function(){
+	    					$('.cool-gift div').removeClass('goddess');
+	    				},2500);
+	    			}else if(content.data.giftName=='跑车'){
+	    				$('.cool-gift div').addClass('car');
+	    				setTimeout(function(){
+	    					$('.cool-gift div').removeClass('car');
+	    				},3000);
+	    			}else if(content.data.giftName=='求婚'){
+	    				$('.cool-gift div').addClass('merry');
+	    				setTimeout(function(){
+	    					$('.cool-gift div').removeClass('merry');
+	    				},2500);
+	    			}
+	    			
 	    		}
+	    	}else if(msgs[i].fromClientType = 'Server' && msgs[i].text){
+	    		var content=JSON.parse(msgs[i].content);
+	    		if($(".globel-note").is(":animated")){
+
+				}else{
+					vm.trumpet={
+			            name:content.data.senderName,
+			            content:'出手豪气送出了一个'+content.data.giftName
+			        },
+					$('.globel-note').css({'width':'auto','left':'100%'});
+					$('.globel-note').animate({'width':'auto','left':'-100%'},5000);
+				}
 	    	}else if(msgs[i].text && msgs[i].fromNick && msgs[i].fromClientType != 'Server'){
 	    		// 发言
 	    		// 解析等级
@@ -334,7 +354,7 @@ function enterLiveroom(){
 	    		var level = 'first';
 	    		if(custom){
 	    			if(custom.level>22){
-		    			level='fourth';
+		    			level='fouth';
 		    		}else if(custom.level>12){
 						level='third';
 		    		}else if(custom.level>1){
@@ -354,12 +374,25 @@ function enterLiveroom(){
 				var level = 'first';
 				if(custom){
 					if(custom.level>22){
-		    			level='fourth';
+		    			level='fouth';
 		    		}else if(custom.level>12){
 						level='third';
 		    		}else if(custom.level>1){
 		    			level='second';
 		    		}
+				}
+				// 高等级用户进入飘屏
+				if(custom.level>17){
+					if($(".vip-enter").is(":animated")){
+
+					}else{
+						vm.vip = {
+			    			range:custom.level,
+			    			name:msgs[i].attach.fromNick
+			    		}
+		    			$('.vip-enter').css({'width':'auto','left':'110%'});
+						$('.vip-enter').animate({'width':'auto','left':'-100%'},5000);
+					}
 				}
 	    		$('#chat').append("<div><span class='message fc-enter'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span><span class='fc-nick'>"+msgs[i].attach.fromNick+"</span>进入直播间</span></div>");
 	    	}else if(msgs[i].flow=="in" && msgs[i].text && msgs[i].custom =="" ){

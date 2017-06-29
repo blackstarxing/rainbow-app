@@ -6,11 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var routerConfig = require('./server/middleware/router');
-// var webpack = require('webpack'),
-//     webpackDevMiddleware = require('webpack-dev-middleware'),
-//     webpackHotMiddleware = require('webpack-hot-middleware'),
-//     webpackDevConfig = require('./webpack.config.js');
-// var compiler = webpack(webpackDevConfig);
+var webpack = require('webpack'),
+    webpackDevMiddleware = require('webpack-dev-middleware'),
+    webpackHotMiddleware = require('webpack-hot-middleware'),
+    webpackDevConfig = require('./webpack.config.js');
+var compiler = webpack(webpackDevConfig);
 var NODE_ENV = process.env.NODE_ENV || 'production';
 var isDev = NODE_ENV === 'development';
 var index = require('./server/routes/index');
@@ -22,10 +22,10 @@ var app = express();
 
 // var proxyaddress = 'http://172.16.10.134:80';
 // var webproxyaddress = 'http://172.16.10.134:8080';
-// var proxyaddress = 'http://118.190.21.195:28888';
-// var webproxyaddress = 'http://118.190.21.195:39999';
-var proxyaddress = 'http://www.caihonglive.tv:28888';
-var webproxyaddress = 'http://www.caihonglive.tv:30000';
+var proxyaddress = 'http://118.190.21.195:28888';
+var webproxyaddress = 'http://118.190.21.195:39999';
+// var proxyaddress = 'http://www.caihonglive.tv:28888';
+// var webproxyaddress = 'http://www.caihonglive.tv:30000';
 
 app.use('/api', proxy(proxyaddress, {
   forwardPath: function(req, res) {
@@ -56,26 +56,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 
-// if (isDev) {
-//     app.use(webpackDevMiddleware(compiler, {
-//         publicPath: webpackDevConfig.output.publicPath,
-//         noInfo: true,
-//         stats: {
-//             colors: true
-//         }
-//     }));
-//     app.use(webpackHotMiddleware(compiler));
-//     app.use(express.static(path.join(__dirname, 'public')));
+if (isDev) {
+    app.use(webpackDevMiddleware(compiler, {
+        publicPath: webpackDevConfig.output.publicPath,
+        noInfo: true,
+        stats: {
+            colors: true
+        }
+    }));
+    app.use(webpackHotMiddleware(compiler));
+    app.use(express.static(path.join(__dirname, 'public')));
     
-//     routerConfig(app, {
-//         dirPath: __dirname + '/server/routes/'
-//     });
-// } else {
+    routerConfig(app, {
+        dirPath: __dirname + '/server/routes/'
+    });
+} else {
     app.use(express.static(path.join(__dirname, 'public')));
     routerConfig(app, {
         dirPath: __dirname + '/server/routes/'
     });
-// }
+}
 
 app.use('/', index);
 app.use('/users', users);

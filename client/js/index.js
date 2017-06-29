@@ -60,13 +60,20 @@ rainbow = new Vue({
         // 礼物队列
         gift_line:[],
         // 礼物信息
-        gift_info1:{
-            sender_icon:'',
-            sender_name:'',
-            gift_name:'',
-            gift_icon:''
+        gift_info1:'',
+        gift_info2:'',
+        // 高级用户进入
+        vip:{
+            range:'',
+            name:''
         },
-        gift_info2:{
+        // 全局系统消息
+        trumpet:{
+            name:'',
+            content:''
+        },
+        // 飘屏大礼物
+        hugeGift:{
             sender_icon:'',
             sender_name:'',
             gift_name:'',
@@ -74,25 +81,7 @@ rainbow = new Vue({
         }
   	},
     updated:function(){
-        // $('.icon-toplist').click(function(){
-        //     // alert($(this).attr('data-id'));
-        //     var that = this;
-        //     $.ajax({
-        //         method: "GET",
-        //         url: "/api/rainbow/userInfo",
-        //         dataType: 'json',
-        //         data: {
-        //             otherId:$(that).attr('data-id'),
-        //             // userId:2
-        //         },
-        //         success: function(data) {
-
-        //         },
-        //         error: function(a, b, c) {
-        //             console.log("接口出问题啦");
-        //         }
-        //     });
-        // })
+      
     },
   	mounted:function(){
   		// this.$nextTick(function () {
@@ -109,27 +98,14 @@ rainbow = new Vue({
                 },
                 success: function(data) {
                     _this.roomid = data.object.info.chat_room_id;
+                    // 预发布
                     _this.accid = 'test_'+data.object.info.userId;
+                    // _this.accid = data.object.info.userId;
                     _this.info = data.object.info;
                     _this.state = _this.info.state;
                     _this.otherLive = data.object.otherLive;
                     // 获取游戏数据
                     _this.getGameInfo()
-                },
-                error: function(a, b, c) {
-                    console.log("接口出问题啦");
-                }
-            });
-            // 游戏玩法
-            $.ajax({
-                method: "GET",
-                url: "/api/rainbow/game/introduce",
-                dataType: 'json',
-                data: {
-                    gameId:1,
-                },
-                success: function(data) {
-                    _this.introContent = data.object;
                 },
                 error: function(a, b, c) {
                     console.log("接口出问题啦");

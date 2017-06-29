@@ -1,0 +1,158 @@
+//@module=game,StartIndex=10001,classname=Game
+option java_package = "com.mrd.game.message";
+
+//----------------------下注（client<-->Gameserver）协议号 10001----------------------
+message CGBet
+{
+	optional int32 	userId				= 1;   //用户id
+	optional int32  index	            = 2;   //下注位
+	optional int32  value               = 3;   //下注值
+	optional int32  gameId              = 4;   //游戏id
+	optional int32  chessboardId        = 5;   //局id
+	optional int32  liveId              = 6;   //直播间ID
+	optional string token               = 7;   //token
+}
+
+//----------------------下注返回（Gameserver<-->client）协议号 10002----------------------
+message GCBetRet
+{
+	optional int32 	code				= 1;   //返回码
+	optional string  msg	            = 2;   //提示信息
+}
+
+//----------------------开局（client<-->Gameserver）协议号 10003----------------------
+message CGOpen
+{
+	optional int32 	userId				= 1;   //用户id
+	optional string token               = 2;   //token
+	optional int32  liveId	            = 3;   //直播间id
+	optional int32  gameId              = 4;   //游戏id
+}
+
+//----------------------开局返回（Gameserver<-->client）协议号 10004----------------------
+message GCOpenRet
+{
+	optional int32 	code				= 1;   //返回码   0成功
+	optional int32  chessboardId	    = 2;   //局ID   
+}
+
+//----------------------牌局结果（client<-->Gameserver）协议号 10005----------------------
+message CGResult
+{
+	optional int32 	userId				= 1;   //用户id
+	optional string token               = 2;   //token
+	optional int32  chessboardId	    = 3;   //局ID 
+}
+
+//----------------------牌局结果返回（Gameserver<-->client）协议号 10006----------------------
+message GCResultRet
+{
+	optional int32 	code				= 1;   //返回码   0成功
+	optional int32  chessboardId	    = 2;   //局ID
+	optional CardsSet cardsSet1         = 3;   //第一位牌组
+	optional CardsSet cardsSet2         = 4;   //第二位牌组
+	optional CardsSet cardsSet3         = 5;   //第三位牌组
+	optional int32  winIndex			= 6;   //获胜位
+
+}
+//欢乐牛仔牌组
+message CardsSet
+{
+	optional int32 nameNo   = 1; //牌组称号编号  0普通无牛  1——9牛1~牛9  10牛牛  11 银牛  12 金牛 13 炸弹 14 五小牛 
+	repeated Card Cards		= 2; //牌组
+}
+
+//欢乐牛仔扑克牌
+message Card
+{
+	optional string cardNoShow     = 1; //牌展示值
+	optional int32  cardNo       =2;  //牌值 
+	optional int32 	cardColor  = 3; //花色  1黑桃  2方块 3梅花 4红桃
+}
+
+//----------------------赠送礼物（client<-->Gameserver）协议号 10007----------------------
+message CGSendGift
+{
+	optional int32 	userId				= 1;   //用户id
+	optional string token               = 2;   //token
+	optional int32  giftId	            = 3;   //礼物ID 
+	optional int32  num	                = 4;   //礼物数量
+	optional int32  type	            = 5;   //礼物类型
+	optional int32  upUserId	        = 6;   //主播ID
+
+}
+
+//----------------------赠送礼物返回（Gameserver<-->client）协议号 10008----------------------
+message GCSendGiftRet
+{
+	optional int32 	code				= 1;   //返回码   0成功  1 失败 2 金币不足
+	optional int32  gitfId              = 2;   //礼物ID
+	optional int32  num                 = 3;   //礼物数量
+}
+
+//----------------------直播间游戏状态（client<-->Gameserver）协议号 10009----------------------
+message CGGameState
+{
+	optional int32 	liveId				= 1;   //直播间ID
+}
+
+//----------------------直播间游戏状态返回（Gameserver<-->client）协议号 10010----------------------
+message GCGameStateRet
+{
+	optional int32 state				= 1;   //状态值 -1错误  1 游戏初始阶段  2 发牌阶段  3 下注阶段  4 结果计算阶段（开牌倒计时） 5 开牌阶段
+	optional int32 countDown            = 2;   //倒计时
+	optional int32  liveId	            = 3;   //直播间ID
+	optional int32  chessboardId        = 4;   //局ID  状态值为1时返回
+}
+
+//----------------------用户离开直播间（client<-->Gameserver）协议号 10011----------------------
+message CGOutLiveRoom
+{
+	optional int32  liveId	            = 1;   //直播间ID
+}
+
+//----------------------用户离开直播间返回（Gameserver<-->client）协议号 10012---------------------
+message GCOutLiveRoomRet
+{
+	optional int32  code	            = 1;   //0 成功
+}
+
+//----------------------直播间实时投注信息（client<-->Gameserver）协议号 10013----------------------
+message CGCathNowInfo
+{
+	optional int32  liveId	            = 1;   //直播间ID
+	optional int32  userId	            = 2;   //用户ID
+}
+
+//----------------------直播间实时投注信息返回（Gameserver<-->client）协议号 10014---------------------
+message GCCathNowInfoRet
+{
+	optional int32  index1Total	            = 1;   //第一投注位投注总值
+	optional int32  index1user	            = 2;   //第一投注位用户投注值
+	
+	optional int32  index2Total	            = 3;   //第二投注位投注总值
+	optional int32  index2user	            = 4;   //第二投注位用户投注值
+
+	optional int32  index3Total	            = 5;   //第三投注位投注总值
+	optional int32  index3user	            = 6;   //第三投注位用户投注值	
+
+}
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
