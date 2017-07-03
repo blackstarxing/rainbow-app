@@ -33,6 +33,7 @@
     height: 2.133333rem;
     margin-left: -1.066667rem;
     margin-top: -3.6rem;
+    z-index: 9999;
 }
 .icon-play{
     background-size: contain;
@@ -893,7 +894,7 @@
     height: 0.453333rem;
     line-height: 0.453333rem;
     margin-left: 0;
-    background-size: contain;
+    background-size: 0.906667rem 0.453333rem;
     text-align: center;
 }
 

@@ -1,0 +1,125 @@
+{% extends 'layout.html' %}
+{% block css %}
+<link rel="stylesheet" href="/activity/css/invite.css">
+{% endblock %}
+{% block content %}
+<div class="g-mobile-wrap">
+    <div class="g-invite">
+    	<div class="m-header">
+    		<img src="/activity/images/invite_top.png" alt="">
+    		<button class="u-invite-btn"><img src="/activity/images/invite_btn.png" alt=""></button>
+    	</div>
+    	<div class="m-middle">
+    		<div class="invite-info">
+    			<ul>
+    				<li><span>有效邀请人数</span><span class="fc-yl">10人</span></li>
+    				<li><span>累计获得奖励</span><span class="fc-yl">1000彩虹糖</span></li>
+    				<li><span>本月剩余邀请名额<i></i></span><span class="fc-yl">10人</span></li>
+    			</ul>
+    		</div>
+    		<div class="invite-award">
+    			<h3 class="invite-title">额外奖励</h3>
+    			<p>额外奖励每个自然月1日重置</p>
+    			<div class="award-list">
+    				<div class="award">
+    					<div class="sweet-num">x1000</div>
+    					<p>本月邀请4人</p>
+    					<button class="got">已领取</button>
+    				</div>
+    				<div class="award">
+    					<div class="sweet-num">x1500</div>
+    					<p>本月邀请6人</p>
+    					<button class="toget">可领取</button>
+    				</div>
+    				<div class="award">
+    					<div class="sweet-num">x2000</div>
+    					<p>本月邀请8人</p>
+    					<button>6/8</button>
+    				</div>
+    				<div class="award">
+    					<div class="sweet-num">x2500</div>
+    					<p>本月邀请10人</p>
+    					<button>6/10</button>
+    				</div>
+    			</div>
+    		</div>
+    		<div class="invite-how">
+    			<h3 class="invite-title">如何获取</h3>
+    			<div class="steps f-cb">
+    				<div>
+    					<div class="step">
+    						1. <span>点击邀请</span>
+    					</div>
+    					<p>点击立即邀请</p>
+    					<p>分享链接给好友</p>
+    				</div>
+    				<div class="f-tar">
+    					<div class="step">
+    						2. <span>好友注册</span>
+    					</div>
+    					<p>好友接受邀请</p>
+    					<p>并下载app成功激活</p>
+    				</div>
+    				<div>
+    					<div class="step">
+    						3. <span>获取奖励</span>
+    					</div>
+    					<p>你和好友获得</p>
+    					<p>总计1100彩虹糖奖励</p>
+    				</div>
+    			</div>
+    		</div>
+    		<div class="invite-rule">
+    			<h3 class="invite-title">活动规则</h3>
+    			<div class="rules">
+    				<p>1、好友通过链接注册成功后，必须下载彩虹直播app登录激活才算一次成功邀请。每个用户当前月份的邀请名额有限制，等级越高名额越多。</p>
+					<p>2、用户成功邀请好友注册后，用户自己可获得600彩虹糖的奖励，好友可获得500彩虹糖的新手礼包，奖励会自动发放到账户之中。</p>
+					<p>3、用户每个自然月有效邀请人数到达3人，6人，10人的时候会获得额外的彩虹糖奖励，额外奖励每个自然月一日会进行重置。</p>
+					<p>4、本活动最终解释权归彩虹直播所有。</p>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <!-- 规则弹窗 -->
+    <div class="m-invite-mask">
+        <div class="game-intro">
+            <h3>邀请名额</h3>
+            <div class="intro-content">
+                <p>不同等级的用户每个自然月拥有不同的邀请名额，只有当邀请名额有剩余时，邀请的用户才算做有效邀请，邀请名额每个月会重置一次。对应关系如下：</p>
+                <table border="1" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <th width="40%">等级</th>
+                            <th width="60%">邀请名额</th>
+                        </tr>
+                        <tr>
+                            <td>≥1</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>≥3</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>≥5</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>≥7</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>≥10</td>
+                            <td>10</td>
+                        </tr>
+                    </tbody>                   
+                </table>
+            </div>
+            <div class="u-close"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="/activity/js/invite.js"></script>
+{% endblock %}

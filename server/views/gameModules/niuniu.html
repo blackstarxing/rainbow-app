@@ -1,0 +1,109 @@
+<div class="m-game">
+    <!-- 牌区 -->
+    <div class="m-card">
+        <div class="game-box">
+            <div class="stake-box">
+                <div class="poker-area">
+                    <div class="result-box" v-show="game.poker_group[0]">
+                        <ul class="f-cb">
+                            <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet1">${card.cardNoShow}</li>
+                        </ul>
+                        <div class="result"><img v-bind:src="'/share/images/cow'+game.result1+'.png'" alt=""></div>
+                    </div>  
+                    <ul class="halfway-poker" v-show="half_group[0]">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>                              
+                </div>
+                <div class="stake-area f-cb">
+                    <div class="stake-name">
+                        <div>奇奇</div>
+                        <img src="/share/images/cow_1.png" alt="">
+                        <div class="power">x${game.rate_first}倍</div>
+                    </div>
+                    <div class="stake-num">
+                        <div class="stake-all">
+                            ${watchNum(game.catNum1)}
+                        </div>
+                        <div class="stake-my">
+                            0
+                        </div>
+                    </div>
+                </div>
+                <div class="result-mask" v-show="game.mask[0]"></div>
+            </div>
+            <div class="stake-box">
+                <div class="poker-area">
+                    <div class="result-box" v-show="game.poker_group[1]">
+                        <ul class="f-cb">
+                            <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet2">${card.cardNoShow}</li>
+                        </ul>
+                        <div class="result"><img v-bind:src="'/share/images/cow'+game.result2+'.png'" alt=""></div>
+                    </div>  
+                    <ul class="halfway-poker" v-show="half_group[1]">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="stake-area f-cb">
+                    <div class="stake-name">
+                        <div>趣趣</div>
+                        <img src="/share/images/cow_2.png" alt="">
+                        <div class="power">x${game.rate_second}倍</div>
+                    </div>
+                    <div class="stake-num">
+                        <div class="stake-all">
+                            ${watchNum(game.catNum2)}
+                        </div>
+                        <div class="stake-my">
+                            0
+                        </div>
+                    </div>
+                </div>
+                <div class="result-mask" v-show="game.mask[1]"></div>
+            </div>
+            <div class="stake-box">
+                <div class="poker-area">
+                    <div class="result-box" v-show="game.poker_group[2]">
+                        <ul class="f-cb">
+                            <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet3">${card.cardNoShow}</li>
+                        </ul>                                   
+                        <div class="result"><img v-bind:src="'/share/images/cow'+game.result3+'.png'" alt=""></div>
+                    </div>  
+                    <ul class="halfway-poker" v-show="half_group[2]">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="stake-area f-cb">
+                    <div class="stake-name">
+                        <div>乐乐</div>
+                        <img src="/share/images/cow_3.png" alt="">
+                        <div class="power">x${game.rate_third}倍</div>
+                    </div>
+                    <div class="stake-num">
+                        <div class="stake-all">
+                            ${watchNum(game.catNum3)}
+                        </div>
+                        <div class="stake-my">
+                            0
+                        </div>
+                    </div>
+                </div>
+                <div class="result-mask" v-show="game.mask[2]"></div>
+            </div>
+        </div>
+        <div class="game-tip" v-bind:class="[game.tipClass]" v-show="game.showTip">${game.tip}</div>
+        <div class="clock" v-show="game.showClock">${game.time}</div>
+    </div>
+    <!-- <div class="m-bet"></div> -->
+</div>

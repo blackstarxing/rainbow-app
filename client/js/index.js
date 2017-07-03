@@ -2,6 +2,7 @@ rainbow = new Vue({
   	el: '#room',
   	delimiters: ['${', '}'],
   	data: {
+        gameShow:true,
         // 直播间数据
         info:'',
         // 直播结束推荐直播

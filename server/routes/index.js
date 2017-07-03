@@ -44,7 +44,7 @@ function getTicket(){
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: '彩虹直播--可以玩的直播' });
 });
 
 router.get('/share/index', function(req, res, next) {
@@ -157,6 +157,8 @@ router.get('/withdrawCash/messageLog', function(req, res, next) {
    res.render('withdrawCash/messageLog', { title: '短信登录' });
 });
 
+
+// 活动页路由
 router.get('/activity/handline', function(req, res, next) {
    res.render('activity/handline', { title: '我要上头条' });
 });
@@ -167,6 +169,11 @@ router.get('/activity/recharge', function(req, res, next) {
 
 router.get('/activity/notice', function(req, res, next) {
    res.render('activity/notice', { title: '文明公约' });
+});
+
+// 邀请好友
+router.get('/activity/invite', function(req, res, next) {
+   res.render('activity/invite', { title: '邀请好友' });
 });
 
 module.exports = router;

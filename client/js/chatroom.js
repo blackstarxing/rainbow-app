@@ -13,15 +13,23 @@ var gname1 = '';
 var gname2 = '';
 
 // 视频播放
+var ua = navigator.userAgent.toLowerCase();
 var myVideo = document.getElementById('mainvideo');
-$('.play-btn').on('click',function(){
+$('.play-btn').click(function(){
     myVideo.play();
     $(this).hide();
 })
+if(ua.match(/MicroMessenger/i)=="micromessenger"){
 
+}else if(ua.match(/QQ/i) == "qq"){
+	myVideo.onplaying = function(){
+		$('.play-btn').hide();
+	}
+}
 myVideo.onended = function() {
-    alert("直播结束");
+    // alert("直播结束");
 };
+
 
 // 获取游客云信账号
 $.ajax({
@@ -335,7 +343,7 @@ function enterLiveroom(){
 	    			}
 	    			
 	    		}
-	    	}else if(msgs[i].fromClientType = 'Server' && msgs[i].text){
+	    	}else if(msgs[i].fromClientType == 'Server' && msgs[i].text){
 	    		var content=JSON.parse(msgs[i].content);
 	    		if($(".globel-note").is(":animated")){
 
@@ -348,6 +356,7 @@ function enterLiveroom(){
 					$('.globel-note').animate({'width':'auto','left':'-100%'},5000);
 				}
 	    	}else if(msgs[i].text && msgs[i].fromNick && msgs[i].fromClientType != 'Server'){
+	    		console.log(13545645);
 	    		// 发言
 	    		// 解析等级
 		    	var custom=msgs[i].custom?JSON.parse(msgs[i].custom):'';
@@ -362,8 +371,11 @@ function enterLiveroom(){
 		    		}
 	    		}
 	    		var host = msgs[i].fromNick=="1" ? '<label for="">主播</label>&nbsp;' : '';
-	    		
-				$('#chat').append("<div><span class='message'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span>"+host+"<span class='fc-nick'>"+msgs[i].fromNick+":</span>"+msgs[i].text+"</span><div>");   		
+	    		if(custom.system){
+	    			$('#chat').append("<div><span class='message fc-cf'>"+msgs[i].text+"</span><div>");
+	    		}else{
+	    			$('#chat').append("<div><span class='message'><span class='levelMedal' style='background-image: url(/share/images/"+level+"_level.png);'>"+custom.level+"</span>"+host+"<span class='fc-nick'>"+msgs[i].fromNick+":</span>"+msgs[i].text+"</span><div>");
+	    		}   		
 	    	}else if(msgs[i].text && !msgs[i].fromNick && msgs[i].custom){
 	            $('#chat').append("<div><span class='bubble'><span class='fromNick'>"+custom.nickname+":&nbsp;&nbsp;</span>"+msgs[i].text+"</span></div>");        
 	        }else if(msgs[i].flow=="in" && !msgs[i].text && msgs[i].attach.fromNick && msgs[i].attach.type=="memberEnter"){
