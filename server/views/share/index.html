@@ -42,7 +42,7 @@
                 <div class="chat-area" id="chat"></div>
                 <div class="award" @click="download">
                     <div>可领取</div>
-                    <img src="/share/images/gold.png" alt="">
+                    <img src="/share/images/candies.png" alt="">
                     x30
                 </div>
             </div>
@@ -51,8 +51,11 @@
                 <i class="op-gift f-fr" @click="download"></i>
                 <i class="op-intro f-fr" @click="showIntro"></i>
             </div>
-            <div v-if="gameShow">
+            <div v-if="gameType==1">
                 {% include 'gameModules/niuniu.html' %}
+            </div>
+            <div v-else-if="gameType==2">
+                {% include 'gameModules/maoshu.html' %}
             </div>
         </div>
         <!-- 下载 -->
