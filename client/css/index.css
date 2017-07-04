@@ -1,9 +1,7 @@
 #room{
 	height:100%;
 }
-[v-cloak] {
-	display: none;
-} 
+
 .m-video{
 	position: absolute;
     left: 0;
