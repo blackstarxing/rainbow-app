@@ -14,16 +14,26 @@
 	height: 1.066667rem;
 	line-height: 1.066667rem;
 }
-.m-phone-code{
-	margin: 0.746667rem 0 0 0;
+.phone-error-clue{
+	width: 100%;
+	height: 0.373333rem;
+	margin: 0.133333rem 0 0.213333rem;
 }
 .phone-number-ipt,.code-number-ipt{
 	box-sizing: border-box;
-	min-width:5rem;
+	min-width:4rem;
+	max-width: 4.5rem;
 	border:none;
 }
 .u-phone-number,.u-phone-code{
 	line-height: 1.066667rem;
+}
+.u-getCode-box{
+	position: relative;
+}
+.u-getCode{
+	position: absolute;
+	right: 0;
 }
 .code-error-clue{
 	height: 0.373333rem;
@@ -62,7 +72,8 @@
 	z-index:9999;
 }
 .codeError{
-	opacity: 1;
+	width: 100%;
+	height: 0.373333rem;
 	text-align: left;
 	margin: 0.133333rem 0 0.266667rem 0;
 }

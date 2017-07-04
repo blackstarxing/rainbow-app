@@ -4,9 +4,7 @@
     width: 100%;
     overflow: hidden;
 }
-[v-cloak] {
-	display: none;
-} 
+
 .m-video{
 	position: absolute;
     left: 0;
