@@ -126,13 +126,12 @@ input:-ms-input-placeholder{font-size:0.4rem;color:#999;}         /* IE浏览器
 }
 
 
-
 /* 两列右侧自适应布局 */
 .g-sd1{position:relative;float:left;width:1.6rem;margin-right:-1.6rem;}
 .g-mn1{float:right;width:100%;}
 .g-mn1c{margin-left:1.733333rem;}
-
-/* 三列中间自适应布局 */
+ 
+/* 三列中间自适应布局 */  
 .g-sd51,.g-sd52{position:relative;float:left;width:1.6rem;height: 1.6rem;margin:0 -1.6rem 0 0;}
 .g-sd52{float:right;width:1.333333rem;margin:0 0 0 -1.333333rem;}
 .g-mn5{float:left;width:100%;}
