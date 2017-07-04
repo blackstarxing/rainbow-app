@@ -142,6 +142,7 @@ router.get('/webview/agreement', function(req, res, next) {
         res.render('error', { title: "错误"});
     });
 });
+
 //提现-登录
 router.get('/withdrawCash/login', function(req, res, next) {
    res.render('withdrawCash/login', { title: '请登录' });
@@ -149,14 +150,33 @@ router.get('/withdrawCash/login', function(req, res, next) {
 
 //提现-我的收益
 router.get('/withdrawCash/income', function(req, res, next) {
-   res.render('withdrawCash/income', { title: '我的收益' });
+    var deviceAgent = req.headers["user-agent"].toLowerCase();
+    var iswechat = deviceAgent.match(/MicroMessenger/i)=="micromessenger";
+    res.render('withdrawCash/income', {
+        title: '我的收益',
+        iswechat: iswechat
+    });
+    res.cookie('rememberme', '1', { maxAge: 900000, httpOnly: true });
 });
 
 //提现-短信验证码登录
 router.get('/withdrawCash/messageLog', function(req, res, next) {
-   res.render('withdrawCash/messageLog', { title: '短信登录' });
+   res.render('withdrawCash/messageLog', { title: '短信登录' });    
 });
-
+//提现-兑换结果
+router.get('/withdrawCash/exchangerst', function(req, res, next) {
+   res.render('withdrawCash/exchangerst', { title: '兑换结果' });
+});
+//提现-收益明细
+router.get('/withdrawCash/incomeDetail', function(req, res, next) {
+   var deviceAgent = req.headers["user-agent"].toLowerCase();
+   var iswechat = deviceAgent.match(/MicroMessenger/i)=="micromessenger";
+   res.render('withdrawCash/incomeDetail', { title: '收益明细' ,iswechat: iswechat});
+});
+//提现-兑换说明
+router.get('/withdrawCash/exchangeExplain', function(req, res, next) {
+   res.render('withdrawCash/exchangeExplain', { title: '兑换说明' });
+});
 
 // 活动页路由
 router.get('/activity/handline', function(req, res, next) {
