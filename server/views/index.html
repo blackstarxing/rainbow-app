@@ -1,12 +1,35 @@
 {% extends 'layout.html' %}
 {% block css %}
-<link rel="stylesheet" href="/dist/index.css">
+<style>
+	*{
+		margin:0;
+		padding:0;
+	}
+	body{
+		background:url(bg.png) top center no-repeat;
+		min-height:100%; 
+	}
+	.header{
+		height: 100px;
+		background: #fff;
+	}
+	.wrap{
+		width: 1200px;
+		margin:0 auto;
+	}
+	.wrap img{
+		height: 100%;
+	}
+</style>
 {% endblock %}
 {% block content %}
- 	<h1>{{ title }}<h1>
-  	<p>Welcome to {{ title }}</p>
+ 	<div class="header">
+		<div class="wrap">
+			<img src="logo.png" alt="">
+		</div>		
+	</div>
 {% endblock %}
 
 {% block js %}
-<script type="text/javascript" src="/dist/index.js"></script>
+<!-- <script type="text/javascript" src="/dist/index.js"></script> -->
 {% endblock %}

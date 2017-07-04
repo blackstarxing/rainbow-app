@@ -4,6 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 var publicPath = 'http://localhost:3000/dist';
 //路径是相对于package.json所在路径
+// hotMiddlewareScript
 var entry_map = {
   'index': ['./client/css/index.css','./client/js/index.js', hotMiddlewareScript],
   'game': ['./client/js/game.js', hotMiddlewareScript],
@@ -61,7 +62,7 @@ if (process.env.NODE_ENV === 'production') {
                     warnings: false
                 }
             }),
-            new ExtractTextPlugin({filename:'./[name].[hash].css', 
+            new ExtractTextPlugin({filename:'./[name].css', 
                 allChunks: true
             }),
             new webpack.optimize.OccurrenceOrderPlugin()

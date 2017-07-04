@@ -9,13 +9,21 @@
     <link rel="stylesheet" href="/css/style.css">
     {% block css %}{% endblock %}
     <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
-<!--     <script type="text/javascript" src="/jquery.js"></script>
-    <script type="text/javascript" src="/vue.js"></script> -->
 </head>
 <body>
     {% block content %}{% endblock %}
     <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/vue.js"></script>
+    <script src="/js/wxjsapi.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script>
+        enableWxShare({
+            appId: 'wx1bd2b48c81600e98',
+            ticket: '{{ticket}}',
+            title: '{{title}}',        
+            imgUrl: 'http://img.wangyuhudong.com/uploads/imgs/live/2017/yuerlogo.png',
+            desc: '玩游戏，撩美女，彩虹直播满足你'
+        })
+    </script>
     {% block js %}{% endblock %}
     
 </body>

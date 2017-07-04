@@ -11,6 +11,7 @@
  					<div class="level"><i class="crown"></i>Lv{{index.myLv.lv}}</div>
  				</div>
  			</div>
+            {% if index.myLv.lv < 23 %}
  			<div class="m-pro f-cb">
  				<span class="f-fl">Lv.{{index.myLv.lv}}</span>
  				<div class="progress f-fl">
@@ -18,7 +19,15 @@
 			    </div>
 			    <span class="f-fl">Lv.{{index.myLv.next_lv}}</span>
  			</div>
- 			<p class="tip">距离LV.{{index.myLv.next_lv}} 还差{{index.myLv.next_lv_expe-index.myLv.now_expe}}</p>
+            <p class="tip">距离LV.{{index.myLv.next_lv}} 还差{{index.myLv.next_lv_expe-index.myLv.now_expe}}经验值</p>
+            {% else %}
+            <div class="m-pro f-cb">
+                <div class="progress f-fl">
+                    <span class="orange" id="bar" style="width:100%;"><span></span></span>
+                </div>
+            </div>
+ 			<p class="tip">您的等级已爆表</p>
+            {% endif %}
  		</div>
  		<div class="g-md">
  			<h3>如何升级</h3>

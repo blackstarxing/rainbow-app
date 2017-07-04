@@ -1,0 +1,219 @@
+.m-header{
+	position: relative;
+}
+.u-invite-btn{
+	position: absolute;
+	width: 40%;
+	left: 50%;
+	top: 5.2rem;
+	margin-left: -20%;
+}
+.m-middle{
+	background: url(/activity/images/invite_bg.png) #2b0c59;
+	background-size: 100%;
+	padding-bottom: 0.4rem;
+}
+.invite-info{
+	position: relative;
+	top:-150px;
+	background: #5b0b9c;
+	margin:0 0.4rem;
+	border-radius: 0.16rem;
+	-webkit-box-shadow:inset 0 0 0.173333rem #d145ef;  
+  	-moz-box-shadow:inset 0 0 0.173333rem #d145ef;  
+  	box-shadow:inset 0 0 0.173333rem #d145ef;
+}
+.invite-info li{
+	display: flex;
+	-webkit-justify-content: space-between;
+    justify-content: space-between;
+    font-size: 0.426667rem;
+    color: #fff;
+    padding:0.24rem 0.266667rem;
+}
+.invite-info i{
+	display: inline-block;
+	width: 0.4rem;
+	height: 0.4rem;
+	background: url(/activity/images/invite_icon.png) no-repeat;
+	background-size: cover;
+	vertical-align: -10%;
+	margin-left: 0.133333rem;
+}
+.invite-award{
+	margin-top: -0.666667rem;
+	text-align: center;
+	color:#b5a3d6;
+	font-size: 0.346667rem;	
+}
+.invite-title{
+	text-align: center;
+	font-size: 0.48rem;
+	font-weight: bold;
+	color:#ffdc38;
+	background: url(/activity/images/invite_left.png) 25% center no-repeat,
+				url(/activity/images/invite_right.png) 75% center no-repeat;
+	margin-bottom: 0.213333rem;
+}
+.award-list{
+	display: flex;
+	-webkit-justify-content: center;
+    justify-content: center;
+    color:#fff;
+    margin-top: 0.64rem;
+    margin-bottom: 1.306667rem;
+}
+.award{
+	flex:1;
+}
+.award .sweet-num{
+	width: 1.6rem;
+	height: 1.6rem;
+	margin:0 auto;
+	background: url(/activity/images/invite_sweet.png);
+	background-size: 100%;
+	color:#ffdc38;
+	font-size: 0.32rem;
+	padding-top: 1rem;
+	margin-bottom: 0.213333rem;
+	box-sizing: border-box;
+}
+.award button{
+	width: 1.546667rem;
+	height: 0.533333rem;
+	border-radius: 0.266667rem;
+	background: #8c3ab7;
+	-webkit-box-shadow:inset 0 0 0.173333rem #d145ef;  
+  	-moz-box-shadow:inset 0 0 0.173333rem #d145ef;  
+  	box-shadow:inset 0 0 0.173333rem #d145ef;
+  	color:#fff;
+  	font-size: 0.346667rem;
+  	margin-top: 0.373333rem;
+}
+.award button.got{
+	color:#432164;
+	background: #8765b2;
+	font-size: 0.32rem;
+	-webkit-box-shadow:none;  
+  	-moz-box-shadow:none;  
+  	box-shadow:none;
+}
+.award button.toget{
+	color:#432164;
+	background: #ffdc38;
+	font-size: 0.32rem;
+	-webkit-box-shadow:none;  
+  	-moz-box-shadow:none;  
+  	box-shadow:none;
+}
+/*如何邀请*/
+.steps{
+	margin-top: 0.4rem;
+	padding: 0 0.333333rem;
+	font-size: 0.373333rem;
+	color:#ffdc38;
+	background: url(/activity/images/invite_line1.png) 70% 0.25rem no-repeat,
+				url(/activity/images/invite_line2.png) 35% 58% no-repeat;
+}
+.steps .step{
+	margin-bottom: 0.346667rem;
+	font-size: 0.4rem;
+	font-weight: bolder;
+}
+.steps .f-tar{
+	margin:0.933333rem 0;
+}
+.steps span{
+	display: inline-block;
+	width: 2.08rem;
+	height: 0.666667rem;
+	line-height: 0.666667rem;
+	border-radius: 0.333333rem;
+	color:#2b0c5b;
+	background: #ffdc38;
+	text-align: center;
+}
+.invite-rule{
+	margin-top: 1.306667rem;
+}
+.invite-rule .rules{
+	margin: 0.533333rem 0.333333rem 0;
+	background: rgba(33,21,46,0.8);
+	border-radius: 0.16rem;
+	font-size: 0.373333rem;
+	color:#ffdc38;
+	padding: 0.266667rem;
+	line-height: 1.5;
+}
+.invite-rule .rules p{
+	margin: 0.213333rem 0;
+}
+/*规则*/
+.m-invite-mask {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 9999;
+    display: none;
+}
+.m-invite-mask .game-intro{
+	position: absolute;
+    width: 7.733333rem;
+    /*height: 9.866667rem;*/
+    left: 50%;
+    top: 50%;
+    padding: 0.4rem 0.32rem;
+    transform: translate(-50%,-60%);
+    background: #fff;
+    border-radius: 0.106667rem;
+    box-sizing: border-box;
+}
+.m-invite-mask h3{
+    font-size: 0.426667rem;
+    color: #f36;
+    font-weight: bold;
+    text-align: center;
+    /*margin-bottom: 0.4rem;*/
+}
+.m-invite-mask p{
+	margin:0.48rem 0;
+	line-height: 0.48rem;
+	font-size: 0.373333rem;
+	color:#333;
+}
+.m-invite-mask .u-close{
+    display: block;
+    width: 0.773333rem;
+    height: 1.653333rem;
+    left: 50%;
+    transform: translate(-50%,0);
+    position: absolute;
+    bottom: -1.653333rem;
+    background: url('/share/images/close_big.png') no-repeat;
+    background-size: contain;
+}
+.m-invite-mask table{
+	font-size: 0.4rem;
+	border-color: #e6e6e6;
+	box-sizing: border-box;
+	width: 96%;
+	margin: 0 auto;
+	border:1px solid #e6e6e6;
+	margin-bottom: 0.266667rem;
+}
+.m-invite-mask table th{	
+	color:#333;	
+}
+.m-invite-mask table td{	
+	color:#666;
+}
+.m-invite-mask table th,
+.m-invite-mask table td{
+	padding: 0.333333rem 0;
+	text-align: center;
+	border:1px solid #e6e6e6;
+}

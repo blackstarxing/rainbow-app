@@ -4,190 +4,134 @@
 {% endblock %}
 {% block content %}
 <div id="room" v-cloak>
+    <div class="play-btn icon-play"></div>
     <div class="g-ct">
         <div class="m-video">
-            <video id="mainvideo" preload="auto" autoplay="false" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" src="http://6721.liveplay.myqcloud.com/live/6721_8b0e1119b959709205a1aeae9cf103b2.m3u8"></video>
+            <div v-if="state==1">
+                <video id="mainvideo" preload="auto" autoplay="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5">
+                    <source type="application/x-mpegURL" src="{{link}}"/>
+                </video>
+            </div>           
         </div>
         <div class="m-header">
             <div class="top-container">
                 <div class="avatar-contatiner">
-                    <i class="avatar icon-avatar" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');" @click="showCard"></i>
+                    <i class="avatar icon-avatar icon-toplist" v-bind:style="{backgroundImage: 'url(' + info.user_icon + ')'}" v-bind:data-id="info.userId" @click="showCard"></i>
                     <div class="content">
-                        <div class="name">可爱的琳baby＊新主播＊等你来爱我</div>
-                        <div class="author-id">ID 123456</div>
+                        <div class="name">${info.nickname}</div>
+                        <div class="author-id">ID ${info.userId}</div>
                     </div>
                     <div class="follow">
-                        <a href="" class="u-follow-btn">关注</a>
+                        <a href="javascript:void(0)" class="u-follow-btn" @click="download">关注</a>
                     </div>
                 </div>
-                <div class="members-container"><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar icon-toplist" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i><i class="item icon-avatar" style="background-image: url(http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg);"></i></div>
+                <div class="members-container">
+                    <i class="item icon-avatar icon-toplist" v-bind:style="{backgroundImage: 'url(' + list.icon + ')'}" v-bind:data-id="list.userId" v-for="list in audienceList"></i>
+                </div>
             </div>
-            <div class="charm">魅力榜<i class="num">317063</i></div>
+            <div class="charm" @click="download">魅力榜 <i class="num">${watchNum(info.charmTotalValue)}</i></div>
         </div>
         <div class="main-section">
             <div class="m-chat">
-                <div class="chat-area" id="chat">
-                    <div><span class="message">fasfdagagdsfgdsafadsfd</span></div>
-                    <div><span class="message">dsfgdsafadsfd</span></div>
-                    <div><span class="message">dsfgdsafadsfd</span></div>
-                    <div><span class="message">dsfgdsafadsfd</span></div>
-                    <div><span class="message">dsfgdsafadsfd</span></div>
-                    <div><span class="message">dsfgdsafa4564</span></div>
+                 <!-- 飘屏礼物 -->
+                <div class="cool-gift">
+                    <div></div>
                 </div>
-                <div class="award">
+                <!-- 高级用户 -->
+                <div class="vip-enter">${vip.range}级 <span>${vip.name}</span> 进入直播间</div>
+                <div class="chat-area" id="chat"></div>
+                <div class="award" @click="download">
                     <div>可领取</div>
                     <img src="/share/images/gold.png" alt="">
+                    x30
                 </div>
             </div>
-            <div class="m-operate"></div>
-            <div class="m-game">
-                <!-- 牌区 -->
-                <div class="m-card">
-                    <div class="game-box">
-                        <div class="stake-box">
-                            <div class="poker-area">
-                                <div class="result-box" v-show="game.poker_group[0]">
-                                    <ul class="f-cb">
-                                        <li class="poker1">J</li>
-                                        <li class="poker2">2</li>
-                                        <li class="poker3">6</li>
-                                        <li class="poker2">Q</li>
-                                        <li class="poker4">A</li>
-                                    </ul>
-                                    <div class="result"><img src="/share/images/goldcow.png" alt=""></div>
-                                </div>                                
-                            </div>
-                            <div class="stake-area f-cb">
-                                <div class="stake-name">
-                                    <div>奇奇</div>
-                                    <img src="/share/images/cow_1.png" alt="">
-                                    <div class="power">x2.2倍</div>
-                                </div>
-                                <div class="stake-num">
-                                    <div class="stake-all">
-                                        1.2万
-                                    </div>
-                                    <div class="stake-my">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="result-mask" v-show="game.mask[0]"></div>
-                        </div>
-                        <div class="stake-box">
-                            <div class="poker-area">
-                                <div class="result-box" v-show="game.poker_group[1]">
-                                    <ul class="f-cb">
-                                        <li class="poker1">J</li>
-                                        <li class="poker2">2</li>
-                                        <li class="poker3">6</li>
-                                        <li class="poker2">Q</li>
-                                        <li class="poker4">A</li>
-                                    </ul>
-                                    <div class="result"><img src="/share/images/goldcow.png" alt=""></div>
-                                </div>  
-                            </div>
-                            <div class="stake-area f-cb">
-                                <div class="stake-name">
-                                    <div>趣趣</div>
-                                    <img src="/share/images/cow_2.png" alt="">
-                                    <div class="power">x2.2倍</div>
-                                </div>
-                                <div class="stake-num">
-                                    <div class="stake-all">
-                                        1.2万
-                                    </div>
-                                    <div class="stake-my">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="result-mask" v-show="game.mask[1]"></div>
-                        </div>
-                        <div class="stake-box">
-                            <div class="poker-area">
-                                <div class="result-box" v-show="game.poker_group[2]">
-                                    <ul class="f-cb">
-                                        <li class="poker1">J</li>
-                                        <li class="poker2">2</li>
-                                        <li class="poker3">6</li>
-                                        <li class="poker2">Q</li>
-                                        <li class="poker4">A</li>
-                                    </ul>
-                                    <div class="result"><img src="/share/images/goldcow.png" alt=""></div>
-                                </div>  
-                            </div>
-                            <div class="stake-area f-cb">
-                                <div class="stake-name">
-                                    <div>乐乐</div>
-                                    <img src="/share/images/cow_3.png" alt="">
-                                    <div class="power">x2.2倍</div>
-                                </div>
-                                <div class="stake-num">
-                                    <div class="stake-all">
-                                        1.2万
-                                    </div>
-                                    <div class="stake-my">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="result-mask" v-show="game.mask[2]"></div>
-                        </div>
-                    </div>
-                    <div class="game-tip" v-bind:class="[game.tipClass]" v-show="game.showTip">${game.tip}</div>
-                    <div class="clock" v-show="game.showClock">${game.time}</div>
-                </div>
-                <div class="m-bet">
-                    
-                </div>
+            <div class="m-operate f-cb">
+                <i class="op-chat f-fl" @click="download"></i>
+                <i class="op-gift f-fr" @click="download"></i>
+                <i class="op-intro f-fr" @click="showIntro"></i>
+            </div>
+            <div v-if="gameShow">
+                {% include 'gameModules/niuniu.html' %}
             </div>
         </div>
-        
+        <!-- 下载 -->
+        <div class="m-footer" v-show="adDisplay">
+            <img src="/images/icon.png" class="f-fl">
+            <div class="f-fl">
+                <h3>彩虹直播</h3>
+                <p>可以玩的直播间</p>
+            </div>
+            <i @click="closeAd"></i>
+            <a href="javascript:void(0)" class="download-btn f-fr" @click="download">进入直播间</a>
+        </div>
+    </div>
+    <!-- 直播结束 -->
+    <div class="m-end-mask m-mask" v-if="state==0">
+        <div class="end-bg" v-bind:style="{backgroundImage: 'url(' + info.live_icon + ')'}"></div>
+        <div class="end-container">
+            <div class="end-head">
+                <h3><span></span>&nbsp;&nbsp;&nbsp;直播结束&nbsp;&nbsp;&nbsp;<span></span></h3>
+                <i class="avatar icon-avatar" v-bind:style="{backgroundImage: 'url(' + info.user_icon + ')'}"></i>
+            </div>
+            <div class="end-recommend">
+                <h3>精彩推荐</h3>
+                <div class="recommend-box">
+                    <div class="recommend" v-for="index in otherLive">
+                        <a v-bind:href="'/share/index?liveId='+index.id" v-bind:style="{backgroundImage: 'url(' + index.icon + ')'}">      
+                            <span><i>·</i>直播中</span>                  
+                        </a>
+                    </div>
+                    <!-- <div class="recommend">
+                        <a href="" style="background-image: url('//p.qlogo.cn/hy_personal/4376ae1e0cf0cccedf6a98055419b4438847511323dc7ea3c0fa7f621a7487230663cb77d04f449f658894768049357c/360?tp=webp');">      
+                            <span><i>·</i>直播中</span>                  
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+            <a href="javascript:void(0)" class="u-dl-btn" @click="download">下载彩虹直播</a>
+        </div>       
     </div>
     <!-- 礼物连击 -->
     <div class="m-gift-combo">
         <div class="gift-wrap wrap-top f-cb">
             <div class="gift-content f-fl">
-                <i class="avatar icon-avatar f-fl" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');"></i>
+                <i class="avatar icon-avatar f-fl" v-bind:style="{backgroundImage: 'url(' + gift_info1.sender_icon + ')'}"></i>
                 <div class="gift-info f-fl">
-                    <h3>提莫队长</h3>
-                    <p>送出了红司机</p>
+                    <h3>${gift_info1.sender_name}</h3>
+                    <p>送出了${gift_info1.gift_name}</p>
                 </div>
-                <img src="/share/images/siji.png" class="f-fl" alt="">
+                <img v-bind:src="gift_info1.gift_icon"class="f-fl" alt="">
             </div>
-            <div class="gift-num f-fl">X2</div>
+            <div class="gift-num f-fl">X${gift_num_top}</div>
         </div>
-        <div class="gift-wrap f-cb">
+        <div class="gift-wrap wrap-bottom f-cb">
             <div class="gift-content f-fl">
-                <i class="avatar icon-avatar f-fl" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');"></i>
+                <i class="avatar icon-avatar f-fl" v-bind:style="{backgroundImage: 'url(' + gift_info2.sender_icon + ')'}"></i>
                 <div class="gift-info f-fl">
-                    <h3>提莫队长</h3>
-                    <p>送出了红司机</p>
+                    <h3>${gift_info2.sender_name}</h3>
+                    <p>送出了${gift_info2.gift_name}</p>
                 </div>
-                <img src="/share/images/siji.png" class="f-fl" alt="">
+                <img v-bind:src="gift_info2.gift_icon" class="f-fl" alt="">
             </div>
-            <div class="gift-num f-fl">X2</div>
+            <div class="gift-num f-fl">X${gift_num_bottom}</div>
         </div>
     </div>
     <!-- 全局通知 -->
     <div class="globel-note">
-        提莫队长 <span>赢取了50000彩虹糖</span> 点击围观
+        ${trumpet.name} <span>${trumpet.content}</span> 点击围观
     </div>
     <!-- 大礼物 -->
     <div class="huge-gift">
         <div class="gift-content f-cb">
-            <i class="avatar icon-avatar f-fl" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');"></i>
+            <i class="avatar icon-avatar f-fl" v-bind:style="{backgroundImage: 'url(' + hugeGift.sender_icon + ')'}"></i>
             <div class="gift-info f-fl">
-                <h3>提莫队长</h3>
-                <p>送出了红司机</p>
+                <h3>${hugeGift.sender_name}</h3>
+                <p>送出了${hugeGift.gift_name}</p>
             </div>
-            <img src="/share/images/siji.png" class="f-fl" alt="">
+            <img src="/share/images/gift_star.png" alt="" class="bling">
+            <img v-bind:src="hugeGift.gift_icon" class="f-fl" alt="">
         </div>
-    </div>
-    <!-- 高级用户 -->
-    <div class="vip-enter">
-        24级 <span>啦啦啦</span> 进入直播间
     </div>
     <!-- 发牌 -->
     <div class="deal-section">
@@ -195,47 +139,50 @@
             
         </ul>
     </div>
-    <div class="m-pop-mask" v-show="cardDisplay">
+    <!-- 用户卡片 -->
+    <div class="m-pop-mask m-mask" v-show="cardDisplay">
         <div class="anchor-panel">
-            <span class="report">举报</span>
+            <span class="report" @click="download">举报</span>
             <span class="close" @click="closeCard">╳</span>
-            <div class="avatar icon-avatar" style="background-image: url(&quot;//p.qlogo.cn/hy_personal/4376ae1e0cf0ccce49552e53ce1a45b3581e23f5bf1ad771b98b939c0e863809b6b1a9516c6abcf8ccfc29b031184cab/80?tp=webp&quot;);"></div>
-            <h3 class="name"><span class="name-text">乌龙茶</span><span class="sex male"></span><span class="levelMedal" style="background-image: url('/share/images/third_level.png');">28</span>
+            <div class="avatar icon-avatar" v-bind:style="{backgroundImage: 'url(' + cardInfo.icon + ')'}" ></div>
+            <h3 class="name">
+                <span class="name-text">${cardInfo.nickname}</span>
+                <span class="sex male" v-if="cardInfo.sex==1"></span>
+                <span class="sex female" v-else></span>
+                <span class="levelMedal" style="background-image: url('/share/images/fouth_level.png');" v-if="cardInfo.lv>22">${cardInfo.lv}</span>
+                <span class="levelMedal" style="background-image: url('/share/images/third_level.png');" v-else-if="cardInfo.lv>12">${cardInfo.lv}</span>
+                <span class="levelMedal" style="background-image: url('/share/images/second_level.png');" v-else-if="cardInfo.lv>1">${cardInfo.lv}</span>
+                <span class="levelMedal" style="background-image: url('/share/images/first_level.png');" v-else>${cardInfo.lv}</span>
             </h3>
-            <p class="anchor-id">Id: 123456</p>
-            <p class="signature">此人还没有留下任何痕迹...</p>
+            <p class="anchor-id">Id: ${cardInfo.id}</p>
+            <p class="signature" v-if="cardInfo.personalsignature">${cardInfo.personalsignature}</p>
+            <p class="signature" v-else>此人还没有留下任何痕迹...</p>
             <ul class="numbers">
-                <li><span class="number">3</span><label>关注</label></li>
-                <li><span class="number">7</span><label>粉丝</label></li>
-                <li><span class="number">0</span><label>魅力</label></li>
+                <li><span class="number">${cardInfo.subscribeNum}</span><label>关注</label></li>
+                <li><span class="number">${cardInfo.fans}</span><label>粉丝</label></li>
+                <li><span class="number">${cardInfo.charmTotalValue}</span><label>魅力</label></li>
             </ul>
-            <p class="listen-text"><span>+ 关注</span></p>
+            <p class="listen-text"><span @click="download">+ 关注</span></p>
         </div>
     </div>
-    <div class="m-end-mask" v-if="is_live_end">
-        <div class="end-bg"></div>
-        <div class="end-container">
-            <div class="end-head">
-                <h3><span></span>&nbsp;&nbsp;&nbsp;直播结束&nbsp;&nbsp;&nbsp;<span></span></h3>
-                <i class="avatar icon-avatar" style="background-image: url('http://tva2.sinaimg.cn/crop.14.0.722.722.180/b06c6ba9jw8f8ko6nhcngj20ku0k2ac1.jpg');"></i>
+    <!-- 玩法介绍 -->
+    <div class="m-intro-mask m-mask" v-show="introDisplay">
+        <div class="game-intro">
+            <h3>游戏介绍</h3>
+            <div class="intro-content">
+                <h3>游戏介绍</h3>
+                <p>欢乐斗牛是一款休闲益智的卡牌游戏。游戏开始的时候奇奇，趣趣，欢欢会拿到五张星球卡牌。您可以给你喜欢的小牛仔赠送彩虹糖。游戏结束后，胜利的小牛仔会给你相应的回报，输的小牛仔只能默默带走你的礼物。</p>
+                <h3>玩法介绍</h3>
+                <p>1、五张卡牌任意3张相加是10的倍数，剩余两张相加取个位数是几就是牛几。</p>
+                <p>银牛：五张卡牌中有一张牌是10，其余都比10大。</p>
+                <p>金牛：五张牌都是10以上的。</p>
+                <p>炸弹：5张牌中有4张牌是一样的。</p>
+                <p>十小：5张牌都小于5，且5张牌相加不大于10</p>
+                <p>2、欢乐斗牛的卡牌大小顺序依次为：十小>炸弹>金牛>银牛>牛牛.....>牛一>没牛</p>
+                <p>3、若卡牌组合相同时，比较最大卡牌数字大小；最大卡牌数字相同时，比较最大卡牌的标示大小，黑桃>红桃>梅花>方块</p>
             </div>
-            <div class="end-recommend">
-                <h3>精彩推荐</h3>
-                <div class="recommend-box">
-                    <div class="recommend">
-                        <a href="" style="background-image: url('//p.qlogo.cn/hy_personal/4376ae1e0cf0cccedf6a98055419b4438847511323dc7ea3c0fa7f621a7487230663cb77d04f449f658894768049357c/360?tp=webp');">      
-                            <span><i>·</i>直播中</span>                  
-                        </a>
-                    </div>
-                    <div class="recommend">
-                        <a href="" style="background-image: url('//p.qlogo.cn/hy_personal/4376ae1e0cf0cccedf6a98055419b4438847511323dc7ea3c0fa7f621a7487230663cb77d04f449f658894768049357c/360?tp=webp');">      
-                            <span><i>·</i>直播中</span>                  
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <a href="" class="u-dl-btn">下载彩虹直播</a>
-        </div>       
+            <div class="u-close" @click="closeIntro"></div>
+        </div>
     </div>
 </div>
  	
@@ -243,16 +190,14 @@
 
 {% block js %}
 <script type="text/javascript" src="/js/vue.js"></script>
+<script type="text/javascript" src="/js/dcodeIO/ByteArray.js"></script>  
 <script type="text/javascript" src="/js/dcodeIO/Long.min.js"></script>     
-<script type="text/javascript" src="/js/dcodeIO/ByteBufferAB.min.js"></script>  
-<script type="text/javascript" src="/js/dcodeIO/ProtoBuf.min.js"></script>  
+<script type="text/javascript" src="/js/dcodeIO/bytebuffer.min.js"></script>  
+<script type="text/javascript" src="/js/dcodeIO/protobuf.min.js"></script>  
 <script type="text/javascript" src="/js/sha1.js"></script>
 <script type="text/javascript" src="/js/Web_SDK_Base_v2.8.0.js"></script>
 <script type="text/javascript" src="/js/Web_SDK_Chatroom_v2.8.0.js"></script>
 <script type="text/javascript" src="/dist/index.js"></script>
 <script type="text/javascript" src="/dist/chatroom.js"></script>
 <script type="text/javascript" src="/dist/game.js"></script>
-<script>
-	
-</script>
 {% endblock %}

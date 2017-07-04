@@ -1,5 +1,8 @@
 #room{
+    position: relative;
 	height:100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 .m-video{
@@ -8,7 +11,7 @@
     top: 0;
     bottom: 0;
     right: 0;
-    background: url(//p.qlogo.cn/hy_personal_room/6774614/67746141492792014/640?tp=webp) center center no-repeat;
+    background: url('/share/images/outline.png') center center no-repeat;
     background-size: cover;
     overflow: hidden; 
 }
@@ -19,6 +22,20 @@
     left: 50%;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);*/
+}
+.play-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2.133333rem;
+    height: 2.133333rem;
+    margin-left: -1.066667rem;
+    margin-top: -3.6rem;
+    z-index: 9999;
+}
+.icon-play{
+    background-size: contain;
+    background-image: url('/share/images/play.png');
 }
 .m-header{
 	position: absolute;
@@ -56,7 +73,7 @@
     overflow: hidden;
 }
 .avatar-contatiner .content{
-	width: 1.546667rem;
+	width: 1.6rem;
 	height: 100%;
     position: absolute;
     left: 1.013333rem;
@@ -73,6 +90,10 @@
     margin-bottom: 0.053333rem;
 }
 .avatar-contatiner .author-id{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 	color:#c8c8c8;
     font-size: 0.293333rem;
 }
@@ -108,11 +129,13 @@
     height: 0.853333rem;
     margin-left: 0.053333rem;
     border-radius: 50%;
+    border:2px solid #fff;
     position: relative;
     background-repeat: no-repeat;
     background-position: center center;
     -webkit-background-size: cover;
     background-size: cover;
+    box-sizing: border-box;
 }
 .m-header .charm{
 	position: absolute;
@@ -148,19 +171,19 @@
 	max-height: 2.88rem;
 	overflow-y: auto;
 	overflow-x: hidden;
+    color:#fff;
 }
 .chat-area .message{
 	display: inline-block;
 	max-width: 74%;
 	background: rgba(0,0,0,0.2);
-	height: 0.586667rem;
+	/*height: 0.586667rem;*/
 	line-height: 0.586667rem;
 	padding:0 0.24rem;
 	margin-bottom: 0.133333rem;
 	width: auto;
 	border-radius: 0.293333rem;
-	text-shadow: 0 .5px 1px rgba(0,0,0,.5);
-    color:#fff;
+	text-shadow: 0 1px 2px rgba(0,0,0,.5);
 }
 .m-chat .award{
     width: 1.28rem;
@@ -168,6 +191,8 @@
 	right: 0.266667rem;
 	bottom: 0;
 	text-align: center;
+    color:#fff;
+    font-size: 0.346667rem;
 }
 .m-chat .award div{
 	width: 100%;
@@ -175,13 +200,45 @@
 	line-height: 0.48rem;
 	border-radius: 0.053333rem;
 	background: rgba(0,0,0,0.5);
-	color:#fff;
+}
+.m-chat .award img{
+    width: 100%;
+}
+
+.chat-area .message img{
+    height: 0.56rem;
+}
+
+/*操作*/
+.m-operate{
+    position: relative;
+    padding: 0.133333rem 0.266667rem;
+}
+.m-operate i{
+    width: 0.96rem;
+    height: 0.96rem;
+}
+.m-operate i.op-chat{
+    background: url('/share/images/op_chat.png') no-repeat;
+    background-size: contain;
+}
+.m-operate i.op-intro{
+    background: url('/share/images/op_intro.png') no-repeat;
+    background-size: contain;
+    margin-right: 0.4rem;
+}
+.m-operate i.op-gift{
+    background: url('/share/images/op_gift.png') no-repeat;
+    background-size: contain;
 }
 
 /*礼物连击*/
 .m-gift-combo{
     position: absolute;
     top: 4.266667rem;
+}
+.gift-wrap{
+    transform: translate3d(-100%, 0, 0);
 }
 .m-gift-combo .gift-content{
     position: relative;
@@ -236,12 +293,13 @@
 
 /*全局通知*/
 .globel-note,.vip-enter{
-    position: absolute;
+    position: relative;
+    display: inline-block;
     top:1.546667rem;
-    right: 0;
+    left: 110%;
+    /*width: auto;*/
     height: 0.693333rem;
     line-height: 0.693333rem;
-    width: auto;
     padding:0 0.346667rem;
     border-top-left-radius: 0.346667rem;
     border-bottom-left-radius: 0.346667rem;
@@ -249,16 +307,24 @@
     font-size:0.373333rem;
     color:#fff;
     z-index: 999;
+    /*overflow:hidden;*/
 }
 .globel-note span,.vip-enter span{
     color:#ff3;
+}
+
+/*高级用户进入*/
+.m-chat .vip-enter{
+    top:-1.066667rem;
+    border-radius: 0.346667rem;
+    background:-webkit-linear-gradient(left,#7b06ff,#a53ddb);
 }
 
 /*大礼物*/
 .huge-gift{
     position: absolute;
     top: 2.773333rem;
-    right: 0;
+    left: 100%;
     width: 4.666667rem;
     height: 1.066667rem;
     padding:0.106667rem;
@@ -267,12 +333,89 @@
     background:-webkit-linear-gradient(left,rgba(169,58,255,0.8),rgba(169,58,255,0));
     box-sizing: border-box;
 }
+.huge-gift .bling{
+    position: absolute;
+    left: 0.76rem;
+    width: 0.76rem;
+}
 
-/*高级用户进入*/
-.vip-enter{
-    top:6.933333rem;
-    border-radius: 0.346667rem;
-    background:-webkit-linear-gradient(left,#7b06ff,#a53ddb);
+/*飘屏礼物*/
+.cool-gift{
+    position: absolute;
+    left: 15%;
+    z-index: 9999;
+}
+.goddess{
+    width: 6.933333rem;
+    height: 5.333333rem;
+    background: url("/share/images/goddess.png") 0 0 no-repeat;
+    background-size: 100%;
+    animation: goddess 2s steps(25) forwards;
+    -webkit-animation: goddess 2s steps(25) forwards;
+}
+.car{
+    width: 6.933333rem;
+    height: 3.36rem;
+    background: url("/share/images/car.png") 0 0 no-repeat;
+    background-size: 100%;
+    animation: car 2.5s steps(30) forwards;
+    -webkit-animation: car 2.5s steps(30) forwards;
+}
+.merry{
+    width: 5.333333rem;
+    height: 5.333333rem;
+    background: url("/share/images/merry.png") 0 0 no-repeat;
+    background-size: 100%;
+    animation: merry 2s steps(27) forwards;
+    -webkit-animation: merry 2s steps(27) forwards;
+}
+@keyframes goddess {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -133.333333rem;
+    }
+}
+@-webkit-keyframes goddess {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -133.333333rem;
+    }
+}
+@keyframes car {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -100.8rem;
+    }
+}
+@-webkit-keyframes car {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -100.8rem;
+    }
+}
+@keyframes merry {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -144.0rem;
+    }
+}
+@-webkit-keyframes merry {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -144.0rem;
+    }
 }
 
 /*游戏区*/
@@ -281,7 +424,8 @@
 }
 .m-card{
     position: relative;
-	height: 4.266667rem;
+	/*height: 4.266667rem;*/
+    height: 5.44rem;
 	padding-top: 0.133333rem;
 	box-sizing: border-box;
 	background: url('/share/images/game_top.png') repeat-x,url('/share/images/game_bg.png');
@@ -363,6 +507,10 @@
 .poker-area li:first-child{
 	margin-left: 0;
 }
+.halfway-poker li{
+    background: url('/share/images/poker_back.png') no-repeat;
+    background-size: 100% 100%;
+}
 .stake-area{
 	height: 2.186667rem;
 	margin:0 0.16rem;
@@ -401,10 +549,10 @@
     /*transform-origin:0 0%;*/
     /*-webkit-transform: translate(-100%,-100%);
     transform: translate(-100%,-100%);*/
-	animation:rotatePoker .25s linear 1;
-	-webkit-animation:rotatePoker .25s linear 1;
-    -moz-animation:rotatePoker .25s linear 1; /* Firefox */
-    -o-animation:rotatePoker .25s linear 1; /* Opera */
+	animation:rotatePoker .5s linear 1;
+	-webkit-animation:rotatePoker .5s linear 1;
+    -moz-animation:rotatePoker .5s linear 1; /* Firefox */
+    -o-animation:rotatePoker .5s linear 1; /* Opera */
 	/*transform: rotate(45deg);*/
 }
 @keyframes rotatePoker{
@@ -452,13 +600,12 @@
     line-height: 0.906667rem;
     background: rgba(0,0,0,0.2);
     border-radius: 0.08rem;
-}
-.stake-all{
     margin: 0.106667rem 0 0.133333rem 0;
     background-image: url('/share/images/coin.png');
     background-repeat: no-repeat;
     background-position: 0.16rem center;
     background-size: 0.4rem;
+    text-align: center;
 }
 /*游戏状态提示*/
 .game-tip{
@@ -487,24 +634,108 @@
     transform: translate(-50%,0);
     background: url('/share/images/clock.png') center center no-repeat;
     background-size: contain;
-    z-index: 99;
+    z-index: 999;
 }
 .m-bet{
 	height: 1.173333rem;
 	background: rgba(0,0,0,0.64);
 }
 
-/*用户卡片弹窗*/
-.m-pop-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
+/*下载*/
+.m-footer{
+    position: fixed;
     bottom: 0;
-    right: 0;
+    width: 100%;
+    height: 1.706667rem;
+    padding:0.266667rem;
+    background: rgba(0,0,0,0.64);
+    box-sizing: border-box;
+    font-size: 0.32rem;
+    color:rgba(255,255,255,0.6);
     z-index: 999;
-    background-color: rgba(0,0,0,.5)
+}
+.m-footer img{
+    height: 100%;
+    margin-right: 0.213333rem;
+}
+.m-footer h3{
+    font-size: 0.4rem;
+    color:#fff;
+    margin:0.133333rem 0 0.186667rem;
+}
+.m-footer i{
+    position: absolute;
+    top:50%;
+    right: 0.266667rem;
+    /*transform: translate(-50%,0);*/
+    margin-top: -0.213333rem;
+    width: 0.426667rem;
+    height: 0.426667rem;
+    display: block;
+    background: url('/share/images/close.png') no-repeat;
+    background-size: cover;
+}
+.m-footer .download-btn{
+    width: 2.506667rem;
+    height: 0.746667rem;
+    margin:0.213333rem 0.8rem 0 0;
+    text-align: center;
+    line-height: 0.746667rem;
+    border-radius: 0.373333rem;
+    vertical-align: middle;
+    font-size: 0.346667rem;
+    color:#fff;
+    background: #f36;
+    font-family: Arial;
 }
 
+/*玩法介绍*/
+.m-intro-mask .game-intro{
+    position: absolute;
+    width: 7.733333rem;
+    height: 9.866667rem;
+    left: 50%;
+    top: 50%;
+    padding: 0.4rem 0.32rem;
+    transform: translate(-50%,-60%);
+    background: #fff;
+    border-radius: 0.106667rem;
+    box-sizing: border-box;
+}
+.m-intro-mask .game-intro h3{
+    font-size: 0.426667rem;
+    color: #f36;
+    font-weight: bold;
+    text-align: center;
+    /*margin-bottom: 0.4rem;*/
+}
+.m-intro-mask .game-intro .intro-content{
+    height: 90%;
+    /*padding-bottom:1.066667rem;*/
+    overflow-y: auto;
+    box-sizing: border-box;
+    color:#666;
+    line-height: 0.533333rem;
+}
+.m-intro-mask .game-intro .intro-content h3{
+    font-size: 0.373333rem;
+    color: #333;
+    text-align: left;
+    margin:0.4rem 0;
+}
+.m-intro-mask .game-intro .u-close{
+    display: block;
+    width: 0.773333rem;
+    height: 1.653333rem;
+    left: 50%;
+    transform: translate(-50%,0);
+    position: absolute;
+    bottom: -1.653333rem;
+    background: url('/share/images/close_big.png') no-repeat;
+    background-size: contain;
+}
+
+/*用户卡片弹窗*/
 .anchor-panel {
     background-color: #fff;
     position: absolute;
@@ -635,24 +866,34 @@
     background-image: url('/share/images/male.png');
 }
 .anchor-panel .name span.female:after {
-    background-size: 14px 30.333333333333336px;
+    background-size: 0.346667rem;
     background-image: url('/share/images/female.png');
 }
 
-.anchor-panel .name .levelMedal {
+.anchor-panel .name .levelMedal,
+.message .levelMedal {
     display: inline-block;
     vertical-align: middle;
     color:#fff;
     font-size: 0.32rem;
-    width: 0.853333rem;
-    height: 0.4rem;
+    width: 0.906667rem;
+    height: 0.453333rem;
     line-height: 0.4rem;
-    -webkit-background-size: 0.853333rem 0.4rem;
-    background-size: 0.853333rem 0.4rem;
+    -webkit-background-size: cover;
+    background-size: cover;
     -webkit-flex-shrink: 0;
     flex-shrink: 0;
    	text-indent: 0.333333rem;
    	margin-left: 0.133333rem;
+}
+/*聊天等级*/
+.message .levelMedal {
+    width: 0.906667rem;
+    height: 0.453333rem;
+    line-height: 0.453333rem;
+    margin-left: 0;
+    background-size: 0.906667rem 0.453333rem;
+    text-align: center;
 }
 
 .anchor-panel .anchor-id{
@@ -720,12 +961,6 @@
 
 /*直播结束*/
 .m-end-mask{
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
     z-index: 99999;
     background: #fff;
     text-align: center;
@@ -822,24 +1057,30 @@
 
 /*animate css*/
 .animated {
-  animation-duration: 1s;
-  animation-fill-mode: both;
+    animation-duration: 1s;
+    animation-fill-mode: both;
 }
 
 .animated.infinite {
-  animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
 }
 
 .animated.hinge {
-  animation-duration: 2s;
+    animation-duration: 2s;
 }
 
 .animated.flipOutX,
 .animated.flipOutY,
 .animated.bounceIn,
 .animated.bounceOut {
-  animation-duration: .75s;
+    animation-duration: .75s;
 }
+
+.animated.slideInLeft,
+.animated.slideOutLeft{
+    animation-duration: .5s;
+}
+
 @keyframes bounceIn {
   from, 20%, 40%, 60%, 80%, to {
     animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
@@ -895,4 +1136,34 @@
 
 .bounceOut {
   animation-name: bounceOut;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInLeft {
+  animation-name: slideInLeft;
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.slideOutLeft {
+  animation-name: slideOutLeft;
 }
