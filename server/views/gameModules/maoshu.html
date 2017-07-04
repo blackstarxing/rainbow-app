@@ -1,0 +1,82 @@
+<div class="m-game">
+    <!-- 牌区 -->
+    <div class="m-card m-rc">
+        <div class="game-box">
+            <div class="poker-area rc-l">
+                <!-- <div class="result-box" v-show="game.poker_group[0]">
+                    <ul class="f-cb">
+                        <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet1">${card.cardNoShow}</li>
+                    </ul>
+                    <div class="result"><img v-bind:src="'/share/images/cow'+game.result1+'.png'" alt=""></div>
+                </div>   -->
+                <ul class="halfway-poker">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>                              
+            </div>
+            <div class="poker-area rc-r">
+                <!--  <div class="result-box">
+                    <ul class="f-cb">
+                        <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet1">${card.cardNoShow}</li>
+                    </ul>
+                    <div class="result"><img v-bind:src="'/share/images/cow'+game.result1+'.png'" alt=""></div>
+                </div>   -->
+                <ul class="halfway-poker">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>                              
+            </div>
+            <div class="stake-wrap f-cb">
+                <div class="rc-l f-cb">
+                    <div class="stake-carton f-fl">
+                        <img src="/share/images/cat.png" alt="">
+                        杰茜<span class="fc-gift">x2.2倍</span>
+                    </div>
+                    <div class="stake-num f-fl">
+                        <div class="stake-all">
+                            ${watchNum(game.catNum2)}
+                        </div>
+                        <div class="stake-my">
+                            0
+                        </div>
+                    </div>
+                </div>
+                <div class="rc-m f-cb">
+                    <div class="balance">平局<span class="fc-gift">x2.2倍</span></div>
+                    <div class="stake-num">
+                        <div class="stake-all">
+                            ${watchNum(game.catNum2)}
+                        </div>
+                        <div class="stake-my">
+                            0
+                        </div>
+                    </div>
+                </div>
+                <div class="rc-r f-cb">
+                    <div class="stake-num f-fl">
+                        <div class="stake-all">
+                            ${watchNum(game.catNum2)}
+                        </div>
+                        <div class="stake-my">
+                            0
+                        </div>
+                    </div>
+                    <div class="stake-carton f-fl">
+                        <img src="/share/images/rat.png" alt="">
+                        山姆<span class="fc-gift">x2.2倍</span>
+                    </div>
+                </div>
+            </div>
+            <div class="rc-mask" v-show="rc.result_mask"></div>
+        </div>
+        <div class="game-tip" v-bind:class="[game.tipClass]" v-show="game.showTip">${game.tip}</div>
+        <div class="clock" v-show="game.showClock">${game.time}</div>
+    </div>
+    <!-- <div class="m-bet"></div> -->
+</div>

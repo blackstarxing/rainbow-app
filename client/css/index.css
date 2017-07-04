@@ -544,6 +544,108 @@
 	background: url('/share/images/poker_back.png') no-repeat;
 	background-size: 100% 100%;
 }
+
+/*猫和老鼠*/
+.m-rc{
+    background: url('/share/images/game_top.png') repeat-x,url('/share/images/maoshu_bg.png');
+    background-size: 100% 0.133333rem,100% 100%;
+    color:#fff;
+    font-size: 0.293333rem;
+    padding-top: 0;
+}
+.m-rc .poker-area{
+    position: absolute;
+    top: 0.266667rem;
+    z-index: 0;
+}
+.m-rc .poker-area ul{
+    width: 3rem;
+}
+.m-rc .poker-area li{
+    margin-left: -0.59rem;
+}
+.m-rc .poker-area li:first-child{
+    margin-left: 0;
+}
+.m-rc .rc-l{
+    left: 0.533333rem;
+}
+.m-rc .rc-r{
+    right: 0.533333rem;
+}
+.m-rc .halfway-poker li{
+    background: url('/share/images/maoshu_back.png') no-repeat;
+    background-size: 100% 100%;
+}
+.m-rc .stake-num{
+    background: url('/share/images/maoshu_stake_bg.png') no-repeat;
+    background-size: 100% 100%;
+    margin-left: 0;
+}
+.m-rc .stake-wrap{
+    position: absolute;
+    width: 100%;
+    top:1.866667rem;
+}
+.m-rc .stake-wrap .rc-l,
+.m-rc .stake-wrap .rc-m,
+.m-rc .stake-wrap .rc-r{
+    position: absolute;
+    top:0;
+}
+.m-rc .stake-wrap .rc-l{
+    left: 0.133333rem;
+}
+.m-rc .stake-wrap .rc-m{
+    left: 50%;
+    top: -0.4rem;
+    -webkit-transform: translate(-50%,0);
+}
+.m-rc .stake-wrap .rc-r{
+    right: 0.133333rem;
+}
+.m-rc .stake-wrap .rc-m .balance{
+    height: 0.4rem;
+    text-align: center;
+}
+.m-rc .stake-carton{
+    margin-top: -0.133333rem;
+}
+.m-rc .rc-l .stake-carton{
+    margin-right: 0.133333rem;
+}
+.m-rc .rc-r .stake-carton{
+    margin-left: 0.133333rem;
+}
+.m-rc .stake-carton img{
+    display: block;
+    width: 1.373333rem;
+}
+.m-rc .stake-num{
+    width: 1.866667rem;
+    height: 2.186667rem;
+}
+.m-rc .stake-all,
+.m-rc .stake-my{
+    margin:0 auto;
+    background: url(/share/images/candy.png) center 0.106667rem no-repeat rgba(0,0,0,0.2);
+    background-size: 0.346667rem 0.306667rem;
+    text-indent: 0;
+    padding-top: 0.48rem;
+    box-sizing: border-box;
+    line-height: 1.2;
+}
+.m-rc .stake-all{
+    margin:0.133333rem auto;
+}
+/*遮罩*/
+.rc-mask{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9;
+}
 /*卡牌旋转动画*/
 .deal-section .rotate{
     /*transform-origin:0 0%;*/
@@ -601,7 +703,7 @@
     background: rgba(0,0,0,0.2);
     border-radius: 0.08rem;
     margin: 0.106667rem 0 0.133333rem 0;
-    background-image: url('/share/images/coin.png');
+    background-image: url('/share/images/candy.png');
     background-repeat: no-repeat;
     background-position: 0.16rem center;
     background-size: 0.4rem;

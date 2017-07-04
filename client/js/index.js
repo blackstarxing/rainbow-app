@@ -2,7 +2,8 @@ rainbow = new Vue({
   	el: '#room',
   	delimiters: ['${', '}'],
   	data: {
-        gameShow:true,
+        // 游戏类型
+        gameType:2,
         // 直播间数据
         info:'',
         // 直播结束推荐直播
@@ -53,6 +54,10 @@ rainbow = new Vue({
             result3:'',
             winIndex:'',
     	},
+        // 猫和老鼠
+        rc:{
+            result_mask:false,
+        },
         // 普通礼物连击
         gift_top:false,
         gift_bottom:false,
@@ -104,6 +109,7 @@ rainbow = new Vue({
                     // _this.accid = data.object.info.userId;
                     _this.info = data.object.info;
                     _this.state = _this.info.state;
+                    // _this.state = 1;
                     _this.otherLive = data.object.otherLive;
                     // 获取游戏数据
                     _this.getGameInfo()
@@ -205,7 +211,7 @@ rainbow = new Vue({
             this.adDisplay = false;
         },
         download:function(){
-            window.location.href = "http://www.baidu.com";
+            window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.yuerlive.rainbow";
         },
   	}
 })
