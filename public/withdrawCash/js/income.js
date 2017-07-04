@@ -121,7 +121,7 @@ var login = new Vue({
                   },2000); 
                 }else{
                     $.ajax({
-                      url: 'webapi/withdraw/apply?money='+_this.exchangeCash,
+                      url: '/webapi/withdraw/apply?money='+_this.exchangeCash,
                       type: 'get',
                       dataType:'json',
                       crossDomain:true,
