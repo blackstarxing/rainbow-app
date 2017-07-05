@@ -360,7 +360,7 @@ var niuniu = function(){
     }
 }
 
-// niuniu();
+niuniu();
 
 
 // 游戏区显示隐藏
