@@ -3,7 +3,10 @@ rainbow = new Vue({
   	delimiters: ['${', '}'],
   	data: {
         // 游戏类型
-        gameType:1,
+        gameType:0,
+        // 卡牌位置
+        top:'',
+        leftarr:[],
         // 直播间数据
         info:'',
         // 直播结束推荐直播
@@ -57,6 +60,7 @@ rainbow = new Vue({
         // 猫和老鼠
         rc:{
             result_mask:false,
+            mask:[false,false,false]
         },
         // 普通礼物连击
         gift_top:false,
@@ -84,7 +88,18 @@ rainbow = new Vue({
             sender_name:'',
             gift_name:'',
             gift_icon:''
-        }
+        },
+        // 玩法介绍
+        gameRules:[
+            {
+                content:'欢乐斗牛是一款休闲益智的卡牌游戏。游戏开始的时候奇奇，趣趣，欢欢会拿到五张彩虹卡牌。您可以给你喜欢的小牛仔赠送彩虹糖。游戏结束后，胜利的小牛仔会给你相应的回报，输的小牛仔只能默默带走你的礼物。',
+                rules:'<p>1、五张卡牌任意3张相加是10的倍数，剩余两张相加取个位数是几就是牛几。</p><p>银牛：五张卡牌中有一张牌是10，其余都比10大。</p><p>金牛：五张牌都是10以上的。</p><p>炸弹：5张牌中有4张牌是一样的。</p><p>十小：5张牌都小于5，且5张牌相加不大于10</p><p>2、欢乐斗牛的卡牌大小顺序依次为：十小>炸弹>金牛>银牛>牛牛.....>牛一>没牛</p><p>3、若卡牌组合相同时，比较最大卡牌数字大小；最大卡牌数字相同时，比较最大卡牌的标示大小，黑桃>红桃>梅花>方块</p>'
+            },
+            {
+                content:'会拿到五张彩虹卡牌。您可以选择支持的一方赠送彩虹糖。游戏结束后，胜利的一方会给你相应的回报，输的只能默默带走你的礼物。偶尔会出现平局的情况，猜中平局杰西和山姆将给你6倍礼物作为奖励哦！',
+                rules:'<p>1、五张卡牌任意3张相加是10的倍数，剩余两张相加取个位数是几就是牛几。</p><p>银牛：五张卡牌中有一张牌是10，其余都比10大。</p><p>金牛：五张牌都是10以上的。</p><p>炸弹：5张牌中有4张牌是一样的。</p><p>十小：5张牌都小于5，且5张牌相加不大于10</p><p>2、猫和老鼠的卡牌大小顺序依次为：十小>炸弹>金牛>银牛>牛牛.....>牛一>没牛，牌型相同则算为平局。</p>'
+            }
+        ]
   	},
     updated:function(){
       
@@ -104,6 +119,7 @@ rainbow = new Vue({
                 },
                 success: function(data) {
                     _this.roomid = data.object.info.chat_room_id;
+                    // _this.gameType = data.object.info.gameId;
                     // 预发布
                     _this.accid = 'test_'+data.object.info.userId;
                     // _this.accid = data.object.info.userId;
@@ -113,6 +129,26 @@ rainbow = new Vue({
                     _this.otherLive = data.object.otherLive;
                     // 获取游戏数据
                     _this.getGameInfo()
+                    if(_this.gameType==1){
+                        _this.leftarr = [];
+                        // 欢乐牛牛卡牌定位
+                        Vue.nextTick(function(){
+                            _this.top = $('.poker-area').eq(0).offset().top;
+                            for(var i=0;i<3;i++){
+                                _this.leftarr.push($('.poker-area').eq(i).offset().left);
+                            }
+                            console.log(_this.leftarr);
+                        })
+                    }else if(_this.gameType==2){           
+                        _this.leftarr = [];
+                        Vue.nextTick(function(){
+                            _this.top = $('.poker-area').eq(0).offset().top;
+                            for(var i=0;i<2;i++){
+                                _this.leftarr.push($('.m-rc .poker-area').eq(i).offset().left);
+                            }
+                            console.log(_this.leftarr);
+                        })           
+                    }
                 },
                 error: function(a, b, c) {
                     console.log("接口出问题啦");

@@ -2,38 +2,41 @@
     <!-- 牌区 -->
     <div class="m-card m-rc">
         <div class="game-box">
-            <div class="poker-area rc-l">
-                <!-- <div class="result-box" v-show="game.poker_group[0]">
-                    <ul class="f-cb">
-                        <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet1">${card.cardNoShow}</li>
-                    </ul>
-                    <div class="result"><img v-bind:src="'/share/images/cow'+game.result1+'.png'" alt=""></div>
-                </div>   -->
-                <ul class="halfway-poker">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>                              
-            </div>
-            <div class="poker-area rc-r">
-                <!--  <div class="result-box">
-                    <ul class="f-cb">
-                        <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet1">${card.cardNoShow}</li>
-                    </ul>
-                    <div class="result"><img v-bind:src="'/share/images/cow'+game.result1+'.png'" alt=""></div>
-                </div>   -->
-                <ul class="halfway-poker">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>                              
-            </div>
+            <!-- <div class="rc-poker"> -->
+                <div class="poker-area rc-l" v-bind:class="[rc.mask[0]?'rc-index':'']">
+                    <div class="result-box" v-show="game.poker_group[0]">
+                        <ul class="f-cb">
+                            <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet1">${card.cardNoShow}</li>
+                        </ul>
+                        <div class="result"><img v-bind:src="'/share/images/cow'+game.result1+'.png'" alt=""></div>
+                    </div>  
+                    <ul class="halfway-poker" v-show="half_group[0]">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>                              
+                </div>
+                <div class="poker-area rc-r" v-bind:class="[rc.mask[2]?'rc-index':'']">
+                     <div class="result-box" v-show="game.poker_group[2]">
+                        <ul class="f-cb">
+                            <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet3">${card.cardNoShow}</li>
+                        </ul>
+                        <div class="result"><img v-bind:src="'/share/images/cow'+game.result3+'.png'" alt=""></div>
+                    </div>  
+                    <ul class="halfway-poker" v-show="half_group[2]">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>                              
+                </div>
+            <!-- </div> -->
+            
             <div class="stake-wrap f-cb">
-                <div class="rc-l f-cb">
+                <div class="rc-l f-cb" v-bind:class="[rc.mask[0]?'rc-index':'']">
                     <div class="stake-carton f-fl">
                         <img src="/share/images/cat.png" alt="">
                         杰茜<span class="fc-gift">x2.2倍</span>
@@ -47,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="rc-m f-cb">
+                <div class="rc-m f-cb" v-bind:class="[rc.mask[1]?'rc-index':'']">
                     <div class="balance">平局<span class="fc-gift">x2.2倍</span></div>
                     <div class="stake-num">
                         <div class="stake-all">
@@ -58,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="rc-r f-cb">
+                <div class="rc-r f-cb" v-bind:class="[rc.mask[2]?'rc-index':'']">
                     <div class="stake-num f-fl">
                         <div class="stake-all">
                             ${watchNum(game.catNum2)}

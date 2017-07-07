@@ -107,7 +107,7 @@ input:-ms-input-placeholder{font-size:0.4rem;color:#999;}         /* IE浏览器
 
 /*居中层*/
 .g-mobile-wrap{
-	max-width: 800px;
+	max-width: 1242px;
 	margin:0 auto;
 }
 .g-mobile-wrap img{

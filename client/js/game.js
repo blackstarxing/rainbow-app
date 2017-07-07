@@ -1,17 +1,40 @@
 var niuniu = function(){
+    var vm = window.rainbow;
     // 扑克牌数量
     var pokerNum = 0;
 
     // 牌组位置
-    var leftarr = [];
-    for(var i=0;i<3;i++){
-        leftarr.push($('.poker-area').eq(i).offset().left);
+    // var leftarr = [];
+    function pokerPosition(){
+        if(vm.gameType==1){
+            vm.leftarr = [];
+            // 欢乐牛牛卡牌定位
+            Vue.nextTick(function(){
+                for(var i=0;i<3;i++){
+                    vm.leftarr.push($('.poker-area').eq(i).offset().left);
+                }
+                console.log(vm.leftarr);
+            })
+        }else if(vm.gameType==2){           
+            vm.leftarr = [];
+            Vue.nextTick(function(){
+                for(var i=0;i<2;i++){
+                    vm.leftarr.push($('.m-rc .poker-area').eq(i).offset().left);
+                }
+                console.log(vm.leftarr);
+            })           
+        }       
     }
+    // pokerPosition();
+
+    window.addEventListener("resize", function(){
+        pokerPosition();
+    }, false); 
+    
     // 定位
-    var top = $('.poker-area').eq(0).offset().top;
+    // var top = $('.poker-area').eq(0).offset().top;
     // 发牌动画延迟
     var delay = 50;
-    var vm = window.rainbow;
 
     var ws;//websocket实例
     var lockReconnect = false;//避免重复连接
@@ -157,6 +180,9 @@ var niuniu = function(){
                     var wsMessage = proto.build(protoName);  
                     var ws = wsMessage.decode(msgBuffer.data.buffer); 
                     console.log(ws);
+                    if(vm.half_enter == true){
+                        vm.half_group = [true,true,true];
+                    }
                     vm.game.cardsSet1 = ws.cardsSet1.Cards;
                     vm.game.cardsSet2 = ws.cardsSet2.Cards;
                     vm.game.cardsSet3 = ws.cardsSet3.Cards;
@@ -166,9 +192,6 @@ var niuniu = function(){
                     vm.game.winIndex = ws.winIndex-1;
                     vm.game.showTip = false;
                     showResult(0);
-
-                    // console.log(vm.game.cardsSet1);
-
                     break;
                 }
             case 10008:
@@ -222,6 +245,15 @@ var niuniu = function(){
                     vm.state = 0; 
                     break;
                 }
+            case 10019:
+                {
+                    protoName = "GCChangeGameRet";
+                    var wsMessage = proto.build(protoName);  
+                    var ws = wsMessage.decode(msgBuffer.data.buffer);
+                    vm.gameType = ws.gameId; 
+                    pokerPosition();
+                    break;
+                }
             default:
                 {
                     protoName = "UNKNOW";
@@ -243,6 +275,8 @@ var niuniu = function(){
             pokerNum = 0;
             vm.game.poker_group = [false,false,false];
             vm.game.mask = [false,false,false];
+            vm.rc.mask = [false,false,false];
+            vm.rc.result_mask = false;
             vm.game.tip = '即将开始，请稍后';
             vm.game.showTip = true;
         }else if(data.state==2){
@@ -280,34 +314,62 @@ var niuniu = function(){
     function dealPoker(){
         var width = $('.deal-section li').eq(0).width();
         var height = $('.deal-section li').eq(0).height();
-        if(pokerNum<15){
-            var initleft = $('.deal-section li').eq(pokerNum).offset().left;
-            var inittop = $('.deal-section li').eq(pokerNum).offset().top;
-            $('.deal-section li').eq(pokerNum).css({left:initleft+0.5*width,top:inittop+0.5*height});
-            if(pokerNum<5){
-                $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[0]+0.86*width+0.35*width*(pokerNum%5)},500);
-            }else if(pokerNum<10){
-                $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[1]+0.86*width+0.35*width*(pokerNum%5)},500);
+        if(vm.gameType==1){
+            if(pokerNum<15){
+                var initleft = $('.deal-section li').eq(pokerNum).offset().left;
+                var inittop = $('.deal-section li').eq(pokerNum).offset().top;
+                $('.deal-section li').eq(pokerNum).css({left:initleft+0.5*width,top:inittop+0.5*height});
+                if(pokerNum<5){
+                    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":vm.top+height/2,"left":vm.leftarr[0]+0.86*width+0.35*width*(pokerNum%5)},500);
+                }else if(pokerNum<10){
+                    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":vm.top+height/2,"left":vm.leftarr[1]+0.86*width+0.35*width*(pokerNum%5)},500);
+                }else{
+                    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":vm.top+height/2,"left":vm.leftarr[2]+0.86*width+0.35*width*(pokerNum%5)},500);
+                }
+                pokerNum++;
+                if(pokerNum==5 || pokerNum==10){                        
+                    delay=300;
+                    setTimeout(function(){                  
+                        createPoker();
+                    },delay);
+                }else{
+                    delay=50;
+                    setTimeout(function(){                  
+                        dealPoker();
+                    },delay);
+                }   
             }else{
-                $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":top+height/2,"left":leftarr[2]+0.86*width+0.35*width*(pokerNum%5)},500);
+                vm.game.tip = '开始下注';
+                vm.game.showTip = true;
+                vm.game.tipClass = 'animated bounceIn';
             }
-            pokerNum++;
-            if(pokerNum==5 || pokerNum==10){                        
-                delay=300;
-                setTimeout(function(){                  
-                    createPoker();
-                },delay);
+        }else if(vm.gameType==2)
+            if(pokerNum<10){
+                var initleft = $('.deal-section li').eq(pokerNum).offset().left;
+                var inittop = $('.deal-section li').eq(pokerNum).offset().top;
+                $('.deal-section li').eq(pokerNum).css({left:initleft+0.5*width,top:inittop+0.5*height});
+                if(pokerNum<5){
+                    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":vm.top+height/2,"left":vm.leftarr[0]+0.49*width+0.45*width*(pokerNum%5)},500);
+                }else{
+                    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":vm.top+height/2,"left":vm.leftarr[1]+0.49*width+0.45*width*(pokerNum%5)},500);
+                }
+                pokerNum++;
+                if(pokerNum==5){                        
+                    delay=300;
+                    setTimeout(function(){                  
+                        createPoker();
+                    },delay);
+                }else{
+                    delay=50;
+                    setTimeout(function(){                  
+                        dealPoker();
+                    },delay);
+                }   
             }else{
-                delay=50;
-                setTimeout(function(){                  
-                    dealPoker();
-                },delay);
-            }   
-        }else{
-            vm.game.tip = '开始下注';
-            vm.game.showTip = true;
-            vm.game.tipClass = 'animated bounceIn';
-        }
+                vm.game.tip = '开始下注';
+                vm.game.showTip = true;
+                vm.game.tipClass = 'animated bounceIn';
+            }
     }
 
     // 下注倒计时
@@ -338,12 +400,21 @@ var niuniu = function(){
             },1000); 
             if(arr_index==2){
                 // vm.game.mask = [true,false,true];
-                vm.game.mask.forEach(function(e,index){  
-                    if(index != vm.game.winIndex){
-                        Vue.set(vm.game.mask, index, true);
-                    }
-                    // alert(index);  
-                })              
+                if(vm.gameType==1){
+                    vm.game.mask.forEach(function(e,index){  
+                        if(index != vm.game.winIndex){
+                            Vue.set(vm.game.mask, index, true);
+                        }
+                    }) 
+                }else if(vm.gameType==2){
+                    vm.rc.mask.forEach(function(e,index){ 
+                        if(index == vm.game.winIndex){
+                            Vue.set(vm.rc.mask, index, true);
+                        }
+                    }) 
+                    vm.rc.result_mask = true;
+                }
+                             
             }
         } else{
             // vm.game.poker_group = [false,false,false];
@@ -361,7 +432,6 @@ var niuniu = function(){
 }
 
 niuniu();
-
 
 // 游戏区显示隐藏
 $(".m-video").on("touchstart", function(e) {

@@ -18,6 +18,12 @@ message GCBetRet
 {
 	optional int32 	code				= 1;   //返回码
 	optional string  msg	            = 2;   //提示信息
+	optional int32   num                = 3;   //下注值
+	optional int32  index1user	        = 4;   //第一投注位用户投注值
+	optional int32  index2user	        = 5;   //第二投注位用户投注值
+	optional int32  index3user	        = 6;   //第三投注位用户投注值
+	optional int32  sweetNum            = 7;   //用户余额
+	optional int32  index               = 8;   //下注位
 }
 
 //----------------------开局（client<-->Gameserver）协议号 10003----------------------
@@ -53,6 +59,7 @@ message GCResultRet
 	optional CardsSet cardsSet2         = 4;   //第二位牌组
 	optional CardsSet cardsSet3         = 5;   //第三位牌组
 	optional int32  winIndex			= 6;   //获胜位
+	optional int32  gameId              = 7;   //游戏ID
 
 }
 //欢乐牛仔牌组
@@ -104,6 +111,7 @@ message GCGameStateRet
 	optional int32 countDown            = 2;   //倒计时
 	optional int32  liveId	            = 3;   //直播间ID
 	optional int32  chessboardId        = 4;   //局ID  状态值为1时返回
+	optional int32  gameId	            = 5;   //游戏ID
 }
 
 //----------------------用户离开直播间（client<-->Gameserver）协议号 10011----------------------
@@ -156,6 +164,42 @@ message GCCloseLiveRet
 message GCCloseGameRet
 {
 	optional int32  liveId	            = 1;   //直播间ID
+}
+
+//----------------------游戏切换（client<-->Gameserver）协议号 10018----------------------
+message CGChangeGame
+{
+	 optional int32  userId              = 1;   //用户ID
+	 optional string  token               = 2;   //登录token
+	 optional int32  liveId				 = 3;   //直播间ID
+	 optional int32  gameId	             = 4;   //游戏ID
+}
+
+//----------------------游戏切换返回（Gameserver<-->client）协议号 10019----------------------
+message GCChangeGameRet
+{
+	 optional int32 code				 = 1;    //返回码  0成功 1 失败等
+	 optional string msg                 = 2;    //提示信息
+	 optional int32 liveId	           	 = 3;    //直播间ID
+	 optional int32 gameId               = 4;    //游戏ID
+}
+
+//----------------------立即关闭游戏（client<-->Gameserver）协议号 10020----------------------
+message CGNowCloseGame
+{
+	 optional int32  userId              = 1;   //用户ID
+	 optional string  token               = 2;   //登录token
+	 optional int32  liveId				 = 3;   //直播间ID
+	 optional int32  gameId	             = 4;   //游戏ID
+}
+
+//----------------------立即关闭游戏返回（Gameserver<-->client）协议号 10021----------------------
+message GCNowCloseGameRet
+{
+	 optional int32 code				 = 1;    //返回码  0成功 1 失败等
+	 optional string msg                 = 2;    //提示信息
+	 optional int32 liveId	           	 = 3;    //直播间ID
+	 optional int32 gameId               = 4;    //游戏ID
 }
 
 

@@ -198,7 +198,7 @@ function enterLiveroom(){
 	       getChat();
 	    }else{
 	        // alert("获取连接房间地址失败");
-	        $('#chat').append("<div>获取连接房间地址失败!<div>"); 
+	        $('#chat').append("<div><span class='message fc-cf'>获取连接房间地址失败!</span><div>"); 
 	    }   
 	})
 	function getChat(){
@@ -356,7 +356,6 @@ function enterLiveroom(){
 					$('.globel-note').animate({'width':'auto','left':'-100%'},5000);
 				}
 	    	}else if(msgs[i].text && msgs[i].fromNick && msgs[i].fromClientType != 'Server'){
-	    		console.log(13545645);
 	    		// 发言
 	    		// 解析等级
 		    	var custom=msgs[i].custom?JSON.parse(msgs[i].custom):'';

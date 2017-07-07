@@ -544,6 +544,10 @@
 	background: url('/share/images/poker_back.png') no-repeat;
 	background-size: 100% 100%;
 }
+.rc-deal li{
+    background: url('/share/images/maoshu_back.png') no-repeat;
+    background-size: 100% 100%;
+}
 
 /*猫和老鼠*/
 .m-rc{
@@ -553,13 +557,34 @@
     font-size: 0.293333rem;
     padding-top: 0;
 }
+.m-rc .rc-poker{
+    position: absolute;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    width:100%;
+    margin-top: 0.266667rem;
+    z-index: 5;
+}
 .m-rc .poker-area{
+    /*-webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;*/
+    width: 3rem;
     position: absolute;
     top: 0.266667rem;
-    z-index: 0;
+    z-index: 5;
 }
 .m-rc .poker-area ul{
     width: 3rem;
+    position: relative;
+    z-index: 99;
+}
+.m-rc .poker-area ul li{
+    position: relative;
 }
 .m-rc .poker-area li{
     margin-left: -0.59rem;
@@ -570,9 +595,15 @@
 .m-rc .rc-l{
     left: 0.533333rem;
 }
+/*.m-rc .rc-l .result{
+    transform: translate(-0%,0);
+}*/
 .m-rc .rc-r{
-    right: 0.533333rem;
+    right: 0.533333rem;  
 }
+/*.m-rc .rc-r .result{
+    transform: translate(-30%,0);
+}*/
 .m-rc .halfway-poker li{
     background: url('/share/images/maoshu_back.png') no-repeat;
     background-size: 100% 100%;
@@ -645,6 +676,9 @@
     width: 100%;
     background: rgba(0,0,0,0.6);
     z-index: 9;
+}
+.m-rc .rc-index{
+    z-index: 99;
 }
 /*卡牌旋转动画*/
 .deal-section .rotate{
