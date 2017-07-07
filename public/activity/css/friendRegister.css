@@ -28,7 +28,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 }
 .register-header{
 	width: 100%;
-	min-height: 5.333333rem;
+	min-height: 8.533333rem;
 	background: url(/activity/images/invite_head.png) no-repeat;
 	background-size: 100% 100%;
 }
