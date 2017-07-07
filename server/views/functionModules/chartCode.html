@@ -1,0 +1,14 @@
+ <div class="g-checkCodeMask">
+        <div class="g-checkCode bgc-wt">
+            <div class="m-Content fs-32 fc-b3">请输入校验码</div>
+            <div class="m-code-ipt">
+                <input type="text" class="u-code-ipt bgc-grey fs-30"  v-model="code" oninput="if(value.length>4)value=value.slice(0,4);">
+                <img v-bind:src="regPic" class="u-codeImg"  alt="没有图片" @click="changePic()">
+            </div>
+            <div class="codeError fs-30 fc-clue"><span>${codeError}</span></div>
+            <div class="m-codeBtn fs-30 f-cb">
+                <button class="codeCancel fs-30 bgc-wt bdc-gye6 f-fl" @click="codeCancel">取消</button>
+                <button class="codeConfirm bgc-f36 fs-30  fc-wt  f-fr" @click="codeConfirm">确定</button>
+            </div>
+         </div>
+ </div>

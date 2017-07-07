@@ -15,7 +15,7 @@
 }
 .invite-info{
 	position: relative;
-	top:-150px;
+	top:-2.0rem;
 	background: #5b0b9c;
 	margin:0 0.4rem;
 	border-radius: 0.16rem;
@@ -53,6 +53,7 @@
 	color:#ffdc38;
 	background: url(/activity/images/invite_left.png) 25% center no-repeat,
 				url(/activity/images/invite_right.png) 75% center no-repeat;
+	background-size: 1.6rem;
 	margin-bottom: 0.213333rem;
 }
 .award-list{
@@ -113,7 +114,8 @@
 	font-size: 0.373333rem;
 	color:#ffdc38;
 	background: url(/activity/images/invite_line1.png) 70% 0.25rem no-repeat,
-				url(/activity/images/invite_line2.png) 35% 58% no-repeat;
+				url(/activity/images/invite_line2.png) 35% 60% no-repeat;
+	background-size:5.333333rem;
 }
 .steps .step{
 	margin-bottom: 0.346667rem;

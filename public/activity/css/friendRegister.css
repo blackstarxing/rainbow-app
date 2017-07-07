@@ -1,0 +1,73 @@
+input::-webkit-input-placeholder { /* WebKit browsers */ 
+	color: #7e7399; 
+} 
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+	color: #7e7399; 
+} 
+input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+	color: #7e7399; 
+} 
+input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+	color: #7e7399; 
+} 
+/*不被点击*/
+.disabled{
+	cursor: not-allowed;
+}
+.g-friendRegister{
+	width: 100%;
+	height: 100%;
+}
+.g-mobile-wrap{
+	height: 100%;
+}
+.m-friendRegister{
+	width: 100%;
+	min-height: 100%;
+	background: #321e50;
+}
+.register-header{
+	width: 100%;
+	min-height: 5.333333rem;
+	background: url(/activity/images/invite_head.png) no-repeat;
+	background-size: 100% 100%;
+}
+.m-register-section{
+	padding: 0 0.4rem;
+}
+.u-friendInvite{
+	width: 100%;
+	height: 0.426667rem;
+	margin: 0.4rem 0;
+	padding-left: 0.266667rem;
+	font-size: 0.426667rem;
+	color:#fff;
+}
+.friendRegister-phone-ipt{
+	width: 9.2rem;
+	height: 1.066667rem;
+	border-radius: 0.533333rem;
+	text-indent: 0.4rem;
+}
+.phone-error-clue,.code-error-clue{
+	width: 100%;
+	height: 0.4rem;
+	padding-left: 0.266667rem;
+}
+.friendRegister-code-ipt{
+	width: 6.133333rem;
+	border-radius: 0.533333rem;
+	text-indent: 0.4rem;
+}
+.u-getCode{
+	max-width: 3.2rem;
+	height: 1.066667rem;
+	line-height: 1.066667rem;
+	margin-left: 0.533333rem;
+}
+.code-error-clue{
+	margin:0.133333rem 0 0.533333rem;
+}
+.accept-invite{
+	width: 9.2rem;
+}
