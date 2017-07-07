@@ -28,7 +28,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 }
 .register-header{
 	width: 100%;
-	min-height: 8.533333rem;
+	min-height: 7.733333rem;
 	background: url(/activity/images/invite_head.png) no-repeat;
 	background-size: 100% 100%;
 }
@@ -38,7 +38,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 .u-friendInvite{
 	width: 100%;
 	min-height: 0.426667rem;
-	margin: 0.4rem 0;
+	margin: 0.266667rem 0 0.4rem 0;
 	padding-left: 0.266667rem;
 	font-size: 0.426667rem;
 	color:#fff;
