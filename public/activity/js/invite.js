@@ -75,6 +75,8 @@ var invite = new Vue({
 	                   		_this.invite.sweet += 1000;
 	                   		// window.location.reload();
 	                   }else if(data.code == 1){
+	                   		_this.invite.first_reward = 1;
+	                   		_this.invite.canGetFirst = 0;
 	                   		layer.open({
 		                      content: '已经领取',
 		                      btn: '好的',
@@ -111,6 +113,8 @@ var invite = new Vue({
 	                   		_this.invite.sweet += 1500;
 	                   		// window.location.reload();
 	                   }else if(data.code == 1){
+	                  	 	_this.invite.second_reward = 1;
+	                   		_this.invite.canGetSecond = 0;
 	                   		layer.open({
 		                      content: '已经领取',
 		                      btn: '好的',
@@ -147,6 +151,8 @@ var invite = new Vue({
 	                   		_this.invite.sweet += 2000;
 	                   		// window.location.reload();
 	                   }else if(data.code == 1){
+	                   		_this.invite.third_reward = 1;
+	                   		_this.invite.canGetThird = 0;
 	                   		layer.open({
 		                      content: '已经领取',
 		                      btn: '好的',
@@ -183,6 +189,8 @@ var invite = new Vue({
 	                   		_this.invite.sweet += 2500;
 	                   		// window.location.reload();
 	                   }else if(data.code == 1){
+	                   		_this.invite.fourth_reward = 1;
+	                   		_this.invite.canGetFourth = 0;
 	                   		layer.open({
 		                      content: '已经领取',
 		                      btn: '好的',

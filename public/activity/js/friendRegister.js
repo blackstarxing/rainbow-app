@@ -149,7 +149,7 @@ var friendRegister = new Vue({
             if(_this.code){
                 if(_this.code.length<4){
                     _this.regPic = '/webapi/checkCode?phone='+_this.phone+'&rand='+new Date();
-                    _this.codeError = '手机验证码错误';
+                    _this.codeError = '图片验证码错误';
                     setTimeout(function(){
                         _this.codeError = '';
                     },2000); 
@@ -199,7 +199,7 @@ var friendRegister = new Vue({
                                });                       
                             }else if(data.code==-3){
                                _this.regPic = '/webapi/checkCode?phone='+_this.phone+'&rand='+new Date();
-                                _this.codeError = '手机验证码错误';
+                                _this.codeError = '图片验证码错误';
                                 setTimeout(function(){
                                     _this.codeError = '';
                                 },2000); 
