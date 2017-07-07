@@ -60,6 +60,8 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 	text-indent: 0.4rem;
 }
 .u-getCode{
+	position: absolute;
+	right: 0.666667rem;
 	max-width: 3.2rem;
 	height: 1.066667rem;
 	line-height: 1.066667rem;
