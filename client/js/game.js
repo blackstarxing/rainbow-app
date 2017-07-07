@@ -111,6 +111,7 @@ var niuniu = function(){
             liveId:vm.live_id,   //直播间ID
         };
         sendMes(obj,'CGGameState',10009);
+        sendMes(obj,'CGEnterLiveRoom',10022);
     }
 
     // 实时投注
@@ -265,6 +266,10 @@ var niuniu = function(){
     // 牌局状态
     function gameState(data){
         console.log(data);
+        if(data.gameId!=vm.gameType){
+            vm.gameType = data.gameId; 
+            pokerPosition();
+        }
         if(data.state == 1 || data.state == 5){
             vm.game.catNum1 = 0;
             vm.game.catNum2 = 0;

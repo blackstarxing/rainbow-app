@@ -119,7 +119,7 @@ rainbow = new Vue({
                 },
                 success: function(data) {
                     _this.roomid = data.object.info.chat_room_id;
-                    // _this.gameType = data.object.info.gameId;
+                    _this.gameType = data.object.info.gameId;
                     // 预发布
                     _this.accid = 'test_'+data.object.info.userId;
                     // _this.accid = data.object.info.userId;
@@ -128,7 +128,7 @@ rainbow = new Vue({
                     // _this.state = 1;
                     _this.otherLive = data.object.otherLive;
                     // 获取游戏数据
-                    _this.getGameInfo()
+                    _this.getGameInfo();
                     if(_this.gameType==1){
                         _this.leftarr = [];
                         // 欢乐牛牛卡牌定位

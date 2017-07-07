@@ -203,6 +203,24 @@ message GCNowCloseGameRet
 }
 
 
+//----------------------进入直播间（client<-->Gameserver）协议号 10022----------------------
+message CGEnterLiveRoom
+{
+	 optional int32  userId              = 1;   //用户ID
+	 optional string  token              = 2;   //登录token
+	 optional int32  liveId				 = 3;   //直播间ID
+}
+
+//----------------------进入直播间返回（Gameserver<-->client）协议号 10023----------------------
+message GCEnterLiveRoomRet
+{
+	 optional int32 code				 = 1;    //返回码  0成功 1 失败等
+	 optional string msg                 = 2;    //提示信息
+	 optional int32 liveId	           	 = 3;    //直播间ID
+}
+
+
+
 
 
 
