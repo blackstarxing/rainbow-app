@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% block css %}
+<link rel="stylesheet" href="/activity/css/download.css">
+{% endblock %}
+{% block content %}
+<div class="g-download" id="download" >
+    <button class="m-downloading-btn" @click="downloadApp">
+        <img src="/activity/images/downLoading.png"  alt="">
+    </button>
+    <button class="m-download-btn" @click="downloadApp">
+        <img src="/activity/images/download-btn.png" alt="">
+    </button>
+</div>
+{% endblock %}
+{% block js %}
+<script >
+	var download = new Vue({
+    el: '#download',
+    mounted:function(){
+        this.$nextTick(function () {
+           /*去掉iphone手机滑动默认行为*/
+          $('body').on('touchmove', function (event) {
+              event.preventDefault();
+          });        
+    	})
+    },
+    methods:{
+     	downloadApp:function(){
+     		window.location.href='http://a.app.qq.com/o/simple.jsp?pkgname=com.yuerlive.rainbow';
+     	}
+    }
+})
+</script>
+{% endblock %}

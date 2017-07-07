@@ -3,9 +3,31 @@
 <link rel="stylesheet" href="/activity/css/friendRegister.css">
 {% endblock %}
 {% block content %}
-<div class="g-mobile-wrap">
-    
+<div class="g-friendRegister" id="friendRegister" v-cloak>
+    <div class="m-friendRegister">
+    	<div class="register-header"></div>
+        <div class="m-register-section">
+            <div class="u-friendInvite">你的好友<span class="fc-invite">${nickName}</span>邀请你一起瓜分1100彩虹糖</div>
+             <!-- 手机号 -->
+            <input  class="friendRegister-phone-ipt fs-30 fc-wt bgc-inviteIpt" type="tel" minlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')"   placeholder="请输入手机号码"  oninput="if(value.length>11)value=value.slice(0,11);if(value.length>=11){$('.u-getCode').removeClass('fc-grey').addClass('fc-f36')}else{$('.u-getCode').removeClass('fc-f36').addClass('fc-grey')}" v-model="phone">
+            <!-- 手机号错误提示-->
+            <div class="phone-error-clue"></div>
+            <!-- 验证码 -->
+            <div class="friendRegister-code f-cb">
+                <input class="friendRegister-code-ipt fc-wt fs-30 f-fl bgc-inviteIpt" type="tel" v-model="messCode" placeholder="请输入短信验证码" onkeyup="this.value=this.value.replace(/\D/g,'')"   oninput="if(value.length>6)value=value.slice(0,6);">
+                <button v-bind:class="{disabled:regdis}" v-bind:disabled="regdis"  class="u-getCode fs-30 fc-grey noset bgc-invite" @click="showPic(0)">${regText}</button> 
+            </div>
+            <!-- 验证码错误提示 -->
+            <div class="code-error-clue fc-clue fs-28"><span>${messageCodeError}</span></div>
+            <!-- 接受邀请 -->
+            <button class="u-dl-btn accept-invite" @click="acceptInvite">接受邀请</button>
+        </div>
+    </div>
+
+     <!--图形验证码-->
+    {% include 'functionModules/chartCode.html' %}
 </div>
+
 {% endblock %}
 {% block js %}
 <script src="/activity/js/friendRegister.js"></script>

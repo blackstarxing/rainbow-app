@@ -196,4 +196,13 @@ router.get('/activity/invite', function(req, res, next) {
    res.render('activity/invite', { title: '邀请好友' });
 });
 
+// 邀请好友注册
+router.get('/activity/friendRegister', function(req, res, next) {
+   res.render('activity/friendRegister', { title: '邀请好友注册' });
+});
+
+// 邀请好友下载页
+router.get('/activity/download', function(req, res, next) {
+   res.render('activity/download', { title: '邀请好友注册' });
+});
 module.exports = router;
