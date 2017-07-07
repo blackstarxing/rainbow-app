@@ -71,6 +71,8 @@ var invite = new Vue({
 	                success: function(data) {
 	                   if(data.code == 1){
 	                   		_this.invite.first_reward = 1;
+	                   		_this.invite.canGetFirst = 0;
+	                   		window.location.reload();
 	                   }else{
 		                   	layer.open({
 		                      content: '服务器出错',
@@ -98,6 +100,8 @@ var invite = new Vue({
 	                success: function(data) {
 	                   if(data.code == 1){
 	                   		_this.invite.second_reward = 1;
+	                   		_this.invite.canGetSecond = 0;
+	                   		window.location.reload();
 	                   }else{
 		                   	layer.open({
 		                      content: '服务器出错',
@@ -125,6 +129,8 @@ var invite = new Vue({
 	                success: function(data) {
 	                   if(data.code == 1){
 	                   		_this.invite.third_reward = 1;
+	                   		_this.invite.canGetThird = 0;
+	                   		window.location.reload();
 	                   }else{
 		                   	layer.open({
 		                      content: '服务器出错',
@@ -152,6 +158,8 @@ var invite = new Vue({
 	                success: function(data) {
 	                   if(data.code == 1){
 	                   		_this.invite.fourth_reward = 1;
+	                   		_this.invite.canGetFourth = 0;
+	                   		window.location.reload();
 	                   }else{
 		                   	layer.open({
 		                      content: '服务器出错',
