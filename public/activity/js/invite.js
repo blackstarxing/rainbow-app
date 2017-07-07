@@ -69,10 +69,17 @@ var invite = new Vue({
 	                	userId:userId	
 	                },
 	                success: function(data) {
-	                   if(data.code == 1){
+	                   if(data.code == 0){
 	                   		_this.invite.first_reward = 1;
 	                   		_this.invite.canGetFirst = 0;
-	                   		window.location.reload();
+	                   		_this.invite.sweet += 1000;
+	                   		// window.location.reload();
+	                   }else if(data.code == 1){
+	                   		layer.open({
+		                      content: '已经领取',
+		                      btn: '好的',
+		                      shadeClose: false,
+		                    });
 	                   }else{
 		                   	layer.open({
 		                      content: '服务器出错',
@@ -98,10 +105,17 @@ var invite = new Vue({
 	                	userId:userId	
 	                },
 	                success: function(data) {
-	                   if(data.code == 1){
+	                   if(data.code == 0){
 	                   		_this.invite.second_reward = 1;
 	                   		_this.invite.canGetSecond = 0;
-	                   		window.location.reload();
+	                   		_this.invite.sweet += 1500;
+	                   		// window.location.reload();
+	                   }else if(data.code == 1){
+	                   		layer.open({
+		                      content: '已经领取',
+		                      btn: '好的',
+		                      shadeClose: false,
+		                    });
 	                   }else{
 		                   	layer.open({
 		                      content: '服务器出错',
@@ -127,10 +141,17 @@ var invite = new Vue({
 	                	userId:userId	
 	                },
 	                success: function(data) {
-	                   if(data.code == 1){
+	                   if(data.code == 0){
 	                   		_this.invite.third_reward = 1;
 	                   		_this.invite.canGetThird = 0;
-	                   		window.location.reload();
+	                   		_this.invite.sweet += 2000;
+	                   		// window.location.reload();
+	                   }else if(data.code == 1){
+	                   		layer.open({
+		                      content: '已经领取',
+		                      btn: '好的',
+		                      shadeClose: false,
+		                    });
 	                   }else{
 		                   	layer.open({
 		                      content: '服务器出错',
@@ -156,10 +177,17 @@ var invite = new Vue({
 	                	userId:userId	
 	                },
 	                success: function(data) {
-	                   if(data.code == 1){
+	                   if(data.code == 0){
 	                   		_this.invite.fourth_reward = 1;
 	                   		_this.invite.canGetFourth = 0;
-	                   		window.location.reload();
+	                   		_this.invite.sweet += 2500;
+	                   		// window.location.reload();
+	                   }else if(data.code == 1){
+	                   		layer.open({
+		                      content: '已经领取',
+		                      btn: '好的',
+		                      shadeClose: false,
+		                    });
 	                   }else{
 		                   	layer.open({
 		                      content: '服务器出错',
