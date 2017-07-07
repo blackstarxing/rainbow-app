@@ -102,6 +102,7 @@ message CGGameState
 {
 	optional int32 	liveId				= 1;   //直播间ID
 	optional int32  userId	            = 2;   //用户ID
+	optional int32  gameId              = 3;   //游戏ID  
 }
 
 //----------------------直播间游戏状态返回（Gameserver<-->client）协议号 10010----------------------
