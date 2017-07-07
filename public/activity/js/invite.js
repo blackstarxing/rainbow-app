@@ -51,7 +51,7 @@ var invite = new Vue({
   			var shareTitle = '呼朋唤友,相约彩虹';
   			var shareDescription = '一起游戏,一起看美女靓仔精彩直播。'; 
   			var shareImageUrl = 'http://img.wangyuhudong.com/uploads/imgs/live/2017/07/06/70c1e490e23b4a27bbf9e4c11a07f383.png';
-  			var shareUrl = 'http://172.16.10.60:3000/activity/friendRegister';
+  			var shareUrl = 'http://118.190.21.195:39999/activity/friendRegister';
   			window.location.href = "rainbowopen://share?shareUrl="+shareUrl+'&shareTitle='+shareTitle+'&shareDescription='+shareDescription+'&shareImageUrl='+shareImageUrl;
   		},
   		// 领取额外奖励
