@@ -3,7 +3,7 @@ rainbow = new Vue({
   	delimiters: ['${', '}'],
   	data: {
         // 游戏类型
-        gameType:2,
+        gameType:1,
         // 直播间数据
         info:'',
         // 直播结束推荐直播
