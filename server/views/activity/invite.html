@@ -29,7 +29,7 @@
     					<p>本月邀请4人</p>
                         <button v-if="invite.canGetFirst==1" class="toget" @click="getReward(3)">可领取</button>
     					<button v-else-if="invite.first_reward==1" class="got">已领取</button>
-                        <button v-else-if="!invite.first_reward">0/4</button>
+                        <button v-else-if="invite.first_reward==null||invite.first_reward==''">0/4</button>
                         <button v-else>${invite.validInviteNum}/4</button>
     				</div>
     				<div class="award">
@@ -37,7 +37,7 @@
     					<p>本月邀请6人</p>
     					<button v-if="invite.canGetSecond==1" class="toget" @click="getReward(4)">可领取</button>
                         <button v-else-if="invite.second_reward==1" class="got">已领取</button>
-                        <button v-else-if="!invite.second_reward">0/6</button>
+                        <button v-else-if="invite.second_reward==null||invite.second_reward==''">0/6</button>
                         <button v-else>${invite.validInviteNum}/6</button>
     				</div>
     				<div class="award">
@@ -45,7 +45,7 @@
     					<p>本月邀请8人</p>
     					<button v-if="invite.canGetThird==1" class="toget" @click="getReward(5)">可领取</button>
                         <button v-else-if="invite.third_reward==1" class="got">已领取</button>
-                        <button v-else-if="!invite.third_reward">0/8</button>
+                        <button v-else-if="invite.third_reward==null||invite.third_reward==''">0/8</button>
                         <button v-else>${invite.validInviteNum}/8</button>
     				</div>
     				<div class="award">
@@ -53,7 +53,7 @@
     					<p>本月邀请10人</p>
     					<button v-if="invite.canGetFourth==1" class="toget" @click="getReward(6)">可领取</button>
                         <button v-else-if="invite.fourth_reward==1" class="got">已领取</button>
-                        <button v-else-if="!invite.fourth_reward">0/10</button>
+                        <button v-else-if="invite.fourth_reward==null||invite.fourth_reward==''">0/10</button>
                         <button v-else>${invite.validInviteNum}/10</button>
     				</div>
     			</div>
