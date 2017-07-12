@@ -30,6 +30,26 @@ var niuniu = function(){
     window.addEventListener("resize", function(){
         pokerPosition();
     }, false); 
+
+    // 更新游戏倍率
+    function freshRate(){
+        $.ajax({
+            method: "GET",
+            url: "/api/rainbow/gameInfo",
+            dataType: 'json',
+            data: {
+                gameId:vm.gameType,
+            },
+            success: function(data) {
+                vm.game.rate_first = data.object.rate_first;
+                vm.game.rate_second = data.object.rate_second;
+                vm.game.rate_third = data.object.rate_third;
+            },
+            error: function(a, b, c) {
+                console.log("接口出问题啦");
+            }
+        });
+    }
     
     // 定位
     // var top = $('.poker-area').eq(0).offset().top;
@@ -185,10 +205,10 @@ var niuniu = function(){
                         vm.half_group = [true,true,true];
                     }
                     vm.game.cardsSet1 = ws.cardsSet1.Cards;
-                    vm.game.cardsSet2 = ws.cardsSet2.Cards;
+                    vm.game.cardsSet2 = ws.cardsSet2==null?[]:ws.cardsSet2.Cards;
                     vm.game.cardsSet3 = ws.cardsSet3.Cards;
                     vm.game.result1 = ws.cardsSet1.nameNo==null?0:ws.cardsSet1.nameNo;
-                    vm.game.result2 = ws.cardsSet2.nameNo==null?0:ws.cardsSet2.nameNo;
+                    vm.game.result2 = ws.cardsSet2==null?0:ws.cardsSet2.nameNo;
                     vm.game.result3 = ws.cardsSet3.nameNo==null?0:ws.cardsSet3.nameNo;
                     vm.game.winIndex = ws.winIndex-1;
                     vm.game.showTip = false;
@@ -253,6 +273,7 @@ var niuniu = function(){
                     var ws = wsMessage.decode(msgBuffer.data.buffer);
                     vm.gameType = ws.gameId; 
                     pokerPosition();
+                    freshRate();
                     break;
                 }
             default:
@@ -269,6 +290,7 @@ var niuniu = function(){
         if(data.gameId!=vm.gameType){
             vm.gameType = data.gameId; 
             pokerPosition();
+            freshRate();
         }
         if(data.state == 1 || data.state == 5){
             vm.game.catNum1 = 0;
