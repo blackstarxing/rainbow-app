@@ -14,6 +14,7 @@ var friendRegister = new Vue({
         regdis:false,
         //邀请人昵称
         nickName:'',
+        
   	},
   	mounted:function(){
   		this.$nextTick(function () {
@@ -29,7 +30,8 @@ var friendRegister = new Vue({
         $('.g-checkCodeMask').hide();
         this.codeError = '';
         this.messageCodeError = '';
-            $.ajax({
+        if(userId){
+             $.ajax({
               url: '/webapi/rainbow/invite/inviter?invite_user_id='+userId,
               type: 'get',
               success: function(data) {
@@ -63,6 +65,8 @@ var friendRegister = new Vue({
                   });
               }
             }); 
+        }
+           
   		});
   	},
   	methods: {
