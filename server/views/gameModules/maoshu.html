@@ -39,11 +39,11 @@
                 <div class="rc-l f-cb" v-bind:class="[rc.mask[0]?'rc-index':'']">
                     <div class="stake-carton f-fl">
                         <img src="/share/images/cat.png" alt="">
-                        杰茜<span class="fc-gift">x2.2倍</span>
+                        杰茜<span class="fc-gift">x${game.rate_first}倍</span>
                     </div>
                     <div class="stake-num f-fl">
                         <div class="stake-all">
-                            ${watchNum(game.catNum2)}
+                            ${watchNum(game.catNum1)}
                         </div>
                         <div class="stake-my">
                             0
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="rc-m f-cb" v-bind:class="[rc.mask[1]?'rc-index':'']">
-                    <div class="balance">平局<span class="fc-gift">x2.2倍</span></div>
+                    <div class="balance">平局<span class="fc-gift">x${game.rate_second}倍</span></div>
                     <div class="stake-num">
                         <div class="stake-all">
                             ${watchNum(game.catNum2)}
@@ -64,7 +64,7 @@
                 <div class="rc-r f-cb" v-bind:class="[rc.mask[2]?'rc-index':'']">
                     <div class="stake-num f-fl">
                         <div class="stake-all">
-                            ${watchNum(game.catNum2)}
+                            ${watchNum(game.catNum3)}
                         </div>
                         <div class="stake-my">
                             0
@@ -72,7 +72,7 @@
                     </div>
                     <div class="stake-carton f-fl">
                         <img src="/share/images/rat.png" alt="">
-                        山姆<span class="fc-gift">x2.2倍</span>
+                        山姆<span class="fc-gift">x${game.rate_third}倍</span>
                     </div>
                 </div>
             </div>
