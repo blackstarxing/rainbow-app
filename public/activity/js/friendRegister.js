@@ -15,6 +15,8 @@ var friendRegister = new Vue({
         //邀请人昵称
         nickName:'',
         
+        //邀请好友文字显示
+        inviteText:true,
   	},
   	mounted:function(){
   		this.$nextTick(function () {
@@ -65,6 +67,8 @@ var friendRegister = new Vue({
                   });
               }
             }); 
+        }else{
+            this.inviteText = false;
         }
            
   		});
