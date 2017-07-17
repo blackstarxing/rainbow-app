@@ -251,70 +251,141 @@ var friendRegister = new Vue({
                 parm.smsCode = _this.messCode;
                 parm.mobile = _this.phone;
                 parm.invite_user_id = userId;
-                $.ajax({
-                    url: '/webapi/rainbow/invite/inviteRegist',
-                    type: 'get',
-                    data:parm,
-                    dataType: 'json',
-                    crossDomain:true,
-                    xhrFields: {
-                        withCredentials: true,
-                    },  
-                    success: function(data) {
-                        if(data.code == 0){
-                            if(data.extend.inviteMsg){
-                               //好友邀请达到上限提示语
-                                layer.open({
-                                  content: '你的好友当月邀请额度已用完,继续注册无法获得奖励,是否继续'
-                                  ,btn: ['继续', '取消']
-                                  ,yes: function(index){
-                                    layer.close(index);
-                                    window.location.href = '/activity/download';
-                                  }
-                                });
-                            }else{
-                                window.location.href = '/activity/download';
-                            }
-                        }else if(data.code == -2){
+                if(parm.invite_user_id){
+                    $.ajax({
+                      url: '/webapi/rainbow/invite/inviteRegist',
+                      type: 'get',
+                      data:parm,
+                      dataType: 'json',
+                      crossDomain:true,
+                      xhrFields: {
+                          withCredentials: true,
+                      },  
+                      success: function(data) {
+                          if(data.code == 0){
+                              if(data.extend.inviteMsg){
+                                 //好友邀请达到上限提示语
+                                  layer.open({
+                                    content: '你的好友当月邀请额度已用完,继续注册无法获得奖励,是否继续'
+                                    ,btn: ['继续', '取消']
+                                    ,yes: function(index){
+                                      layer.close(index);
+                                      window.location.href = '/activity/download';
+                                    }
+                                  });
+                              }else{
+                                  window.location.href = '/activity/download';
+                              }
+                          }else if(data.code == -2){
+                            layer.open({
+                               content: '用户已存在',
+                               btn: '好的',
+                               shadeClose: false,
+                            });
+                          }else if(data.code == -3){
+                            layer.open({
+                               content: '邀请人不存在',
+                               btn: '好的',
+                               shadeClose: false,
+                            });
+                          }else if(data.code == -5){
+                            layer.open({
+                               content: '参数错误',
+                               btn: '好的',
+                               shadeClose: false,
+                            });
+                          }else if(data.code == -1){
+                            layer.open({
+                               content: '验证码不正确',
+                               btn: '好的',
+                               shadeClose: false,
+                            });
+                          }else{
+                            layer.open({
+                               content: '服务器出错',
+                               btn: '好的',
+                               shadeClose: false,
+                            });
+                          }
+                      },
+                      error: function() {
                           layer.open({
-                             content: '用户已存在',
-                             btn: '好的',
-                             shadeClose: false,
+                            content: '网络异常，请刷新重试',
+                            btn: '好的',
+                            shadeClose: false,
                           });
-                        }else if(data.code == -3){
+                      }
+                  });
+                }else{
+                    var parme = {};
+                    parme.smsCode = _this.messCode;
+                    parme.mobile = _this.phone;
+                    $.ajax({
+                      url: '/webapi/rainbow/invite/inviteRegist',
+                      type: 'get',
+                      data:parme,
+                      dataType: 'json',
+                      crossDomain:true,
+                      xhrFields: {
+                          withCredentials: true,
+                      },  
+                      success: function(data) {
+                          if(data.code == 0){
+                              if(data.extend.inviteMsg){
+                                 //好友邀请达到上限提示语
+                                  layer.open({
+                                    content: '你的好友当月邀请额度已用完,继续注册无法获得奖励,是否继续'
+                                    ,btn: ['继续', '取消']
+                                    ,yes: function(index){
+                                      layer.close(index);
+                                      window.location.href = '/activity/download';
+                                    }
+                                  });
+                              }else{
+                                  window.location.href = '/activity/download';
+                              }
+                          }else if(data.code == -2){
+                            layer.open({
+                               content: '用户已存在',
+                               btn: '好的',
+                               shadeClose: false,
+                            });
+                          }else if(data.code == -3){
+                            layer.open({
+                               content: '邀请人不存在',
+                               btn: '好的',
+                               shadeClose: false,
+                            });
+                          }else if(data.code == -5){
+                            layer.open({
+                               content: '参数错误',
+                               btn: '好的',
+                               shadeClose: false,
+                            });
+                          }else if(data.code == -1){
+                            layer.open({
+                               content: '验证码不正确',
+                               btn: '好的',
+                               shadeClose: false,
+                            });
+                          }else{
+                            layer.open({
+                               content: '服务器出错',
+                               btn: '好的',
+                               shadeClose: false,
+                            });
+                          }
+                      },
+                      error: function() {
                           layer.open({
-                             content: '邀请人不存在',
-                             btn: '好的',
-                             shadeClose: false,
+                            content: '网络异常，请刷新重试',
+                            btn: '好的',
+                            shadeClose: false,
                           });
-                        }else if(data.code == -5){
-                          layer.open({
-                             content: '参数错误',
-                             btn: '好的',
-                             shadeClose: false,
-                          });
-                        }else if(data.code == -1){
-                          layer.open({
-                             content: '验证码不正确',
-                             btn: '好的',
-                             shadeClose: false,
-                          });
-                        }else{
-                          layer.open({
-                             content: '服务器出错',
-                             btn: '好的',
-                             shadeClose: false,
-                          });
-                        }
-                    },
-                    error: function() {
-                        layer.open({
-                          content: '网络异常，请刷新重试',
-                          btn: '好的',
-                          shadeClose: false,
-                        });
-                    }
-                });
+                      }
+                  });
+                }
+                
             }else if(_this.phone ==''){
                 _this.messageCodeError = "手机号码不能为空";
                 setTimeout(function(){
