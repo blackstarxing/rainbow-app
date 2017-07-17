@@ -7,7 +7,7 @@
     <div class="m-friendRegister">
     	<div class="register-header"></div>
         <div class="m-register-section">
-            <div class="u-friendInvite">你的好友<span class="fc-invite">${nickName}</span>邀请你一起瓜分1100彩虹糖</div>
+            <div class="u-friendInvite" v-show="inviteText">你的好友<span class="fc-invite">${nickName}</span>邀请你一起瓜分1100彩虹糖</div>
              <!-- 手机号 -->
             <input  class="friendRegister-phone-ipt fs-30 fc-wt bgc-inviteIpt" type="tel" minlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')"   placeholder="请输入手机号码"  oninput="if(value.length>11)value=value.slice(0,11);if(value.length>=11){$('.u-getCode').removeClass('fc-grey').addClass('fc-f36')}else{$('.u-getCode').removeClass('fc-f36').addClass('fc-grey')}" v-model="phone">
             <!-- 手机号错误提示-->
