@@ -1,0 +1,54 @@
+.g-recharge-login{
+	width: 100%;
+	min-height: 100%;
+	padding: 0 0 0.4rem;
+	box-sizing: border-box;
+}
+.m-login-ipt{
+	width: 100%;
+	height: 2.133333rem;
+	padding:0.64rem 0.266667rem; 
+	box-sizing: border-box;
+}
+.u-login-ipt{
+	width: 100%;
+	height: 0.853333rem;
+	text-indent: 0.426667rem;
+	border-radius: 0.426667rem;
+	box-sizing: border-box;
+}
+.u-login-btn{
+	width: 9.066667rem;
+	margin: 0.853333rem auto 0.48rem;
+}
+.g-getId{
+	/*width: 100%;*/
+	height: 0.4rem;
+	margin-bottom: 1.066667rem;
+	text-align: center;
+}
+.g-getId span{
+	border-bottom:1px solid #f36;
+}
+.m-getId-step{
+	display: none;
+	padding: 0 0.266667rem;
+	box-sizing: border-box;
+}
+.m-getId-step.active{
+	display: block;
+}
+.getFirstStep{
+	width: 7.493333rem;
+	height: 2.666667rem;
+	margin: 0.48rem 0 0.853333rem 0;
+	background: url('/Recharge/images/getFirstStep.png')  no-repeat;
+	background-size: 7.493333rem 2.666667rem;
+}
+.getSecondStep{
+	width: 5.84rem;
+	height: 4.16rem;
+	margin-top: 0.48rem;
+	background: url('/Recharge/images/getSecondStep.png')  no-repeat;
+	background-size: 5.84rem 4.16rem;
+}

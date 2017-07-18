@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block css %}
+<link rel="stylesheet" href="/Recharge/css/paySuccess.css">
+{% endblock %}
+{% block content %}
+<div class="g-paySuccess bgc-grey">
+    <div class="m-paySuccess bgc-wt bdc-btm">
+        <div class="u-pay-icon">
+            <div class="payIcon"></div>
+        </div>
+        <div class="fs-32 fc-b3">支付成功</div>
+    </div>
+    <div class="m-current-balance bgc-wt f-cb">
+    	<span>当前余额</span>
+    	<span class="f-fr">15546</span>
+    	<i class="balance-icon f-fr"></i>
+    </div>
+    <button class="u-dl-btn u-pay-btn">完成</button>
+</div>
+{% endblock %}
+{% block js %}
+<script src="/Recharge/js/login.js"></script>
+{% endblock %}
