@@ -57,6 +57,9 @@
             <div v-else-if="gameType==2">
                 {% include 'gameModules/maoshu.html' %}
             </div>
+            <div v-else-if="gameType==3">
+                {% include 'gameModules/threehero.html' %}
+            </div>
         </div>
         <!-- 下载 -->
         <div class="m-footer" v-show="adDisplay">

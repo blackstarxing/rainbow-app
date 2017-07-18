@@ -71,6 +71,8 @@
     background-size: cover;
     border-radius: 50%;
     overflow: hidden;
+    border:0.026667rem solid #fff;
+    box-sizing: border-box;
 }
 .avatar-contatiner .content{
 	width: 1.6rem;
@@ -236,9 +238,10 @@
 .m-gift-combo{
     position: absolute;
     top: 4.266667rem;
+    transform: translate3d(-100%, 0, 0);
 }
 .gift-wrap{
-    transform: translate3d(-100%, 0, 0);
+    /*transform: translate3d(-100%, 0, 0);*/
 }
 .m-gift-combo .gift-content{
     position: relative;
@@ -668,6 +671,99 @@
 }
 .m-rc .stake-all{
     margin:0.133333rem auto;
+}
+/*三英战吕布*/
+.m-banker{
+    position: fixed;
+    top: 2.8rem;
+    left: 0.266667rem;
+    color:#fff;
+    font-size: 0.346667rem;
+}
+.m-banker .banker{
+    width: 3.2rem;
+    height: 3.36rem;
+    background: rgba(0,0,0,0.5);
+    border-radius: 0.16rem;
+}
+.banker-avatar{
+    padding:0.133333rem;
+}
+.banker-avatar i{
+    position: static;
+    width: 0.773333rem;
+    height: 0.773333rem;
+    float: left;
+    margin-right: 0.133333rem;
+}
+.banker-avatar span{
+    line-height: 0.773333rem;
+    font-size: 0.346667rem;
+}
+.m-banker .record{
+    height: 0.586667rem;
+    line-height: 0.586667rem;
+    font-size: 0.293333rem;
+    border-radius: 0.293333rem;
+    margin:0 0.133333rem;
+    padding-left: 0.533333rem;
+    background: url(/share/images/candy.png) 0.16rem center no-repeat,
+                url(/share/images/right_rank.png) right 0.16rem center no-repeat rgba(0,0,0,0.5);
+    background-size: 0.293333rem,0.133333rem;
+    margin-bottom: 0.133333rem;
+}
+.m-banker .record span{
+    float: right;
+    margin-right: 0.4rem;
+}
+.m-banker button{
+    width: 3.2rem;
+    height: 0.746667rem;
+    line-height: 0.746667rem;
+    text-align: center;
+    border-radius: 0.373333rem;
+    background: rgba(0,0,0,0.5);
+    margin-top: 0.133333rem;
+    color:#fff;
+    font-size: 0.346667rem;
+}
+.hero .stake-area{
+    background: none;
+    margin:0;
+    padding:0 0.066667rem;
+}
+.hero .stake-name{
+    width: 1.76rem;
+    margin:0;
+    margin-top: -0.16rem;
+    position: relative;
+}
+.hero .power{
+    text-align: left;
+    text-indent: 0.133333rem;
+    margin-top: 0.133333rem;
+}
+.hero .power span{
+    color:#fff;
+}
+.hero .stake-num{
+    width: 1.653333rem;
+    height: 2.186667rem;
+    background: url('/share/images/hero_stake_bg.png') no-repeat;
+    background-size: 100% 100%;
+    margin-left: -0.213333rem;
+    float: left;
+}
+.hero .stake-all,
+.hero .stake-my{
+    width: 1.333333rem;
+    margin:0.12rem auto;
+    background: url(/share/images/candy.png) center 0.106667rem no-repeat rgba(0,0,0,0.2);
+    background-size: 0.346667rem 0.306667rem;
+    text-indent: 0;
+    padding-top: 0.48rem;
+    box-sizing: border-box;
+    line-height: 1.2;
 }
 /*遮罩*/
 .rc-mask{
@@ -1276,12 +1372,12 @@
 
 @keyframes slideInLeft {
   from {
-    transform: translate3d(-100%, 0, 0);
+    transform: translate3d(0, 0, 0);
     visibility: visible;
   }
 
   to {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(100%, 0, 0);
   }
 }
 
@@ -1291,12 +1387,12 @@
 
 @keyframes slideOutLeft {
   from {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(100%, 0, 0);
   }
 
   to {
     visibility: hidden;
-    transform: translate3d(-100%, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
 }
 

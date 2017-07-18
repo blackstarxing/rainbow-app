@@ -23,7 +23,15 @@ var niuniu = function(){
                 }
                 console.log(vm.leftarr);
             })           
-        }       
+        }else if(vm.gameType==3){           
+            vm.leftarr = [];
+            Vue.nextTick(function(){
+                for(var i=0;i<2;i++){
+                    vm.leftarr.push($('.game-box .poker-area').eq(i).offset().left);
+                }
+                console.log(vm.leftarr);
+            })           
+        }        
     }
     // pokerPosition();
 
@@ -370,7 +378,7 @@ var niuniu = function(){
                 vm.game.showTip = true;
                 vm.game.tipClass = 'animated bounceIn';
             }
-        }else if(vm.gameType==2)
+        }else if(vm.gameType==2){
             if(pokerNum<10){
                 var initleft = $('.deal-section li').eq(pokerNum).offset().left;
                 var inittop = $('.deal-section li').eq(pokerNum).offset().top;
@@ -397,6 +405,41 @@ var niuniu = function(){
                 vm.game.showTip = true;
                 vm.game.tipClass = 'animated bounceIn';
             }
+        }else if(vm.gameType==3){
+            if(pokerNum<20){
+                var initleft = $('.deal-section li').eq(pokerNum).offset().left;
+                var inittop = $('.deal-section li').eq(pokerNum).offset().top;
+                $('.deal-section li').eq(pokerNum).css({left:initleft+0.5*width,top:inittop+0.5*height});
+                var bankerTop = $('.m-banker .poker-area').eq(0).offset().top;
+                var bankerLeft = $('.m-banker .poker-area').eq(0).offset().left;
+                if(pokerNum<5){
+                    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":bankerTop+height/2,"left":bankerLeft+0.84*width+0.35*width*(pokerNum%5)},500);
+                }else if(pokerNum<10){
+                    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":vm.top+height/2,"left":vm.leftarr[0]+0.86*width+0.35*width*(pokerNum%5)},500);
+                }else if(pokerNum<15){
+                    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":vm.top+height/2,"left":vm.leftarr[1]+0.86*width+0.35*width*(pokerNum%5)},500);
+                }else{
+                    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":vm.top+height/2,"left":vm.leftarr[2]+0.86*width+0.35*width*(pokerNum%5)},500);
+                }
+                pokerNum++;
+                if(pokerNum==5 || pokerNum==10 || pokerNum==15){                        
+                    delay=300;
+                    setTimeout(function(){                  
+                        createPoker();
+                    },delay);
+                }else{
+                    delay=50;
+                    setTimeout(function(){                  
+                        dealPoker();
+                    },delay);
+                }   
+                console.log(delay);
+            }else{
+                vm.game.tip = '开始下注';
+                vm.game.showTip = true;
+                vm.game.tipClass = 'animated bounceIn';
+            }
+        }
     }
 
     // 下注倒计时
@@ -456,6 +499,7 @@ var niuniu = function(){
         }
         dealPoker();
     }
+    // createPoker();
 }
 
 niuniu();

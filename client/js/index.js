@@ -3,7 +3,7 @@ rainbow = new Vue({
   	delimiters: ['${', '}'],
   	data: {
         // 游戏类型
-        gameType:0,
+        gameType:3,
         // 卡牌位置
         top:'',
         leftarr:[],
@@ -62,6 +62,10 @@ rainbow = new Vue({
             result_mask:false,
             mask:[false,false,false]
         },
+        // 三英战吕布
+        hero:{
+
+        },
         // 普通礼物连击
         gift_top:false,
         gift_bottom:false,
@@ -98,6 +102,10 @@ rainbow = new Vue({
             {
                 content:'会拿到五张彩虹卡牌。您可以选择支持的一方赠送彩虹糖。游戏结束后，胜利的一方会给你相应的回报，输的只能默默带走你的礼物。偶尔会出现平局的情况，猜中平局杰西和山姆将给你6倍礼物作为奖励哦！',
                 rules:'<p>1、五张卡牌任意3张相加是10的倍数，剩余两张相加取个位数是几就是牛几。</p><p>银牛：五张卡牌中有一张牌是10，其余都比10大。</p><p>金牛：五张牌都是10以上的。</p><p>炸弹：5张牌中有4张牌是一样的。</p><p>十小：5张牌都小于5，且5张牌相加不大于10</p><p>2、猫和老鼠的卡牌大小顺序依次为：十小>炸弹>金牛>银牛>牛牛.....>牛一>没牛，牌型相同则算为平局。</p>'
+            },
+            {
+                content:'会拿到五张彩虹卡牌。您可以选择支持的一方赠送彩虹糖。游戏结束后，胜利的一方会给你相应的回报，输的只能默默带走你的礼物。偶尔会出现平局的情况，猜中平局杰西和山姆将给你6倍礼物作为奖励哦！',
+                rules:'<p>1、五张卡牌任意3张相加是10的倍数，剩余两张相加取个位数是几就是牛几。</p><p>银牛：五张卡牌中有一张牌是10，其余都比10大。</p><p>金牛：五张牌都是10以上的。</p><p>炸弹：5张牌中有4张牌是一样的。</p><p>十小：5张牌都小于5，且5张牌相加不大于10</p><p>2、猫和老鼠的卡牌大小顺序依次为：十小>炸弹>金牛>银牛>牛牛.....>牛一>没牛，牌型相同则算为平局。</p>'
             }
         ]
   	},
@@ -119,12 +127,12 @@ rainbow = new Vue({
                 },
                 success: function(data) {
                     _this.roomid = data.object.info.chat_room_id;
-                    _this.gameType = data.object.info.gameId;
+                    // _this.gameType = data.object.info.gameId;
                     // 预发布
                     _this.accid = 'test_'+data.object.info.userId;
                     // _this.accid = data.object.info.userId;
                     _this.info = data.object.info;
-                    _this.state = _this.info.state;
+                    // _this.state = _this.info.state;
                     // _this.state = 1;
                     _this.otherLive = data.object.otherLive;
                     // 获取游戏数据
@@ -145,6 +153,15 @@ rainbow = new Vue({
                             _this.top = $('.poker-area').eq(0).offset().top;
                             for(var i=0;i<2;i++){
                                 _this.leftarr.push($('.m-rc .poker-area').eq(i).offset().left);
+                            }
+                            console.log(_this.leftarr);
+                        })           
+                    }else if(_this.gameType==3){           
+                        _this.leftarr = [];
+                        Vue.nextTick(function(){
+                            _this.top = $('.game-box .poker-area').eq(0).offset().top;
+                            for(var i=0;i<3;i++){
+                                _this.leftarr.push($('.game-box .poker-area').eq(i).offset().left);
                             }
                             console.log(_this.leftarr);
                         })           

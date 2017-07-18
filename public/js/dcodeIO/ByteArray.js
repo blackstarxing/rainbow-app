@@ -145,6 +145,7 @@ var ByteArray = (function () {
             length = this.bytesAvailable;
         }
         else if (!this.validate(length)) {
+            //此处有修改
             // return null;
         }
         if (bytes) {
