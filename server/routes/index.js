@@ -205,4 +205,18 @@ router.get('/activity/friendRegister', function(req, res, next) {
 router.get('/activity/download', function(req, res, next) {
    res.render('activity/download', { title: '邀请好友注册' });
 });
+
+//充值-我的糖果
+router.get('/Recharge/rainbowCandy', function(req, res, next) {
+   res.render('Recharge/rainbowCandy', { title: '我的糖果' });
+});
+//充值-登录
+router.get('/Recharge/login', function(req, res, next) {
+   res.render('Recharge/login', { title: '登录' });
+});
+//充值-支付成功
+router.get('/Recharge/paySuccess', function(req, res, next) {
+   res.render('Recharge/paySuccess', { title: '支付结果' });
+});
+
 module.exports = router;

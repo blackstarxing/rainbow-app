@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block css %}
+<link rel="stylesheet" href="/Recharge/css/login.css">
+{% endblock %}
+{% block content %}
+<div class="g-recharge-login bgc-grey" id="rechargeLogin">
+    <div class="m-login-ipt bgc-wt">
+        <input class="u-login-ipt fc-b3 fs-30 bgc-ipt" type="number" placeholder="输入你的个人ID" v-model="userId" onkeyup="this.value=this.value.replace(/\D/g,'')" oninput="if(value.length>7)value=value.slice(0,7);">
+    </div>
+    <button class="u-dl-btn u-login-btn" @click='getId'>完成</button>
+    <div class="g-getId fs-30 fc-f36"><span>如何获取个人ID?</span></div>
+    <div class="m-getId-step">
+        <span class="fs-32 fc-b3">第一步:点击进入我的页面</span>
+        <div class="getFirstStep"></div>
+        <span class="fs-32 fc-b3">第二步:在头像下查看个人ID</span>
+        <div class="getSecondStep"></div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="/Recharge/js/login.js"></script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block css %}
+<link rel="stylesheet" href="/Recharge/css/rainbowCandy.css">
+{% endblock %}
+{% block content %}
+<div class="g-rainbowCandy bgc-grey" id="rainbowCandy" v-cloak>
+    <div class="m-rainbowCandy bgc-wt">
+        <div class="u-rainbowCandy-account  fs-30">
+            <span class="fc-b9">充值账户&nbsp;:</span>
+            <img class="u-account-icon"  v-bind:src="countInfo.icon" alt="">
+            <span class="fc-b3">${countInfo.nickname}</span>
+            <span class="u-switch-account fc-f36" @click='switchCount'>切换账号</span>
+        </div>
+       <!--  <div class="u-rainbowCandy-balance fs-30">
+            <span class="fc-b9">账户余额&nbsp;:</span>
+            <span class="fc-candy">124500</span>
+            <span class="fc-b3">彩虹糖</span>
+        </div> -->
+    </div>
+    <div class="m-candyItem bgc-wt">
+        <div v-if='rechargeInfo.is_first == 0'>
+            <div v-for='(valuelist,index) in rechargeInfo.sweetList' :id='valuelist.id' :class="{active:isCur==index}"  class="u-candyItem bdc-gye6" @click='switchCash(index)'>
+                <div class="u-firstCharge"></div>
+                <div class="fc-b3 fs-30 candyItem-count">${valuelist.value}彩虹糖</div>
+                <div class="fc-b9 fs-30 candyItem-cash">${valuelist.rmb}元</div>
+            </div>
+        </div>
+        <div  v-else-if='rechargeInfo.is_first != 0' >
+            <div v-for='(valuelist,index) in rechargeInfo.sweetList' :id='valuelist.id' :class="{active:isCur==index}"  class="u-candyItem bdc-gye6" @click='switchCash(index)'>
+                <div class="fc-b3 fs-30 candyItem-count">${valuelist.value}彩虹糖</div>
+                <div class="fc-b9 fs-30 candyItem-cash">${valuelist.rmb}元</div>
+            </div>
+        </div>
+    </div>
+    <div  class="firstCharge-clue fs-30 fc-b6">
+        <div v-show='rechargeInfo.is_first == 0'>
+            首充奖励<span class="fc-f36 award-candy">${firsrAward}彩虹糖</span>
+        </div>
+    </div>
+    <button class="u-dl-btn u-pay-btn" @click='rechargeCandy'>立即支付</button>
+</div>
+{% endblock %}
+{% block js %}
+<script src="/Recharge/js/rainbowCandy.js"></script>
+{% endblock %}

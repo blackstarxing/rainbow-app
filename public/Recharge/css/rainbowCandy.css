@@ -1,0 +1,91 @@
+.g-rainbowCandy{
+	width: 100%;
+	height: 100%;
+	margin:0;
+	padding:0; 
+}
+.m-rainbowCandy{
+	width:100%;
+	min-height: 1.333333rem;
+	margin-bottom: 0.213333rem;
+	padding-left: 0.266667rem;
+	box-sizing: border-box;
+}
+.u-rainbowCandy-account,.u-rainbowCandy-balance{
+	position: relative;
+	width: 100%;
+	min-height: 1.333333rem;
+	line-height: 1.333333rem;
+	box-sizing: border-box; 
+}
+.u-rainbowCandy-balance{
+	padding-right: 0.266667rem; 
+}
+.u-account-icon{
+	width: 0.853333rem;
+	height: 0.853333rem;
+	margin: 0 0.213333rem 0 0.266667rem;
+	vertical-align: middle;
+	border-radius: 50%;
+}
+.u-switch-account{
+	position: absolute;
+	top:50%;
+	transform: translateY(-50%);
+	right: 0.266667rem;
+}
+.m-candyItem{
+	width: 100%;
+	min-height: 5.066667rem;
+	padding: 0.346667rem 0.4rem;
+	box-sizing: border-box;
+	font-size: 0;
+}
+.u-candyItem{
+	display: inline-block;
+	position: relative;
+	width: 2.893333rem;
+	height: 2.026667rem;
+	margin-bottom: 0.32rem;
+	box-sizing: border-box;
+	text-align: center;
+	border-radius: 0.106667rem;
+}
+.u-candyItem.active{
+	border:2px solid #ffb128;
+	background: #fffaec;
+}
+
+.u-candyItem:nth-child(3n+1),.u-candyItem:nth-child(3n+2){
+	margin-right: 0.266667rem;
+}
+.u-candyItem:nth-child(3n+2){
+	width: 2.88rem;
+}
+.candyItem-count{
+	width: 100%;
+	height: 0.4rem;
+	margin: 0.48rem 0 0.4rem;
+}
+
+.u-firstCharge{
+	position: absolute;
+	top:0;
+	right: 0;
+	width: 0.76rem;
+	height: 0.76rem;
+	background: url('/Recharge/images/firstCharge.png') no-repeat;
+	background-size: 0.76rem 0.76rem;
+}
+
+.firstCharge-clue{
+	width: 100%;
+	height: 0.4rem;
+	margin:0.853333rem 1.0rem 0.133333rem;
+}
+.award-candy{
+	margin-left: 0.133333rem;
+}
+.u-pay-btn{
+	width: 9.066667rem;
+}	
