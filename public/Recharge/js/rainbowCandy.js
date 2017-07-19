@@ -1,15 +1,19 @@
-var rainbowCandy = new Vue({
-    el: '#rainbowCandy',
-    delimiters: ['${', '}'],
-    data: {
-    	//tab当前位置
-    	isCur:0,
-    	//首充奖励
-    	firsrAward:600,
-    	userId:'',
-    	countInfo:[],
-    	rechargeInfo:[],
-    },
+	var rainbowCandy = new Vue({
+	    el: '#rainbowCandy',
+	    delimiters: ['${', '}'],
+	    data: {
+	    	//tab当前位置
+	    	isCur:0,
+	    	//首充奖励
+	    	firsrAward:600,
+	    	userId:'',
+	    	countInfo:[],
+	    	rechargeInfo:[],
+	    	//支付失败提示
+	    	payPrompt:false,
+	    	//支付文字
+	    	payText:'',
+	    },
     mounted:function(){
         this.$nextTick(function () {
             /*去掉iphone手机滑动默认行为*/
@@ -90,17 +94,10 @@ var rainbowCandy = new Vue({
         	window.location.href = '/Recharge/login';
         	window.localStorage.removeItem('userId');
         },
-        switchCash:function(index){
+        switchCash:function(index,value){
         	var _this = this;
         	_this.isCur = index;
-        	switch(_this.isCur){
-        		case 0:_this.firsrAward = 600; break;
-        		case 1:_this.firsrAward = 880; break;
-        		case 2:_this.firsrAward = 1080; break;
-        		case 3:_this.firsrAward = 1800; break;
-        		case 4:_this.firsrAward = 2880; break;
-        		case 5:_this.firsrAward = 6980; break;
-        	}
+        	_this.firsrAward = value;
         },
         //立即支付
         rechargeCandy:function(){
@@ -118,10 +115,10 @@ var rainbowCandy = new Vue({
                   if(data.code == 0){
 	                  	var weixinPay = data.object;
 	                  	var appId = weixinPay.appId;
-	                  	var appId ='wx1bd2b48c81600e98';
+	                  	// var appId ='wx1bd2b48c81600e98';
 	                  	var nonce_str = weixinPay.nonce_str;
 	                  	var package = weixinPay.package;
-	                  	var timeStamp = weixinPay.timeStamp;
+	                  	var timeStamp = weixinPay.timeStamp+'';
 	                  	var paySign = weixinPay.paySign;
 	                  	var signType = weixinPay.signType; 
 	                  	callpay();
@@ -136,14 +133,28 @@ var rainbowCandy = new Vue({
 						             "signType":signType     //微信签名方式  
 						         },  
 						         function(res){  
-						          if(res.err_msg == "get_brand_wcpay_request:ok" ) {  
-						         //window.location.replace("index.html");  
-						         alert('支付成功');  
-						     }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
-						         alert('支付取消');  
-						     }else if(res.err_msg == "get_brand_wcpay_request:fail" ){  
-						        alert('支付失败');  
-						     } //使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。  
+						          	if(res.err_msg == "get_brand_wcpay_request:ok" ) {  
+						           		 var _this = this;
+								        _this.payPrompt = true; 
+								        _this.payText = '支付成功';
+								         setTimeout(function(){
+								        	_this.payPrompt = false; 
+								        },2000); 
+								    }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
+								        var _this = this;
+								        _this.payPrompt = true;  
+								        _this.payText = '支付失败';
+								        setTimeout(function(){
+								        	_this.payPrompt = false; 
+								        },2000);
+								    }else if(res.err_msg == "get_brand_wcpay_request:fail" ){  
+								         var _this = this;
+								        _this.payPrompt = true; 
+								        _this.payText = '支付失败'; 
+								         setTimeout(function(){
+								        	_this.payPrompt = false; 
+								        },2000);  
+								    } //使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。  
 						         }  
 						    );  
 						 };  
