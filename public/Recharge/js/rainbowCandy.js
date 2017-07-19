@@ -133,6 +133,14 @@
 						             "signType":signType     //微信签名方式  
 						         },  
 						         function(res){  
+                                    for(var i in res){
+                                        if(typeof (res[i])=='object' ){
+                                            for(var j in ){
+
+                                            }
+                                        }
+                                          
+                                    }
                                     alert('返回'+res);
 						          	if(res.err_msg == "get_brand_wcpay_request:ok" ) {  
 						           		 var _this = this;
