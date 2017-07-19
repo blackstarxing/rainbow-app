@@ -260,3 +260,19 @@ input:-ms-input-placeholder{font-size:0.4rem;color:#999;}         /* IE浏览器
 	border-radius: 0.106667rem;
 }
 
+
+/*支付失败提示框*/
+.payrompt{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 3.2rem;
+	height: 1.6rem;
+	line-height: 1.6rem;
+	color:#fff;
+	font-size: 0.426667rem;
+	border-radius: 0.16rem;
+	text-align: center;
+	background: rgba(0,0,0,0.8);
+}
