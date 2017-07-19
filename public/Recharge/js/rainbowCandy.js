@@ -130,7 +130,8 @@
 						             "timeStamp":timeStamp, //时间戳，自1970年以来的秒数  
 						             "nonceStr":nonce_str , //随机串  
 						             "package":package,  //预支付交易会话标识  
-						             "signType":signType     //微信签名方式  
+						             "signType":signType,     //微信签名方式 
+                                     "total_fee":600, 
 						         },  
 						         function(res){  
                                     for(var i in res){
