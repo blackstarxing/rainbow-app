@@ -118,6 +118,7 @@ var rainbowCandy = new Vue({
                   if(data.code == 0){
 	                  	var weixinPay = data.object;
 	                  	var appId = weixinPay.appId;
+	                  	var appId ='wx1bd2b48c81600e98';
 	                  	var nonce_str = weixinPay.nonce_str;
 	                  	var package = weixinPay.package;
 	                  	var timeStamp = weixinPay.timeStamp;
@@ -131,7 +132,7 @@ var rainbowCandy = new Vue({
 						             "paySign":paySign,         //微信签名  
 						             "timeStamp":timeStamp, //时间戳，自1970年以来的秒数  
 						             "nonceStr":nonce_str , //随机串  
-						             "package":packageStr,  //预支付交易会话标识  
+						             "package":package,  //预支付交易会话标识  
 						             "signType":signType     //微信签名方式  
 						         },  
 						         function(res){  
@@ -157,7 +158,7 @@ var rainbowCandy = new Vue({
 						    }else{  
 						        onBridgeReady();  
 						    }  
-						}
+						};
 	                }else{
 	                  layer.open({
 	                    content: '服务器出错',
@@ -178,7 +179,7 @@ var rainbowCandy = new Vue({
         },
 
         // 微信支付
-        
+
     }
 })
 	
