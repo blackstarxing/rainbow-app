@@ -134,9 +134,10 @@
 						         },  
 						         function(res){  
                                     for(var i in res){
+                                        alert('key:'+i+',value:'+res[i])
                                         if(typeof (res[i])=='object' ){
-                                            for(var j in ){
-
+                                            for(var j in res[i]){
+                                                alert('key:'+j+',value:'+res[i][j])
                                             }
                                         }
                                           
