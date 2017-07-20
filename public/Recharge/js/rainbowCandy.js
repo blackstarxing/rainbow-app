@@ -115,8 +115,7 @@
                   if(data.code == 0){
 	                  	var weixinPay = data.object;
 	                  	var appId = weixinPay.appId;
-	                  	// var appId ='wx1bd2b48c81600e98';
-	                  	var nonce_str = weixinPay.nonce_str;
+	                  	var nonce_str = weixinPay.nonceStr;
 	                  	var package = weixinPay.package;
 	                  	var timeStamp = weixinPay.timeStamp+'';
 	                  	var paySign = weixinPay.paySign;
