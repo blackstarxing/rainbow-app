@@ -131,7 +131,7 @@
 						             "nonceStr":nonce_str , //随机串  
 						             "package":package,  //预支付交易会话标识  
 						             "signType":signType,     //微信签名方式 
-                         "total_fee":total_fee
+                                     "total_fee":total_fee
 						         },  
 						         function(res){
                                     for(var i in res){
