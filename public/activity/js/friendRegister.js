@@ -16,7 +16,9 @@ var friendRegister = new Vue({
         nickName:'',
         
         //邀请好友文字显示
-        inviteText:true,
+        // inviteText:true,
+        //弹框的显示
+        mask:false
   	},
   	mounted:function(){
   		this.$nextTick(function () {
@@ -29,7 +31,6 @@ var friendRegister = new Vue({
         });
         $('.set').hide();
         $('.noset').show();
-        $('.g-checkCodeMask').hide();
         this.codeError = '';
         this.messageCodeError = '';
         if(userId){
@@ -68,7 +69,12 @@ var friendRegister = new Vue({
               }
             }); 
         }else{
-            this.inviteText = false;
+            // this.inviteText = false;
+            layer.open({
+                content: '服务器出错',
+                btn: '好的',
+                shadeClose: false,
+            });
         }
            
   		});
@@ -95,7 +101,7 @@ var friendRegister = new Vue({
                             success: function(data) {
                                _this.code = '';
                                _this.regPic = '/webapi/checkCode?phone='+_this.phone+'&rand='+new Date();
-                               $('.g-checkCodeMask').show();
+                               _this.mask = true;
                             },
                             error: function() {
                                 layer.open({
@@ -149,7 +155,8 @@ var friendRegister = new Vue({
 
         //弹出框取消
         codeCancel:function(){
-            $('.g-checkCodeMask').hide();
+            var _this = this;
+            _this.mask = false;
         },
         //弹出框确定(校验验证码)
         codeConfirm:function(e){
@@ -168,7 +175,7 @@ var friendRegister = new Vue({
                         dataType: 'json',
                         success: function(data) {
                             if(data.code==0){
-                               $('.g-checkCodeMask').hide();
+                               _this.mask = false;
                                $.ajax({
                                   url: '/webapi/sendSMSCode',
                                   data:{

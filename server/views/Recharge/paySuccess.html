@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/Recharge/css/paySuccess.css">
 {% endblock %}
 {% block content %}
-<div class="g-paySuccess bgc-grey">
+<div class="g-paySuccess bgc-grey" id="paySuccess" v-cloak>
     <div class="m-paySuccess bgc-wt bdc-btm">
         <div class="u-pay-icon">
             <div class="payIcon"></div>
@@ -12,12 +12,59 @@
     </div>
     <div class="m-current-balance bgc-wt f-cb">
     	<span>当前余额</span>
-    	<span class="f-fr">15546</span>
+    	<span class="f-fr">${sweet}</span>
     	<i class="balance-icon f-fr"></i>
     </div>
-    <button class="u-dl-btn u-pay-btn" >完成</button>
+    <button class="u-dl-btn u-pay-btn" @click='paySuccess'>完成</button>
 </div>
 {% endblock %}
 {% block js %}
-<script src="/Recharge/js/login.js"></script>
+<script>
+    var paySuccess = new Vue({
+    el: '#paySuccess',
+    delimiters: ['${', '}'],
+    data: {
+        userId:'',
+        sweet:''
+    },
+    mounted:function(){
+        var _this = this;
+        _this.userId = window.localStorage.getItem("userId");
+        $.ajax({
+            url: '/webapi/pay/mySweet?userId='+_this.userId,
+            type: 'get',
+            dataType:'json',
+            crossDomain:true,
+            xhrFields: {
+                  withCredentials: true,
+            },
+            success: function(data) {
+              if(data.code == 0){
+                 _this.sweet = data.object;
+              }else{
+                layer.open({
+                  content: '服务器出错',
+                  btn: '好的',
+                  shadeClose: false,
+                });
+              }
+            },  
+            error: function() {
+                layer.open({
+                  content: '网络异常，请刷新重试',
+                  btn: '好的',
+                  shadeClose: false,
+                });
+            }
+        }); 
+    },
+    methods: {
+        // 完成
+        paySuccess:function(){
+            window.location.href = '/Recharge/rainbowCandy';
+        }
+    }
+})
+
+</script>
 {% endblock %}

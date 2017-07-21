@@ -5,14 +5,44 @@ var rechargeLogin = new Vue({
       	userId:''
     },
     mounted:function(){
-        this.$nextTick(function () {
+      this.$nextTick(function () {
           // 展开得到ID的步骤
           $('.g-getId').on('click',function(){
             $('.m-getId-step').addClass('active');
           });
           var _this = this;
+          $.ajax({
+                url: '/webapi/pay/checkAuth',
+                type: 'get',
+                dataType:'json',
+                crossDomain:true,
+                xhrFields: {
+                      withCredentials: true,
+                },
+                success: function(data) {
+                  if(data.code == 0){
+                    
+                  }else if(data.code == 302){
+                    window.location.href = data.result;
+                  }else{
+                    layer.open({
+                      content: '授权失败',
+                      btn: '好的',
+                      shadeClose: false,
+                    });
+                  }
+                },  
+                error: function() {
+                    layer.open({
+                      content: '网络异常，请刷新重试',
+                      btn: '好的',
+                      shadeClose: false,
+                    });
+                }
+          });
          
         })
+      })
     },
     methods: {
         // 点击完成操作

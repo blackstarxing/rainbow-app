@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block css %}
+<link rel="stylesheet" href="/activity/css/floorPage.css">
+{% endblock %}
+{% block content %}
+<div class="g-floorPage" id="floorPage"  v-cloak>
+    <div class="m-game-pic"></div>
+    <div class="m-floorPage">
+        <!-- 手机号 -->
+        <input  class="friendRegister-phone-ipt fs-28 fc-wt bdc-floor" type="tel" minlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')"   placeholder="请输入手机号码"  oninput="if(value.length>11)value=value.slice(0,11);if(value.length>=11){$('.u-getCode').removeClass('active')}else{$('.u-getCode').addClass('active')}" v-model="phone">
+        <!-- 手机号错误提示-->
+        <div class="phone-error-clue"></div>
+        <!-- 验证码 -->
+        <div class="friendRegister-code f-cb">
+            <input class="friendRegister-code-ipt fc-wt fs-28 f-fl bdc-floor" type="tel" v-model="messCode" placeholder="请输入短信验证码" onkeyup="this.value=this.value.replace(/\D/g,'')"   oninput="if(value.length>6)value=value.slice(0,6);">
+            <button v-bind:class="{disabled:regdis}" v-bind:disabled="regdis"  class="u-getCode fs-28 fc-wt active noset" @click="showPic(0)">${regText}</button> 
+        </div>
+        <!-- 验证码错误提示 -->
+        <div class="code-error-clue fc-wt fs-28"><span>${messageCodeError}</span></div>
+        <!-- 开始游戏按钮 -->
+        <div class="u-floorPage-btn" @click='beginGame'></div>
+    </div>
+    <!--图形验证码-->
+    {% include 'functionModules/chartCode.html' %}
+</div>
+
+{% endblock %}
+{% block js %}
+<script src="/activity/js/floorPage.js"></script>
+{% endblock %}

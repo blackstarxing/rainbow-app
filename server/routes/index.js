@@ -219,4 +219,8 @@ router.get('/Recharge/paySuccess', function(req, res, next) {
    res.render('Recharge/paySuccess', { title: '支付结果' });
 });
 
+//落地页
+router.get('/activity/floorPage', function(req, res, next) {
+   res.render('activity/floorPage', { title: '落地页' });
+});
 module.exports = router;
