@@ -114,13 +114,12 @@
                 success: function(data) {
                   if(data.code == 0){
 	                  	var weixinPay = data.object;
-	                  	var appId = weixinPay.appId;
-	                  	var nonce_str = weixinPay.nonceStr;
-	                  	var package = weixinPay.package;
+	                  	var appId = weixinPay.appId+'';
+	                  	var nonce_str = weixinPay.nonceStr+'';
+	                  	var package = weixinPay.package+'';
 	                  	var timeStamp = weixinPay.timeStamp+'';
-	                  	var paySign = weixinPay.paySign;
-	                  	var signType = weixinPay.signType; 
-                      var total_fee = weixinPay.totalFee; 
+	                  	var paySign = weixinPay.paySign+'';
+	                  	var signType = weixinPay.signType+''; 
 	                  	callpay();
 		                function onBridgeReady(){  
 						    WeixinJSBridge.invoke(  
@@ -131,7 +130,6 @@
 						             "nonceStr":nonce_str , //随机串  
 						             "package":package,  //预支付交易会话标识  
 						             "signType":signType,     //微信签名方式 
-                                     "total_fee":total_fee
 						         },  
 						         function(res){
                                     for(var i in res){
