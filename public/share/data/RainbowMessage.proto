@@ -60,6 +60,7 @@ message GCResultRet
 	optional CardsSet cardsSet3         = 5;   //第三位牌组
 	optional int32  winIndex			= 6;   //获胜位
 	optional int32  gameId              = 7;   //游戏ID
+	optional CardsSet bankerCardsSet    = 8;   //庄家牌组
 
 }
 //欢乐牛仔牌组
@@ -67,6 +68,7 @@ message CardsSet
 {
 	optional int32 nameNo   = 1; //牌组称号编号  0普通无牛  1——9牛1~牛9  10牛牛  11 银牛  12 金牛 13 炸弹 14 五小牛 
 	repeated Card Cards		= 2; //牌组
+	optional int32 isWin	= 3; //是否赢庄 1 是 0 否
 }
 
 //欢乐牛仔扑克牌
@@ -113,6 +115,7 @@ message GCGameStateRet
 	optional int32  liveId	            = 3;   //直播间ID
 	optional int32  chessboardId        = 4;   //局ID  状态值为1时返回
 	optional int32  gameId	            = 5;   //游戏ID
+	optional int32  bankerId            = 6;   //庄家ID
 }
 
 //----------------------用户离开直播间（client<-->Gameserver）协议号 10011----------------------
@@ -218,6 +221,61 @@ message GCEnterLiveRoomRet
 	 optional int32 code				 = 1;    //返回码  0成功 1 失败等
 	 optional string msg                 = 2;    //提示信息
 	 optional int32 liveId	           	 = 3;    //直播间ID
+}
+
+//----------------------上下庄（client<-->Gameserver）协议号 10024----------------------
+message CGUpDownBanker
+{
+	 optional int32  userId               = 1;   //用户ID
+	 optional string  token               = 2;   //登录token
+	 optional int32  liveId				  = 3;   //直播间ID
+	 optional int32  upOrDown             = 4;   //上下庄   0下庄  1 上庄
+}
+
+//----------------------上下庄返回（Gameserver<-->client）协议号 10025----------------------
+message GCUpDownBankerRet
+{
+	 optional int32 code				    = 1;    //返回码  0成功 1 失败等
+	 optional string msg                 	= 2;    //提示信息
+	 optional int32 liveId	           	    = 3;    //直播间ID
+}
+
+//----------------------上庄列表（client<-->Gameserver）协议号 10026----------------------
+message CGUpBankerList
+{
+	 optional int32  liveId				 = 1;   //直播间ID
+	 optional int32  gameId               = 2;   //游戏ID
+}
+
+//----------------------上庄列表返回（client<-->Gameserver）协议号 10027----------------------
+message GCUpBankerListRet
+{
+	 repeated User user		= 1; //上庄用户
+}
+
+//上庄用户
+message User
+{
+	 optional int32  num				  = 1;   //序号
+	 optional int32  userId               = 2;   //用户ID
+	 optional string nickname             = 3;   //昵称
+	 optional int32  sweetNum             = 4;   //彩虹糖数量
+}
+
+//----------------------用户实时彩虹糖（client<-->Gameserver）协议号 10028----------------------
+message CGNowSweetInfo
+{
+	 optional int32  userId               = 1;   //用户ID
+	 optional string  token               = 2;   //登录token
+}
+
+//----------------------用户实时彩虹糖返回（Gameserver<-->client）协议号 10029----------------------
+message GCNowSweetInfoRet
+{
+	 optional int32 userId                 	= 1;    //用户ID
+	 optional int32 totalSweet	            = 2;    //彩虹糖数量 总额
+	 optional int32 freezeSweet	            = 3;    //彩虹糖数量 冻结
+	 optional int32 availableSweet          = 4;    //彩虹糖数量 可用
 }
 
 

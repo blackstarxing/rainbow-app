@@ -3,20 +3,20 @@
     <div class="m-banker">
         <div class="banker">
             <div class="banker-avatar">
-                <i class="avatar icon-avatar icon-toplist" v-bind:style="{backgroundImage: 'url(' + info.user_icon + ')'}" v-bind:data-id="info.userId" @click="showCard"></i>
-                <span>吕布</span>
+                <i class="avatar icon-avatar icon-toplist" v-bind:style="{backgroundImage: 'url(' + hero.banker.user_icon + ')'}" v-bind:data-id="info.userId" @click="showCard"></i>
+                <span>${hero.banker.name}</span>
             </div>
             <div class="record">
-                1.2万<span>记录</span>
+                ${watchNum(hero.banker.sweet)}<span>记录</span>
             </div>
             <div class="poker-area">
-                <div class="result-box" v-show="game.poker_group[0]">
+                <div class="result-box" v-show="hero.poker_group[0]">
                     <ul class="f-cb">
-                        <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet1">${card.cardNoShow}</li>
+                        <li v-bind:class="'poker'+card.cardColor" v-for="card in hero.bankerCardsSet">${card.cardNoShow}</li>
                     </ul>
-                    <div class="result"><img v-bind:src="'/share/images/cow'+game.result1+'.png'" alt=""></div>
+                    <div class="result"><img v-bind:src="'/share/images/cow'+hero.result+'.png'" alt=""></div>
                 </div>  
-                <ul class="halfway-poker">
+                <ul class="halfway-poker" v-show="hero.half_group[0]">
                     <li></li>
                     <li></li>
                     <li></li>
@@ -31,13 +31,13 @@
         <div class="game-box hero">
             <div class="stake-box">
                 <div class="poker-area">
-                    <div class="result-box" v-show="game.poker_group[0]">
+                    <div class="result-box" v-show="hero.poker_group[1]">
                         <ul class="f-cb">
                             <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet1">${card.cardNoShow}</li>
                         </ul>
                         <div class="result"><img v-bind:src="'/share/images/cow'+game.result1+'.png'" alt=""></div>
                     </div>  
-                    <ul class="halfway-poker" v-show="half_group[0]">
+                    <ul class="halfway-poker" v-show="hero.half_group[1]">
                         <li></li>
                         <li></li>
                         <li></li>
@@ -59,17 +59,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="result-mask" v-show="game.mask[0]"></div>
             </div>
             <div class="stake-box">
                 <div class="poker-area">
-                    <div class="result-box" v-show="game.poker_group[1]">
+                    <div class="result-box" v-show="hero.poker_group[2]">
                         <ul class="f-cb">
                             <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet2">${card.cardNoShow}</li>
                         </ul>
                         <div class="result"><img v-bind:src="'/share/images/cow'+game.result2+'.png'" alt=""></div>
                     </div>  
-                    <ul class="halfway-poker" v-show="half_group[1]">
+                    <ul class="halfway-poker" v-show="hero.half_group[2]">
                         <li></li>
                         <li></li>
                         <li></li>
@@ -91,17 +90,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="result-mask" v-show="game.mask[1]"></div>
             </div>
             <div class="stake-box">
                 <div class="poker-area">
-                    <div class="result-box" v-show="game.poker_group[2]">
+                    <div class="result-box" v-show="hero.poker_group[3]">
                         <ul class="f-cb">
                             <li v-bind:class="'poker'+card.cardColor" v-for="card in game.cardsSet3">${card.cardNoShow}</li>
                         </ul>                                   
                         <div class="result"><img v-bind:src="'/share/images/cow'+game.result3+'.png'" alt=""></div>
                     </div>  
-                    <ul class="halfway-poker" v-show="half_group[2]">
+                    <ul class="halfway-poker" v-show="hero.half_group[3]">
                         <li></li>
                         <li></li>
                         <li></li>

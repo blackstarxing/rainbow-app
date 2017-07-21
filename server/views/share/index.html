@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
 <div id="room" v-cloak>
-    <div class="play-btn icon-play"></div>
+    <div class="play-btn icon-play" v-if="state==1"></div>
     <div class="g-ct">
         <div class="m-video">
             <div v-if="state==1">
