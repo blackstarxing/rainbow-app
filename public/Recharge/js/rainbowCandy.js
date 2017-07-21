@@ -132,36 +132,23 @@
 						             "signType":signType,     //微信签名方式 
 						         },  
 						         function(res){  
-                                    for(var i in res){
-                                        alert('key:'+i+',value:'+res[i])
-                                        if(typeof (res[i])=='object' ){
-                                            for(var j in res[i]){
-                                                alert('key:'+j+',value:'+res[i][j])
-                                            }
-                                        }
-                                          
-                                    }
-                                    alert('返回'+res);
 						          	if(res.err_msg == "get_brand_wcpay_request:ok" ) {  
-						           		 var _this = this;
-								        _this.payText = '支付成功';
-								         setTimeout(function(){
-								        	_this.payPrompt = true; 
-								        },2000); 
+						           		 window.location.href = '/Recharge/paySuccess';
 								    }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
 								        var _this = this;
-								        _this.payText = '支付失败';
-								        setTimeout(function(){
-								        	_this.payPrompt = true;  
-								        },2000);
+                                        _this.payText = '支付失败'; 
+								        _this.payPrompt = true; 
+                                         setTimeout(function(){
+                                            _this.payPrompt = false; 
+                                        },2000);
 								    }else if(res.err_msg == "get_brand_wcpay_request:fail" ){  
 								         var _this = this;
-								        _this.payPrompt = true; 
 								        _this.payText = '支付失败'; 
-								         setTimeout(function(){
-								           _this.payPrompt = true; 
-								        },2000);  
-								    } //使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。  
+								        _this.payPrompt = true; 
+                                        setTimeout(function(){
+                                            _this.payPrompt = false; 
+                                        },2000); 
+								    } //使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。  
 						         }  
 						    );  
 						 };  
@@ -177,13 +164,25 @@
 						        onBridgeReady();  
 						    }  
 						};
-	                }else{
-	                  layer.open({
-	                    content: '服务器出错',
-	                    btn: '好的',
-	                    shadeClose: false,
-	                  });
-	                }
+	                }else if(data.code == -1){
+    	                layer.open({
+    	                  content: '充值失败',
+    	                  btn: '好的',
+    	                  shadeClose: false,
+    	                });
+	                }else if(data.code == -5){
+                        layer.open({
+                            content: '参数出错',
+                            btn: '好的',
+                            shadeClose: false,
+                        });
+                    }else{
+                        layer.open({
+                            content: '服务器出错,请稍后再试',
+                            btn: '好的',
+                            shadeClose: false,
+                        });
+                    }
                 },  
                 error: function() {
                     layer.open({
@@ -195,8 +194,6 @@
             });
 
         },
-
-        // 微信支付
 
     }
 })

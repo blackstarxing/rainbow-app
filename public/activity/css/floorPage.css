@@ -1,0 +1,69 @@
+/*placeholder*/
+input::-webkit-input-placeholder{font-size:0.373333rem;color:#937aaa;}    /* 使用webkit内核的浏览器 */
+input:-moz-placeholder{0.373333rem;color:#937aaa;}              /* Firefox版本4-18 */
+input::-moz-placeholder{0.373333rem;color:#937aaa;}             /* Firefox版本19+ */
+input:-ms-input-placeholder{0.373333rem;color:#937aaa;}         /* IE浏览器 */
+.g-floorPage{
+	width: 100%;
+	/*height: 100%;*/
+	box-sizing: border-box;
+}
+.m-game-pic{
+	width: 100%;
+	height: 12.533333rem;
+	background: url('/activity/images/floorPage.png')  no-repeat;
+	background-size: 10.0rem 12.533333rem;
+}
+.m-floorPage{
+	width: 100%;
+	height: 6.0rem;
+	padding: 1.5rem 0.533333rem 0;
+	margin-top: -2.4rem;
+	background: url('/activity/images/floorLogin.png')  no-repeat;
+	background-size: 10.0rem 6.0rem;
+	box-sizing: border-box;
+}
+.friendRegister-phone-ipt{
+	width: 7.2rem;
+	height: 1.066667rem;
+	border-radius: 0.533333rem;
+	text-indent: 0.32rem;
+	background: rgba(0,0,0,0.2);
+}
+.phone-error-clue{
+	width: 100%;
+	height: 0.213333rem;
+	padding-left: 0.266667rem;
+}
+.friendRegister-code-ipt{
+	width: 4.0rem;
+	border-radius: 0.533333rem;
+	text-indent: 0.32rem;
+	background: rgba(0,0,0,0.2);
+}
+.u-getCode{
+	position: absolute;
+	left: 4.32rem;
+	max-width: 3.2rem;
+	height: 1.066667rem;
+	line-height: 1.25rem;
+	margin-left: 0.533333rem;
+	/*-webkit-text-stroke:1px #451f55;*/
+}
+.u-getCode.active{
+	opacity: 0.6;
+	filter:alpha(opacity=60);
+}
+.code-error-clue{
+	width: 100%;
+	height: 0.4rem;
+	padding-left: 0.266667rem;
+	margin:0.133333rem 0 0.133333rem;
+}
+
+.u-floorPage-btn{
+	width: 7.813333rem;
+	height: 1.173333rem;
+	background: url('/activity/images/beginGame.png') no-repeat;
+	background-size: 7.813333rem 1.173333rem;
+}

@@ -63,6 +63,10 @@ input:-ms-input-placeholder{font-size:0.4rem;color:#999;}         /* IE浏览器
 .bdc-gye6{border:1px solid #e6e6e6;}
 /*充值彩虹糖 被选中状态*/
 .bdc-candy{border:2px solid #ffb128;}
+/*落地页input*/
+.bdc-floor{border:2px solid #d47aff;}
+ /*落地页button*/
+.bdc-floorBtn{border:1px solid #451f55;}
 
 /*color*/
 .fc-wt{color:#fff;}
@@ -262,7 +266,7 @@ input:-ms-input-placeholder{font-size:0.4rem;color:#999;}         /* IE浏览器
 
 
 /*支付失败提示框*/
-.payrompt{
+.payPrompt{
 	position: absolute;
 	top: 50%;
 	left: 50%;
