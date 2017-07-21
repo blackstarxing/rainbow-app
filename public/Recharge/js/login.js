@@ -42,7 +42,6 @@ var rechargeLogin = new Vue({
           });
          
         })
-      })
     },
     methods: {
         // 点击完成操作
