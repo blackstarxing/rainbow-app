@@ -18,14 +18,14 @@
         </div> -->
     </div>
     <div class="m-candyItem bgc-wt">
-        <div v-if='rechargeInfo.is_first == 0'>
+        <div v-if='rechargeInfo.is_first == 1'>
             <div v-for='(valuelist,index) in rechargeInfo.sweetList' :id='valuelist.id' :class="{active:isCur==index}"  class="u-candyItem bdc-gye6" @click='switchCash(index,valuelist.first_charge_value)'>
                 <div class="u-firstCharge"></div>
                 <div class="fc-b3 fs-30 candyItem-count">${valuelist.value}彩虹糖</div>
                 <div class="fc-b9 fs-30 candyItem-cash">${valuelist.rmb}元</div>
             </div>
         </div>
-        <div  v-else-if='rechargeInfo.is_first != 0' >
+        <div  v-else-if='rechargeInfo.is_first != 1' >
             <div v-for='(valuelist,index) in rechargeInfo.sweetList' :id='valuelist.id' :class="{active:isCur==index}"  class="u-candyItem bdc-gye6" @click='switchCash(index,valuelist.first_charge_value)'>
                 <div class="fc-b3 fs-30 candyItem-count">${valuelist.value}彩虹糖</div>
                 <div class="fc-b9 fs-30 candyItem-cash">${valuelist.rmb}元</div>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div  class="firstCharge-clue fs-30 fc-b6">
-        <div v-show='rechargeInfo.is_first == 0'>
+        <div v-show='rechargeInfo.is_first == 1'>
             首充奖励<span class="fc-f36 award-candy">${firsrAward}彩虹糖</span>
         </div>
     </div>
