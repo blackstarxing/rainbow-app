@@ -182,8 +182,7 @@ var rainbowCandy = new Vue({
 	                  	var timeStamp = weixinPay.timeStamp+'';
 	                  	var paySign = weixinPay.paySign+'';
 	                  	var signType = weixinPay.signType+''; 
-	                  	callpay();
-		               
+	                  	callpay();		               
 	                }else if(data.code == -1){
     	                layer.open({
     	                  content: '充值失败',
