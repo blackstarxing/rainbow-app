@@ -81,9 +81,9 @@ var rechargeLogin = new Vue({
                 });
             }else if(_this.userId.length != 7){
                 layer.open({
-                    content: 'id输入有误,请重新输入',
-                    btn: '好的',
-                    shadeClose: false,
+                    content: 'id输入有误,请重新输入'
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
                 });
             }
        
