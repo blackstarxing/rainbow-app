@@ -132,41 +132,43 @@ var rainbowCandy = new Vue({
 						             "signType":signType,     //微信签名方式 
 						         },  
 						         function(res){
-                                    // for(var i in res){
-                                    //     alert('key:'+i+',value:'+res[i])
-                                    //     if(typeof (res[i])=='object' ){
-                                    //          for(var j in res[i]){
-                                    //                alert('key:'+j+',value:'+res[i][j])
-                                    //          }
-                                    //     }
-                                    //  }
+                        // for(var i in res){
+                        //     alert('key:'+i+',value:'+res[i])
+                        //     if(typeof (res[i])=='object' ){
+                        //          for(var j in res[i]){
+                        //                alert('key:'+j+',value:'+res[i][j])
+                        //          }
+                        //     }
+                        //  }
 						          	if(res.err_msg == "get_brand_wcpay_request:ok" ) {  
 						           		 window.location.href = '/Recharge/paySuccess';
-								    }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
-								        // var _this = this;
-                                        //_this.payText = '支付失败'; 
-								        // _this.payPrompt = true; 
-                                        //    setTimeout(function(){
-                                        //       _this.payPrompt = false; 
-                                        //,2000);
-                                        layer.open({
-                                          content: '支付失败',
-                                          btn: '好的',
-                                          shadeClose: false,
-                                        });
-								    }else if(res.err_msg == "get_brand_wcpay_request:fail" ){  
-								        //  var _this = this;
-								        // _this.payText = '支付失败'; 
-								        // _this.payPrompt = true; 
-                                        //setTimeout(function(){
-                                        //    _this.payPrompt = false; 
-                                        //},2000); 
-                                        layer.open({
-                                          content: '支付失败',
-                                          btn: '好的',
-                                          shadeClose: false,
-                                        });
-								    } //使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。  
+    								    }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
+    								        // var _this = this;
+                            //_this.payText = '支付失败'; 
+    								        // _this.payPrompt = true; 
+                            //    setTimeout(function(){
+                            //       _this.payPrompt = false; 
+                            //,2000);
+                            layer.open({
+                              style: 'width:3.2rem;height:1.6rem;line-height:1.6rem;background:rgba(0,0,0,0.6);color:#fff',
+                              content: '支付失败',
+                              time:2,
+                              shade:'background:rgba(0,0,0,0)',
+                            });
+    								    }else if(res.err_msg == "get_brand_wcpay_request:fail" ){  
+                    				//  var _this = this;
+                    				// _this.payText = '支付失败'; 
+                    				// _this.payPrompt = true; 
+                            //setTimeout(function(){
+                            //    _this.payPrompt = false; 
+                            //},2000); 
+                            layer.open({
+                              style: 'width:3.2rem;height:1.6rem;line-height:1.6rem;background:rgba(0,0,0,0.6);color:#fff',
+                              content: '支付失败',
+                              time:2,
+                              shade:'background:rgba(0,0,0,0)',
+                            });
+    								    } //使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。  
 						         }  
 						    );  
 						 };  
@@ -184,10 +186,11 @@ var rainbowCandy = new Vue({
 						};
 	                }else if(data.code == -1){
     	                layer.open({
-    	                  content: '充值失败',
-    	                  btn: '好的',
-    	                  shadeClose: false,
-    	                });
+                          style: 'width:3.2rem;height:1.6rem;line-height:1.6rem;background:rgba(0,0,0,0.6);color:#fff',
+                          content: '支付失败',
+                          time:2,
+                          shade:'background:rgba(0,0,0,0)',
+                      });
 	                }else if(data.code == -5){
                         layer.open({
                             content: '参数出错',
