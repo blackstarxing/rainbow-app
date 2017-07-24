@@ -28,6 +28,15 @@
 	vertical-align: middle;
 	border-radius: 50%;
 }
+.u-account-nickName{
+	position: absolute;
+	max-width: 4.4rem;
+	height: 1.333333rem;
+	line-height: 1.333333rem;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .u-switch-account{
 	position: absolute;
 	top:50%;
