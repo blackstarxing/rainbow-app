@@ -39,8 +39,8 @@
         </div>
 
         <!-- 送出礼物 -->
-        <div v-if="incomeList!=''" class="m-giftHistoryList bgc-wt" v-show="giftSendList">
-            <div class="u-giftHistoryList bdc-btm  f-cb" v-for="item in incomeList">
+        <div v-if="sendGiftList!=''" class="m-giftHistoryList bgc-wt" v-show="giftSendList">
+            <div class="u-giftHistoryList bdc-btm  f-cb" v-for="item in sendGiftList">
                 <div class="m-fansIcon g-sd51">
                     <img v-bind:src="item.icon" alt="">
                 </div>
@@ -54,11 +54,11 @@
                     <img  v-bind:src="item.no_frame_icon" alt="">
                 </div>
             </div>
-            <div class="giftLoad" v-show="giftLoad">${giftloadText}</div>
+            <div class="giftLoad" v-show="sendLoad">${sendloadText}</div>
         </div>
         <!-- 暂无送出礼物 -->
         <div  v-else  class="disRecord disRecord-income" v-show="giftSendList">
-            <div class="u-disRecord u-disRecord-income fs-30 fc-b9">送出礼物</div>
+            <div class="u-disRecord u-disRecord-income fs-30 fc-b9">暂无送出礼物</div>
         </div>
 
         <!-- 兑换记录 -->

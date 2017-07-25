@@ -16,16 +16,21 @@
        exchangeislast:'',
        incomepage:1,
        exchangepage:1,
+       sendpage:1,
        pageSize:10,
        //数据加载判断 
        giftislast:0,
        cashislast:0,
+       sendislast:0,
        //收礼加载中
        giftLoad:false,
        giftloadText:'',
        // 兑换加载
        changeLoad:false,
        exchangeloadText:'',
+       //送出礼物加载
+       sendLoad:false,
+       sendloadText:'',
      },
      mounted:function(){
         this.$nextTick(function () {
@@ -81,6 +86,12 @@
                     }else if(_this.cashislast == 1){
                       _this.exchangeloadText = '没有数据了';
                     }
+                    if(!_this.sendislast && _this.giftSendList== true){
+                       _this.sendpage+=1;
+                       _this.sendRecordLoad();
+                    }else if(_this.sendislast == 1){
+                      _this.sendloadText = '没有数据了';
+                    }
                 }
             })
         })
@@ -106,6 +117,7 @@
            $('.u-incomeDetail').removeClass('active');
             var _this = this;
             _this.giftHistoryList = false;
+            _this.giftSendList = false;
             _this.withdrawList = true;
             $.ajax({
               url: '/webapi/withdraw/withdrawList?page='+1+'&pageSize='+_this.pageSize,
@@ -157,6 +169,7 @@
            $('.u-exchangeDetail').removeClass('active');
            var _this = this;
             _this.giftHistoryList = true;
+             _this.giftSendList = false;
             _this.withdrawList = false;
              $.ajax({
               url: '/webapi/withdraw/giftHistoryList?page='+1+'&pageSize='+_this.pageSize,
@@ -207,6 +220,42 @@
             $('.u-sendDetail').addClass('active');
             $('.u-incomeDetail').removeClass('active');
             $('.u-exchangeDetail').removeClass('active');
+            var _this = this;
+            _this.giftHistoryList = false;
+            _this.withdrawList = false;
+            _this.giftSendList = true;
+            $.ajax({
+              url: '/webapi/withdraw/sendGiftHistoryList?page='+1+'&pageSize='+_this.pageSize,
+              type: 'get',
+              dataType:'json',
+              crossDomain:true,
+              xhrFields: {
+                  withCredentials: true,
+              },
+              success: function(data) {
+                if(data.code == 0){
+                   _this.sendGiftList = data.object.list;
+                   _this.sendislast = data.object.isLast;
+                }else if(data.code == -1){
+                  window.location.href = '/withdrawCash/login';
+                }else if(data.code == -2){
+                  window.location.href = '/withdrawCash/login';
+                }else{
+                  layer.open({
+                    content: '服务器出错',
+                    btn: '好的',
+                    shadeClose: false,
+                  });
+                }
+              },
+              error: function() {
+                  layer.open({
+                    content: '网络异常，请刷新重试',
+                    btn: '好的',
+                    shadeClose: false,
+                  });
+              }
+            });
         },
         // 收益记录加载更多
         incomeLoad:function(){
@@ -267,7 +316,7 @@
                 success: function(data) {
                   if(data.code == 0){
                      _this.exchangeList=_this.exchangeList.concat(data.object.list);
-                     _this.cashislast = data.object.isLast;
+                     _this.sendislast = data.object.isLast;
                   }else{
                     layer.open({
                       content: '服务器出错',
@@ -287,7 +336,42 @@
             });
         },
         sendRecordLoad:function(){
-
+            var _this = this;
+            _this.sendLoad = true;
+            _this.sendloadText = '加载中...';
+            $.ajax({
+                url: '/webapi/withdraw/sendGiftHistoryList',
+                type: 'get',
+                dataType:'json',
+                data:{
+                  page: _this.sendpage,
+                  pageSize: _this.pageSize,
+                }, 
+                crossDomain:true,
+                xhrFields: {
+                    withCredentials: true,
+                },
+                success: function(data) {
+                  if(data.code == 0){
+                     _this.sendGiftList=_this.sendGiftList.concat(data.object.list);
+                     _this.sendislast = data.object.isLast;
+                  }else{
+                    layer.open({
+                      content: '服务器出错',
+                      btn: '好的',
+                      shadeClose: false,
+                    });
+                  }
+                 
+                },
+                error: function() {
+                    layer.open({
+                      content: '网络异常，请刷新重试',
+                      btn: '好的',
+                      shadeClose: false,
+                    });
+                }
+            });
         },
       }
 }) 
