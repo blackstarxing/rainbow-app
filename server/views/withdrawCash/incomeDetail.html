@@ -6,14 +6,16 @@
 	<div id="incomeDetail" class="g-incomeDetail bgc-grey" v-cloak>
         <ul  class="m-incomeDetail   bgc-wt bdc-btm">
             <li class="u-incomeDetail active" @click="incomeRecord">
-                <div>收益记录</div>
+                <div>收到礼物</div>
+            </li>
+            <li class="u-sendDetail" @click="sendRecord">
+                <div>送出礼物</div>
             </li>
             <li class="u-exchangeDetail" @click="exchangeRecord">
                 <div>兑换记录</div>
             </li>
         </ul>
-        
-         <!-- 收益记录 -->
+        <!-- 收到礼物 -->
         <div v-if="incomeList!=''" class="m-giftHistoryList bgc-wt" v-show="giftHistoryList">
             <div class="u-giftHistoryList bdc-btm  f-cb" v-for="item in incomeList">
                 <div class="m-fansIcon g-sd51">
@@ -31,12 +33,34 @@
             </div>
             <div class="giftLoad" v-show="giftLoad">${giftloadText}</div>
         </div>
-         <!-- 暂无收礼记录 -->
-         <div  v-else  class="disRecord disRecord-income" v-show="giftHistoryList">
-             <div class="u-disRecord u-disRecord-income fs-30 fc-b9">暂无收礼记录</div>
-         </div>
-        
-        
+         <!-- 暂无收到礼物 -->
+        <div  v-else  class="disRecord disRecord-income" v-show="giftHistoryList">
+            <div class="u-disRecord u-disRecord-income fs-30 fc-b9">暂无收到礼物</div>
+        </div>
+
+        <!-- 送出礼物 -->
+        <div v-if="incomeList!=''" class="m-giftHistoryList bgc-wt" v-show="giftSendList">
+            <div class="u-giftHistoryList bdc-btm  f-cb" v-for="item in incomeList">
+                <div class="m-fansIcon g-sd51">
+                    <img v-bind:src="item.icon" alt="">
+                </div>
+                <div class="m-giftList g-mn5">
+                    <div class="u-giftList fs-30 fc-f36 g-mn5c">
+                        <span>${item.nickname}</span><span class="fc-b3">赠送${item.num}个</span><span>${item.name}</span>
+                        <div class="u-giftList-time fs-28 fc-b9">${item.create_date}</div>
+                    </div>
+                </div>
+                <div class="m-giftIcon g-sd52">
+                    <img  v-bind:src="item.no_frame_icon" alt="">
+                </div>
+            </div>
+            <div class="giftLoad" v-show="giftLoad">${giftloadText}</div>
+        </div>
+        <!-- 暂无送出礼物 -->
+        <div  v-else  class="disRecord disRecord-income" v-show="giftSendList">
+            <div class="u-disRecord u-disRecord-income fs-30 fc-b9">送出礼物</div>
+        </div>
+
         <!-- 兑换记录 -->
         <div  v-if="exchangeList!=''"  class="m-withdrawList" v-show="withdrawList"> 
              <div class="u-withdrawList bgc-wt" v-for="item in exchangeList">

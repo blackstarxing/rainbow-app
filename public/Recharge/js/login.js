@@ -87,6 +87,6 @@ var rechargeLogin = new Vue({
                 });
             }
        
-        }      
+        },      
     }
 })

@@ -6,7 +6,7 @@
     {% if iswechat %}
 	<div id="income" class="g-income" v-cloak>
         <div class="m-headIcon">
-            <div class="u-incomeDetail-text fs-28 fc-wt" @click="incomeDetail">收益明细</div>
+            <div class="u-incomeDetail-text fs-28 fc-wt" @click="incomeDetail">我的账单</div>
             <div class="u-headText">可兑换收益(元)</div>
             <div class="u-headCash">${income.withdraw_amount}</div>
         </div>  
@@ -51,7 +51,7 @@
     {% else %}
         <div id="income" class="g-income" v-cloak>
         <div class="m-headIcon">
-            <div class="u-incomeDetail-text fs-28 fc-wt" @click="incomeDetail">收益明细</div>
+            <div class="u-incomeDetail-text fs-28 fc-wt" @click="incomeDetail">我的账单</div>
             <div class="u-headText">可兑换收益(元)</div>
             <div class="u-headCash">${incomeExplain.withdraw_amount}</div>
         </div>  

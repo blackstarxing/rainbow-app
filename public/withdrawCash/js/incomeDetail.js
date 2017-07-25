@@ -4,7 +4,10 @@
      data: {
        //tab切换
        giftHistoryList:true,
+       giftSendList:false,
        withdrawList:false,
+       //送出礼物列表
+       sendGiftList:[],
        //兑换列表
        exchangeList:[],
        //收益列表
@@ -99,6 +102,7 @@
         // 兑换记录
         exchangeRecord:function(){
            $('.u-exchangeDetail').addClass('active');
+           $('.u-sendDetail').removeClass('active');
            $('.u-incomeDetail').removeClass('active');
             var _this = this;
             _this.giftHistoryList = false;
@@ -149,6 +153,7 @@
         // 收益记录
         incomeRecord:function(){
            $('.u-incomeDetail').addClass('active');
+           $('.u-sendDetail').removeClass('active');
            $('.u-exchangeDetail').removeClass('active');
            var _this = this;
             _this.giftHistoryList = true;
@@ -196,6 +201,12 @@
                   });
               }
             });
+        },
+        //送出礼物
+        sendRecord:function(){
+            $('.u-sendDetail').addClass('active');
+            $('.u-incomeDetail').removeClass('active');
+            $('.u-exchangeDetail').removeClass('active');
         },
         // 收益记录加载更多
         incomeLoad:function(){
@@ -274,6 +285,9 @@
                     });
                 }
             });
-         },
+        },
+        sendRecordLoad:function(){
+
+        },
       }
 }) 
