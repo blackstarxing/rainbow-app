@@ -167,11 +167,11 @@ router.get('/withdrawCash/messageLog', function(req, res, next) {
 router.get('/withdrawCash/exchangerst', function(req, res, next) {
    res.render('withdrawCash/exchangerst', { title: '兑换结果' });
 });
-//提现-收益明细
+//提现-我的账单
 router.get('/withdrawCash/incomeDetail', function(req, res, next) {
    var deviceAgent = req.headers["user-agent"].toLowerCase();
    var iswechat = deviceAgent.match(/MicroMessenger/i)=="micromessenger";
-   res.render('withdrawCash/incomeDetail', { title: '收益明细' ,iswechat: iswechat});
+   res.render('withdrawCash/incomeDetail', { title: '我的账单' ,iswechat: iswechat});
 });
 //提现-兑换说明
 router.get('/withdrawCash/exchangeExplain', function(req, res, next) {

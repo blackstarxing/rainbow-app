@@ -11,10 +11,10 @@
 }
 .m-incomeDetail li{
 	display: inline-block;
-	width: 49%;
+	width: 32.5%;
 	height: 100%;
 	line-height: 1.066667rem;
-	padding: 0 1.133333rem;
+	/*padding: 0 1.133333rem;*/
 	box-sizing: border-box;
 	text-align: center;
 	font-size: 0.4rem;

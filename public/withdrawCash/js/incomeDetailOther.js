@@ -4,7 +4,10 @@
      data: {
        //tab切换
        giftHistoryList:true,
+       giftSendList:false,
        withdrawList:false,
+       //送出礼物列表
+       sendGiftList:[],
        //兑换列表
        exchangeList:[],
        //收益列表
@@ -214,6 +217,12 @@
                   });
               }
             });
+        },
+         //送出礼物
+        sendRecord:function(){
+            $('.u-sendDetail').addClass('active');
+            $('.u-incomeDetail').removeClass('active');
+            $('.u-exchangeDetail').removeClass('active');
         },
         // 收益记录加载更多
         incomeLoad:function(){
