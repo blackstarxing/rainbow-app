@@ -3,7 +3,7 @@ rainbow = new Vue({
   	delimiters: ['${', '}'],
   	data: {
         // 游戏类型
-        gameType:3,
+        gameType:0,
         // 卡牌位置
         top:'',
         leftarr:[],

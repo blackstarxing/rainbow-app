@@ -10,6 +10,7 @@ var gameProgress = function(){
             vm.leftarr = [];
             // 欢乐牛牛卡牌定位
             Vue.nextTick(function(){
+                vm.top = $('.poker-area').eq(0).offset().top;
                 for(var i=0;i<3;i++){
                     vm.leftarr.push($('.poker-area').eq(i).offset().left);
                 }
@@ -18,6 +19,7 @@ var gameProgress = function(){
         }else if(vm.gameType==2){           
             vm.leftarr = [];
             Vue.nextTick(function(){
+                vm.top = $('.poker-area').eq(0).offset().top;
                 for(var i=0;i<2;i++){
                     vm.leftarr.push($('.m-rc .poker-area').eq(i).offset().left);
                 }
@@ -26,7 +28,8 @@ var gameProgress = function(){
         }else if(vm.gameType==3){           
             vm.leftarr = [];
             Vue.nextTick(function(){
-                for(var i=0;i<2;i++){
+                vm.top = $('.game-box .poker-area').eq(0).offset().top;
+                for(var i=0;i<3;i++){
                     vm.leftarr.push($('.game-box .poker-area').eq(i).offset().left);
                 }
                 console.log(vm.leftarr);
@@ -313,6 +316,14 @@ var gameProgress = function(){
             case 10027:
                 {
                     protoName = "GCUpBankerListRet";
+                    var wsMessage = proto.build(protoName);  
+                    var ws = wsMessage.decode(msgBuffer.data.buffer);
+                    console.log(ws);
+                    break;
+                }
+            case 10029:
+                {
+                    protoName = "GCNowSweetInfoRet";
                     var wsMessage = proto.build(protoName);  
                     var ws = wsMessage.decode(msgBuffer.data.buffer);
                     console.log(ws);

@@ -1,7 +1,8 @@
-<div class="m-game">
+<div class="m-game m-hero">
     <!-- 牌区 -->
     <div class="m-banker">
         <div class="banker">
+            <img src="/share/images/banker_icon.png" alt="" class="banker-icon">
             <div class="banker-avatar">
                 <i class="avatar icon-avatar icon-toplist" v-bind:style="{backgroundImage: 'url(' + hero.banker.user_icon + ')'}" v-bind:data-id="info.userId" @click="showCard"></i>
                 <span>${hero.banker.name}</span>

@@ -26,7 +26,12 @@
                     </div>
                 </div>
                 <div class="members-container">
-                    <i class="item icon-avatar icon-toplist" v-bind:style="{backgroundImage: 'url(' + list.icon + ')'}" v-bind:data-id="list.userId" v-for="list in audienceList"></i>
+                    <i class="item icon-avatar icon-toplist" v-bind:style="{backgroundImage: 'url(' + list.icon + ')'}" v-bind:data-id="list.userId" v-for="list in audienceList">
+                        <span class="levelMedal" style="background-image: url('/share/images/fouth_level.png');" v-if="list.lv>22">${list.lv}</span>
+                        <span class="levelMedal" style="background-image: url('/share/images/third_level.png');" v-else-if="list.lv>12">${list.lv}</span>
+                        <span class="levelMedal" style="background-image: url('/share/images/second_level.png');" v-else-if="list.lv>1">${list.lv}</span>
+                        <span class="levelMedal" style="background-image: url('/share/images/first_level.png');" v-else>${list.lv}</span>
+                    </i>
                 </div>
             </div>
             <div class="charm" @click="download">魅力榜 <i class="num">${watchNum(info.charmTotalValue)}</i></div>
@@ -41,9 +46,15 @@
                 <div class="vip-enter">${vip.range}级 <span>${vip.name}</span> 进入直播间</div>
                 <div class="chat-area" id="chat"></div>
                 <div class="award" @click="download">
-                    <div>可领取</div>
-                    <img src="/share/images/candies.png" alt="">
-                    x30
+                    <div>
+                        <div class="award-title">可领取</div>
+                        <img src="/share/images/candies.png" alt="">
+                        x30
+                    </div>
+                    <div>
+                        <img src="/share/images/task.png" alt="">
+                        <div class="award-title">快来领糖</div>
+                    </div>                   
                 </div>
             </div>
             <div class="m-operate f-cb">
@@ -88,11 +99,6 @@
                             <span><i>·</i>直播中</span>                  
                         </a>
                     </div>
-                    <!-- <div class="recommend">
-                        <a href="" style="background-image: url('//p.qlogo.cn/hy_personal/4376ae1e0cf0cccedf6a98055419b4438847511323dc7ea3c0fa7f621a7487230663cb77d04f449f658894768049357c/360?tp=webp');">      
-                            <span><i>·</i>直播中</span>                  
-                        </a>
-                    </div> -->
                 </div>
             </div>
             <a href="javascript:void(0)" class="u-dl-btn" @click="download">下载彩虹直播</a>
@@ -140,7 +146,7 @@
         </div>
     </div>
     <!-- 发牌 -->
-    <div class="deal-section" v-bind:class="[gameType==2?'rc-deal':'']">
+    <div class="deal-section" v-bind:class="[gameType==2?'rc-deal':'',gameType==3?'hero-deal':'']">
         <ul>
             
         </ul>

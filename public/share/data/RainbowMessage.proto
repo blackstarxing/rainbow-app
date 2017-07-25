@@ -16,7 +16,7 @@ message CGBet
 //----------------------下注返回（Gameserver<-->client）协议号 10002----------------------
 message GCBetRet
 {
-	optional int32 	code				= 1;   //返回码
+	optional int32 	code				= 1;   //返回码  0成功  1 余额不足失败   2 冻结额不足失败
 	optional string  msg	            = 2;   //提示信息
 	optional int32   num                = 3;   //下注值
 	optional int32  index1user	        = 4;   //第一投注位用户投注值
@@ -61,6 +61,8 @@ message GCResultRet
 	optional int32  winIndex			= 6;   //获胜位
 	optional int32  gameId              = 7;   //游戏ID
 	optional CardsSet bankerCardsSet    = 8;   //庄家牌组
+	optional int32  bankerflow          = 9;   //庄家本局流水
+	optional int32  bankerId            = 10;  //庄家ID
 
 }
 //欢乐牛仔牌组
@@ -69,6 +71,7 @@ message CardsSet
 	optional int32 nameNo   = 1; //牌组称号编号  0普通无牛  1——9牛1~牛9  10牛牛  11 银牛  12 金牛 13 炸弹 14 五小牛 
 	repeated Card Cards		= 2; //牌组
 	optional int32 isWin	= 3; //是否赢庄 1 是 0 否
+	optional int32 rate     = 4; //倍率
 }
 
 //欢乐牛仔扑克牌
@@ -94,7 +97,7 @@ message CGSendGift
 //----------------------赠送礼物返回（Gameserver<-->client）协议号 10008----------------------
 message GCSendGiftRet
 {
-	optional int32 	code				= 1;   //返回码   0成功  1 失败 2 金币不足
+	optional int32 	code				= 1;   //返回码   0成功  1 失败 2 余额不足 3 冻结额不足失败
 	optional int32  gitfId              = 2;   //礼物ID
 	optional int32  num                 = 3;   //礼物数量
 }
@@ -122,6 +125,7 @@ message GCGameStateRet
 message CGOutLiveRoom
 {
 	optional int32  liveId	            = 1;   //直播间ID
+	optional int32  userId              = 2;   //用户ID
 }
 
 //----------------------用户离开直播间返回（Gameserver<-->client）协议号 10012---------------------
