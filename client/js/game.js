@@ -69,7 +69,6 @@ var gameProgress = function(){
             dataType: 'json',
             data: {
                 otherId:id,
-                // userId:2
             },
             success: function(data) {
                 vm.hero.banker.user_icon = data.object.icon;
@@ -82,8 +81,6 @@ var gameProgress = function(){
         });
     }
     
-    // 定位
-    // var top = $('.poker-area').eq(0).offset().top;
     // 发牌动画延迟
     var delay = 50;
 

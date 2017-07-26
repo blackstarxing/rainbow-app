@@ -69,7 +69,7 @@ rainbow = new Vue({
             bankerCardsSet:[],
             result:'',
             banker:{
-                user_icon:'http://wx.qlogo.cn/mmopen/TKR40I5SAOaJMF9ia8okaMBMAa0tpt9GeG0RZjIRZuMnFfkM0Tz1zicWwx1ceTehJIsa2W3862K6b7fILUxzrib2CEvnojFfL04/0',
+                user_icon:'/share/images/banker.png',
                 name:'吕布',
                 sweet:30000
             }
@@ -140,8 +140,7 @@ rainbow = new Vue({
                     _this.accid = 'test_'+data.object.info.userId;
                     // _this.accid = data.object.info.userId;
                     _this.info = data.object.info;
-                    // _this.state = _this.info.state;
-                    // _this.state = 1;
+                    _this.state = _this.info.state;
                     _this.otherLive = data.object.otherLive;
                     // 获取游戏数据
                     _this.getGameInfo();

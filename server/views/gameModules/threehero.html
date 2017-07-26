@@ -7,7 +7,7 @@
                 <i class="avatar icon-avatar icon-toplist" v-bind:style="{backgroundImage: 'url(' + hero.banker.user_icon + ')'}" v-bind:data-id="info.userId" @click="showCard"></i>
                 <span>${hero.banker.name}</span>
             </div>
-            <div class="record">
+            <div class="record" @click="download">
                 ${watchNum(hero.banker.sweet)}<span>记录</span>
             </div>
             <div class="poker-area">
@@ -26,7 +26,7 @@
                 </ul>                              
             </div>
         </div>
-        <button>我要上庄</button>
+        <button @click="download">我要上庄</button>
     </div>
     <div class="m-card">
         <div class="game-box hero">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="stake-area f-cb">
                     <div class="stake-name">
-                        <img src="/share/images/hero.png" alt="">
+                        <img src="/share/images/hero_1.png" alt="">
                         <div class="power"><span>刘备</span>x${game.rate_first}倍</div>
                     </div>
                     <div class="stake-num">
@@ -79,7 +79,7 @@
                 </div>
                 <div class="stake-area f-cb">
                     <div class="stake-name">
-                        <img src="/share/images/hero.png" alt="">
+                        <img src="/share/images/hero_2.png" alt="">
                         <div class="power"><span>关羽</span>x${game.rate_second}倍</div>
                     </div>
                     <div class="stake-num">
@@ -110,7 +110,7 @@
                 </div>
                 <div class="stake-area f-cb">
                     <div class="stake-name">
-                        <img src="/share/images/hero.png" alt="">
+                        <img src="/share/images/hero_3.png" alt="">
                         <div class="power"><span>张飞</span>x${game.rate_third}倍</div>
                     </div>
                     <div class="stake-num">
