@@ -234,8 +234,9 @@ function enterLiveroom(){
 		    	// 预发布
 		    	var userId = e.account.slice(5);
 		    	// var userId = e.account;
+		    	var level = e.custom==''?1:JSON.parse(e.custom).level;
 		    	if(e.avatar){
-		    		vm.audienceList.push({'icon':e.avatar,'userId':userId}); 
+		    		vm.audienceList.push({'icon':e.avatar,'userId':userId,'lv':level}); 
 		    	}                
             }) 
 		}

@@ -1,4 +1,4 @@
-var niuniu = function(){
+var gameProgress = function(){
     var vm = window.rainbow;
     // 扑克牌数量
     var pokerNum = 0;
@@ -10,6 +10,7 @@ var niuniu = function(){
             vm.leftarr = [];
             // 欢乐牛牛卡牌定位
             Vue.nextTick(function(){
+                vm.top = $('.poker-area').eq(0).offset().top;
                 for(var i=0;i<3;i++){
                     vm.leftarr.push($('.poker-area').eq(i).offset().left);
                 }
@@ -18,6 +19,7 @@ var niuniu = function(){
         }else if(vm.gameType==2){           
             vm.leftarr = [];
             Vue.nextTick(function(){
+                vm.top = $('.poker-area').eq(0).offset().top;
                 for(var i=0;i<2;i++){
                     vm.leftarr.push($('.m-rc .poker-area').eq(i).offset().left);
                 }
@@ -26,7 +28,8 @@ var niuniu = function(){
         }else if(vm.gameType==3){           
             vm.leftarr = [];
             Vue.nextTick(function(){
-                for(var i=0;i<2;i++){
+                vm.top = $('.game-box .poker-area').eq(0).offset().top;
+                for(var i=0;i<3;i++){
                     vm.leftarr.push($('.game-box .poker-area').eq(i).offset().left);
                 }
                 console.log(vm.leftarr);
@@ -58,9 +61,26 @@ var niuniu = function(){
             }
         });
     }
+    // 庄家信息
+    function freshBanker(id){
+        $.ajax({
+            method: "GET",
+            url: "/api/rainbow/userInfo",
+            dataType: 'json',
+            data: {
+                otherId:id,
+            },
+            success: function(data) {
+                vm.hero.banker.user_icon = data.object.icon;
+                vm.hero.banker.name = data.object.nickname;
+                vm.hero.banker.sweet = data.object.rainbow_sweet;
+            },
+            error: function(a, b, c) {
+                console.log("接口出问题啦");
+            }
+        });
+    }
     
-    // 定位
-    // var top = $('.poker-area').eq(0).offset().top;
     // 发牌动画延迟
     var delay = 50;
 
@@ -216,10 +236,16 @@ var niuniu = function(){
                     vm.game.cardsSet2 = ws.cardsSet2==null?[]:ws.cardsSet2.Cards;
                     vm.game.cardsSet3 = ws.cardsSet3.Cards;
                     vm.game.result1 = ws.cardsSet1.nameNo==null?0:ws.cardsSet1.nameNo;
-                    vm.game.result2 = ws.cardsSet2==null?0:ws.cardsSet2.nameNo;
+                    if(vm.gameType!=2){
+                        vm.game.result2 = ws.cardsSet2.nameNo==null?0:ws.cardsSet2.nameNo;
+                    }
                     vm.game.result3 = ws.cardsSet3.nameNo==null?0:ws.cardsSet3.nameNo;
                     vm.game.winIndex = ws.winIndex-1;
                     vm.game.showTip = false;
+                    if(vm.gameType==3){
+                        vm.hero.bankerCardsSet = ws.bankerCardsSet.Cards;
+                        vm.hero.result = ws.bankerCardsSet.nameNo==null?0:ws.bankerCardsSet.nameNo;
+                    }
                     showResult(0);
                     break;
                 }
@@ -284,6 +310,22 @@ var niuniu = function(){
                     freshRate();
                     break;
                 }
+            case 10027:
+                {
+                    protoName = "GCUpBankerListRet";
+                    var wsMessage = proto.build(protoName);  
+                    var ws = wsMessage.decode(msgBuffer.data.buffer);
+                    console.log(ws);
+                    break;
+                }
+            case 10029:
+                {
+                    protoName = "GCNowSweetInfoRet";
+                    var wsMessage = proto.build(protoName);  
+                    var ws = wsMessage.decode(msgBuffer.data.buffer);
+                    console.log(ws);
+                    break;
+                }
             default:
                 {
                     protoName = "UNKNOW";
@@ -295,6 +337,9 @@ var niuniu = function(){
     // 牌局状态
     function gameState(data){
         console.log(data);
+        if(data.banker!=1 && data.banker!=null){
+           freshBanker(data.bankerId); 
+        }       
         if(data.gameId!=vm.gameType){
             vm.gameType = data.gameId; 
             pokerPosition();
@@ -312,6 +357,7 @@ var niuniu = function(){
             vm.game.mask = [false,false,false];
             vm.rc.mask = [false,false,false];
             vm.rc.result_mask = false;
+            vm.hero.poker_group = [false,false,false,false];
             vm.game.tip = '即将开始，请稍后';
             vm.game.showTip = true;
         }else if(data.state==2){
@@ -321,10 +367,16 @@ var niuniu = function(){
         }else if(data.state==3){
             if(vm.half_enter == true){
                 vm.half_group = [true,true,true];
+                vm.hero.half_group = [true,true,true,true];
             }
             vm.game.showTip = false;
             vm.game.time = data.countDown;
             countDown();
+            if(vm.game.time>0){
+                $('.stake-area').on('click',function(){
+                    alert(1);
+                })
+            }
             // setTimeout(function(){
             //     vm.game.tipClass = 'animated bounceOut';
             //     setTimeout(countDown,750);
@@ -333,6 +385,7 @@ var niuniu = function(){
         }else if(data.state==4){
             if(vm.half_enter == true){
                 vm.half_group = [true,true,true];
+                vm.hero.half_group = [true,true,true,true];
             }
             vm.game.time = 0;
             vm.game.showClock = false;
@@ -413,7 +466,7 @@ var niuniu = function(){
                 var bankerTop = $('.m-banker .poker-area').eq(0).offset().top;
                 var bankerLeft = $('.m-banker .poker-area').eq(0).offset().left;
                 if(pokerNum<5){
-                    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":bankerTop+height/2,"left":bankerLeft+0.84*width+0.35*width*(pokerNum%5)},500);
+                    $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":bankerTop+height/2,"left":bankerLeft+0.82*width+0.35*width*(pokerNum%5)},500);
                 }else if(pokerNum<10){
                     $('.deal-section li').eq(pokerNum).addClass('rotate').animate({"top":vm.top+height/2,"left":vm.leftarr[0]+0.86*width+0.35*width*(pokerNum%5)},500);
                 }else if(pokerNum<15){
@@ -433,7 +486,6 @@ var niuniu = function(){
                         dealPoker();
                     },delay);
                 }   
-                console.log(delay);
             }else{
                 vm.game.tip = '开始下注';
                 vm.game.showTip = true;
@@ -459,36 +511,58 @@ var niuniu = function(){
     function showResult(index){
         vm.half_enter = false;
         var arr_index = parseInt(index);
-        if(arr_index<3){
-            // vm.game.poker_group[arr_index] = true;
-            Vue.set(vm.game.poker_group, arr_index, true);
-            Vue.set(vm.half_group, arr_index, false);
-            // console.log(vm.game.poker_group[arr_index]);
-            setTimeout(function(){  
-                arr_index++;
-                showResult(arr_index);
-            },1000); 
-            if(arr_index==2){
-                // vm.game.mask = [true,false,true];
-                if(vm.gameType==1){
-                    vm.game.mask.forEach(function(e,index){  
-                        if(index != vm.game.winIndex){
-                            Vue.set(vm.game.mask, index, true);
-                        }
-                    }) 
-                }else if(vm.gameType==2){
-                    vm.rc.mask.forEach(function(e,index){ 
-                        if(index == vm.game.winIndex){
-                            Vue.set(vm.rc.mask, index, true);
-                        }
-                    }) 
-                    vm.rc.result_mask = true;
+        if(vm.gameType<3){
+            if(arr_index<3){
+                // vm.game.poker_group[arr_index] = true;
+                Vue.set(vm.game.poker_group, arr_index, true);
+                Vue.set(vm.half_group, arr_index, false);
+                // console.log(vm.game.poker_group[arr_index]);
+                setTimeout(function(){  
+                    arr_index++;
+                    showResult(arr_index);
+                },1000); 
+                if(arr_index==2){
+                    // vm.game.mask = [true,false,true];
+                    if(vm.gameType==1){
+                        vm.game.mask.forEach(function(e,index){  
+                            if(index != vm.game.winIndex){
+                                Vue.set(vm.game.mask, index, true);
+                            }
+                        }) 
+                    }else if(vm.gameType==2){
+                        vm.rc.mask.forEach(function(e,index){ 
+                            if(index == vm.game.winIndex){
+                                Vue.set(vm.rc.mask, index, true);
+                            }
+                        }) 
+                        vm.rc.result_mask = true;
+                    }
+                                 
                 }
-                             
+            } else{
+                // vm.game.poker_group = [false,false,false];
             }
-        } else{
-            // vm.game.poker_group = [false,false,false];
+        }else if(vm.gameType==3){
+            // 三英战吕布
+            if(arr_index<4){
+                // vm.game.poker_group[arr_index] = true;
+                Vue.set(vm.hero.poker_group, arr_index, true);
+                Vue.set(vm.hero.half_group, arr_index, false);
+                // console.log(vm.game.poker_group[arr_index]);
+                if(arr_index==0){
+                    for(var i=0;i<5;i++){
+                        $('.deal-section li').eq(i).hide();
+                    }
+                }
+                setTimeout(function(){  
+                    arr_index++;
+                    showResult(arr_index);
+                },1000); 
+            } else{
+                // vm.game.poker_group = [false,false,false];
+            }
         }
+        
     }
 
     // 添加扑克牌
@@ -502,7 +576,7 @@ var niuniu = function(){
     // createPoker();
 }
 
-niuniu();
+gameProgress();
 
 // 游戏区显示隐藏
 $(".m-video").on("touchstart", function(e) {

@@ -3,7 +3,7 @@ rainbow = new Vue({
   	delimiters: ['${', '}'],
   	data: {
         // 游戏类型
-        gameType:3,
+        gameType:0,
         // 卡牌位置
         top:'',
         leftarr:[],
@@ -64,7 +64,15 @@ rainbow = new Vue({
         },
         // 三英战吕布
         hero:{
-
+            half_group:[false,false,false,false],
+            poker_group:[false,false,false,false],
+            bankerCardsSet:[],
+            result:'',
+            banker:{
+                user_icon:'/share/images/banker.png',
+                name:'吕布',
+                sweet:30000
+            }
         },
         // 普通礼物连击
         gift_top:false,
@@ -127,13 +135,12 @@ rainbow = new Vue({
                 },
                 success: function(data) {
                     _this.roomid = data.object.info.chat_room_id;
-                    // _this.gameType = data.object.info.gameId;
+                    _this.gameType = data.object.info.gameId;
                     // 预发布
                     _this.accid = 'test_'+data.object.info.userId;
                     // _this.accid = data.object.info.userId;
                     _this.info = data.object.info;
-                    // _this.state = _this.info.state;
-                    // _this.state = 1;
+                    _this.state = _this.info.state;
                     _this.otherLive = data.object.otherLive;
                     // 获取游戏数据
                     _this.getGameInfo();
@@ -219,6 +226,10 @@ rainbow = new Vue({
         // 数量计算
         watchNum: function (num) {
             return num>10000 ? (num/10000).toFixed(1)+'w' : num;
+        },
+        // 押注
+        stake:function(){
+            // 倒计时大于0开启
         },
   		// 用户卡片
     	showCard:function(id){

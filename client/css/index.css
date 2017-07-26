@@ -50,6 +50,7 @@
     left: 0.266667rem;
     right: 0.266667rem;
     display: flex;
+    height: 1.066667rem;
 }
 .avatar-contatiner{
 	position: relative;
@@ -70,7 +71,7 @@
     -webkit-background-size: cover;
     background-size: cover;
     border-radius: 50%;
-    overflow: hidden;
+    /*overflow: hidden;*/
     border:0.026667rem solid #fff;
     box-sizing: border-box;
 }
@@ -126,6 +127,7 @@
     overflow-x: auto;
 }
 .members-container .icon-avatar{
+    position: relative;
 	display: inline-block;
     width: 0.853333rem;
     height: 0.853333rem;
@@ -138,6 +140,19 @@
     -webkit-background-size: cover;
     background-size: cover;
     box-sizing: border-box;
+}
+.members-container .icon-avatar span{
+    position: absolute;
+    bottom: -0.106667rem;
+    display: block;
+    width: 100%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    font-size: 0.24rem;
+    background-size: 100%;
+    text-align: center;
+    text-indent: 0.333333rem;
+    color:#fff;
 }
 .m-header .charm{
 	position: absolute;
@@ -188,15 +203,15 @@
 	text-shadow: 0 1px 2px rgba(0,0,0,.5);
 }
 .m-chat .award{
-    width: 1.28rem;
+    width: 1.44rem;
 	position: absolute;
 	right: 0.266667rem;
 	bottom: 0;
 	text-align: center;
     color:#fff;
-    font-size: 0.346667rem;
+    font-size: 0.32rem;
 }
-.m-chat .award div{
+.m-chat .award .award-title{
 	width: 100%;
 	height: 0.48rem;
 	line-height: 0.48rem;
@@ -673,6 +688,21 @@
     margin:0.133333rem auto;
 }
 /*三英战吕布*/
+.hero-deal li{
+    background: url('/share/images/hero_back.png') no-repeat;
+    background-size: 100% 100%;
+}
+.m-hero .halfway-poker li{
+    background: url('/share/images/hero_back.png') no-repeat;
+    background-size: 100% 100%;
+}
+.m-hero .m-card{
+    background: url('/share/images/game_top.png') repeat-x,url('/share/images/hero_bg.png');
+    background-size: 100% 0.133333rem,100% 100%;
+    color:#fff;
+    font-size: 0.293333rem;
+    padding-top: 0;
+}
 .m-banker{
     position: fixed;
     top: 2.8rem;
@@ -699,6 +729,12 @@
 .banker-avatar span{
     line-height: 0.773333rem;
     font-size: 0.346667rem;
+}
+.m-banker .banker-icon{
+    position: absolute;
+    width: 0.693333rem;
+    right: -0.266667rem;
+    top: -0.266667rem;
 }
 .m-banker .record{
     height: 0.586667rem;
