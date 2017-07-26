@@ -241,7 +241,7 @@
             _this.withdrawList = false;
             _this.giftSendList = true;
             $.ajax({
-              url: '/webapi/withdraw/sendGiftHistoryList?page='+1+'&pageSize='+_this.pageSize,
+              url: '/webapi/withdraw/sendGiftHistoryList4Mobile?page='+1+'&pageSize='+_this.pageSize,
               type: 'get',
               dataType:'json',
               data:{
@@ -370,7 +370,7 @@
             _this.sendLoad = true;
             _this.sendloadText = '加载中...';
             $.ajax({
-                url: '/webapi/withdraw/sendGiftHistoryList',
+                url: '/webapi/withdraw/sendGiftHistoryList4Mobile',
                 type: 'get',
                 dataType:'json',
                 data:{
