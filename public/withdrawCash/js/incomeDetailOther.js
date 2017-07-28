@@ -133,6 +133,7 @@
             var token = _this.getCookie('token');
             var userId = _this.getCookie('userId');
             _this.giftHistoryList = false;
+            _this.giftSendList = false;
             _this.withdrawList = true;
             $.ajax({
               url: '/webapi/withdraw/withdrawList4Mobile?page='+1+'&pageSize='+_this.pageSize,
@@ -186,6 +187,7 @@
            var token = _this.getCookie('token');
            var userId = _this.getCookie('userId');
             _this.giftHistoryList = true;
+            _this.giftSendList = false;
             _this.withdrawList = false;
              $.ajax({
               url: '/webapi/withdraw/giftHistoryList4Mobile?page='+1+'&pageSize='+_this.pageSize,
