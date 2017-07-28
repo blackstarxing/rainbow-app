@@ -237,7 +237,20 @@ function enterLiveroom(){
 		    	var level = e.custom==''?1:JSON.parse(e.custom).level;
 		    	if(e.avatar){
 		    		vm.audienceList.push({'icon':e.avatar,'userId':userId,'lv':level}); 
-		    	}                
+		    	}  
+		    	// 等级排序
+		    	var compare = function (obj1, obj2) {
+				    var val1 = obj1.lv;
+				    var val2 = obj2.lv;
+				    if (val1 > val2) {
+				        return -1;
+				    } else if (val1 < val2) {
+				        return 1;
+				    } else {
+				        return 0;
+				    }            
+				} 
+		    	vm.audienceList.sort(compare);              
             }) 
 		}
 	}
