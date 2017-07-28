@@ -127,6 +127,7 @@
         // 兑换记录
         exchangeRecord:function(){
            $('.u-exchangeDetail').addClass('active');
+           $('.u-sendDetail').removeClass('active');
            $('.u-incomeDetail').removeClass('active');
             var _this = this;
             var token = _this.getCookie('token');
@@ -179,6 +180,7 @@
         // 收益记录
         incomeRecord:function(){
            $('.u-incomeDetail').addClass('active');
+           $('.u-sendDetail').removeClass('active');
            $('.u-exchangeDetail').removeClass('active');
            var _this = this;
            var token = _this.getCookie('token');
