@@ -22,7 +22,7 @@ var app = express();
 
 // var proxyaddress = 'http://172.16.10.134:80';
 // var webproxyaddress = 'http://172.16.10.134:8080';
-var proxyaddress = 'http://118.190.21.195:28888';
+var proxyaddress = 'http://47.95.32.135:28888';
 var webproxyaddress = 'http://47.95.32.135:39999';
 // var webproxyaddress = 'http://qa.rainbowweb.yuerlive.cn/api';
 // var proxyaddress = 'http://www.caihonglive.tv:28888';

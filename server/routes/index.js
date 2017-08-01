@@ -8,7 +8,7 @@ var ticket = '';
 var ticketline = '';
 
 // var path = 'http://172.16.10.134:80';
-var path = 'http://118.190.21.195:28888';
+var path = 'http://47.95.32.135:28888';
 // var path = 'http://www.caihonglive.tv:28888';
 
 function getTicket(){

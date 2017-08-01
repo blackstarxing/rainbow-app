@@ -16,7 +16,7 @@ message CGBet
 //----------------------下注返回（Gameserver<-->client）协议号 10002----------------------
 message GCBetRet
 {
-	optional int32 	code				= 1;   //返回码  0成功  1 余额不足失败   2 冻结额不足失败
+	optional int32 	code				= 1;   //返回码  0成功  1 余额不足失败   2 用户冻结额不足失败  3庄家冻结额不足失败
 	optional string  msg	            = 2;   //提示信息
 	optional int32   num                = 3;   //下注值
 	optional int32  index1user	        = 4;   //第一投注位用户投注值
@@ -280,6 +280,24 @@ message GCNowSweetInfoRet
 	 optional int32 totalSweet	            = 2;    //彩虹糖数量 总额
 	 optional int32 freezeSweet	            = 3;    //彩虹糖数量 冻结
 	 optional int32 availableSweet          = 4;    //彩虹糖数量 可用
+}
+
+//----------------------用户状态（client<-->Gameserver）协议号 10030----------------------
+message CGUserState
+{
+	  optional int32  userId               = 1;   //用户ID
+}
+
+//----------------------用户状态返回（Gameserver<-->client）协议号 10031----------------------
+message GCUserStateRet
+{
+	  optional int32 userId                 = 1;    //用户ID
+	  optional int32 liveId	                = 2;    //用户所在直播间ID
+	  optional int32 isBanker	            = 3;    //用户是否为庄家
+	  optional int32 freezeSweet	        = 4;    //用户冻结金额
+	  optional string chatRoomId	        = 5;    //用户聊天室ID
+	  optional string icon                  = 6;    //直播封面
+	  optional int32  notSettleSweet        = 7;    //当前未结算投注额
 }
 
 

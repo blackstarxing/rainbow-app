@@ -337,7 +337,7 @@ var gameProgress = function(){
     // 牌局状态
     function gameState(data){
         console.log(data);
-        if(data.banker!=1 && data.banker!=null){
+        if(data.bankerId!=1 && data.bankerId!=null){
            freshBanker(data.bankerId); 
         }       
         if(data.gameId!=vm.gameType){
