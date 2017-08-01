@@ -169,7 +169,7 @@
            $('.u-exchangeDetail').removeClass('active');
            var _this = this;
             _this.giftHistoryList = true;
-             _this.giftSendList = false;
+            _this.giftSendList = false;
             _this.withdrawList = false;
              $.ajax({
               url: '/webapi/withdraw/giftHistoryList?page='+1+'&pageSize='+_this.pageSize,

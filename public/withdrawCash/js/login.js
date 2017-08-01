@@ -71,7 +71,7 @@ var login = new Vue({
                 success: function(data) {
                   if(data.code == 1){
                     window.location.href = data.result;
-                  }else if(data.cdoe == 2){
+                  }else if(data.code == 2){
                     window.location.href = data.result;
                   }else if(data.code == 3){
                     window.location.href = data.result;

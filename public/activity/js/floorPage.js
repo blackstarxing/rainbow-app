@@ -14,6 +14,8 @@ var floorPage = new Vue({
         regdis:false,
         //弹框的显示
         mask:false,
+        //渠道号
+        channelNo:'',
   	},
   	mounted:function(){
   		this.$nextTick(function () {
@@ -27,9 +29,35 @@ var floorPage = new Vue({
         $('.noset').show();
         _this.codeError = '';
         _this.messageCodeError = '';
+        _this.channelNo = _this.getQueryString('channelNo');
+        if(_this.channelNo){
+            $.ajax({
+                url: '/webapi/rainbow/channelWatchTimes?channelNo='+_this.channelNo,
+                type: 'get',
+                success: function(data) {
+                   
+                },
+                error: function() {
+                    layer.open({
+                      content: '网络异常，请刷新重试',
+                      btn: '好的',
+                      shadeClose: false,
+                    });
+                }
+            });
+        }
   		});
   	},
   	methods: {
+        // 获取url参数
+        getQueryString:function(name){
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        },
        // 图形验证码
         showPic:function(type){
             var _this = this;
@@ -193,73 +221,142 @@ var floorPage = new Vue({
         beginGame:function(){
            var _this = this;
             if(/^1[34578][0-9]{9}$/.test(_this.phone) && _this.messCode.length==6){
+                _this.channelNo = _this.getQueryString('channelNo');
                 var parme = {};
                 parme.smsCode = _this.messCode;
                 parme.mobile = _this.phone;
-                $.ajax({
-                  url: '/webapi/rainbow/invite/inviteRegist',
-                  type: 'get',
-                  data:parme,
-                  dataType: 'json',
-                  crossDomain:true,
-                  xhrFields: {
-                      withCredentials: true,
-                  },  
-                  success: function(data) {
-                      if(data.code == 0){
-                          if(data.extend.inviteMsg){
-                             //好友邀请达到上限提示语
-                              layer.open({
-                                content: '你的好友当月邀请额度已用完,继续注册无法获得奖励,是否继续'
-                                ,btn: ['继续', '取消']
-                                ,yes: function(index){
-                                  layer.close(index);
-                                  window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.yuerlive.rainbow';
+                parme.channelNo = _this.channelNo;
+                if(_this.channelNo){
+                    $.ajax({
+                        url: '/webapi/rainbow/invite/inviteRegist',
+                        type: 'get',
+                        data:parme,
+                        dataType: 'json',
+                        crossDomain:true,
+                        xhrFields: {
+                            withCredentials: true,
+                        },  
+                        success: function(data) {
+                            if(data.code == 0){
+                                if(data.extend.inviteMsg){
+                                   //好友邀请达到上限提示语
+                                    layer.open({
+                                      content: '你的好友当月邀请额度已用完,继续注册无法获得奖励,是否继续'
+                                      ,btn: ['继续', '取消']
+                                      ,yes: function(index){
+                                        layer.close(index);
+                                        window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.yuerlive.rainbow';
+                                      }
+                                    });
+                                }else{
+                                    window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.yuerlive.rainbow';
                                 }
+                            }else if(data.code == -2){
+                              layer.open({
+                                 content: '用户已存在',
+                                 btn: '好的',
+                                 shadeClose: false,
                               });
-                          }else{
-                              window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.yuerlive.rainbow';
-                          }
-                      }else if(data.code == -2){
-                        layer.open({
-                           content: '用户已存在',
-                           btn: '好的',
-                           shadeClose: false,
-                        });
-                      }else if(data.code == -3){
-                        layer.open({
-                           content: '邀请人不存在',
-                           btn: '好的',
-                           shadeClose: false,
-                        });
-                      }else if(data.code == -5){
-                        layer.open({
-                           content: '参数错误',
-                           btn: '好的',
-                           shadeClose: false,
-                        });
-                      }else if(data.code == -1){
-                        layer.open({
-                           content: '验证码不正确',
-                           btn: '好的',
-                           shadeClose: false,
-                        });
-                      }else{
-                        layer.open({
-                           content: '服务器出错',
-                           btn: '好的',
-                           shadeClose: false,
-                        });
-                      }
-                  },
-                  error: function() {
-                      layer.open({
-                        content: '网络异常，请刷新重试',
-                        btn: '好的',
-                        shadeClose: false,
-                      });
-                  }
-                });
+                            }else if(data.code == -3){
+                              layer.open({
+                                 content: '邀请人不存在',
+                                 btn: '好的',
+                                 shadeClose: false,
+                              });
+                            }else if(data.code == -5){
+                              layer.open({
+                                 content: '参数错误',
+                                 btn: '好的',
+                                 shadeClose: false,
+                              });
+                            }else if(data.code == -1){
+                              layer.open({
+                                 content: '验证码不正确',
+                                 btn: '好的',
+                                 shadeClose: false,
+                              });
+                            }else{
+                              layer.open({
+                                 content: '服务器出错',
+                                 btn: '好的',
+                                 shadeClose: false,
+                              });
+                            }
+                        },
+                        error: function() {
+                            layer.open({
+                              content: '网络异常，请刷新重试',
+                              btn: '好的',
+                              shadeClose: false,
+                            });
+                        }
+                    });
+                }else{
+                    $.ajax({
+                        url: '/webapi/rainbow/invite/inviteRegist',
+                        type: 'get',
+                        data:parme,
+                        dataType: 'json',
+                        crossDomain:true,
+                        xhrFields: {
+                            withCredentials: true,
+                        },  
+                        success: function(data) {
+                            if(data.code == 0){
+                                if(data.extend.inviteMsg){
+                                   //好友邀请达到上限提示语
+                                    layer.open({
+                                      content: '你的好友当月邀请额度已用完,继续注册无法获得奖励,是否继续'
+                                      ,btn: ['继续', '取消']
+                                      ,yes: function(index){
+                                        layer.close(index);
+                                        window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.yuerlive.rainbow';
+                                      }
+                                    });
+                                }else{
+                                    window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.yuerlive.rainbow';
+                                }
+                            }else if(data.code == -2){
+                              layer.open({
+                                 content: '用户已存在',
+                                 btn: '好的',
+                                 shadeClose: false,
+                              });
+                            }else if(data.code == -3){
+                              layer.open({
+                                 content: '邀请人不存在',
+                                 btn: '好的',
+                                 shadeClose: false,
+                              });
+                            }else if(data.code == -5){
+                              layer.open({
+                                 content: '参数错误',
+                                 btn: '好的',
+                                 shadeClose: false,
+                              });
+                            }else if(data.code == -1){
+                              layer.open({
+                                 content: '验证码不正确',
+                                 btn: '好的',
+                                 shadeClose: false,
+                              });
+                            }else{
+                              layer.open({
+                                 content: '服务器出错',
+                                 btn: '好的',
+                                 shadeClose: false,
+                              });
+                            }
+                        },
+                        error: function() {
+                            layer.open({
+                              content: '网络异常，请刷新重试',
+                              btn: '好的',
+                              shadeClose: false,
+                            });
+                        }
+                    });
+                }
             }else if(_this.phone ==''){
                 _this.messageCodeError = "手机号码不能为空";
                 setTimeout(function(){
