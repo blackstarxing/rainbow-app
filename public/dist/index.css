@@ -1,0 +1,1438 @@
+#room{
+    position: relative;
+	height:100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.m-video{
+	position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: url('/share/images/outline.png') center center no-repeat;
+    background-size: cover;
+    overflow: hidden; 
+}
+#mainvideo{
+	height: 100%;
+    width: 100%;
+    /*top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);*/
+}
+.play-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2.133333rem;
+    height: 2.133333rem;
+    margin-left: -1.066667rem;
+    margin-top: -3.6rem;
+    z-index: 9999;
+}
+.icon-play{
+    background-size: contain;
+    background-image: url('/share/images/play.png');
+}
+.m-header{
+	position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
+}
+.top-container{
+	position: absolute;
+    top: 0.266667rem;
+    left: 0.266667rem;
+    right: 0.266667rem;
+    display: flex;
+    height: 1.066667rem;
+}
+.avatar-contatiner{
+	position: relative;
+	height: 0.96rem;
+	width: 4.0rem;
+	border-radius: 0.48rem;
+	background: rgba(0,0,0,0.5);
+}
+.icon-avatar{
+	position: absolute;
+    display: inline-block;
+    width: 0.853333rem;
+    height: 0.853333rem;
+    top: 0.053333rem;
+    left: 0.053333rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    background-size: cover;
+    border-radius: 50%;
+    /*overflow: hidden;*/
+    border:0.026667rem solid #fff;
+    box-sizing: border-box;
+}
+.avatar-contatiner .content{
+	width: 1.6rem;
+	height: 100%;
+    position: absolute;
+    left: 1.013333rem;
+    padding:0.106667rem 0;
+    box-sizing: border-box;
+}
+.avatar-contatiner .name{
+	width: 100%;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.346667rem;
+    color: #fff;
+    margin-bottom: 0.053333rem;
+}
+.avatar-contatiner .author-id{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+	color:#c8c8c8;
+    font-size: 0.293333rem;
+}
+.avatar-contatiner .follow{
+	position: absolute;
+	top: 0.16rem;
+	right: 0.16rem;
+	width: 1.12rem;
+	height: 0.64rem;
+	line-height: 0.64rem;
+	text-align: center;
+	background: #fff;
+	border-radius: 0.32rem;
+}
+.u-follow-btn{
+    color:#ff285e;
+}
+.members-container{
+	/*height: 0.853333rem;*/
+	-webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    margin-left: 10px;
+    /*margin-top: 0.053333rem;*/
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-x: auto;
+}
+.members-container .icon-avatar{
+    position: relative;
+	display: inline-block;
+    width: 0.853333rem;
+    height: 0.853333rem;
+    margin-left: 0.053333rem;
+    border-radius: 50%;
+    border:2px solid #fff;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    background-size: cover;
+    box-sizing: border-box;
+}
+.members-container .icon-avatar span{
+    position: absolute;
+    bottom: -0.106667rem;
+    display: block;
+    width: 100%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    font-size: 0.24rem;
+    background-size: 100%;
+    text-align: center;
+    text-indent: 0.333333rem;
+    color:#fff;
+}
+.m-header .charm{
+	position: absolute;
+    top: 1.626667rem;
+    left: 0.266667rem;
+    overflow: hidden;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    border-radius: 0.32rem;
+    padding: 0 0.4rem 0 0.8rem;
+    color: #fff;
+    font-size: 0.293333rem;
+    /*background-color: rgba(0,0,0,.5);*/
+    background: url('/share/images/rank.png') 0.16rem center no-repeat,url('/share/images/right_rank.png') right 0.16rem center no-repeat rgba(0,0,0,0.5);
+    background-size: 0.533333rem,0.133333rem;
+}
+.main-section{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+.main-section .m-game{
+	width: 100%;
+	height: 5.44rem;
+	background: #fff;
+}
+.m-chat{
+	padding:0 0.266667rem;
+	position: relative;
+}
+.chat-area{
+	height: auto;
+	max-height: 2.88rem;
+	overflow-y: auto;
+	overflow-x: hidden;
+    color:#fff;
+}
+.chat-area .message{
+	display: inline-block;
+	max-width: 74%;
+	background: rgba(0,0,0,0.2);
+	/*height: 0.586667rem;*/
+	line-height: 0.586667rem;
+	padding:0 0.24rem;
+	margin-bottom: 0.133333rem;
+	width: auto;
+	border-radius: 0.293333rem;
+	text-shadow: 0 1px 2px rgba(0,0,0,.5);
+}
+.m-chat .award{
+    width: 1.44rem;
+	position: absolute;
+	right: 0.266667rem;
+	bottom: 0;
+	text-align: center;
+    color:#fff;
+    font-size: 0.32rem;
+}
+.m-chat .award .award-title{
+	width: 100%;
+	height: 0.48rem;
+	line-height: 0.48rem;
+	border-radius: 0.053333rem;
+	background: rgba(0,0,0,0.5);
+}
+.m-chat .award img{
+    width: 100%;
+}
+
+.chat-area .message img{
+    height: 0.56rem;
+}
+
+/*操作*/
+.m-operate{
+    position: relative;
+    padding: 0.133333rem 0.266667rem;
+}
+.m-operate i{
+    width: 0.96rem;
+    height: 0.96rem;
+}
+.m-operate i.op-chat{
+    background: url('/share/images/op_chat.png') no-repeat;
+    background-size: contain;
+}
+.m-operate i.op-intro{
+    background: url('/share/images/op_intro.png') no-repeat;
+    background-size: contain;
+    margin-right: 0.4rem;
+}
+.m-operate i.op-gift{
+    background: url('/share/images/op_gift.png') no-repeat;
+    background-size: contain;
+}
+
+/*礼物连击*/
+.m-gift-combo{
+    position: absolute;
+    top: 4.266667rem;
+    transform: translate3d(-100%, 0, 0);
+    z-index: 99;
+}
+.gift-wrap{
+    /*transform: translate3d(-100%, 0, 0);*/
+}
+.m-gift-combo .gift-content{
+    position: relative;
+    width: 4.746667rem;
+    height: 1.066667rem;
+    padding:0.08rem 0.133333rem;
+    background: rgba(0,0,0,0.5);
+    border-top-right-radius: 0.533333rem;
+    border-bottom-right-radius: 0.533333rem;
+    box-sizing: border-box;
+}
+.m-gift-combo .wrap-top{
+    margin-bottom: 0.32rem;
+}
+.gift-content .gift-info{
+    width: 2.0rem;
+    margin-left: 0.213333rem;
+}
+.gift-content .icon-avatar{
+    position: static;
+}
+.gift-content h3,.gift-content p{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.gift-content h3{
+    font-size: 0.373333rem;
+    color:#fff;
+}
+.gift-content p{
+    font-size: 0.32rem;
+    color:#ff3;
+}
+.gift-content img{
+    width: 1.333333rem;
+    position: absolute;
+    right: 0.133333rem;
+    bottom: 0;
+}
+.m-gift-combo .gift-num{
+    padding-right: 0.133333rem;
+    font-size: 0.746667rem;
+    font-weight: bold;
+    font-style: italic;
+    background:-webkit-linear-gradient(top,#ffed22,#ffa025);
+    -webkit-background-clip:text;   
+    color:transparent;
+    -webkit-text-stroke: 0.04rem #fff;
+}
+
+/*全局通知*/
+.globel-note,.vip-enter{
+    position: relative;
+    display: inline-block;
+    top:1.546667rem;
+    left: 110%;
+    /*width: auto;*/
+    height: 0.693333rem;
+    line-height: 0.693333rem;
+    padding:0 0.346667rem;
+    border-top-left-radius: 0.346667rem;
+    border-bottom-left-radius: 0.346667rem;
+    background:-webkit-linear-gradient(left,rgba(169,58,255,0.8),rgba(169,58,255,0));
+    font-size:0.373333rem;
+    color:#fff;
+    z-index: 999;
+    /*overflow:hidden;*/
+}
+.globel-note span,.vip-enter span{
+    color:#ff3;
+}
+
+/*高级用户进入*/
+.m-chat .vip-enter{
+    top:-1.066667rem;
+    border-radius: 0.346667rem;
+    background:-webkit-linear-gradient(left,#7b06ff,#a53ddb);
+}
+
+/*大礼物*/
+.huge-gift{
+    position: absolute;
+    top: 2.773333rem;
+    left: 100%;
+    width: 4.666667rem;
+    height: 1.066667rem;
+    padding:0.106667rem;
+    border-top-left-radius: 0.533333rem;
+    border-bottom-left-radius: 0.533333rem;
+    background:-webkit-linear-gradient(left,rgba(169,58,255,0.8),rgba(169,58,255,0));
+    box-sizing: border-box;
+}
+.huge-gift .bling{
+    position: absolute;
+    left: 0.76rem;
+    width: 0.76rem;
+}
+
+/*飘屏礼物*/
+.cool-gift{
+    position: absolute;
+    left: 15%;
+    z-index: 9999;
+}
+.goddess{
+    width: 6.933333rem;
+    height: 5.333333rem;
+    background: url("/share/images/goddess.png") 0 0 no-repeat;
+    background-size: 100%;
+    animation: goddess 2s steps(25) forwards;
+    -webkit-animation: goddess 2s steps(25) forwards;
+}
+.car{
+    width: 6.933333rem;
+    height: 3.36rem;
+    background: url("/share/images/car.png") 0 0 no-repeat;
+    background-size: 100%;
+    animation: car 2.5s steps(30) forwards;
+    -webkit-animation: car 2.5s steps(30) forwards;
+}
+.merry{
+    width: 5.333333rem;
+    height: 5.333333rem;
+    background: url("/share/images/merry.png") 0 0 no-repeat;
+    background-size: 100%;
+    animation: merry 2s steps(27) forwards;
+    -webkit-animation: merry 2s steps(27) forwards;
+}
+@keyframes goddess {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -133.333333rem;
+    }
+}
+@-webkit-keyframes goddess {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -133.333333rem;
+    }
+}
+@keyframes car {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -100.8rem;
+    }
+}
+@-webkit-keyframes car {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -100.8rem;
+    }
+}
+@keyframes merry {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -144.0rem;
+    }
+}
+@-webkit-keyframes merry {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -144.0rem;
+    }
+}
+
+/*游戏区*/
+.m-game{
+	box-sizing: border-box;
+}
+.m-card{
+    position: relative;
+	/*height: 4.266667rem;*/
+    height: 5.44rem;
+	padding-top: 0.133333rem;
+	box-sizing: border-box;
+	background: url('/share/images/game_top.png') repeat-x,url('/share/images/game_bg.png');
+	background-size: 100% 0.133333rem,100% 100%;
+}
+.poker-area{
+	margin-bottom: 0.16rem;
+    height: 1.466667rem;
+}
+.game-box{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+.stake-box{
+	flex: 1;
+	overflow: hidden;
+    position: relative;
+    padding:0.133333rem 0;
+}
+.poker-area ul{
+    position: relative;
+	width: 2.54rem;
+	height: 1.466667rem;
+	margin:0 auto;
+    z-index: 99;
+}
+.poker-area li{
+	width: 1.066667rem;
+	height: 1.466667rem;
+	float: left;
+	margin-left: -0.7rem;
+    color:#000;
+    text-indent: 0.066667rem;
+    font-size: 0.266667rem;
+    font-weight: bolder;
+    border:1px solid rgba(0,0,0,0.2);
+    border-radius: 0.053333rem;
+    box-sizing: border-box;
+}
+.poker-area .result-box{
+    position: relative;
+}
+.poker-area .result{
+    position: absolute;
+    bottom: 0;
+    z-index: 999;
+    width: 2.54rem;
+    left: 50%;
+    -webkit-transform: translate(-50%,0);
+    transform: translate(-50%,0);
+}
+.poker-area .result img{
+    width: 100%;
+    vertical-align: bottom;
+}
+.poker-area li.poker1{
+    background: url('/share/images/poker_1.png') no-repeat;
+    background-size: cover;
+}
+.poker-area li.poker2{
+    background: url('/share/images/poker_2.png') no-repeat;
+    background-size: cover;
+}
+.poker-area li.poker3{
+    background: url('/share/images/poker_3.png') no-repeat;
+    background-size: cover;
+}
+.poker-area li.poker4{
+    background: url('/share/images/poker_4.png') no-repeat;
+    background-size: cover;
+}
+.poker-area li.poker2,.poker-area li.poker4{
+    color:#e32742;
+}
+.poker-area li:first-child{
+	margin-left: 0;
+}
+.halfway-poker li{
+    background: url('/share/images/poker_back.png') no-repeat;
+    background-size: 100% 100%;
+}
+.stake-area{
+	height: 2.186667rem;
+	margin:0 0.16rem;
+	background: url('/share/images/stake_bg.png') no-repeat;
+	background-size: 100% 100%;
+}
+.result-mask{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    background-color: rgba(0,0,0,.2);
+}
+.deal-section{
+	
+}
+.deal-section ul{
+	height: 100%;
+}
+.deal-section li{
+	position: absolute;
+	width: 1.066667rem;
+	height: 1.466667rem;
+	left: 50%;
+	top: 50%;
+    transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+	background: url('/share/images/poker_back.png') no-repeat;
+	background-size: 100% 100%;
+}
+.rc-deal li{
+    background: url('/share/images/maoshu_back.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+/*猫和老鼠*/
+.m-rc{
+    background: url('/share/images/game_top.png') repeat-x,url('/share/images/maoshu_bg.png');
+    background-size: 100% 0.133333rem,100% 100%;
+    color:#fff;
+    font-size: 0.293333rem;
+    padding-top: 0;
+}
+.m-rc .rc-poker{
+    position: absolute;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    width:100%;
+    margin-top: 0.266667rem;
+    z-index: 5;
+}
+.m-rc .poker-area{
+    /*-webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;*/
+    width: 3rem;
+    position: absolute;
+    top: 0.266667rem;
+    z-index: 5;
+}
+.m-rc .poker-area ul{
+    width: 3rem;
+    position: relative;
+    z-index: 99;
+}
+.m-rc .poker-area ul li{
+    position: relative;
+}
+.m-rc .poker-area li{
+    margin-left: -0.59rem;
+}
+.m-rc .poker-area li:first-child{
+    margin-left: 0;
+}
+.m-rc .rc-l{
+    left: 0.533333rem;
+}
+/*.m-rc .rc-l .result{
+    transform: translate(-0%,0);
+}*/
+.m-rc .rc-r{
+    right: 0.533333rem;  
+}
+/*.m-rc .rc-r .result{
+    transform: translate(-30%,0);
+}*/
+.m-rc .halfway-poker li{
+    background: url('/share/images/maoshu_back.png') no-repeat;
+    background-size: 100% 100%;
+}
+.m-rc .stake-num{
+    background: url('/share/images/maoshu_stake_bg.png') no-repeat;
+    background-size: 100% 100%;
+    margin-left: 0;
+}
+.m-rc .stake-wrap{
+    position: absolute;
+    width: 100%;
+    top:1.866667rem;
+}
+.m-rc .stake-wrap .rc-l,
+.m-rc .stake-wrap .rc-m,
+.m-rc .stake-wrap .rc-r{
+    position: absolute;
+    top:0;
+}
+.m-rc .stake-wrap .rc-l{
+    left: 0.133333rem;
+}
+.m-rc .stake-wrap .rc-m{
+    left: 50%;
+    top: -0.4rem;
+    -webkit-transform: translate(-50%,0);
+}
+.m-rc .stake-wrap .rc-r{
+    right: 0.133333rem;
+}
+.m-rc .stake-wrap .rc-m .balance{
+    height: 0.4rem;
+    text-align: center;
+}
+.m-rc .stake-carton{
+    margin-top: -0.133333rem;
+}
+.m-rc .rc-l .stake-carton{
+    margin-right: 0.133333rem;
+}
+.m-rc .rc-r .stake-carton{
+    margin-left: 0.133333rem;
+}
+.m-rc .stake-carton img{
+    display: block;
+    width: 1.373333rem;
+}
+.m-rc .stake-num{
+    width: 1.866667rem;
+    height: 2.186667rem;
+}
+.m-rc .stake-all,
+.m-rc .stake-my{
+    margin:0 auto;
+    background: url(/share/images/candy.png) center 0.106667rem no-repeat rgba(0,0,0,0.2);
+    background-size: 0.346667rem 0.306667rem;
+    text-indent: 0;
+    padding-top: 0.48rem;
+    box-sizing: border-box;
+    line-height: 1.2;
+}
+.m-rc .stake-all{
+    margin:0.133333rem auto;
+}
+/*三英战吕布*/
+.hero-deal li{
+    background: url('/share/images/hero_back.png') no-repeat;
+    background-size: 100% 100%;
+}
+.m-hero .halfway-poker li{
+    background: url('/share/images/hero_back.png') no-repeat;
+    background-size: 100% 100%;
+}
+.m-hero .m-card{
+    background: url('/share/images/game_top.png') repeat-x,url('/share/images/hero_bg.png');
+    background-size: 100% 0.133333rem,100% 100%;
+    color:#fff;
+    font-size: 0.293333rem;
+    padding-top: 0;
+}
+.m-banker{
+    position: fixed;
+    top: 2.8rem;
+    left: 0.266667rem;
+    color:#fff;
+    font-size: 0.346667rem;
+}
+.m-banker .banker{
+    width: 3.2rem;
+    height: 3.36rem;
+    background: rgba(0,0,0,0.5);
+    border-radius: 0.16rem;
+}
+.banker-avatar{
+    padding:0.133333rem;
+}
+.banker-avatar i{
+    position: static;
+    width: 0.773333rem;
+    height: 0.773333rem;
+    float: left;
+    margin-right: 0.133333rem;
+}
+.banker-avatar span{
+    line-height: 0.773333rem;
+    font-size: 0.346667rem;
+}
+.m-banker .banker-icon{
+    position: absolute;
+    width: 0.693333rem;
+    right: -0.266667rem;
+    top: -0.266667rem;
+}
+.m-banker .record{
+    height: 0.586667rem;
+    line-height: 0.586667rem;
+    font-size: 0.293333rem;
+    border-radius: 0.293333rem;
+    margin:0 0.133333rem;
+    padding-left: 0.533333rem;
+    background: url(/share/images/candy.png) 0.16rem center no-repeat,
+                url(/share/images/right_rank.png) right 0.16rem center no-repeat rgba(0,0,0,0.5);
+    background-size: 0.293333rem,0.133333rem;
+    margin-bottom: 0.133333rem;
+}
+.m-banker .record span{
+    float: right;
+    margin-right: 0.4rem;
+}
+.m-banker button{
+    width: 3.2rem;
+    height: 0.746667rem;
+    line-height: 0.746667rem;
+    text-align: center;
+    border-radius: 0.373333rem;
+    background: rgba(0,0,0,0.5);
+    margin-top: 0.133333rem;
+    color:#fff;
+    font-size: 0.346667rem;
+}
+.hero .stake-area{
+    background: none;
+    margin:0;
+    padding:0 0.066667rem;
+}
+.hero .stake-name{
+    width: 1.76rem;
+    margin:0;
+    margin-top: -0.16rem;
+    position: relative;
+}
+.hero .power{
+    text-align: left;
+    text-indent: 0.133333rem;
+    margin-top: 0.133333rem;
+}
+.hero .power span{
+    color:#fff;
+}
+.hero .stake-num{
+    width: 1.653333rem;
+    height: 2.186667rem;
+    background: url('/share/images/hero_stake_bg.png') no-repeat;
+    background-size: 100% 100%;
+    margin-left: -0.213333rem;
+    float: left;
+}
+.hero .stake-all,
+.hero .stake-my{
+    width: 1.333333rem;
+    margin:0.12rem auto;
+    background: url(/share/images/candy.png) center 0.106667rem no-repeat rgba(0,0,0,0.2);
+    background-size: 0.346667rem 0.306667rem;
+    text-indent: 0;
+    padding-top: 0.48rem;
+    box-sizing: border-box;
+    line-height: 1.2;
+}
+/*遮罩*/
+.rc-mask{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9;
+}
+.m-rc .rc-index{
+    z-index: 99;
+}
+/*卡牌旋转动画*/
+.deal-section .rotate{
+    /*transform-origin:0 0%;*/
+    /*-webkit-transform: translate(-100%,-100%);
+    transform: translate(-100%,-100%);*/
+	animation:rotatePoker .5s linear 1;
+	-webkit-animation:rotatePoker .5s linear 1;
+    -moz-animation:rotatePoker .5s linear 1; /* Firefox */
+    -o-animation:rotatePoker .5s linear 1; /* Opera */
+	/*transform: rotate(45deg);*/
+}
+@keyframes rotatePoker{
+    0%   {transform:translate(-50%,-50%) rotate(0deg);}
+    25%  {transform:translate(-50%,-50%) rotate(90deg);}
+    50%  {transform:translate(-50%,-50%) rotate(180deg);}
+    75%  {transform:translate(-50%,-50%) rotate(270deg);}
+    100% {transform:translate(-50%,-50%) rotate(360deg);}
+}
+@-webkit-keyframes rotatePoker{
+
+　　 0%   {-webkit-transform:translate(-50%,-50%) rotate(0deg);}
+    25%  {-webkit-transform:translate(-50%,-50%) rotate(90deg);}
+    50%  {-webkit-transform:translate(-50%,-50%) rotate(180deg);}
+    75%  {-webkit-transform:translate(-50%,-50%) rotate(270deg);}
+    100% {-webkit-transform:translate(-50%,-50%) rotate(360deg);}
+
+}
+
+.stake-name{
+    text-align: center;
+    font-size: 0.293333rem;
+    width: 1rem;
+    margin:0.1rem;
+    color:#fff;
+    float: left;
+}
+.stake-name img{
+    width: 100%;
+}
+.stake-name .power{
+    font-size: 0.266667rem;
+    color:#fff82b;
+}
+.stake-num{
+    float: left;
+    margin-left: 0.133333rem;
+    font-size: 0.293333rem;
+    color:#fff;
+    text-indent: 0.613333rem;
+}
+.stake-all,.stake-my{
+    width: 1.466667rem;
+    height: 0.906667rem;
+    line-height: 0.906667rem;
+    background: rgba(0,0,0,0.2);
+    border-radius: 0.08rem;
+    margin: 0.106667rem 0 0.133333rem 0;
+    background-image: url('/share/images/candy.png');
+    background-repeat: no-repeat;
+    background-position: 0.16rem center;
+    background-size: 0.4rem;
+    text-align: center;
+}
+/*游戏状态提示*/
+.game-tip{
+    width: 100%;
+    height: 0.906667rem;
+    line-height: 0.906667rem;
+    text-align: center;
+    color:#fff;
+    background: url('/share/images/game_tip.png') center center no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 50%;
+    margin-top: -0.453333rem;
+}
+.clock{
+    position: absolute;
+    width: 1.093333rem;
+    height: 1.026667rem;
+    line-height: 1.026667rem; 
+    text-align: center;
+    color:#fff;
+    font-size: 0.48rem;
+    left: 50%;
+    top:0.4rem;
+    -webkit-transform: translate(-50%,0);
+    transform: translate(-50%,0);
+    background: url('/share/images/clock.png') center center no-repeat;
+    background-size: contain;
+    z-index: 999;
+}
+.m-bet{
+	height: 1.173333rem;
+	background: rgba(0,0,0,0.64);
+}
+
+/*下载*/
+.m-footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 1.706667rem;
+    padding:0.266667rem;
+    background: rgba(0,0,0,0.64);
+    box-sizing: border-box;
+    font-size: 0.32rem;
+    color:rgba(255,255,255,0.6);
+    z-index: 999;
+}
+.m-footer img{
+    height: 100%;
+    margin-right: 0.213333rem;
+}
+.m-footer h3{
+    font-size: 0.4rem;
+    color:#fff;
+    margin:0.133333rem 0 0.186667rem;
+}
+.m-footer i{
+    position: absolute;
+    top:50%;
+    right: 0.266667rem;
+    /*transform: translate(-50%,0);*/
+    margin-top: -0.213333rem;
+    width: 0.426667rem;
+    height: 0.426667rem;
+    display: block;
+    background: url('/share/images/close.png') no-repeat;
+    background-size: cover;
+}
+.m-footer .download-btn{
+    width: 2.506667rem;
+    height: 0.746667rem;
+    margin:0.213333rem 0.8rem 0 0;
+    text-align: center;
+    line-height: 0.746667rem;
+    border-radius: 0.373333rem;
+    vertical-align: middle;
+    font-size: 0.346667rem;
+    color:#fff;
+    background: #f36;
+    font-family: Arial;
+}
+
+/*玩法介绍*/
+.m-intro-mask .game-intro{
+    position: absolute;
+    width: 7.733333rem;
+    height: 9.866667rem;
+    left: 50%;
+    top: 50%;
+    padding: 0.4rem 0.32rem;
+    transform: translate(-50%,-60%);
+    background: #fff;
+    border-radius: 0.106667rem;
+    box-sizing: border-box;
+}
+.m-intro-mask .game-intro h3{
+    font-size: 0.426667rem;
+    color: #f36;
+    font-weight: bold;
+    text-align: center;
+    /*margin-bottom: 0.4rem;*/
+}
+.m-intro-mask .game-intro .intro-content{
+    height: 90%;
+    /*padding-bottom:1.066667rem;*/
+    overflow-y: auto;
+    box-sizing: border-box;
+    color:#666;
+    line-height: 0.533333rem;
+}
+.m-intro-mask .game-intro .intro-content h3{
+    font-size: 0.373333rem;
+    color: #333;
+    text-align: left;
+    margin:0.4rem 0;
+}
+.m-intro-mask .game-intro .u-close{
+    display: block;
+    width: 0.773333rem;
+    height: 1.653333rem;
+    left: 50%;
+    transform: translate(-50%,0);
+    position: absolute;
+    bottom: -1.653333rem;
+    background: url('/share/images/close_big.png') no-repeat;
+    background-size: contain;
+}
+
+/*用户卡片弹窗*/
+.anchor-panel {
+    background-color: #fff;
+    position: absolute;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    width: 8.533333rem;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    padding: 0 22px;
+    border-radius: 0.133333rem;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.anchor-panel .report {
+    position: absolute;
+    color: #999;
+    left: 30px;
+    top: 12px;
+    font-size: 0.346667rem;
+}
+
+.anchor-panel .close {
+    position: absolute;
+    color: #999;
+    right: 30px;
+    top: 12px;
+    font-size: 0.346667rem;
+}
+
+.anchor-panel .report:before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 3px;
+    width: 13px;
+    height: 13px;
+    -webkit-background-repeat: no-repeat;
+}
+
+.anchor-panel .report.reported {
+    left: 15px
+}
+
+.anchor-panel .report.reported:before {
+    display: none
+}
+
+.anchor-panel .avatar {
+    width: 2.133333rem;
+    height: 2.133333rem;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: -0.88rem;
+    left: 50%;
+    margin-left: -1.066667rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    background-size: cover
+}
+
+.anchor-panel .name {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin-top: 1.52rem;
+    font-size: 0.426667rem;
+    line-height: 0.48rem;
+    height: 0.48rem;
+}
+
+.anchor-panel .name span {
+    display: inline-block;
+    vertical-align: middle
+}
+
+.anchor-panel .name span.name-text {
+    max-width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 0.133333rem;
+}
+
+.anchor-panel .name .sex {
+    position: relative;
+    width: 0;
+    height: 0.346667rem;
+    margin:0 0.133333rem;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0
+}
+
+.anchor-panel .name .male,.anchor-panel .name .female {
+    margin-right: 18px
+}
+
+.anchor-panel .name .male:after,.anchor-panel .name .female:after {
+    content: '';
+    position: absolute;
+    right: -15px;
+    top: 0;
+    width: 0.346667rem;
+    height: 0.346667rem;
+}
+
+.anchor-panel .name span.male:after {
+    content: ' ';
+    background-repeat: no-repeat;
+}
+
+.anchor-panel .name span.female:after {
+    content: '  ';
+    background-repeat: no-repeat;
+}
+.anchor-panel .name span.male:after {
+    background-size: 0.346667rem;
+    background-image: url('/share/images/male.png');
+}
+.anchor-panel .name span.female:after {
+    background-size: 0.346667rem;
+    background-image: url('/share/images/female.png');
+}
+
+.anchor-panel .name .levelMedal,
+.message .levelMedal {
+    display: inline-block;
+    vertical-align: middle;
+    color:#fff;
+    font-size: 0.32rem;
+    width: 0.906667rem;
+    height: 0.453333rem;
+    line-height: 0.4rem;
+    -webkit-background-size: cover;
+    background-size: cover;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+   	text-indent: 0.333333rem;
+   	margin-left: 0.133333rem;
+}
+/*聊天等级*/
+.message .levelMedal {
+    width: 0.906667rem;
+    height: 0.453333rem;
+    line-height: 0.453333rem;
+    margin-left: 0;
+    background-size: 0.906667rem 0.453333rem;
+    text-align: center;
+}
+
+.anchor-panel .anchor-id{
+	font-size: 0.346667rem;
+	color: #999;
+	margin-top: 0.16rem;
+}
+
+.anchor-panel .signature {
+    font-size: 0.373333rem;
+    line-height: 0.373333rem;
+    height: 0.373333rem;
+    margin-top: 0.426667rem;
+    color: #999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.anchor-panel .numbers {
+    margin: 0.64rem 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    padding-bottom: 22px
+}
+
+.anchor-panel .numbers li {
+    list-style: none;
+    min-width: 40px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1
+}
+
+.anchor-panel .numbers li span.number {
+    font-size: 0.426667rem;
+    color: #333;
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.anchor-panel .numbers li label {
+	display: inline-block;
+    font-size: 0.346667rem;
+    color: #999;
+    margin-top: 0.213333rem;
+}
+
+.anchor-panel .listen-text span{
+	display: block;
+	margin:0 auto 0.72rem;
+	width: 1.6rem;
+	height: 0.746667rem;
+	line-height: 0.746667rem;
+	background: #f36;
+	color:#fff;
+	border-radius: 0.373333rem;
+}
+
+/*直播结束*/
+.m-end-mask{
+    z-index: 99999;
+    background: #fff;
+    text-align: center;
+    color:#fff;
+}
+.m-end-mask .end-bg{
+    width: 100%;
+    height: 100%;
+    background: url(//p.qlogo.cn/hy_personal_room/6774614/67746141492792014/640?tp=webp) center center no-repeat #fff;
+    background-size: cover;
+    -webkit-filter: blur(15px);
+    -webkit-filter: alpha( Opacity=100);
+       -moz-filter: blur(15px);
+        -ms-filter: blur(15px);    
+            filter: blur(15px);
+}
+.m-end-mask .end-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0;
+    z-index: 9;
+    background: rgba(0,0,0,0.5);
+}
+.m-end-mask .end-head{
+    margin-top:2.853333rem;
+    font-size: 0.533333rem;
+}
+.m-end-mask .end-head h3{
+    font-weight: normal;
+}
+.m-end-mask .end-head h3 span{
+    display: inline-block;
+    width: 1.066667rem;
+    height: 0.053333rem;
+    background: #fff;
+    vertical-align: 32%;
+}
+.m-end-mask .end-head .icon-avatar{
+    position: static;
+    margin-top: 0.586667rem;
+    width: 2.133333rem;
+    height: 2.133333rem;
+    border:0.053333rem solid #fff;
+    box-sizing: border-box;
+}
+.end-recommend{
+    padding:0 1.28rem;
+    margin-top: 1.226667rem;
+}
+.end-recommend h3{
+    font-size: 0.4rem;
+    margin-bottom: 0.533333rem;
+}
+.end-recommend .recommend-box{
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-around;
+}
+.end-recommend .recommend{
+    /*flex:1;*/
+    width: 3.413333rem;
+    height: 3.413333rem;
+    border:4px solid rgba(0,0,0,0.4);
+}
+.end-recommend .recommend>a{
+    display: block;
+    height: 100%;
+    background-size: cover;
+}
+.end-recommend .recommend span{
+    display: inline-block;
+    width: 1.333333rem;
+    height: 0.373333rem;
+    line-height: 0.373333rem;
+    border:0.053333rem solid rgba(255,255,255,0.4);
+    border-radius: 0.24rem;
+    font-size: 0.24rem;
+    float: right;
+    background: rgba(0,0,0,0.4)
+}
+.end-recommend .recommend i{
+    color:#b8ff1f;
+    font-size: 0.506667rem;
+    vertical-align: middle;
+}
+.m-end-mask .u-dl-btn{
+    margin:0.853333rem auto 0;
+}
+
+/*animate css*/
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.animated.infinite {
+    animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+    animation-duration: 2s;
+}
+
+.animated.flipOutX,
+.animated.flipOutY,
+.animated.bounceIn,
+.animated.bounceOut {
+    animation-duration: .75s;
+}
+
+.animated.slideInLeft,
+.animated.slideOutLeft{
+    animation-duration: .5s;
+}
+
+@keyframes bounceIn {
+  from, 20%, 40%, 60%, 80%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    transform: scale3d(.9, .9, .9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    transform: scale3d(.97, .97, .97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.bounceIn {
+  animation-name: bounceIn;
+}
+
+@keyframes bounceOut {
+  20% {
+    transform: scale3d(.9, .9, .9);
+  }
+
+  50%, 55% {
+    opacity: 1;
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+}
+
+.bounceOut {
+  animation-name: bounceOut;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+.slideInLeft {
+  animation-name: slideInLeft;
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideOutLeft {
+  animation-name: slideOutLeft;
+}

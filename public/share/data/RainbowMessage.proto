@@ -242,6 +242,7 @@ message GCUpDownBankerRet
 	 optional int32 code				    = 1;    //返回码  0成功 1 失败等
 	 optional string msg                 	= 2;    //提示信息
 	 optional int32 liveId	           	    = 3;    //直播间ID
+	 optional int32 upOrDown                = 4;    //上下庄   0下庄  1 上庄
 }
 
 //----------------------上庄列表（client<-->Gameserver）协议号 10026----------------------
